@@ -1,8 +1,8 @@
 import { tryCatch } from "#shared/lib/trycatch"
-import { type User } from "@clerk/backend"
+import { TillyAccount, SubscriptionData } from "#shared/schema/account"
+import { co } from "jazz-tools"
 import { PUBLIC_ENABLE_PAYWALL } from "astro:env/client"
 import { createMiddleware } from "hono/factory"
-import { clerkClient } from "./auth-client"
 
 export { requirePlus }
 
@@ -15,41 +15,37 @@ type SubscriptionStatus = {
 	tier: SubscriptionTier
 	isTrial: boolean
 	nextPaymentDate: Date | null
-	source: "remote" | "fallback"
+	source: "jazz" | "fallback"
 }
-
-type BillingSubscription = Awaited<
-	ReturnType<typeof clerkClient.billing.getUserBillingSubscription>
->
 
 type RequirePlusAppContext = {
 	Variables: {
-		user: User
+		jazzAccountId: string
 		subscription: SubscriptionStatus
 	}
 }
 
 let requirePlus = createMiddleware<RequirePlusAppContext>(async (c, next) => {
-	let user = c.get("user")
-	if (!user) {
+	let jazzAccountId = c.get("jazzAccountId")
+	if (!jazzAccountId) {
 		console.warn("[Subscription] Missing authenticated user for requirePlus")
 		return c.json({ error: "Authentication required" }, 401)
 	}
 
-	let status = await getSubscriptionStatus(user)
+	let status = await getSubscriptionStatus(jazzAccountId)
 	c.set("subscription", status)
-	logSubscriptionStatus(user.id, status)
+	logSubscriptionStatus(jazzAccountId, status)
 
 	if (!PUBLIC_ENABLE_PAYWALL) {
 		console.warn(
-			`[Subscription] ${user.id} | Plus check disabled | tier=${status.tier} | trial=${status.isTrial ? "yes" : "no"} | source=${status.source}`,
+			`[Subscription] ${jazzAccountId} | Plus check disabled | tier=${status.tier} | trial=${status.isTrial ? "yes" : "no"} | source=${status.source}`,
 		)
 		return next()
 	}
 
 	if (!status.hasPlusAccess) {
 		console.warn(
-			`[Subscription] ${user.id} | Access denied | tier=${status.tier} | trial=${status.isTrial ? "yes" : "no"} | source=${status.source}`,
+			`[Subscription] ${jazzAccountId} | Access denied | tier=${status.tier} | trial=${status.isTrial ? "yes" : "no"} | source=${status.source}`,
 		)
 		return c.json({ error: "Plus subscription required" }, 403)
 	}
@@ -57,14 +53,19 @@ let requirePlus = createMiddleware<RequirePlusAppContext>(async (c, next) => {
 	return next()
 })
 
-async function getSubscriptionStatus(user: User): Promise<SubscriptionStatus> {
-	let billingResult = await tryCatch(
-		clerkClient.billing.getUserBillingSubscription(user.id),
+async function getSubscriptionStatus(
+	jazzAccountId: string,
+): Promise<SubscriptionStatus> {
+	let accountResult = await tryCatch(
+		TillyAccount.load(jazzAccountId, {
+			resolve: { root: { subscription: true } },
+		}),
 	)
-	if (!billingResult.ok) {
+
+	if (!accountResult.ok || !accountResult.data) {
 		console.warn(
-			`[Subscription] ${user.id} | Failed to load billing subscription`,
-			billingResult.error,
+			`[Subscription] ${jazzAccountId} | Failed to load account`,
+			accountResult.error,
 		)
 		return {
 			hasPlusAccess: false,
@@ -75,7 +76,8 @@ async function getSubscriptionStatus(user: User): Promise<SubscriptionStatus> {
 		}
 	}
 
-	let subscription = billingResult.data
+	let account = accountResult.data
+	let subscription = account.root?.subscription
 
 	if (!subscription) {
 		return {
@@ -83,27 +85,21 @@ async function getSubscriptionStatus(user: User): Promise<SubscriptionStatus> {
 			tier: "free",
 			isTrial: false,
 			nextPaymentDate: null,
-			source: "remote",
+			source: "fallback",
 		}
 	}
 
-	let snapshot = subscriptionSnapshotFromRemote(subscription)
+	let snapshot = subscriptionSnapshotFromJazz(subscription)
 
-	return { ...snapshot, source: "remote" }
+	return { ...snapshot, source: "jazz" }
 }
 
-function subscriptionSnapshotFromRemote(
-	subscription: BillingSubscription,
+function subscriptionSnapshotFromJazz(
+	subscription: co.loaded<typeof SubscriptionData>,
 ): Omit<SubscriptionStatus, "source"> {
-	let hasPlusPlan = subscriptionIncludesPlus(subscription)
-	let isTrial = subscription.subscriptionItems.some(
-		item => item.isFreeTrial === true,
-	)
-	let nextPaymentDate = subscription.nextPayment
-		? new Date(subscription.nextPayment.date)
-		: null
-
-	let tier: SubscriptionTier = hasPlusPlan ? "plus" : "free"
+	let tier: SubscriptionTier = subscription.tier || "free"
+	let isTrial = subscription.isTrial || false
+	let nextPaymentDate = subscription.nextPaymentDate || null
 
 	return {
 		hasPlusAccess: tier === "plus",
@@ -111,21 +107,6 @@ function subscriptionSnapshotFromRemote(
 		isTrial,
 		nextPaymentDate,
 	}
-}
-
-function subscriptionIncludesPlus(subscription: BillingSubscription): boolean {
-	for (let item of subscription.subscriptionItems) {
-		let planSlug = item.plan?.slug?.toLowerCase() ?? ""
-		let planId = item.planId?.toLowerCase() ?? ""
-		let planName = item.plan?.name?.toLowerCase() ?? ""
-
-		let values = [planSlug, planId, planName]
-		if (values.includes("plus")) {
-			return true
-		}
-	}
-
-	return false
 }
 
 function logSubscriptionStatus(userId: string, status: SubscriptionStatus) {

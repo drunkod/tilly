@@ -10,6 +10,8 @@ export {
 	sortByDeletedAt,
 }
 
+export const PersonList = co.list(Person)
+
 export let PushDevice = z.object({
 	isEnabled: z.boolean(),
 	deviceName: z.string(),

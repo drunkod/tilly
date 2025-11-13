@@ -1,5 +1,6 @@
 import { tryCatch } from "#shared/lib/trycatch"
-import { UsageTracking, UserAccount } from "#shared/schema/user"
+import { UsageTracking } from "#shared/schema/user"
+import { TillyAccount } from "#shared/schema/account"
 import type { ModelMessage } from "ai"
 import {
 	CACHED_INPUT_TOKEN_COST_PER_MILLION,
@@ -10,14 +11,13 @@ import {
 } from "astro:env/server"
 import { addDays, isPast } from "date-fns"
 import { co, Group, type ResolveQuery } from "jazz-tools"
-import { clerkClient } from "./auth-client"
 import { type SubscriptionStatus } from "./chat-subscription"
-import { initServerWorker, initUserWorker } from "./utils"
+import { initServerWorker } from "./utils"
 
 export { checkInputSize, checkUsageLimits, updateUsage }
 
 function checkInputSize(
-	user: ChatUser,
+	jazzAccountId: string,
 	messages: Array<TokenCountMessage | ModelMessage>,
 ) {
 	let estimatedTokens = estimateTokenCount(messages)
@@ -25,7 +25,7 @@ function checkInputSize(
 	if (estimatedTokens > MAX_REQUEST_TOKENS) {
 		let overflow = estimatedTokens - MAX_REQUEST_TOKENS
 		console.warn(
-			`[Chat] ${user.id} | Request too large: ${estimatedTokens} tokens exceeds limit by ${overflow}`,
+			`[Chat] ${jazzAccountId} | Request too large: ${estimatedTokens} tokens exceeds limit by ${overflow}`,
 		)
 		return false
 	}
@@ -33,8 +33,8 @@ function checkInputSize(
 	return true
 }
 
-async function checkUsageLimits(user: ChatUser): Promise<UsageLimitResult> {
-	let context = await ensureUsageContext(user)
+async function checkUsageLimits(jazzAccountId: string): Promise<UsageLimitResult> {
+	let context = await ensureUsageContext(jazzAccountId)
 	let percentUsed = context.usageTracking.weeklyPercentUsed ?? 0
 
 	let exceeded = percentUsed >= 100
@@ -45,7 +45,7 @@ async function checkUsageLimits(user: ChatUser): Promise<UsageLimitResult> {
 		let resetLabel = resetDate ? resetDate.toISOString() : "unknown"
 
 		console.warn(
-			`[Chat] ${user.id} | Usage limit exceeded | Remaining ${remainingPercent}% | Reset ${resetLabel}`,
+			`[Chat] ${jazzAccountId} | Usage limit exceeded | Remaining ${remainingPercent}% | Reset ${resetLabel}`,
 		)
 	}
 
@@ -57,11 +57,11 @@ async function checkUsageLimits(user: ChatUser): Promise<UsageLimitResult> {
 }
 
 async function updateUsage(
-	user: ChatUser,
+	jazzAccountId: string,
 	subscription: SubscriptionStatus,
 	usage: UsageUpdatePayload,
 ): Promise<void> {
-	let context = await ensureUsageContext(user)
+	let context = await ensureUsageContext(jazzAccountId)
 
 	let updateResult = await tryCatch(
 		applyUsageUpdate(context.usageTracking, usage),
@@ -69,7 +69,7 @@ async function updateUsage(
 
 	if (!updateResult.ok) {
 		console.error(
-			`[Usage] ${user.id} | Failed to update usage`,
+			`[Usage] ${jazzAccountId} | Failed to update usage`,
 			updateResult.error,
 		)
 		throw new Error("Failed to update usage")
@@ -83,13 +83,8 @@ async function updateUsage(
 	let usagePercent = update.percentUsed.toFixed(1)
 
 	console.log(
-		`[Chat] ${user.id} | tokens(in=${usage.inputTokens}, cached=${usage.cachedTokens}, out=${usage.outputTokens}) | cacheHit=${cacheHit ? "yes" : "no"} | cost=$${update.cost.toFixed(4)} | usage=${usagePercent}% | tier=${subscription.tier} | trial=${subscription.isTrial ? "yes" : "no"}`,
+		`[Chat] ${jazzAccountId} | tokens(in=${usage.inputTokens}, cached=${usage.cachedTokens}, out=${usage.outputTokens}) | cacheHit=${cacheHit ? "yes" : "no"} | cost=$${update.cost.toFixed(4)} | usage=${usagePercent}% | tier=${subscription.tier} | trial=${subscription.isTrial ? "yes" : "no"}`,
 	)
-}
-
-type ChatUser = {
-	id: string
-	unsafeMetadata: Record<string, unknown>
 }
 
 type UsageUpdatePayload = {
@@ -104,11 +99,9 @@ type UsageLimitResult = {
 	resetDate: Date
 }
 
-type UserWorker = Awaited<ReturnType<typeof initUserWorker>>["worker"]
 type ServerWorker = Awaited<ReturnType<typeof initServerWorker>>["worker"]
 
 type UsageContext = {
-	worker: UserWorker
 	usageTracking: co.loaded<typeof UsageTracking>
 }
 
@@ -129,133 +122,73 @@ type TokenCountMessage = {
 let usageAttachQuery = {
 	profile: true,
 	root: { usageTracking: true },
-} satisfies ResolveQuery<typeof UserAccount>
+} satisfies ResolveQuery<typeof TillyAccount>
 
-async function ensureUsageContext(user: ChatUser): Promise<UsageContext> {
-	let workerResult = await tryCatch(initUserWorker(user))
-	if (!workerResult.ok) {
-		console.error(
-			`[Usage] ${user.id} | Failed to init worker`,
-			workerResult.error,
-		)
-		throw new Error("Failed to init worker")
-	}
-
-	let worker: UserWorker = workerResult.data.worker
-	let usageTracking = await loadUsageTrackingForUser(
-		user,
-		worker,
-		getStoredUsageTrackingId(user),
+async function ensureUsageContext(jazzAccountId: string): Promise<UsageContext> {
+	let accountResult = await tryCatch(
+		TillyAccount.load(jazzAccountId, {
+			resolve: { root: { usageTracking: true } },
+		}),
 	)
 
-	await attachUsageTrackingToUser(worker, usageTracking)
+	if (!accountResult.ok || !accountResult.data) {
+		console.error(
+			`[Usage] ${jazzAccountId} | Failed to load account`,
+			accountResult.error,
+		)
+		throw new Error("Failed to load account")
+	}
 
-	return { worker, usageTracking }
+	let account = accountResult.data
+	let usageTracking = account.root?.usageTracking
+
+	if (!usageTracking) {
+		// Create new usage tracking
+		usageTracking = await createUsageTracking(jazzAccountId)
+		if (account.root) {
+			account.root.$jazz.set("usageTracking", usageTracking)
+		}
+	}
+
+	await synchronizeUsageTracking(usageTracking)
+
+	return { usageTracking }
 }
 
-async function loadUsageTrackingForUser(
-	user: ChatUser,
-	userWorker: UserWorker,
-	existingUsageId?: string,
+async function createUsageTracking(
+	jazzAccountId: string,
 ): Promise<co.loaded<typeof UsageTracking>> {
 	let serverWorkerResult = await tryCatch(initServerWorker())
 	if (!serverWorkerResult.ok) {
-		console.error(
-			`[Usage] ${user.id} | Failed to init server worker`,
-			serverWorkerResult.error,
-		)
 		throw new Error("Failed to init server worker")
 	}
 
-	let serverWorker: ServerWorker = serverWorkerResult.data.worker
-
-	if (existingUsageId) {
-		let existingResult = await tryCatch(
-			UsageTracking.load(existingUsageId, { loadAs: serverWorker }),
-		)
-
-		if (existingResult.ok && existingResult.data) {
-			let usageTracking = existingResult.data
-			await synchronizeUsageTracking(usageTracking)
-			await ensureMetadata(user, usageTracking)
-			return usageTracking
-		}
-
-		if (!existingResult.ok) {
-			console.warn(
-				`[Usage] ${user.id} | Failed to load existing usage tracking`,
-				existingResult.error,
-			)
-		}
-	}
-
+	let serverWorker = serverWorkerResult.data.worker
 	let nextResetDate = createWeeklyResetDate()
 
 	console.log(
-		`[Usage] ${user.id} | Creating usage tracking | Weekly budget ${WEEKLY_BUDGET} | Reset ${nextResetDate.toISOString()}`,
+		`[Usage] ${jazzAccountId} | Creating usage tracking | Weekly budget ${WEEKLY_BUDGET} | Reset ${nextResetDate.toISOString()}`,
 	)
 
-	let usageTrackingGroup = Group.create({ owner: serverWorker })
-	usageTrackingGroup.addMember(userWorker, "reader")
+	// Load account to get access
+	let accountResult = await tryCatch(TillyAccount.load(jazzAccountId))
 
-	let usageTracking = UsageTracking.create(
+	if (!accountResult.ok || !accountResult.data) {
+		throw new Error("Failed to load account for usage tracking")
+	}
+
+	let usageTrackingGroup = Group.create({ owner: serverWorker })
+	usageTrackingGroup.addMember(accountResult.data, "reader")
+
+	return UsageTracking.create(
 		{
 			version: 5,
-			userId: user.id,
+			userId: jazzAccountId,
 			weeklyPercentUsed: 0,
 			resetDate: nextResetDate,
 		},
 		{ owner: usageTrackingGroup },
 	)
-
-	await ensureMetadata(user, usageTracking)
-
-	return usageTracking
-}
-
-function getStoredUsageTrackingId(user: ChatUser): string | undefined {
-	let storedValue = user.unsafeMetadata.usageTrackingId
-	return typeof storedValue === "string" ? storedValue : undefined
-}
-
-async function attachUsageTrackingToUser(
-	worker: UserWorker,
-	usageTracking: co.loaded<typeof UsageTracking>,
-): Promise<void> {
-	let workerResult = await tryCatch(
-		worker.$jazz.ensureLoaded({ resolve: usageAttachQuery }),
-	)
-
-	if (!workerResult.ok) {
-		console.error(
-			`[Usage] ${usageTracking.userId} | Failed to load worker root`,
-			workerResult.error,
-		)
-		throw new Error("Failed to attach usage tracking")
-	}
-
-	let workerWithProfile = workerResult.data
-
-	if (!workerWithProfile.root) {
-		return
-	}
-
-	let currentUsage = workerWithProfile.root.usageTracking
-	let desiredUsage = usageTracking
-
-	if (!currentUsage) {
-		workerWithProfile.root.$jazz.set("usageTracking", desiredUsage)
-		return
-	}
-
-	let currentId = currentUsage.$jazz.id
-	let desiredId = desiredUsage.$jazz.id
-
-	if (currentId === desiredId) {
-		return
-	}
-
-	workerWithProfile.root.$jazz.set("usageTracking", desiredUsage)
 }
 
 async function synchronizeUsageTracking(

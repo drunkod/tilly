@@ -1,4 +1,11 @@
-import { hc } from "hono/client"
-import type { AppType } from "#server/main"
+export async function authenticatedFetch(url: string, options: RequestInit = {}) {
+  const token = sessionStorage.getItem("session_token")
 
-export const apiClient = hc<AppType>("/api")
+  return fetch(url, {
+    ...options,
+    headers: {
+      ...options.headers,
+      ...(token ? { "Authorization": `Bearer ${token}` } : {})
+    }
+  })
+}

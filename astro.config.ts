@@ -59,17 +59,9 @@ export default defineConfig({
 				context: "server",
 				access: "secret",
 			}),
-			CLERK_SECRET_KEY: envField.string({
+			JWT_SECRET: envField.string({
 				context: "server",
 				access: "secret",
-			}),
-			PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({
-				context: "client",
-				access: "public",
-			}),
-			PUBLIC_CLERK_ACCOUNTS_URL: envField.string({
-				context: "client",
-				access: "public",
 			}),
 			PUBLIC_JAZZ_SYNC_SERVER: envField.string({
 				context: "client",

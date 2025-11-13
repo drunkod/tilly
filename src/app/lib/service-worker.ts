@@ -1,4 +1,5 @@
-import { useUser } from "@clerk/clerk-react"
+import { useAccount } from "jazz-tools/react"
+import { TillyAccount } from "#shared/schema/account"
 import { tryCatch } from "#shared/lib/trycatch"
 import { useEffect, useCallback } from "react"
 
@@ -155,17 +156,17 @@ function clearUserIdInServiceWorker() {
 }
 
 function useSyncUserIdToServiceWorker() {
-	let { user, isLoaded } = useUser()
+	let me = useAccount(TillyAccount)
 
 	let syncUserId = useCallback(() => {
-		if (!isLoaded) return
+		if (!me.$isLoaded) return
 
-		if (user?.id) {
-			setUserIdInServiceWorker(user.id)
+		if (me.$jazz.id) {
+			setUserIdInServiceWorker(me.$jazz.id)
 		} else {
 			clearUserIdInServiceWorker()
 		}
-	}, [user, isLoaded])
+	}, [me])
 
 	useEffect(() => {
 		syncUserId()
