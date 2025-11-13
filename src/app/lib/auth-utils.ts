@@ -1,15 +1,15 @@
-import { PUBLIC_CLERK_ACCOUNTS_URL } from "astro:env/client"
+import { usePasskeyAuth, useLogOut, useIsAuthenticated } from "jazz-tools/react"
 
-export function getSignInUrl(redirectPath: string = "/app"): string {
-	let currentUrl = window.location.origin
-	return `${getAccountsUrl()}/sign-in?redirect_url=${currentUrl}${redirectPath}`
+const APPLICATION_NAME = "Tilly"
+
+export function useAuthStatus() {
+	return useIsAuthenticated()
 }
 
-export function getSignUpUrl(redirectPath: string = "/app"): string {
-	let currentUrl = window.location.origin
-	return `${getAccountsUrl()}/sign-up?redirect_url=${currentUrl}${redirectPath}`
+export function useAuth() {
+	return usePasskeyAuth({ appName: APPLICATION_NAME })
 }
 
-function getAccountsUrl(): string {
-	return PUBLIC_CLERK_ACCOUNTS_URL
+export function useSignOut() {
+	return useLogOut()
 }

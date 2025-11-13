@@ -1,15 +1,14 @@
-import { ClerkProvider, useClerk } from "@clerk/clerk-react"
-import { JazzReactProviderWithClerk, useAccount } from "jazz-tools/react"
+import { JazzReactProvider, useAccount } from "jazz-tools/react"
 import { RouterProvider, createRouter } from "@tanstack/react-router"
 import {
 	PUBLIC_JAZZ_SYNC_SERVER,
-	PUBLIC_CLERK_PUBLISHABLE_KEY,
 } from "astro:env/client"
-import { UserAccount } from "#shared/schema/user"
+import { TillyAccount } from "#shared/schema/account"
 import { routeTree } from "#app/routeTree.gen"
 import { IntlProvider } from "#shared/intl/setup"
 import { messagesDe } from "#shared/intl/messages"
 import { useServiceWorker } from "#app/lib/service-worker"
+import { useSessionSync } from "#app/lib/session-manager"
 import { SplashScreen } from "./components/splash-screen"
 import { Toaster } from "#shared/ui/sonner"
 import { MainErrorBoundary } from "#app/components/main-error-boundary"
@@ -17,42 +16,37 @@ import { MainErrorBoundary } from "#app/components/main-error-boundary"
 export function PWA() {
 	return (
 		<MainErrorBoundary>
-			<ClerkProvider
-				publishableKey={PUBLIC_CLERK_PUBLISHABLE_KEY}
-				afterSignOutUrl="/app"
-			>
-				<JazzWithClerk />
-			</ClerkProvider>
+			<JazzApp />
 		</MainErrorBoundary>
 	)
 }
 
-function JazzWithClerk() {
+function JazzApp() {
 	useServiceWorker({ updateCheckIntervalMs: 2 * 60 * 60 * 1000 })
-	let clerk = useClerk()
+	useSessionSync()
 	let syncConfig = buildSyncConfig()
 
 	return (
-		<JazzReactProviderWithClerk
-			clerk={clerk}
-			AccountSchema={UserAccount}
+		<JazzReactProvider
+			AccountSchema={TillyAccount}
 			sync={syncConfig}
 			fallback={<SplashScreen />}
 		>
 			<RouterWithJazz />
 			<Toaster richColors />
-		</JazzReactProviderWithClerk>
+		</JazzReactProvider>
 	)
 }
 
 function RouterWithJazz() {
-	let { me } = useAccount(UserAccount)
+	let me = useAccount(TillyAccount, {
+		resolve: { root: true, profile: true }
+	})
 
 	// Only show splash screen if account is still loading
-	if (me === undefined) return <SplashScreen />
+	if (!me.$isLoaded) return <SplashScreen />
 
-	// Pass null for unauthenticated users, me object for authenticated users
-	let contextMe = me ? me : null
+	let contextMe = me
 	let locale = me?.root?.language || "en"
 
 	if (locale === "de") {
@@ -77,7 +71,6 @@ function buildSyncConfig(): JazzSyncConfig {
 
 	let syncConfig: JazzSyncConfig = {
 		peer: syncServer,
-		when: "signedUp",
 	}
 
 	return syncConfig
@@ -88,7 +81,7 @@ function isSyncPeer(value: string | undefined): value is SyncPeer {
 	return value.startsWith("ws://") || value.startsWith("wss://")
 }
 
-type JazzSyncProps = Parameters<typeof JazzReactProviderWithClerk>[0]["sync"]
+type JazzSyncProps = Parameters<typeof JazzReactProvider>[0]["sync"]
 type JazzSyncConfig = NonNullable<JazzSyncProps>
 type SyncPeer = JazzSyncConfig["peer"]
 

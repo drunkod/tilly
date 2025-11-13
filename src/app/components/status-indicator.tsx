@@ -6,7 +6,7 @@ import {
 	Check,
 	ExclamationTriangleFill,
 } from "react-bootstrap-icons"
-import { useAuth } from "@clerk/clerk-react"
+import { useIsAuthenticated } from "jazz-tools/react"
 
 import { Button } from "#shared/ui/button"
 import {
@@ -22,7 +22,7 @@ import { useServiceWorkerUpdate } from "#app/hooks/use-service-worker-update"
 import { useOnlineStatus } from "#app/hooks/use-online-status"
 import { useIsMobile } from "#app/hooks/use-mobile"
 import { T, useIntl } from "#shared/intl/setup"
-import { getSignInUrl } from "#app/lib/auth-utils"
+import { useAuth } from "#app/lib/auth-utils"
 import { Alert, AlertTitle } from "#shared/ui/alert"
 
 export { StatusIndicator }
@@ -30,7 +30,7 @@ export { StatusIndicator }
 function StatusIndicator() {
 	let { updateAvailable } = useServiceWorkerUpdate()
 	let isOnline = useOnlineStatus()
-	let { isLoaded, isSignedIn } = useAuth()
+	let isSignedIn = useIsAuthenticated()
 
 	if (!isOnline) {
 		return <OfflineIndicator />
@@ -40,7 +40,7 @@ function StatusIndicator() {
 		return <UpdateIndicator />
 	}
 
-	if (isLoaded && !isSignedIn) {
+	if (!isSignedIn) {
 		return <NotSignedInIndicator />
 	}
 
@@ -170,9 +170,10 @@ function UpdateIndicator() {
 function NotSignedInIndicator() {
 	let t = useIntl()
 	let isMobile = useIsMobile()
+	let auth = useAuth()
 
 	function handleSignIn() {
-		window.location.href = getSignInUrl(window.location.pathname)
+		auth.logIn()
 	}
 
 	return (

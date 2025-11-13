@@ -1,9 +1,7 @@
-import { CRON_SECRET, CLERK_SECRET_KEY } from "astro:env/server"
-import { PUBLIC_CLERK_PUBLISHABLE_KEY } from "astro:env/client"
-import { createClerkClient } from "@clerk/backend"
-import type { User } from "@clerk/backend"
+import { CRON_SECRET } from "astro:env/server"
+import { TillyAccount } from "#shared/schema/account"
 import { isDeleted } from "#shared/schema/user"
-import { initUserWorker } from "../lib/utils"
+import { getRegisteredUsers } from "../lib/user-registry"
 import { tryCatch } from "#shared/lib/trycatch"
 import { toZonedTime, format, fromZonedTime } from "date-fns-tz"
 import { Hono } from "hono"
@@ -39,10 +37,11 @@ let cronDeliveryApp = new Hono().get(
 		let processingPromises: Promise<void>[] = []
 		let maxConcurrentUsers = 50
 
-		for await (let user of userGenerator()) {
+		for await (let registeredUser of getRegisteredUsers()) {
 			await waitForConcurrencyLimit(processingPromises, maxConcurrentUsers)
 
-			let userPromise = loadNotificationSettings(user)
+			let userPromise = loadAccount(registeredUser.jazzAccountId)
+				.then(account => loadNotificationSettings(account))
 				.then(data => shouldReceiveNotification(data))
 				.then(data => hasDueNotifications(data))
 				.then(data => getDevices(data))
@@ -52,9 +51,11 @@ let cronDeliveryApp = new Hono().get(
 				})
 				.catch(error => {
 					if (typeof error === "string") {
-						console.log(`❌ User ${user.id}: ${error}`)
+						console.log(`❌ User ${registeredUser.jazzAccountId}: ${error}`)
 					} else {
-						console.log(`❌ User ${user.id}: ${error.message || error}`)
+						console.log(
+							`❌ User ${registeredUser.jazzAccountId}: ${error.message || error}`,
+						)
 					}
 				})
 				.finally(() => removeFromList(processingPromises, userPromise))
@@ -71,67 +72,31 @@ let cronDeliveryApp = new Hono().get(
 	},
 )
 
-async function* userGenerator() {
-	let clerkClient = createClerkClient({
-		secretKey: CLERK_SECRET_KEY,
-		publishableKey: PUBLIC_CLERK_PUBLISHABLE_KEY,
-	})
+async function loadAccount(jazzAccountId: string) {
+	let accountResult = await tryCatch(
+		TillyAccount.load(jazzAccountId, {
+			resolve: settingsQuery,
+		}),
+	)
 
-	let offset = 0
-	let limit = 500
-	let totalUsers = 0
-	let jazzUsers = 0
-
-	while (true) {
-		let response = await clerkClient.users.getUserList({
-			limit,
-			offset,
-		})
-
-		totalUsers += response.data.length
-
-		for (let user of response.data) {
-			if (
-				user.unsafeMetadata.jazzAccountID &&
-				user.unsafeMetadata.jazzAccountSecret
-			) {
-				jazzUsers++
-				yield user
-			}
-		}
-
-		if (response.data.length < limit) {
-			break
-		}
-
-		offset += limit
+	if (!accountResult.ok || !accountResult.data) {
+		throw `Failed to load account - ${accountResult.error}`
 	}
 
-	console.log(
-		`🚀 Found ${jazzUsers} users with Jazz accounts out of ${totalUsers} total users`,
-	)
+	return accountResult.data
 }
 
-async function loadNotificationSettings(user: User) {
-	let workerResult = await tryCatch(initUserWorker(user))
-	if (!workerResult.ok) {
-		throw `Failed to init worker - ${workerResult.error}`
-	}
-
-	let workerWithSettings = await workerResult.data.worker.$jazz.ensureLoaded({
-		resolve: settingsQuery,
-	})
-	let notificationSettings = workerWithSettings.root.notificationSettings
+async function loadNotificationSettings(account: LoadedUserAccountSettings) {
+	let notificationSettings = account.root?.notificationSettings
 	if (!notificationSettings) {
 		throw "No notification settings configured"
 	}
 
-	console.log(`✅ User ${user.id}: Loaded notification settings`)
+	console.log(`✅ User ${account.$jazz.id}: Loaded notification settings`)
 
 	return {
-		user,
+		account,
 		notificationSettings,
-		worker: workerWithSettings,
 		currentUtc: new Date(),
 	}
 }
@@ -140,10 +105,10 @@ async function shouldReceiveNotification<
 	T extends {
 		notificationSettings: LoadedNotificationSettings
 		currentUtc: Date
-		user: User
+		account: LoadedUserAccountSettings
 	},
 >(data: T) {
-	let { notificationSettings, currentUtc, user } = data
+	let { notificationSettings, currentUtc, account } = data
 
 	if (!isPastNotificationTime(notificationSettings, currentUtc)) {
 		let userTimezone = notificationSettings.timezone || "UTC"
@@ -164,7 +129,7 @@ async function shouldReceiveNotification<
 		throw `Already delivered today (last delivered: ${lastDelivered})`
 	}
 
-	console.log(`✅ User ${user.id}: Passed notification time checks`)
+	console.log(`✅ User ${account.$jazz.id}: Passed notification time checks`)
 
 	return data
 }
@@ -172,9 +137,9 @@ async function shouldReceiveNotification<
 async function hasDueNotifications(
 	data: NotificationProcessingContext,
 ): Promise<DueNotificationContext> {
-	let { user, notificationSettings, worker, currentUtc } = data
+	let { account, notificationSettings, currentUtc } = data
 
-	let userAccountWithPeople = await worker.$jazz.ensureLoaded({
+	let userAccountWithPeople = await account.$jazz.ensureLoaded({
 		resolve: peopleQuery,
 	})
 
@@ -185,13 +150,12 @@ async function hasDueNotifications(
 	)
 
 	console.log(
-		`✅ User ${user.id}: Checked due reminders (${dueReminderCount} found)`,
+		`✅ User ${account.$jazz.id}: Checked due reminders (${dueReminderCount} found)`,
 	)
 
 	return {
-		user,
+		account,
 		notificationSettings,
-		worker,
 		currentUtc,
 		dueReminderCount,
 	}
@@ -200,10 +164,10 @@ async function hasDueNotifications(
 async function getDevices(
 	data: DueNotificationContext,
 ): Promise<DeviceNotificationContext> {
-	let { user, notificationSettings } = data
+	let { account, notificationSettings } = data
 
 	if (data.dueReminderCount === 0) {
-		console.log(`✅ User ${user.id}: No due reminders to notify about`)
+		console.log(`✅ User ${account.$jazz.id}: No due reminders to notify about`)
 		return {
 			...data,
 			devices: [],
@@ -212,7 +176,7 @@ async function getDevices(
 
 	let enabledDevices = getEnabledDevices(notificationSettings)
 	if (enabledDevices.length === 0) {
-		console.log(`✅ User ${user.id}: No enabled devices`)
+		console.log(`✅ User ${account.$jazz.id}: No enabled devices`)
 		return {
 			...data,
 			devices: [],
@@ -220,7 +184,7 @@ async function getDevices(
 	}
 
 	console.log(
-		`✅ User ${data.user.id}: Ready to send notification for ${data.dueReminderCount} due reminders to ${enabledDevices.length} devices`,
+		`✅ User ${data.account.$jazz.id}: Ready to send notification for ${data.dueReminderCount} due reminders to ${enabledDevices.length} devices`,
 	)
 
 	return {
@@ -232,24 +196,18 @@ async function getDevices(
 async function processDevicesPipeline(
 	userWithDevices: DeviceNotificationContext,
 ) {
-	let {
-		user,
-		devices,
-		dueReminderCount,
-		notificationSettings,
-		worker,
-		currentUtc,
-	} = userWithDevices
+	let { account, devices, dueReminderCount, notificationSettings, currentUtc } =
+		userWithDevices
 
 	if (devices.length === 0) {
 		markNotificationSettingsAsDelivered(notificationSettings, currentUtc)
-		await worker.$jazz.waitForSync()
+		await account.$jazz.waitForSync()
 		console.log(
-			`✅ User ${user.id}: Marked as delivered (skipped - no action needed)`,
+			`✅ User ${account.$jazz.id}: Marked as delivered (skipped - no action needed)`,
 		)
 		return [
 			{
-				userID: user.id,
+				userID: account.$jazz.id,
 				notificationCount: 0,
 				success: true,
 			},
@@ -258,8 +216,8 @@ async function processDevicesPipeline(
 
 	let payload = createLocalizedNotificationPayload(
 		dueReminderCount,
-		user.id,
-		worker,
+		account.$jazz.id,
+		account,
 	)
 
 	let devicePromises = devices.map((device: PushDevice) =>
@@ -280,12 +238,12 @@ async function processDevicesPipeline(
 					: result.reason?.message || result.reason || "Unknown error"
 
 			console.error(
-				`❌ User ${user.id}: Failed to send to device ${devices[i].endpoint.slice(-10)}:`,
+				`❌ User ${account.$jazz.id}: Failed to send to device ${devices[i].endpoint.slice(-10)}:`,
 				error,
 			)
 		} else {
 			console.log(
-				`✅ User ${user.id}: Successfully sent to device ${devices[i].endpoint.slice(-10)}`,
+				`✅ User ${account.$jazz.id}: Successfully sent to device ${devices[i].endpoint.slice(-10)}`,
 			)
 		}
 
@@ -295,13 +253,13 @@ async function processDevicesPipeline(
 	let userSuccess = deviceResults.some(r => r.success)
 
 	markNotificationSettingsAsDelivered(notificationSettings, currentUtc)
-	await worker.$jazz.waitForSync()
+	await account.$jazz.waitForSync()
 
-	console.log(`✅ User ${user.id}: Completed notification delivery`)
+	console.log(`✅ User ${account.$jazz.id}: Completed notification delivery`)
 
 	return [
 		{
-			userID: user.id,
+			userID: account.$jazz.id,
 			notificationCount: dueReminderCount,
 			success: userSuccess,
 		},
@@ -395,9 +353,9 @@ function removeFromList<T>(list: T[], item: T) {
 function createLocalizedNotificationPayload(
 	reminderCount: number,
 	userId: string,
-	worker: LoadedUserAccountSettings,
+	account: LoadedUserAccountSettings,
 ): NotificationPayload {
-	let t = getIntl(worker)
+	let t = getIntl(account)
 	return {
 		title: t("server.push.dueReminders.title", { count: reminderCount }),
 		body: t("server.push.dueReminders.body"),
@@ -410,9 +368,8 @@ function createLocalizedNotificationPayload(
 }
 
 type NotificationProcessingContext = {
-	user: User
+	account: LoadedUserAccountSettings
 	notificationSettings: LoadedNotificationSettings
-	worker: LoadedUserAccountSettings
 	currentUtc: Date
 }
 
