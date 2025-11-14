@@ -14,15 +14,35 @@ export const Route = createFileRoute("/_app")({
 })
 
 function AppComponent() {
-	let { me } = useAccount(UserAccount, { resolve: query })
+	let me = useAccount(TillyAccount, { resolve: query,
+        select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null
+    })
 
-	let people = me?.root?.people ?? []
+	if (!me.$isLoaded) {
+		return (
+			<>
+				<Outlet />
+				<StatusIndicator />
+				<Navigation dueReminderCount={0} />
+			</>
+		)
+	}
+
+	let people = [...(me.root?.people ?? [])]
 	let dueReminderCount = people
-		.filter(person => !isDeleted(person))
-		.flatMap(person => person.reminders)
-		.filter(reminder => reminder != null)
-		.filter(reminder => !reminder.done && !isDeleted(reminder))
-		.filter(reminder => isDueToday(reminder)).length
+		.filter((person: co.loaded<typeof Person>) => person && !isDeleted(person))
+		.flatMap((person: co.loaded<typeof Person>) =>
+			person.reminders ? [...person.reminders] : [],
+		)
+		.filter(
+			(reminder: co.loaded<typeof Reminder> | null) => reminder != null,
+		)
+		.filter(
+			(reminder: co.loaded<typeof Reminder>) =>
+				reminder && !reminder.done && !isDeleted(reminder),
+		)
+		.filter((reminder: co.loaded<typeof Reminder>) => isDueToday(reminder))
+		.length
 
 	useEffect(() => {
 		setAppBadge(dueReminderCount)
@@ -58,7 +78,7 @@ let query = {
 			},
 		},
 	},
-} as const satisfies ResolveQuery<typeof UserAccount>
+} as const satisfies ResolveQuery<typeof TillyAccount>
 
 async function setAppBadge(count: number) {
 	let isAppBadgeSupported =

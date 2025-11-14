@@ -28,7 +28,7 @@ function NewReminder({
 	onSuccess?: (reminderId: string) => void
 	personId?: string
 }) {
-	let { me } = useAccount(UserAccount, {
+	let me = useAccount(TillyAccount, {
 		resolve: {
 			root: {
 				people: {
@@ -36,23 +36,29 @@ function NewReminder({
 				},
 			},
 		},
-	})
+        select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null
+    })
 	let t = useIntl()
 	let [selectedPersonId, setSelectedPersonId] = useState(initialPersonId ?? "")
 	let [dialogOpen, setDialogOpen] = useState(false)
 
-	let people = (me?.root?.people ?? []).filter(
-		person => person && !isDeleted(person),
+	if (!me.$isLoaded) {
+		return null
+	}
+
+	let people = [...(me.root?.people ?? [])].filter(
+		(person: co.loaded<typeof Person>) => person && !isDeleted(person),
 	)
 
-	let peopleOptions = people.map(person => ({
+	let peopleOptions = people.map((person: co.loaded<typeof Person>) => ({
 		value: person.$jazz.id,
 		label: person.name,
 	}))
 
 	let selectedPersonLabel =
-		peopleOptions.find(personOption => personOption.value === selectedPersonId)
-			?.label ?? ""
+		peopleOptions.find(
+			personOption => personOption.value === selectedPersonId,
+		)?.label ?? ""
 
 	function handlePersonSelected(personId: string) {
 		setSelectedPersonId(personId)

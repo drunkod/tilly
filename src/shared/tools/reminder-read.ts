@@ -35,8 +35,10 @@ async function listReminders(options: {
 	)
 	if (!userResult.ok) throw errors.USER_NOT_FOUND
 
-	let user = userResult.data
-	if (!user) throw errors.USER_NOT_FOUND
+	let loadedUser = userResult.data
+	if (!loadedUser) throw errors.USER_NOT_FOUND
+
+	let user = await loadedUser.$jazz.ensureLoaded()
 
 	let people = user.root?.people ?? []
 

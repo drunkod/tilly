@@ -10,7 +10,7 @@ import {
 	type TillyUIMessage,
 } from "#shared/tools/tools"
 import { z } from "zod"
-import { authMiddleware, requireAuth } from "../lib/auth-middleware"
+import { sessionAuthMiddleware, requireAuth } from "../lib/session-auth"
 import { requirePlus } from "../lib/chat-subscription"
 import {
 	checkInputSize,
@@ -21,7 +21,7 @@ import {
 export { chatMessagesApp }
 
 let chatMessagesApp = new Hono()
-	.use("*", authMiddleware)
+	.use("*", sessionAuthMiddleware)
 	.use("*", requireAuth)
 	.use("*", requirePlus)
 	.post("/", async c => {
@@ -33,10 +33,10 @@ let chatMessagesApp = new Hono()
 
 		let userContextMessages = addUserContextToMessages(messages)
 
-		let user = c.get("user")
+		let jazzAccountId = c.get("jazzAccountId")
 		let subscriptionStatus = c.get("subscription")
 
-		let usageLimits = await checkUsageLimits(user)
+		let usageLimits = await checkUsageLimits(jazzAccountId)
 		if (usageLimits.exceeded) {
 			let errorMessage = "Usage budget exceeded"
 			let errorResponse: UsageLimitExceededResponse = {
@@ -57,7 +57,7 @@ let chatMessagesApp = new Hono()
 			tools: allTools,
 		})
 
-		if (!checkInputSize(user, modelMessages)) {
+		if (!checkInputSize(jazzAccountId, modelMessages)) {
 			return c.json({ error: "Request too large" }, 413)
 		}
 
@@ -74,7 +74,7 @@ let chatMessagesApp = new Hono()
 				let outputTokens = usage.outputTokens ?? 0
 				let cachedTokens = getCachedTokenCount(providerMetadata)
 
-				await updateUsage(user, subscriptionStatus, {
+				await updateUsage(jazzAccountId, subscriptionStatus, {
 					inputTokens,
 					cachedTokens,
 					outputTokens,

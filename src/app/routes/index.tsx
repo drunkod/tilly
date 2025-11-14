@@ -3,7 +3,7 @@ import { motion } from "motion/react"
 import { Button } from "#shared/ui/button"
 import { TypographyH1, TypographyLead } from "#shared/ui/typography"
 import { useAppStore } from "#app/lib/store"
-import { getSignInUrl } from "#app/lib/auth-utils"
+import { useAuth } from "#app/lib/auth-utils"
 import { T } from "#shared/intl/setup"
 import {
 	SkipForwardFill,
@@ -24,10 +24,11 @@ export const Route = createFileRoute("/")({
 
 function WelcomeIndex() {
 	let setTourSkipped = useAppStore(state => state.setTourSkipped)
+	const auth = useAuth()
 
 	function handleSignIn() {
 		setTourSkipped(true)
-		window.location.href = getSignInUrl("/")
+		auth.logIn()
 	}
 
 	return (

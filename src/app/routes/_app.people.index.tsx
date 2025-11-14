@@ -39,20 +39,31 @@ export let Route = createFileRoute("/_app/people/")({
 
 let query = {
 	root: { people: { $each: { avatar: true, reminders: { $each: true } } } },
-} as const satisfies ResolveQuery<typeof UserAccount>
+} as const satisfies ResolveQuery<typeof TillyAccount>
 
 function PeopleScreen() {
 	let { me: data, eagerCount } = Route.useLoaderData()
 	let navigate = Route.useNavigate()
 
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let me = useAccount(TillyAccount, {
 		resolve: query,
-	})
+        select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null
+    })
 
-	let currentMe = subscribedMe ?? data
+	let currentMe = me?.$isLoaded ? me : data
 
-	let allPeople = (currentMe?.root.people ?? []).filter(
-		p => !p.permanentlyDeletedAt,
+	if (!currentMe?.$isLoaded) {
+		return (
+			<PeopleLayout>
+				<div className="text-center">
+					<p>Loading...</p>
+				</div>
+			</PeopleLayout>
+		)
+	}
+
+	let allPeople = [...(currentMe.root?.people ?? [])].filter(
+		(p: co.loaded<typeof Person>) => p && !p.permanentlyDeletedAt,
 	)
 
 	let { peopleSearchQuery, setPeopleSearchQuery } = useAppStore()
@@ -99,8 +110,7 @@ function PeopleScreen() {
 					{people.active.map((person, index) => (
 						<li key={person.$jazz.id}>
 							<PersonListItem
-								// eslint-disable-next-line @typescript-eslint/no-explicit-any
-								person={person as any} // TODO: ouch :(
+								person={person}
 								searchQuery={deferredSearchQuery}
 								noLazy={index < eagerCount}
 							/>
@@ -143,8 +153,7 @@ function PeopleScreen() {
 									{people.deleted.map((person, index) => (
 										<li key={person.$jazz.id}>
 											<PersonListItem
-												// eslint-disable-next-line @typescript-eslint/no-explicit-any
-												person={person as any} // TODO: ouch :(
+												person={person}
 												searchQuery={deferredSearchQuery}
 												noLazy={index < eagerCount}
 											/>
@@ -171,8 +180,7 @@ function PeopleScreen() {
 								{people.deleted.map((person, index) => (
 									<li key={person.$jazz.id}>
 										<PersonListItem
-											// eslint-disable-next-line @typescript-eslint/no-explicit-any
-											person={person as any} // TODO: ouch :(
+											person={person}
 											searchQuery={deferredSearchQuery}
 											noLazy={index < eagerCount}
 										/>

@@ -66,7 +66,8 @@ function PersonScreen() {
 	let data = Route.useLoaderData()
 	let subscribedPerson = useCoState(Person, personID, {
 		resolve: query,
-	})
+        select: (subscribedPerson) => subscribedPerson.$isLoaded ? subscribedPerson : subscribedPerson.$jazz.loadingState === "loading" ? undefined : null
+    })
 	let person = subscribedPerson ?? data.person
 	let { tab } = Route.useSearch()
 	let isMobile = useIsMobile()
@@ -74,10 +75,23 @@ function PersonScreen() {
 	let deferredSearchQuery = useDeferredValue(searchQuery)
 	let autoFocusRef = useAutoFocusInput()
 	let t = useIntl()
+
+	if (!person?.$isLoaded) {
+		return (
+			<div className="relative space-y-8 pb-20 md:mt-12 md:pb-4">
+				<div className="text-center">
+					<p>Loading...</p>
+				</div>
+			</div>
+		)
+	}
+
 	let notes = usePersonNotes(person, deferredSearchQuery)
 
 	let reminders = usePersonReminders(person, deferredSearchQuery)
-	let hasDueReminders = reminders.open.some(reminder => isDueToday(reminder))
+	let hasDueReminders = reminders.open.some((reminder: co.loaded<typeof Reminder>) =>
+		isDueToday(reminder),
+	)
 
 	if (!me) {
 		return (
@@ -93,7 +107,7 @@ function PersonScreen() {
 	return (
 		<div className="relative space-y-8 pb-20 md:mt-12 md:pb-4">
 			<title>{t("person.detail.pageTitle", { name: person.name })}</title>
-			<PersonDetails person={person} me={me} />
+			<PersonDetails person={person as co.loaded<typeof Person, typeof query>} me={me} />
 
 			<div className="space-y-6">
 				<div className="flex flex-1 items-center gap-2">
@@ -167,7 +181,7 @@ function PersonScreen() {
 							</TabsTrigger>
 						</TabsList>
 						<AddItemButton
-							person={person}
+							person={person as co.loaded<typeof Person, typeof query>}
 							activeTab={tab}
 							userId={me?.$jazz.id ?? ""}
 							onItemCreated={() => setSearchQuery("")}
@@ -176,14 +190,14 @@ function PersonScreen() {
 					<TabsContent value="notes">
 						<NotesList
 							notes={notes}
-							person={person}
+							person={person as co.loaded<typeof Person, typeof query>}
 							searchQuery={deferredSearchQuery}
 						/>
 					</TabsContent>
 					<TabsContent value="reminders">
 						<RemindersList
 							reminders={reminders}
-							person={person}
+							person={person as co.loaded<typeof Person, typeof query>}
 							userId={me?.$jazz.id ?? ""}
 							searchQuery={deferredSearchQuery}
 						/>
@@ -243,7 +257,7 @@ function NotesList({
 				<NoteListItem
 					key={entry.item.$jazz.id}
 					note={entry.item}
-					person={person}
+					person={person as co.loaded<typeof Person, typeof query>}
 					searchQuery={searchQuery}
 				/>
 			))}
@@ -263,7 +277,7 @@ function NotesList({
 									<NoteListItem
 										key={entry.item.$jazz.id}
 										note={entry.item}
-										person={person}
+										person={person as co.loaded<typeof Person, typeof query>}
 										searchQuery={searchQuery}
 									/>
 								))}
@@ -287,7 +301,7 @@ function NotesList({
 								<NoteListItem
 									key={entry.item.$jazz.id}
 									note={entry.item}
-									person={person}
+									person={person as co.loaded<typeof Person, typeof query>}
 									searchQuery={searchQuery}
 								/>
 							))}
@@ -346,7 +360,7 @@ function RemindersList({
 				<ReminderListItem
 					key={reminder.$jazz.id}
 					reminder={reminder}
-					person={person}
+					person={person as co.loaded<typeof Person, typeof query>}
 					userId={userId}
 					showPerson={false}
 					searchQuery={searchQuery}
@@ -368,7 +382,7 @@ function RemindersList({
 									<ReminderListItem
 										key={reminder.$jazz.id}
 										reminder={reminder}
-										person={person}
+										person={person as co.loaded<typeof Person, typeof query>}
 										userId={userId}
 										showPerson={false}
 										searchQuery={searchQuery}
@@ -390,7 +404,7 @@ function RemindersList({
 									<ReminderListItem
 										key={reminder.$jazz.id}
 										reminder={reminder}
-										person={person}
+										person={person as co.loaded<typeof Person, typeof query>}
 										userId={userId}
 										showPerson={false}
 										searchQuery={searchQuery}
@@ -416,7 +430,7 @@ function RemindersList({
 								<ReminderListItem
 									key={reminder.$jazz.id}
 									reminder={reminder}
-									person={person}
+									person={person as co.loaded<typeof Person, typeof query>}
 									userId={userId}
 									showPerson={false}
 									searchQuery={searchQuery}
@@ -436,7 +450,7 @@ function RemindersList({
 								<ReminderListItem
 									key={reminder.$jazz.id}
 									reminder={reminder}
-									person={person}
+									person={person as co.loaded<typeof Person, typeof query>}
 									userId={userId}
 									showPerson={false}
 									searchQuery={searchQuery}

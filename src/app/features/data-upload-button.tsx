@@ -76,6 +76,7 @@ export function UploadButton({ userID }: { userID: string }) {
 				},
 			},
 		})
+		if (!account?.$isLoaded) return
 		let root = account?.root
 		if (!root?.people) return
 
@@ -90,7 +91,7 @@ export function UploadButton({ userID }: { userID: string }) {
 				let existingPersonIndex = -1
 				if (values.mode === "merge") {
 					existingPersonIndex = root.people.findIndex(
-						p => p?.$jazz.id === personData.id,
+						(p: co.loaded<typeof Person>) => p?.$jazz.id === personData.id,
 					)
 				}
 
@@ -150,7 +151,7 @@ export function UploadButton({ userID }: { userID: string }) {
 					if (personData.notes && existingPerson.notes) {
 						for (let noteData of personData.notes) {
 							let existingNoteIndex = existingPerson.notes.findIndex(
-								n => n?.$jazz.id === noteData.id,
+								(n: co.loaded<typeof Note>) => n?.$jazz.id === noteData.id,
 							)
 							if (
 								existingNoteIndex >= 0 &&
@@ -212,7 +213,8 @@ export function UploadButton({ userID }: { userID: string }) {
 					if (personData.reminders && existingPerson.reminders) {
 						for (let reminderData of personData.reminders) {
 							let existingReminderIndex = existingPerson.reminders.findIndex(
-								r => r?.$jazz.id === reminderData.id,
+								(r: co.loaded<typeof Reminder>) =>
+									r?.$jazz.id === reminderData.id,
 							)
 							if (
 								existingReminderIndex >= 0 &&

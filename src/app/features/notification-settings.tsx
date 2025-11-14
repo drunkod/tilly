@@ -48,10 +48,12 @@ import { getServiceWorkerRegistration } from "#app/lib/service-worker"
 import { tryCatch } from "#shared/lib/trycatch"
 import { useIsInAppBrowser } from "#app/hooks/use-pwa"
 
+import { TillyAccount } from "#shared/schema/account"
+
 export function NotificationSettings({
 	me,
 }: {
-	me: co.loaded<typeof UserAccount, Query>
+	me: co.loaded<typeof TillyAccount, Query>
 }) {
 	let t = useIntl()
 	let isAuthenticated = useIsAuthenticated()
@@ -59,7 +61,7 @@ export function NotificationSettings({
 
 	let [currentEndpoint] = useCurrentEndpoint()
 
-	let devices = me?.root.notificationSettings?.pushDevices || []
+	let devices = me.root?.notificationSettings?.pushDevices || []
 	let isCurrentDeviceAdded =
 		currentEndpoint && devices.some(d => d.endpoint === currentEndpoint)
 
@@ -183,8 +185,8 @@ let notificationTimeFormSchema = z.object({
 		}),
 })
 
-function TimezoneSection({ me }: { me: co.loaded<typeof UserAccount, Query> }) {
-	let notifications = me?.root.notificationSettings
+function TimezoneSection({ me }: { me: co.loaded<typeof TillyAccount, Query> }) {
+	let notifications = me.root?.notificationSettings
 	let currentTimezone =
 		notifications?.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone
 	let usingDefaultTimezone = !notifications?.timezone
@@ -326,9 +328,9 @@ function TimezoneSection({ me }: { me: co.loaded<typeof UserAccount, Query> }) {
 function NotificationTimeSection({
 	me,
 }: {
-	me: co.loaded<typeof UserAccount, Query>
+	me: co.loaded<typeof TillyAccount, Query>
 }) {
-	let notifications = me?.root.notificationSettings
+	let notifications = me.root?.notificationSettings
 	let currentNotificationTime = notifications?.notificationTime || "12:00"
 	let usingDefaultTime = !notifications?.notificationTime
 	let [isNotificationTimeDialogOpen, setIsNotificationTimeDialogOpen] =
@@ -491,9 +493,9 @@ function NotificationTimeSection({
 function LastDeliveredSection({
 	me,
 }: {
-	me: co.loaded<typeof UserAccount, Query>
+	me: co.loaded<typeof TillyAccount, Query>
 }) {
-	let notifications = me?.root.notificationSettings
+	let notifications = me.root?.notificationSettings
 	let locale = useLocale()
 	let dfnsLocale = locale === "de" ? dfnsDe : undefined
 
@@ -572,12 +574,12 @@ interface DeviceListItemProps {
 			auth: string
 		}
 	}
-	me: co.loaded<typeof UserAccount, Query>
+	me: co.loaded<typeof TillyAccount, Query>
 }
 
 function DeviceListItem({ device, me }: DeviceListItemProps) {
 	let t = useIntl()
-	let notifications = me?.root.notificationSettings
+	let notifications = me.root?.notificationSettings
 	let [currentEndpoint, refreshEndpoint] = useCurrentEndpoint()
 	let isCurrentDevice = device.endpoint === currentEndpoint
 	let [actionsDialogOpen, setActionsDialogOpen] = useState(false)
@@ -829,13 +831,13 @@ function DeviceListItem({ device, me }: DeviceListItemProps) {
 }
 
 interface AddDeviceDialogProps {
-	me: co.loaded<typeof UserAccount, Query>
+	me: co.loaded<typeof TillyAccount, Query>
 	disabled?: boolean
 }
 
 function AddDeviceDialog({ me, disabled }: AddDeviceDialogProps) {
 	let t = useIntl()
-	let notifications = me?.root.notificationSettings
+	let notifications = me.root?.notificationSettings
 	let [, refreshEndpoint] = useCurrentEndpoint()
 	let [open, setOpen] = useState(false)
 	let [permission, setPermission] = useState<NotificationPermission>(

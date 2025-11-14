@@ -22,11 +22,13 @@ async function createReminder(
 		userId: string
 	},
 ): Promise<ReminderCreated> {
-	let person = await Person.load(options.personId, {
+	let loadedPerson = await Person.load(options.personId, {
 		resolve: { reminders: { $each: true } },
 	})
 
-	if (!person) throw errors.PERSON_NOT_FOUND
+	if (!loadedPerson) throw errors.PERSON_NOT_FOUND
+
+	let person = await loadedPerson.$jazz.ensureLoaded()
 
 	let now = new Date()
 

@@ -1,25 +1,17 @@
 #!/usr/bin/env tsx
 
 import { UsageTracking } from "../src/shared/schema/user"
-import { createClerkClient } from "@clerk/backend"
+import { TillyAccount } from "../src/shared/schema/account"
+import { getRegisteredUsers } from "../src/server/lib/user-registry"
 import { startWorker } from "jazz-tools/worker"
 import { ServerAccount } from "../src/shared/schema/server"
 
 type ServerWorker = Awaited<ReturnType<typeof startWorker>>["worker"]
 
 // Load environment variables
-let CLERK_SECRET_KEY = process.env.CLERK_SECRET_KEY
-let PUBLIC_CLERK_PUBLISHABLE_KEY = process.env.PUBLIC_CLERK_PUBLISHABLE_KEY
 let PUBLIC_JAZZ_SYNC_SERVER = process.env.PUBLIC_JAZZ_SYNC_SERVER
 let PUBLIC_JAZZ_WORKER_ACCOUNT = process.env.PUBLIC_JAZZ_WORKER_ACCOUNT
 let JAZZ_WORKER_SECRET = process.env.JAZZ_WORKER_SECRET
-
-if (!CLERK_SECRET_KEY || !PUBLIC_CLERK_PUBLISHABLE_KEY) {
-	console.error(
-		"❌ Missing required Clerk environment variables: CLERK_SECRET_KEY, PUBLIC_CLERK_PUBLISHABLE_KEY",
-	)
-	process.exit(1)
-}
 
 if (
 	!PUBLIC_JAZZ_SYNC_SERVER ||
@@ -55,7 +47,7 @@ async function initJazzWorker() {
 async function resetUsageForUser(usageTrackingId: string, userId: string) {
 	try {
 		let usageTracking = await UsageTracking.load(usageTrackingId)
-		if (!usageTracking) {
+		if (!usageTracking?.$isLoaded) {
 			console.warn(`  ⚠️  Usage tracking not found for user ${userId}`)
 			return false
 		}
@@ -64,10 +56,7 @@ async function resetUsageForUser(usageTrackingId: string, userId: string) {
 
 		console.log(`  📊 Current usage: ${usagePercent.toFixed(1)}% of budget`)
 
-		usageTracking.$jazz.set("weeklyPercentUsed", 0)
-
-		console.log(`  ⏳ Waiting for sync...`)
-		await usageTracking.$jazz.waitForSync()
+		usageTracking.weeklyPercentUsed = 0
 
 		console.log(`  ✅ Reset successfully`)
 		return true
@@ -83,29 +72,13 @@ async function resetAllUsage() {
 	// Initialize Jazz worker to load CoValues
 	await initJazzWorker()
 
-	// Initialize Clerk client
-	let clerkClient = createClerkClient({
-		secretKey: CLERK_SECRET_KEY,
-		publishableKey: PUBLIC_CLERK_PUBLISHABLE_KEY,
-	})
-
 	try {
-		console.log("📋 Fetching users from Clerk...")
+		console.log("📋 Fetching registered users...")
 
 		let users = []
-		let hasMore = true
-		let offset = 0
-		let limit = 100
 
-		while (hasMore) {
-			let response = await clerkClient.users.getUserList({
-				limit,
-				offset,
-			})
-
-			users.push(...response.data)
-			hasMore = response.data.length === limit
-			offset += limit
+		for await (let user of getRegisteredUsers()) {
+			users.push(user)
 		}
 
 		console.log(`📊 Found ${users.length} users`)
@@ -114,12 +87,22 @@ async function resetAllUsage() {
 		let skipCount = 0
 
 		for (let [index, user] of users.entries()) {
-			console.log(`\n[${index + 1}/${users.length}] Processing user ${user.id}`)
+			console.log(
+				`\n[${index + 1}/${users.length}] Processing user ${user.jazzAccountId}`,
+			)
 
-			// Get usage tracking ID from user metadata
-			let usageTrackingId = user.unsafeMetadata?.usageTrackingId as
-				| string
-				| undefined
+			// Load account to get usage tracking
+			let account = await TillyAccount.load(user.jazzAccountId, {
+				resolve: { root: { usageTracking: true } },
+			})
+
+			if (!account) {
+				console.log(`  ⏭️  Account not found, skipping`)
+				skipCount++
+				continue
+			}
+
+			let usageTrackingId = account.root?.usageTracking?.$jazz.id
 
 			if (!usageTrackingId) {
 				console.log(`  ⏭️  No usage tracking found, skipping`)
@@ -127,7 +110,7 @@ async function resetAllUsage() {
 				continue
 			}
 
-			let success = await resetUsageForUser(usageTrackingId, user.id)
+			let success = await resetUsageForUser(usageTrackingId, user.jazzAccountId)
 			if (success) {
 				resetCount++
 			}
@@ -137,7 +120,7 @@ async function resetAllUsage() {
 		console.log(`✅ Successfully reset: ${resetCount} users`)
 		console.log(`⏭️  Skipped (no usage tracking): ${skipCount} users`)
 	} catch (error) {
-		console.error("❌ Failed to fetch users or reset usage:", error)
+		console.error("❌ Failed to reset usage:", error)
 	}
 }
 

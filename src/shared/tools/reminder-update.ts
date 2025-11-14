@@ -34,10 +34,12 @@ async function updateReminder(
 		reminderId: string
 	},
 ): Promise<ReminderUpdated> {
-	let person = await Person.load(options.personId)
+	let person = await Person.load(options.personId, {
+		resolve: { reminders: { $each: true } },
+	})
 	if (!person) throw errors.PERSON_NOT_FOUND
 
-	let reminder = await Reminder.load(options.reminderId)
+	let reminder = person.reminders.find(r => r?.$jazz.id === options.reminderId)
 	if (!reminder) throw errors.REMINDER_NOT_FOUND
 
 	let previous = { ...reminder }

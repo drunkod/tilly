@@ -1,10 +1,9 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router"
-import { SignOutButton, useAuth, useUser } from "@clerk/clerk-react"
-import { getSignInUrl, getSignUpUrl } from "#app/lib/auth-utils"
+import { useAuth, useSignOut } from "#app/lib/auth-utils"
 import { useAccount, useIsAuthenticated } from "jazz-tools/react"
 import { Button } from "#shared/ui/button"
 import { Input } from "#shared/ui/input"
-import { UserAccount } from "#shared/schema/user"
+import { TillyAccount } from "#shared/schema/account"
 import type { ResolveQuery } from "jazz-tools"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -61,7 +60,7 @@ export const Route = createFileRoute("/_app/settings")({
 		if (!context.me) {
 			return { me: null }
 		}
-		let loadedMe = await UserAccount.load(context.me.$jazz.id, {
+		let loadedMe = await TillyAccount.load(context.me.$jazz.id, {
 			resolve: query,
 		})
 		if (!loadedMe) throw notFound()
@@ -75,18 +74,17 @@ let query = {
 	root: {
 		notificationSettings: true,
 		usageTracking: true,
+		subscription: true,
 	},
-} as const satisfies ResolveQuery<typeof UserAccount>
+} as const satisfies ResolveQuery<typeof TillyAccount>
 
 function SettingsScreen() {
 	let t = useIntl()
-	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let me = useAccount(TillyAccount, {
 		resolve: query,
 	})
-	let currentMe = subscribedMe ?? data.me
 
-	if (!currentMe) {
+	if (!me.$isLoaded) {
 		return (
 			<div className="space-y-8 pb-20 md:mt-12 md:pb-4">
 				<title>{t("settings.pageTitle")}</title>
@@ -111,9 +109,9 @@ function SettingsScreen() {
 			</TypographyH1>
 			<div className="divide-border divide-y">
 				<AuthenticationSection />
-				<AgentSection me={currentMe} />
+				<AgentSection me={me} />
 				<LanguageSection />
-				<NotificationSettings me={currentMe} />
+				<NotificationSettings me={me} />
 				<PWASection />
 				<DataSection />
 				<AboutSection />
@@ -124,21 +122,19 @@ function SettingsScreen() {
 
 function LanguageSection() {
 	let t = useIntl()
-	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let me = useAccount(TillyAccount, {
 		resolve: query,
 	})
-	let currentMe = subscribedMe ?? data.me
 
-	let currentLang = currentMe?.root?.language || "en"
-
-	function setLanguage(lang: "de" | "en") {
-		if (!currentMe?.root) return
-		currentMe.root.$jazz.set("language", lang)
+	if (!me.$isLoaded || !me.root?.$isLoaded) {
+		return null
 	}
 
-	if (!currentMe) {
-		return null
+	let currentLang = me.root.language || "en"
+
+	function setLanguage(lang: "de" | "en") {
+		if (!me.root) return
+		me.root.$jazz.set("language", lang)
 	}
 
 	return (
@@ -173,25 +169,35 @@ function LanguageSection() {
 
 function AuthenticationSection() {
 	let t = useIntl()
-	let isAuthenticated = useIsAuthenticated()
+	let isSignedIn = useIsAuthenticated()
 	let auth = useAuth()
-	let { user } = useUser()
-
+	let logOut = useSignOut()
+	let me = useAccount(TillyAccount, {
+		resolve: { profile: true, root: { subscription: true } },
+	})
 	let isOnline = useOnlineStatus()
+
+	function handleSignOut() {
+		logOut()
+		resetAppStore()
+	}
+
+	let tier = me.$isLoaded ? me.root?.subscription?.tier : undefined
+	let email = me.$isLoaded ? me.profile?.email : undefined
 
 	return (
 		<SettingsSection
 			title={t("settings.auth.title")}
 			description={
-				isAuthenticated
+				isSignedIn
 					? t("settings.auth.description.signedIn")
 					: isOnline
-						? t("settings.auth.description.signedOut.online")
-						: t("settings.auth.description.signedOut.offline")
+					? t("settings.auth.description.signedOut.online")
+					: t("settings.auth.description.signedOut.offline")
 			}
 		>
 			<div className="space-y-6">
-				{isAuthenticated ? (
+				{isSignedIn && me.$isLoaded ? (
 					<>
 						<div>
 							<p className="mb-1 text-sm font-medium">
@@ -199,45 +205,29 @@ function AuthenticationSection() {
 							</p>
 							<p className="text-muted-foreground text-sm">
 								{t("settings.auth.status.signedIn", {
-									email: user?.emailAddresses[0]?.emailAddress || "",
+									email: email || "No email set",
 								})}
 							</p>
 							<div className="mt-3 inline-flex flex-wrap gap-3">
-								<Button asChild variant="secondary" disabled={!isOnline}>
-									<a href={`${getAccountsUrl()}/user`}>
-										<T k="settings.auth.manageAccount" />
-									</a>
+								<Button
+									onClick={handleSignOut}
+									variant="outline"
+									disabled={!isOnline}
+								>
+									<T k="settings.auth.signOut" />
 								</Button>
-								<SignOutButton redirectUrl="/app">
-									<Button
-										onClick={() => resetAppStore()}
-										variant="outline"
-										disabled={!isOnline}
-									>
-										<T k="settings.auth.signOut" />
-									</Button>
-								</SignOutButton>
 							</div>
 						</div>
-						{auth.isLoaded && auth.isSignedIn && (
-							<div>
-								<p className="mb-1 text-sm font-medium">
-									<T k="settings.auth.tier.label" />
-								</p>
-								<p className="text-muted-foreground text-sm">
-									{auth.has({ plan: "plus" })
-										? t("settings.auth.tier.plus")
-										: t("settings.auth.tier.free")}
-								</p>
-								<div className="mt-3">
-									<Button asChild variant="secondary" disabled={!isOnline}>
-										<a href={`${getAccountsUrl()}/user/billing`}>
-											<T k="settings.auth.manageSubscription" />
-										</a>
-									</Button>
-								</div>
-							</div>
-						)}
+						<div>
+							<p className="mb-1 text-sm font-medium">
+								<T k="settings.auth.tier.label" />
+							</p>
+							<p className="text-muted-foreground text-sm">
+								{tier === "plus"
+									? t("settings.auth.tier.plus")
+									: t("settings.auth.tier.free")}
+							</p>
+						</div>
 					</>
 				) : (
 					<div>
@@ -248,15 +238,15 @@ function AuthenticationSection() {
 							{t("settings.auth.status.signedOut")}
 						</p>
 						<div className="mt-3 space-x-2">
-							<Button asChild disabled={!isOnline}>
-								<a href={getSignInUrl("/app/settings")}>
-									<T k="auth.signIn.button" />
-								</a>
+							<Button onClick={() => auth.logIn()} disabled={!isOnline}>
+								<T k="auth.signIn.button" />
 							</Button>
-							<Button asChild variant="outline" disabled={!isOnline}>
-								<a href={getSignUpUrl("/app/settings")}>
-									<T k="auth.signUp.button" />
-								</a>
+							<Button
+								onClick={() => auth.signUp("")}
+								variant="outline"
+								disabled={!isOnline}
+							>
+								<T k="auth.signUp.button" />
 							</Button>
 						</div>
 					</div>
@@ -288,7 +278,7 @@ let agentFormSchema = z.object({
 function AgentSection({
 	me,
 }: {
-	me: co.loaded<typeof UserAccount, typeof query>
+	me: co.loaded<typeof TillyAccount, typeof query>
 }) {
 	let [isDisplayNameDialogOpen, setIsDisplayNameDialogOpen] = useState(false)
 	let t = useIntl()
@@ -567,12 +557,12 @@ function PWASection() {
 function DataSection() {
 	let t = useIntl()
 	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let subscribedMe = useAccount(TillyAccount, {
 		resolve: query,
 	})
-	let currentMe = subscribedMe ?? data.me
+	let currentMe = subscribedMe.$isLoaded ? subscribedMe : data.me
 
-	if (!currentMe) {
+	if (!currentMe?.$isLoaded) {
 		return null
 	}
 
@@ -625,7 +615,7 @@ function DataSection() {
 function DeleteDataButton({
 	currentMe,
 }: {
-	currentMe: co.loaded<typeof UserAccount>
+	currentMe: co.loaded<typeof TillyAccount>
 }) {
 	let [open, setOpen] = useState(false)
 	let t = useIntl()
@@ -642,7 +632,7 @@ function DeleteDataButton({
 
 	async function onSubmit() {
 		let accountResult = await tryCatch(
-			UserAccount.load(currentMe.$jazz.id, {
+			TillyAccount.load(currentMe.$jazz.id, {
 				resolve: { root: { people: true } },
 			}),
 		)
@@ -752,11 +742,13 @@ function AboutSection() {
 	let t = useIntl()
 	let setTourSkipped = useAppStore(s => s.setTourSkipped)
 	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let subscribedMe = useAccount(TillyAccount, {
 		resolve: query,
 	})
-	let currentMe = subscribedMe ?? data.me
-	let currentLang = currentMe?.root?.language || "en"
+	let currentMe = subscribedMe.$isLoaded ? subscribedMe : data.me
+	let currentLang = currentMe?.$isLoaded
+		? currentMe.root?.language || "en"
+		: "en"
 
 	return (
 		<SettingsSection
@@ -794,10 +786,4 @@ function AboutSection() {
 			</div>
 		</SettingsSection>
 	)
-}
-
-import { PUBLIC_CLERK_ACCOUNTS_URL } from "astro:env/client"
-
-function getAccountsUrl(): string {
-	return PUBLIC_CLERK_ACCOUNTS_URL
 }

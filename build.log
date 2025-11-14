@@ -1,0 +1,766 @@
+
+> @ccssmnn/tilly@ build /app
+> pnpm test:run && astro check && astro build
+
+
+> @ccssmnn/tilly@ test:run /app
+> vitest run
+
+
+ RUN  v3.2.4 /app
+
+ ✓ src/shared/intl/messages.test.ts (2 tests) 43ms
+ ✓  TS  src/shared/intl/messages.test.ts (2 tests)
+
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+Type Errors  no errors
+   Start at  06:56:05
+   Duration  2.31s (transform 203ms, setup 0ms, collect 336ms, tests 43ms, environment 0ms, prepare 109ms, typecheck 2.19s)
+
+06:56:12 [content] Syncing content
+06:56:13 [content] Synced content
+06:56:13 [types] Generated 1.85s
+06:56:13 [check] Getting diagnostics for Astro files in /app...
+[96mscripts/reset-usage.ts[0m:[93m70[0m:[93m29[0m - [91merror[0m[90m ts(2339): [0mProperty 'waitForSync' does not exist on type 'CoMapJazzApi<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap> | { ...; }'.
+  Property 'waitForSync' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m70[0m   await usageTracking.$jazz.waitForSync()
+[7m  [0m [91m                            ~~~~~~~~~~~[0m
+[96mscripts/reset-usage.ts[0m:[93m67[0m:[93m23[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap> | { ...; }'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m67[0m   usageTracking.$jazz.set("weeklyPercentUsed", 0)
+[7m  [0m [91m                      ~~~[0m
+[96mscripts/reset-usage.ts[0m:[93m63[0m:[93m36[0m - [91merror[0m[90m ts(2339): [0mProperty 'weeklyPercentUsed' does not exist on type 'MaybeLoaded<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap>'.
+  Property 'weeklyPercentUsed' does not exist on type 'NotLoaded<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap>'.
+
+[7m63[0m   let usagePercent = usageTracking.weeklyPercentUsed ?? 0
+[7m  [0m [91m                                   ~~~~~~~~~~~~~~~~~[0m
+[96mscripts/reset-usage.ts[0m:[93m4[0m:[93m35[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@clerk/backend' or its corresponding type declarations.
+
+[7m4[0m import { createClerkClient } from "@clerk/backend"
+[7m [0m [91m                                  ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/app/main.tsx[0m:[93m49[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly profile: MaybeLoaded<{ readonly name: string; readonly inbox: string | undefined; readonly inboxInvite: string | undefined; } & CoMap>; readonly root: MaybeLoaded<...>; } & Account>'.
+
+[7m49[0m  let { me } = useAccount(UserAccount)
+[7m  [0m [91m       ~~[0m
+[96msrc/app/main.tsx[0m:[93m1[0m:[93m41[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@clerk/clerk-react' or its corresponding type declarations.
+
+[7m1[0m import { ClerkProvider, useClerk } from "@clerk/clerk-react"
+[7m [0m [91m                                        ~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/app/components/status-indicator.tsx[0m:[93m9[0m:[93m25[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@clerk/clerk-react' or its corresponding type declarations.
+
+[7m9[0m import { useAuth } from "@clerk/clerk-react"
+[7m [0m [91m                        ~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/app/features/data-upload-button.tsx[0m:[93m215[0m:[93m9[0m - [91merror[0m[90m ts(7006): [0mParameter 'r' implicitly has an 'any' type.
+
+[7m215[0m         r => r?.$jazz.id === reminderData.id,
+[7m   [0m [91m        ~[0m
+[96msrc/app/features/data-upload-button.tsx[0m:[93m153[0m:[93m9[0m - [91merror[0m[90m ts(7006): [0mParameter 'n' implicitly has an 'any' type.
+
+[7m153[0m         n => n?.$jazz.id === noteData.id,
+[7m   [0m [91m        ~[0m
+[96msrc/app/features/data-upload-button.tsx[0m:[93m93[0m:[93m7[0m - [91merror[0m[90m ts(7006): [0mParameter 'p' implicitly has an 'any' type.
+
+[7m93[0m       p => p?.$jazz.id === personData.id,
+[7m  [0m [91m      ~[0m
+[96msrc/app/features/data-upload-button.tsx[0m:[93m79[0m:[93m23[0m - [91merror[0m[90m ts(2339): [0mProperty 'root' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: D...'.
+  Property 'root' does not exist on type 'NotLoaded<{ readonly root: { readonly people: readonly ({ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Dat...'.
+
+[7m79[0m   let root = account?.root
+[7m  [0m [91m                      ~~~~[0m
+
+[96msrc/app/features/new-note.tsx[0m:[93m48[0m:[93m33[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m48[0m  let peopleOptions = people.map(person => ({
+[7m  [0m [91m                                ~~~~~~[0m
+[96msrc/app/features/new-note.tsx[0m:[93m45[0m:[93m3[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m45[0m   person => person && !isDeleted(person),
+[7m  [0m [91m  ~~~~~~[0m
+[96msrc/app/features/new-note.tsx[0m:[93m31[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive:...'.
+
+[7m31[0m  let { me } = useAccount(UserAccount, {
+[7m  [0m [91m       ~~[0m
+
+[96msrc/app/features/new-person.tsx[0m:[93m27[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly profile: MaybeLoaded<{ readonly name: string; readonly inbox: string | undefined; readonly inboxInvite: string | undefined; } & CoMap>; readonly root: MaybeLoaded<...>; } & Account>'.
+
+[7m27[0m  let { me } = useAccount(UserAccount, {})
+[7m  [0m [91m       ~~[0m
+
+[96msrc/app/features/new-reminder.tsx[0m:[93m54[0m:[93m22[0m - [91merror[0m[90m ts(7006): [0mParameter 'personOption' implicitly has an 'any' type.
+
+[7m54[0m   peopleOptions.find(personOption => personOption.value === selectedPersonId)
+[7m  [0m [91m                     ~~~~~~~~~~~~[0m
+[96msrc/app/features/new-reminder.tsx[0m:[93m48[0m:[93m33[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m48[0m  let peopleOptions = people.map(person => ({
+[7m  [0m [91m                                ~~~~~~[0m
+[96msrc/app/features/new-reminder.tsx[0m:[93m45[0m:[93m3[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m45[0m   person => person && !isDeleted(person),
+[7m  [0m [91m  ~~~~~~[0m
+[96msrc/app/features/new-reminder.tsx[0m:[93m31[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive:...'.
+
+[7m31[0m  let { me } = useAccount(UserAccount, {
+[7m  [0m [91m       ~~[0m
+
+[96msrc/app/features/note-hooks.ts[0m:[93m39[0m:[93m24[0m - [91merror[0m[90m ts(7006): [0mParameter 'note' implicitly has an 'any' type.
+
+[7m39[0m  filteredNotes.forEach(note => {
+[7m  [0m [91m                       ~~~~[0m
+[96msrc/app/features/note-hooks.ts[0m:[93m23[0m:[93m25[0m - [91merror[0m[90m ts(7006): [0mParameter 'note' implicitly has an 'any' type.
+
+[7m23[0m   : person.notes.filter(note => note && !isPermanentlyDeleted(note))
+[7m  [0m [91m                        ~~~~[0m
+[96msrc/app/features/note-hooks.ts[0m:[93m23[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'filter' does not exist on type 'CoList<MaybeLoaded<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap>> | NotLoaded<...>'.
+  Property 'filter' does not exist on type 'NotLoaded<CoList<MaybeLoaded<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap>>>'.
+
+[7m23[0m   : person.notes.filter(note => note && !isPermanentlyDeleted(note))
+[7m  [0m [91m                 ~~~~~~[0m
+[96msrc/app/features/note-hooks.ts[0m:[93m18[0m:[93m25[0m - [91merror[0m[90m ts(7006): [0mParameter 'note' implicitly has an 'any' type.
+
+[7m18[0m   ? person.notes.filter(note => {
+[7m  [0m [91m                        ~~~~[0m
+[96msrc/app/features/note-hooks.ts[0m:[93m18[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'filter' does not exist on type 'CoList<MaybeLoaded<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap>> | NotLoaded<...>'.
+  Property 'filter' does not exist on type 'NotLoaded<CoList<MaybeLoaded<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap>>>'.
+
+[7m18[0m   ? person.notes.filter(note => {
+[7m  [0m [91m                 ~~~~~~[0m
+
+[96msrc/app/features/note-tour.tsx[0m:[93m28[0m:[93m17[0m - [91merror[0m[90m ts(7006): [0mParameter 'p' implicitly has an 'any' type.
+
+[7m28[0m   ? people.find(p => p.$jazz.id === personId)
+[7m  [0m [91m                ~[0m
+[96msrc/app/features/note-tour.tsx[0m:[93m24[0m:[93m3[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m24[0m   person => person && !isDeleted(person),
+[7m  [0m [91m  ~~~~~~[0m
+[96msrc/app/features/note-tour.tsx[0m:[93m19[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive:...'.
+
+[7m19[0m  let { me } = useAccount(UserAccount, {
+[7m  [0m [91m       ~~[0m
+
+[96msrc/app/features/reminder-hooks.ts[0m:[93m113[0m:[93m3[0m - [91merror[0m[90m ts(7006): [0mParameter 'r' implicitly has an 'any' type.
+
+[7m113[0m   r => r && isDeleted(r) && !isPermanentlyDeleted(r),
+[7m   [0m [91m  ~[0m
+[96msrc/app/features/reminder-hooks.ts[0m:[93m110[0m:[93m3[0m - [91merror[0m[90m ts(7006): [0mParameter 'r' implicitly has an 'any' type.
+
+[7m110[0m   r => r && !isDeleted(r) && r.done,
+[7m   [0m [91m  ~[0m
+[96msrc/app/features/reminder-hooks.ts[0m:[93m107[0m:[93m3[0m - [91merror[0m[90m ts(7006): [0mParameter 'r' implicitly has an 'any' type.
+
+[7m107[0m   r => r && !isDeleted(r) && !r.done,
+[7m   [0m [91m  ~[0m
+[96msrc/app/features/reminder-hooks.ts[0m:[93m103[0m:[93m5[0m - [91merror[0m[90m ts(7006): [0mParameter 'reminder' implicitly has an 'any' type.
+
+[7m103[0m     reminder => reminder && !isPermanentlyDeleted(reminder),
+[7m   [0m [91m    ~~~~~~~~[0m
+[96msrc/app/features/reminder-hooks.ts[0m:[93m102[0m:[93m22[0m - [91merror[0m[90m ts(2339): [0mProperty 'filter' does not exist on type 'CoList<MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly crea...'.
+  Property 'filter' does not exist on type 'NotLoaded<CoList<MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; rea...'.
+
+[7m102[0m   : person.reminders.filter(
+[7m   [0m [91m                     ~~~~~~[0m
+[96msrc/app/features/reminder-hooks.ts[0m:[93m97[0m:[93m29[0m - [91merror[0m[90m ts(7006): [0mParameter 'reminder' implicitly has an 'any' type.
+
+[7m97[0m   ? person.reminders.filter(reminder => {
+[7m  [0m [91m                            ~~~~~~~~[0m
+[96msrc/app/features/reminder-hooks.ts[0m:[93m97[0m:[93m22[0m - [91merror[0m[90m ts(2339): [0mProperty 'filter' does not exist on type 'CoList<MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly crea...'.
+  Property 'filter' does not exist on type 'NotLoaded<CoList<MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; rea...'.
+
+[7m97[0m   ? person.reminders.filter(reminder => {
+[7m  [0m [91m                     ~~~~~~[0m
+[96msrc/app/features/reminder-hooks.ts[0m:[93m27[0m:[93m24[0m - [91merror[0m[90m ts(2488): [0mType 'CoList<MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly crea...' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m27[0m   for (let reminder of person.reminders) {
+[7m  [0m [91m                       ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/app/features/reminder-tour.tsx[0m:[93m28[0m:[93m17[0m - [91merror[0m[90m ts(7006): [0mParameter 'p' implicitly has an 'any' type.
+
+[7m28[0m   ? people.find(p => p.$jazz.id === personId)
+[7m  [0m [91m                ~[0m
+[96msrc/app/features/reminder-tour.tsx[0m:[93m24[0m:[93m3[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m24[0m   person => person && !isDeleted(person),
+[7m  [0m [91m  ~~~~~~[0m
+[96msrc/app/features/reminder-tour.tsx[0m:[93m19[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive:...'.
+
+[7m19[0m  let { me } = useAccount(UserAccount, {
+[7m  [0m [91m       ~~[0m
+
+[96msrc/app/lib/service-worker.ts[0m:[93m1[0m:[93m25[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@clerk/clerk-react' or its corresponding type declarations.
+
+[7m1[0m import { useUser } from "@clerk/clerk-react"
+[7m [0m [91m                        ~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/app/routes/_app.assistant.tsx[0m:[93m482[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive:...'.
+
+[7m482[0m  let { me: subscribedMe } = useAccount(UserAccount, { resolve: query })
+[7m   [0m [91m       ~~[0m
+[96msrc/app/routes/_app.assistant.tsx[0m:[93m165[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive:...'.
+
+[7m165[0m  let { me: subscribedMe } = useAccount(UserAccount, {
+[7m   [0m [91m       ~~[0m
+[96msrc/app/routes/_app.assistant.tsx[0m:[93m46[0m:[93m25[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@clerk/clerk-react' or its corresponding type declarations.
+
+[7m46[0m import { useAuth } from "@clerk/clerk-react"
+[7m  [0m [91m                        ~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/app/routes/_app.people.$personID.tsx[0m:[93m186[0m:[93m8[0m - [91merror[0m[90m ts(2322): [0mType 'MaybeLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: re...' is not assignable to type '{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: readonly ({ .....'.
+  Type 'NotLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: read...' is not assignable to type '{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: readonly ({ .....'.
+
+[7m186[0m        person={person}
+[7m   [0m [91m       ~~~~~~[0m
+[96msrc/app/routes/_app.people.$personID.tsx[0m:[93m179[0m:[93m8[0m - [91merror[0m[90m ts(2322): [0mType 'MaybeLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: re...' is not assignable to type '{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: readonly ({ .....'.
+  Type 'NotLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: read...' is not assignable to type '{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: readonly ({ .....'.
+
+[7m179[0m        person={person}
+[7m   [0m [91m       ~~~~~~[0m
+[96msrc/app/routes/_app.people.$personID.tsx[0m:[93m170[0m:[93m8[0m - [91merror[0m[90m ts(2322): [0mType 'MaybeLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: re...' is not assignable to type '{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: readonly ({ .....'.
+  Type 'NotLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: read...' is not assignable to type '{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: readonly ({ .....'.
+
+[7m170[0m        person={person}
+[7m   [0m [91m       ~~~~~~[0m
+[96msrc/app/routes/_app.people.$personID.tsx[0m:[93m96[0m:[93m19[0m - [91merror[0m[90m ts(2322): [0mType 'MaybeLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: re...' is not assignable to type '{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: readonly ({ .....'.
+  Type 'NotLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: read...' is not assignable to type '{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: readonly ({ .....'.
+
+[7m96[0m    <PersonDetails person={person} me={me} />
+[7m  [0m [91m                  ~~~~~~[0m
+[96msrc/app/routes/_app.people.$personID.tsx[0m:[93m95[0m:[93m56[0m - [91merror[0m[90m ts(2339): [0mProperty 'name' does not exist on type 'MaybeLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: re...'.
+  Property 'name' does not exist on type 'NotLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: read...'.
+
+[7m95[0m    <title>{t("person.detail.pageTitle", { name: person.name })}</title>
+[7m  [0m [91m                                                       ~~~~[0m
+[96msrc/app/routes/_app.people.$personID.tsx[0m:[93m85[0m:[93m57[0m - [91merror[0m[90m ts(2339): [0mProperty 'name' does not exist on type 'MaybeLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: re...'.
+  Property 'name' does not exist on type 'NotLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: read...'.
+
+[7m85[0m     <title>{t("person.detail.pageTitle", { name: person.name })}</title>
+[7m  [0m [91m                                                        ~~~~[0m
+[96msrc/app/routes/_app.people.$personID.tsx[0m:[93m79[0m:[93m37[0m - [91merror[0m[90m ts(2345): [0mArgument of type 'MaybeLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: re...' is not assignable to parameter of type '({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ... 5 more ....'.
+  Type 'NotLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: read...' is not assignable to type '({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ... 5 more ....'.
+
+[7m79[0m  let reminders = usePersonReminders(person, deferredSearchQuery)
+[7m  [0m [91m                                    ~~~~~~[0m
+[96msrc/app/routes/_app.people.$personID.tsx[0m:[93m77[0m:[93m29[0m - [91merror[0m[90m ts(2345): [0mArgument of type 'MaybeLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: re...' is not assignable to parameter of type '({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ... 5 more ....'.
+  Type 'NotLoaded<{ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: read...' is not assignable to type '({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ... 5 more ....'.
+
+[7m77[0m  let notes = usePersonNotes(person, deferredSearchQuery)
+[7m  [0m [91m                            ~~~~~~[0m
+
+[96msrc/app/routes/_app.people.index.tsx[0m:[93m55[0m:[93m3[0m - [91merror[0m[90m ts(7006): [0mParameter 'p' implicitly has an 'any' type.
+
+[7m55[0m   p => !p.permanentlyDeletedAt,
+[7m  [0m [91m  ~[0m
+[96msrc/app/routes/_app.people.index.tsx[0m:[93m48[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly reminders: readonly ({ ...; ...'.
+
+[7m48[0m  let { me: subscribedMe } = useAccount(UserAccount, {
+[7m  [0m [91m       ~~[0m
+
+[96msrc/app/routes/_app.reminders.tsx[0m:[93m66[0m:[93m3[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m66[0m   person => person && !isDeleted(person),
+[7m  [0m [91m  ~~~~~~[0m
+[96msrc/app/routes/_app.reminders.tsx[0m:[93m56[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly reminders: readonly ({ ...; ...'.
+
+[7m56[0m  let { me: subscribedMe } = useAccount(UserAccount, {
+[7m  [0m [91m       ~~[0m
+
+[96msrc/app/routes/_app.settings.tsx[0m:[93m755[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly notificationSettings: ({ readonly version: 1; readonly timezone: string | undefined; readonly notificationTime: string | undefined; readonly lastDeliveredAt: Date | undefined; readonly pushDevices: ({ ...; } & {})[]; } & CoMap) | undefined; readonly usageTracking: ({ ...; } & ...'.
+
+[7m755[0m  let { me: subscribedMe } = useAccount(UserAccount, {
+[7m   [0m [91m       ~~[0m
+[96msrc/app/routes/_app.settings.tsx[0m:[93m661[0m:[93m11[0m - [91merror[0m[90m ts(2339): [0mProperty 'root' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: CoList<MaybeLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly pro...'.
+  Property 'root' does not exist on type 'NotLoaded<{ readonly root: { readonly people: CoList<MaybeLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progr...'.
+
+[7m661[0m   account.root.$jazz.set("people", co.list(Person).create([]))
+[7m   [0m [91m          ~~~~[0m
+[96msrc/app/routes/_app.settings.tsx[0m:[93m655[0m:[93m16[0m - [91merror[0m[90m ts(2339): [0mProperty 'root' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: CoList<MaybeLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly pro...'.
+  Property 'root' does not exist on type 'NotLoaded<{ readonly root: { readonly people: CoList<MaybeLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progr...'.
+
+[7m655[0m   if (!account.root) {
+[7m   [0m [91m               ~~~~[0m
+[96msrc/app/routes/_app.settings.tsx[0m:[93m570[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly notificationSettings: ({ readonly version: 1; readonly timezone: string | undefined; readonly notificationTime: string | undefined; readonly lastDeliveredAt: Date | undefined; readonly pushDevices: ({ ...; } & {})[]; } & CoMap) | undefined; readonly usageTracking: ({ ...; } & ...'.
+
+[7m570[0m  let { me: subscribedMe } = useAccount(UserAccount, {
+[7m   [0m [91m       ~~[0m
+[96msrc/app/routes/_app.settings.tsx[0m:[93m128[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly notificationSettings: ({ readonly version: 1; readonly timezone: string | undefined; readonly notificationTime: string | undefined; readonly lastDeliveredAt: Date | undefined; readonly pushDevices: ({ ...; } & {})[]; } & CoMap) | undefined; readonly usageTracking: ({ ...; } & ...'.
+
+[7m128[0m  let { me: subscribedMe } = useAccount(UserAccount, {
+[7m   [0m [91m       ~~[0m
+[96msrc/app/routes/_app.settings.tsx[0m:[93m84[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly notificationSettings: ({ readonly version: 1; readonly timezone: string | undefined; readonly notificationTime: string | undefined; readonly lastDeliveredAt: Date | undefined; readonly pushDevices: ({ ...; } & {})[]; } & CoMap) | undefined; readonly usageTracking: ({ ...; } & ...'.
+
+[7m84[0m  let { me: subscribedMe } = useAccount(UserAccount, {
+[7m  [0m [91m       ~~[0m
+[96msrc/app/routes/_app.settings.tsx[0m:[93m2[0m:[93m49[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@clerk/clerk-react' or its corresponding type declarations.
+
+[7m2[0m import { SignOutButton, useAuth, useUser } from "@clerk/clerk-react"
+[7m [0m [91m                                                ~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/app/routes/_app.tsx[0m:[93m25[0m:[93m11[0m - [91merror[0m[90m ts(7006): [0mParameter 'reminder' implicitly has an 'any' type.
+
+[7m25[0m   .filter(reminder => isDueToday(reminder)).length
+[7m  [0m [91m          ~~~~~~~~[0m
+[96msrc/app/routes/_app.tsx[0m:[93m24[0m:[93m11[0m - [91merror[0m[90m ts(7006): [0mParameter 'reminder' implicitly has an 'any' type.
+
+[7m24[0m   .filter(reminder => !reminder.done && !isDeleted(reminder))
+[7m  [0m [91m          ~~~~~~~~[0m
+[96msrc/app/routes/_app.tsx[0m:[93m23[0m:[93m11[0m - [91merror[0m[90m ts(7006): [0mParameter 'reminder' implicitly has an 'any' type.
+
+[7m23[0m   .filter(reminder => reminder != null)
+[7m  [0m [91m          ~~~~~~~~[0m
+[96msrc/app/routes/_app.tsx[0m:[93m22[0m:[93m12[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m22[0m   .flatMap(person => person.reminders)
+[7m  [0m [91m           ~~~~~~[0m
+[96msrc/app/routes/_app.tsx[0m:[93m21[0m:[93m11[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m21[0m   .filter(person => !isDeleted(person))
+[7m  [0m [91m          ~~~~~~[0m
+[96msrc/app/routes/_app.tsx[0m:[93m17[0m:[93m8[0m - [91merror[0m[90m ts(2339): [0mProperty 'me' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & ...'.
+
+[7m17[0m  let { me } = useAccount(UserAccount, { resolve: query })
+[7m  [0m [91m       ~~[0m
+
+[96msrc/server/features/push-cron.ts[0m:[93m365[0m:[93m21[0m - [91merror[0m[90m ts(2488): [0mType 'readonly ({ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly notes: readonly ({ ...; } & CoMap)[] & CoList<...>; readonly reminders: read...' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m365[0m  for (let person of people) {
+[7m   [0m [91m                    ~~~~~~[0m
+[96msrc/server/features/push-cron.ts[0m:[93m4[0m:[93m27[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@clerk/backend' or its corresponding type declarations.
+
+[7m4[0m import type { User } from "@clerk/backend"
+[7m [0m [91m                          ~~~~~~~~~~~~~~~~[0m
+[96msrc/server/features/push-cron.ts[0m:[93m3[0m:[93m35[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@clerk/backend' or its corresponding type declarations.
+
+[7m3[0m import { createClerkClient } from "@clerk/backend"
+[7m [0m [91m                                  ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/server/lib/auth-client.ts[0m:[93m1[0m:[93m35[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@clerk/backend' or its corresponding type declarations.
+
+[7m1[0m import { createClerkClient } from "@clerk/backend"
+[7m [0m [91m                                  ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/server/lib/auth-middleware.ts[0m:[93m1[0m:[93m44[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@clerk/backend' or its corresponding type declarations.
+
+[7m1[0m import { type AuthObject, type User } from "@clerk/backend"
+[7m [0m [91m                                           ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/server/lib/chat-subscription.ts[0m:[93m100[0m:[93m3[0m - [91merror[0m[90m ts(7006): [0mParameter 'item' implicitly has an 'any' type.
+
+[7m100[0m   item => item.isFreeTrial === true,
+[7m   [0m [91m  ~~~~[0m
+[96msrc/server/lib/chat-subscription.ts[0m:[93m2[0m:[93m27[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@clerk/backend' or its corresponding type declarations.
+
+[7m2[0m import { type User } from "@clerk/backend"
+[7m [0m [91m                          ~~~~~~~~~~~~~~~~[0m
+
+[96msrc/server/lib/chat-usage.ts[0m:[93m340[0m:[93m28[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap> | { ...; }'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m340[0m  serverUsageTracking.$jazz.set("weeklyPercentUsed", newPercent)
+[7m   [0m [91m                           ~~~[0m
+[96msrc/server/lib/chat-usage.ts[0m:[93m336[0m:[93m44[0m - [91merror[0m[90m ts(2339): [0mProperty 'weeklyPercentUsed' does not exist on type 'MaybeLoaded<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap>'.
+  Property 'weeklyPercentUsed' does not exist on type 'NotLoaded<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap>'.
+
+[7m336[0m  let previousPercent = serverUsageTracking.weeklyPercentUsed ?? 0
+[7m   [0m [91m                                           ~~~~~~~~~~~~~~~~~[0m
+[96msrc/server/lib/chat-usage.ts[0m:[93m181[0m:[93m4[0m - [91merror[0m[90m ts(2322): [0mType 'MaybeLoaded<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap>' is not assignable to type '{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap'.
+  Type 'NotLoaded<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap>' is not assignable to type '{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap'.
+
+[7m181[0m    return usageTracking
+[7m   [0m [91m   ~~~~~~[0m
+[96msrc/server/lib/chat-usage.ts[0m:[93m180[0m:[93m31[0m - [91merror[0m[90m ts(2345): [0mArgument of type 'MaybeLoaded<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap>' is not assignable to parameter of type '{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap'.
+  Type 'NotLoaded<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap>' is not assignable to type '{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap'.
+
+[7m180[0m    await ensureMetadata(user, usageTracking)
+[7m   [0m [91m                              ~~~~~~~~~~~~~[0m
+[96msrc/server/lib/chat-usage.ts[0m:[93m179[0m:[93m35[0m - [91merror[0m[90m ts(2345): [0mArgument of type 'MaybeLoaded<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap>' is not assignable to parameter of type '{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap'.
+  Type 'NotLoaded<{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap>' is not assignable to type '{ readonly version: 5; readonly userId: string; readonly weeklyPercentUsed: number | undefined; readonly resetDate: Date; } & CoMap'.
+
+[7m179[0m    await synchronizeUsageTracking(usageTracking)
+[7m   [0m [91m                                  ~~~~~~~~~~~~~[0m
+
+[96msrc/shared/schema/user.ts[0m:[93m157[0m:[93m21[0m - [91merror[0m[90m ts(2488): [0mType 'readonly ({ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & Co...' must have a '[Symbol.iterator]()' method that returns an iterator.
+
+[7m157[0m  for (let person of root.people) {
+[7m   [0m [91m                    ~~~~~~~~~~~[0m
+
+[96msrc/shared/tools/note-create.ts[0m:[93m32[0m:[93m15[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] &...'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m32[0m  person.$jazz.set("updatedAt", new Date())
+[7m  [0m [91m              ~~~[0m
+[96msrc/shared/tools/note-create.ts[0m:[93m31[0m:[93m9[0m - [91merror[0m[90m ts(2339): [0mProperty 'notes' does not exist on type 'MaybeLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & ...'.
+  Property 'notes' does not exist on type 'NotLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & Co...'.
+
+[7m31[0m  person.notes.$jazz.push(note)
+[7m  [0m [91m        ~~~~~[0m
+
+[96msrc/shared/tools/note-update.ts[0m:[93m69[0m:[93m3[0m - [91merror[0m[90m ts(2322): [0mType 'MaybeLoaded<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap>' is not assignable to type '{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap'.
+  Type 'NotLoaded<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap>' is not assignable to type '{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap'.
+
+[7m69[0m   _ref: note,
+[7m  [0m [91m  ~~~~[0m
+[96msrc/shared/tools/note-update.ts[0m:[93m68[0m:[93m3[0m - [91merror[0m[90m ts(2322): [0mType '{ version: 1; title: string | undefined; content: string; pinned: boolean | undefined; deletedAt: Date | undefined; permanentlyDeletedAt: Date | undefined; createdAt: Date; updatedAt: Date; $jazz: CoMapJazzApi<...>; $type$: "CoMap"; $isLoaded: true; } | { ...; }' is not assignable to type '{ version: 1; content: string; createdAt: Date; updatedAt: Date; title?: string | undefined; pinned?: boolean | undefined; deletedAt?: Date | undefined; permanentlyDeletedAt?: Date | undefined; }'.
+  Type '{ $jazz: { id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }; $isLoaded: false; }' is missing the following properties from type '{ version: 1; content: string; createdAt: Date; updatedAt: Date; title?: string | undefined; pinned?: boolean | undefined; deletedAt?: Date | undefined; permanentlyDeletedAt?: Date | undefined; }': version, content, createdAt, updatedAt
+
+[7m68[0m   previous,
+[7m  [0m [91m  ~~~~~~~~[0m
+[96msrc/shared/tools/note-update.ts[0m:[93m67[0m:[93m3[0m - [91merror[0m[90m ts(2322): [0mType '{ version: 1; title: string | undefined; content: string; pinned: boolean | undefined; deletedAt: Date | undefined; permanentlyDeletedAt: Date | undefined; createdAt: Date; updatedAt: Date; $jazz: CoMapJazzApi<...>; $type$: "CoMap"; $isLoaded: true; } | { ...; }' is not assignable to type '{ version: 1; content: string; createdAt: Date; updatedAt: Date; title?: string | undefined; pinned?: boolean | undefined; deletedAt?: Date | undefined; permanentlyDeletedAt?: Date | undefined; }'.
+  Type '{ $jazz: { id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }; $isLoaded: false; }' is missing the following properties from type '{ version: 1; content: string; createdAt: Date; updatedAt: Date; title?: string | undefined; pinned?: boolean | undefined; deletedAt?: Date | undefined; permanentlyDeletedAt?: Date | undefined; }': version, content, createdAt, updatedAt
+
+[7m67[0m   current: { ...note },
+[7m  [0m [91m  ~~~~~~~[0m
+[96msrc/shared/tools/note-update.ts[0m:[93m61[0m:[93m15[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; } | CoMapJazzApi<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ ...; } & { ...; } & CoMap> | undefined; ... 5 more ...; readonly updatedAt: Date; } & CoMap>'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m61[0m  person.$jazz.set("updatedAt", new Date())
+[7m  [0m [91m              ~~~[0m
+[96msrc/shared/tools/note-update.ts[0m:[93m60[0m:[93m13[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap> | { ...; }'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m60[0m  note.$jazz.set("updatedAt", new Date())
+[7m  [0m [91m            ~~~[0m
+[96msrc/shared/tools/note-update.ts[0m:[93m54[0m:[93m14[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap> | { ...; }'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m54[0m   note.$jazz.set(
+[7m  [0m [91m             ~~~[0m
+[96msrc/shared/tools/note-update.ts[0m:[93m50[0m:[93m14[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap> | { ...; }'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m50[0m   note.$jazz.set("deletedAt", new Date(updates.deletedAt))
+[7m  [0m [91m             ~~~[0m
+[96msrc/shared/tools/note-update.ts[0m:[93m46[0m:[93m14[0m - [91merror[0m[90m ts(2339): [0mProperty 'delete' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap> | { ...; }'.
+  Property 'delete' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m46[0m   note.$jazz.delete("deletedAt")
+[7m  [0m [91m             ~~~~~~[0m
+[96msrc/shared/tools/note-update.ts[0m:[93m42[0m:[93m14[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap> | { ...; }'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m42[0m   note.$jazz.set("pinned", updates.pinned)
+[7m  [0m [91m             ~~~[0m
+[96msrc/shared/tools/note-update.ts[0m:[93m39[0m:[93m14[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap> | { ...; }'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m39[0m   note.$jazz.set("content", updates.content)
+[7m  [0m [91m             ~~~[0m
+[96msrc/shared/tools/note-update.ts[0m:[93m36[0m:[93m14[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap> | { ...; }'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m36[0m   note.$jazz.set("title", updates.title)
+[7m  [0m [91m             ~~~[0m
+
+[96msrc/shared/tools/person-create.ts[0m:[93m51[0m:[93m10[0m - [91merror[0m[90m ts(2339): [0mProperty 'root' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive:...'.
+  Property 'root' does not exist on type 'NotLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: b...'.
+
+[7m51[0m  account.root.people.$jazz.push(person)
+[7m  [0m [91m         ~~~~[0m
+[96msrc/shared/tools/person-create.ts[0m:[93m36[0m:[93m23[0m - [91merror[0m[90m ts(2769): [0mNo overload matches this call.
+  Overload 1 of 2, '(imageBlobOrFile: Blob | File, options?: CreateImageOptions | undefined): Promise<{ readonly original: FileStream; } & { readonly original: MaybeLoaded<...>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap>', gave the following error.
+  Overload 2 of 2, '(filePath: string, options?: CreateImageOptions | undefined): Promise<{ readonly original: FileStream; } & { readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap>', gave the following error.
+
+[7m36[0m    let avatar = await createImage(data.avatarFile, {
+[7m  [0m [91m                      ~~~~~~~~~~~[0m
+[96msrc/shared/tools/person-create.ts[0m:[93m21[0m:[93m16[0m - [91merror[0m[90m ts(2339): [0mProperty 'root' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive:...'.
+  Property 'root' does not exist on type 'NotLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: b...'.
+
+[7m21[0m  if (!account?.root?.people) throw errors.USER_ACCOUNT_NOT_FOUND
+[7m  [0m [91m               ~~~~[0m
+
+[96msrc/shared/tools/person-read.ts[0m:[93m228[0m:[93m36[0m - [91merror[0m[90m ts(7006): [0mParameter 'r' implicitly has an 'any' type.
+
+[7m228[0m   reminders: filteredReminders.map(r => ({
+[7m   [0m [91m                                   ~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m219[0m:[93m28[0m - [91merror[0m[90m ts(7006): [0mParameter 'n' implicitly has an 'any' type.
+
+[7m219[0m   notes: filteredNotes.map(n => ({
+[7m   [0m [91m                           ~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m218[0m:[93m25[0m - [91merror[0m[90m ts(2339): [0mProperty 'deletedAt' does not exist on type 'MaybeLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & ...'.
+  Property 'deletedAt' does not exist on type 'NotLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & Co...'.
+
+[7m218[0m   deletedAt: fullPerson.deletedAt?.toISOString(),
+[7m   [0m [91m                        ~~~~~~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m217[0m:[93m23[0m - [91merror[0m[90m ts(2339): [0mProperty 'summary' does not exist on type 'MaybeLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & ...'.
+  Property 'summary' does not exist on type 'NotLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & Co...'.
+
+[7m217[0m   summary: fullPerson.summary,
+[7m   [0m [91m                      ~~~~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m216[0m:[93m20[0m - [91merror[0m[90m ts(2339): [0mProperty 'name' does not exist on type 'MaybeLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & ...'.
+  Property 'name' does not exist on type 'NotLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & Co...'.
+
+[7m216[0m   name: fullPerson.name,
+[7m   [0m [91m                   ~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m209[0m:[93m48[0m - [91merror[0m[90m ts(7006): [0mParameter 'reminder' implicitly has an 'any' type.
+
+[7m209[0m   filteredReminders = filteredReminders.filter(reminder =>
+[7m   [0m [91m                                               ~~~~~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m206[0m:[93m40[0m - [91merror[0m[90m ts(7006): [0mParameter 'note' implicitly has an 'any' type.
+
+[7m206[0m   filteredNotes = filteredNotes.filter(note =>
+[7m   [0m [91m                                       ~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m196[0m:[93m32[0m - [91merror[0m[90m ts(7006): [0mParameter 'r' implicitly has an 'any' type.
+
+[7m196[0m   fullPerson.reminders?.filter(r => {
+[7m   [0m [91m                               ~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m196[0m:[93m14[0m - [91merror[0m[90m ts(2339): [0mProperty 'reminders' does not exist on type 'MaybeLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & ...'.
+  Property 'reminders' does not exist on type 'NotLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & Co...'.
+
+[7m196[0m   fullPerson.reminders?.filter(r => {
+[7m   [0m [91m             ~~~~~~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m188[0m:[93m28[0m - [91merror[0m[90m ts(7006): [0mParameter 'n' implicitly has an 'any' type.
+
+[7m188[0m   fullPerson.notes?.filter(n => {
+[7m   [0m [91m                           ~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m188[0m:[93m14[0m - [91merror[0m[90m ts(2339): [0mProperty 'notes' does not exist on type 'MaybeLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & ...'.
+  Property 'notes' does not exist on type 'NotLoaded<{ readonly notes: readonly ({ readonly version: 1; readonly title: string | undefined; readonly content: string; readonly pinned: boolean | undefined; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readonly updatedAt: Date; } & CoMap)[] & Co...'.
+
+[7m188[0m   fullPerson.notes?.filter(n => {
+[7m   [0m [91m             ~~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m97[0m:[93m26[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m97[0m   people = allPeople.map(person => ({
+[7m  [0m [91m                         ~~~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m86[0m:[93m11[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m86[0m   .filter(person => input.includeDeleted || !isDeleted(person))
+[7m  [0m [91m          ~~~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m85[0m:[93m11[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m85[0m   .filter(person => !isPermanentlyDeleted(person))
+[7m  [0m [91m          ~~~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m84[0m:[93m11[0m - [91merror[0m[90m ts(7006): [0mParameter 'person' implicitly has an 'any' type.
+
+[7m84[0m   .filter(person => person != null)
+[7m  [0m [91m          ~~~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m83[0m:[93m21[0m - [91merror[0m[90m ts(2339): [0mProperty 'root' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive:...'.
+  Property 'root' does not exist on type 'NotLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: b...'.
+
+[7m83[0m  let allPeople = me.root.people
+[7m  [0m [91m                    ~~~~[0m
+[96msrc/shared/tools/person-read.ts[0m:[93m79[0m:[93m11[0m - [91merror[0m[90m ts(2339): [0mProperty 'root' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive:...'.
+  Property 'root' does not exist on type 'NotLoaded<{ readonly root: { readonly people: readonly ({ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: b...'.
+
+[7m79[0m  if (!me?.root?.people) {
+[7m  [0m [91m          ~~~~[0m
+
+[96msrc/shared/tools/person-update.ts[0m:[93m82[0m:[93m3[0m - [91merror[0m[90m ts(2322): [0mType 'MaybeLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ....' is not assignable to type '{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ... 5 more .....'.
+  Type 'NotLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ......' is not assignable to type '{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ... 5 more .....'.
+
+[7m82[0m   _ref: person,
+[7m  [0m [91m  ~~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m79[0m:[93m20[0m - [91merror[0m[90m ts(2339): [0mProperty 'version' does not exist on type 'MaybeLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ....'.
+  Property 'version' does not exist on type 'NotLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ......'.
+
+[7m79[0m    version: person.version,
+[7m  [0m [91m                   ~~~~~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m78[0m:[93m20[0m - [91merror[0m[90m ts(2339): [0mProperty 'summary' does not exist on type 'MaybeLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ....'.
+  Property 'summary' does not exist on type 'NotLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ......'.
+
+[7m78[0m    summary: person.summary,
+[7m  [0m [91m                   ~~~~~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m77[0m:[93m17[0m - [91merror[0m[90m ts(2339): [0mProperty 'name' does not exist on type 'MaybeLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ....'.
+  Property 'name' does not exist on type 'NotLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ......'.
+
+[7m77[0m    name: person.name,
+[7m  [0m [91m                ~~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m71[0m:[93m15[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; } | CoMapJazzApi<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ ...; } & { ...; } & CoMap> | undefined; ... 5 more ...; readonly updatedAt: Date; } & CoMap>'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m71[0m  person.$jazz.set("updatedAt", new Date())
+[7m  [0m [91m              ~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m67[0m:[93m17[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; } | CoMapJazzApi<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ ...; } & { ...; } & CoMap> | undefined; ... 5 more ...; readonly updatedAt: Date; } & CoMap>'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m67[0m    person.$jazz.set("avatar", avatar)
+[7m  [0m [91m                ~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m62[0m:[93m25[0m - [91merror[0m[90m ts(2339): [0mProperty 'owner' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; } | CoMapJazzApi<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ ...; } & { ...; } & CoMap> | undefined; ... 5 more ...; readonly updatedAt: Date; } & CoMap>'.
+  Property 'owner' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m62[0m     owner: person.$jazz.owner,
+[7m  [0m [91m                        ~~~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m59[0m:[93m17[0m - [91merror[0m[90m ts(2339): [0mProperty 'delete' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; } | CoMapJazzApi<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ ...; } & { ...; } & CoMap> | undefined; ... 5 more ...; readonly updatedAt: Date; } & CoMap>'.
+  Property 'delete' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m59[0m    person.$jazz.delete("avatar")
+[7m  [0m [91m                ~~~~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m54[0m:[93m16[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; } | CoMapJazzApi<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ ...; } & { ...; } & CoMap> | undefined; ... 5 more ...; readonly updatedAt: Date; } & CoMap>'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m54[0m   person.$jazz.set("permanentlyDeletedAt", updates.permanentlyDeletedAt)
+[7m  [0m [91m               ~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m50[0m:[93m16[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; } | CoMapJazzApi<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ ...; } & { ...; } & CoMap> | undefined; ... 5 more ...; readonly updatedAt: Date; } & CoMap>'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m50[0m   person.$jazz.set("deletedAt", updates.deletedAt)
+[7m  [0m [91m               ~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m46[0m:[93m16[0m - [91merror[0m[90m ts(2339): [0mProperty 'delete' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; } | CoMapJazzApi<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ ...; } & { ...; } & CoMap> | undefined; ... 5 more ...; readonly updatedAt: Date; } & CoMap>'.
+  Property 'delete' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m46[0m   person.$jazz.delete("deletedAt")
+[7m  [0m [91m               ~~~~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m42[0m:[93m16[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; } | CoMapJazzApi<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ ...; } & { ...; } & CoMap> | undefined; ... 5 more ...; readonly updatedAt: Date; } & CoMap>'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m42[0m   person.$jazz.set("summary", updates.summary)
+[7m  [0m [91m               ~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m39[0m:[93m16[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; } | CoMapJazzApi<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ ...; } & { ...; } & CoMap> | undefined; ... 5 more ...; readonly updatedAt: Date; } & CoMap>'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m39[0m   person.$jazz.set("name", updates.name)
+[7m  [0m [91m               ~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m35[0m:[93m19[0m - [91merror[0m[90m ts(2339): [0mProperty 'version' does not exist on type 'MaybeLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ....'.
+  Property 'version' does not exist on type 'NotLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ......'.
+
+[7m35[0m   version: person.version,
+[7m  [0m [91m                  ~~~~~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m34[0m:[93m19[0m - [91merror[0m[90m ts(2339): [0mProperty 'summary' does not exist on type 'MaybeLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ....'.
+  Property 'summary' does not exist on type 'NotLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ......'.
+
+[7m34[0m   summary: person.summary,
+[7m  [0m [91m                  ~~~~~~~[0m
+[96msrc/shared/tools/person-update.ts[0m:[93m33[0m:[93m16[0m - [91merror[0m[90m ts(2339): [0mProperty 'name' does not exist on type 'MaybeLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ....'.
+  Property 'name' does not exist on type 'NotLoaded<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [...]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap> | undefined; ......'.
+
+[7m33[0m   name: person.name,
+[7m  [0m [91m               ~~~~[0m
+
+[96msrc/shared/tools/reminder-create.ts[0m:[93m44[0m:[93m15[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly reminders: readonly ({ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; ... 4 more ...; readonly updatedAt: Date; } & CoMap)[] & CoList<...>; } & { ...; } & CoMap> | { .....'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m44[0m  person.$jazz.set("updatedAt", new Date())
+[7m  [0m [91m              ~~~[0m
+[96msrc/shared/tools/reminder-create.ts[0m:[93m43[0m:[93m9[0m - [91merror[0m[90m ts(2339): [0mProperty 'reminders' does not exist on type 'MaybeLoaded<{ readonly reminders: readonly ({ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; ... 4 more ...; readonly updatedAt: Date; } & CoMap)[] & CoList<...>; } & { ...; } & CoMap>'.
+  Property 'reminders' does not exist on type 'NotLoaded<{ readonly reminders: readonly ({ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; ... 4 more ...; readonly updatedAt: Date; } & CoMap)[] & CoList<...>; } & { ...; } & CoMap>'.
+
+[7m43[0m  person.reminders.$jazz.push(reminder)
+[7m  [0m [91m        ~~~~~~~~~[0m
+
+[96msrc/shared/tools/reminder-read.ts[0m:[93m41[0m:[93m20[0m - [91merror[0m[90m ts(2339): [0mProperty 'root' does not exist on type 'MaybeLoaded<{ readonly root: { readonly people: readonly ({ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly reminders: readonly ({ ...; ...'.
+  Property 'root' does not exist on type 'NotLoaded<{ readonly root: { readonly people: readonly ({ readonly avatar: ({ readonly original: MaybeLoaded<FileStream>; readonly originalSize: [number, number]; readonly placeholderDataURL: string | undefined; readonly progressive: boolean; } & { ...; } & CoMap) | undefined; readonly reminders: readonly ({ ...; } ...'.
+
+[7m41[0m  let people = user.root?.people ?? []
+[7m  [0m [91m                   ~~~~[0m
+
+[96msrc/shared/tools/reminder-update.ts[0m:[93m90[0m:[93m3[0m - [91merror[0m[90m ts(2322): [0mType 'MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: ...' is not assignable to type '{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readon...'.
+  Type 'NotLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Da...' is not assignable to type '{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readon...'.
+
+[7m90[0m   _ref: reminder,
+[7m  [0m [91m  ~~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m89[0m:[93m3[0m - [91merror[0m[90m ts(2322): [0mType '{ version: 1; text: string; dueAtDate: string; repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; done: boolean; deletedAt: Date | undefined; ... 5 more ...; $isLoaded: true; } | { ...; }' is not assignable to type '{ version: 1; text: string; dueAtDate: string; done: boolean; createdAt: Date; updatedAt: Date; repeat?: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; deletedAt?: Date | undefined; permanentlyDeletedAt?: Date | undefined; }'.
+  Type '{ $jazz: { id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }; $isLoaded: false; }' is missing the following properties from type '{ version: 1; text: string; dueAtDate: string; done: boolean; createdAt: Date; updatedAt: Date; repeat?: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; deletedAt?: Date | undefined; permanentlyDeletedAt?: Date | undefined; }': version, text, dueAtDate, done, and 2 more.
+
+[7m89[0m   previous,
+[7m  [0m [91m  ~~~~~~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m88[0m:[93m3[0m - [91merror[0m[90m ts(2322): [0mType '{ version: 1; text: string; dueAtDate: string; repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; done: boolean; deletedAt: Date | undefined; ... 5 more ...; $isLoaded: true; } | { ...; }' is not assignable to type '{ version: 1; text: string; dueAtDate: string; done: boolean; createdAt: Date; updatedAt: Date; repeat?: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; deletedAt?: Date | undefined; permanentlyDeletedAt?: Date | undefined; }'.
+  Type '{ $jazz: { id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }; $isLoaded: false; }' is missing the following properties from type '{ version: 1; text: string; dueAtDate: string; done: boolean; createdAt: Date; updatedAt: Date; repeat?: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; deletedAt?: Date | undefined; permanentlyDeletedAt?: Date | undefined; }': version, text, dueAtDate, done, and 2 more.
+
+[7m88[0m   current: { ...reminder },
+[7m  [0m [91m  ~~~~~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m82[0m:[93m15[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; } | CoMapJazzApi<{ readonly version: 1; readonly name: string; readonly summary: string | undefined; readonly avatar: MaybeLoaded<{ ...; } & { ...; } & CoMap> | undefined; ... 5 more ...; readonly updatedAt: Date; } & CoMap>'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m82[0m  person.$jazz.set("updatedAt", new Date())
+[7m  [0m [91m              ~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m81[0m:[93m17[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m81[0m  reminder.$jazz.set("updatedAt", new Date())
+[7m  [0m [91m                ~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m78[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m78[0m   reminder.$jazz.set("permanentlyDeletedAt", updates.permanentlyDeletedAt)
+[7m  [0m [91m                 ~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m74[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m74[0m   reminder.$jazz.set("deletedAt", updates.deletedAt)
+[7m  [0m [91m                 ~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m70[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'delete' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'delete' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m70[0m   reminder.$jazz.delete("deletedAt")
+[7m  [0m [91m                 ~~~~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m66[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m66[0m   reminder.$jazz.set("done", updates.done)
+[7m  [0m [91m                 ~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m65[0m:[93m41[0m - [91merror[0m[90m ts(2339): [0mProperty 'done' does not exist on type 'MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: ...'.
+  Property 'done' does not exist on type 'NotLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Da...'.
+
+[7m65[0m  if (updates.done === false && reminder.done) {
+[7m  [0m [91m                                        ~~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m63[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m63[0m   reminder.$jazz.set("done", false)
+[7m  [0m [91m                 ~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m62[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m62[0m   reminder.$jazz.set("dueAtDate", nextDueAtDate)
+[7m  [0m [91m                 ~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m61[0m:[93m48[0m - [91merror[0m[90m ts(2345): [0mArgument of type 'MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: ...' is not assignable to parameter of type '{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readon...'.
+  Type 'NotLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Da...' is not assignable to type '{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Date; readon...'.
+
+[7m61[0m   let { nextDueAtDate } = calculateNextDueDate(reminder)
+[7m  [0m [91m                                               ~~~~~~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m60[0m:[93m58[0m - [91merror[0m[90m ts(2339): [0mProperty 'repeat' does not exist on type 'MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: ...'.
+  Property 'repeat' does not exist on type 'NotLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Da...'.
+
+[7m60[0m  if (updates.done === true && !reminder.done && reminder.repeat) {
+[7m  [0m [91m                                                         ~~~~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m60[0m:[93m41[0m - [91merror[0m[90m ts(2339): [0mProperty 'done' does not exist on type 'MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: ...'.
+  Property 'done' does not exist on type 'NotLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Da...'.
+
+[7m60[0m  if (updates.done === true && !reminder.done && reminder.repeat) {
+[7m  [0m [91m                                        ~~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m58[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m58[0m   reminder.$jazz.set("done", updates.done)
+[7m  [0m [91m                 ~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m57[0m:[93m59[0m - [91merror[0m[90m ts(2339): [0mProperty 'repeat' does not exist on type 'MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: ...'.
+  Property 'repeat' does not exist on type 'NotLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Da...'.
+
+[7m57[0m  if (updates.done === true && !reminder.done && !reminder.repeat) {
+[7m  [0m [91m                                                          ~~~~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m57[0m:[93m41[0m - [91merror[0m[90m ts(2339): [0mProperty 'done' does not exist on type 'MaybeLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: ...'.
+  Property 'done' does not exist on type 'NotLoaded<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt: Da...'.
+
+[7m57[0m  if (updates.done === true && !reminder.done && !reminder.repeat) {
+[7m  [0m [91m                                        ~~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m55[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'delete' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'delete' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m55[0m   reminder.$jazz.delete("repeat")
+[7m  [0m [91m                 ~~~~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m52[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m52[0m   reminder.$jazz.set("repeat", updates.repeat)
+[7m  [0m [91m                 ~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m49[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m49[0m   reminder.$jazz.set("dueAtDate", updates.dueAtDate)
+[7m  [0m [91m                 ~~~[0m
+[96msrc/shared/tools/reminder-update.ts[0m:[93m46[0m:[93m18[0m - [91merror[0m[90m ts(2339): [0mProperty 'set' does not exist on type 'CoMapJazzApi<{ readonly version: 1; readonly text: string; readonly dueAtDate: string; readonly repeat: ({ interval: number; unit: "day" | "week" | "month" | "year"; } & {}) | undefined; readonly done: boolean; readonly deletedAt: Date | undefined; readonly permanentlyDeletedAt: Date | undefined; readonly createdAt:...'.
+  Property 'set' does not exist on type '{ id: string; loadingState: "loading" | "unavailable" | "unauthorized"; }'.
+
+[7m46[0m   reminder.$jazz.set("text", updates.text)
+[7m  [0m [91m                 ~~~[0m
+
+Result (166 files):
+- 154 errors
+- 0 warnings
+- 0 hints
+
+ ELIFECYCLE  Command failed with exit code 1.

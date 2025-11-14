@@ -48,22 +48,33 @@ let query = {
 			},
 		},
 	},
-} as const satisfies ResolveQuery<typeof UserAccount>
+} as const satisfies ResolveQuery<typeof TillyAccount>
 
 function Reminders() {
 	let { me: data, eagerCount } = Route.useLoaderData()
 
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let me = useAccount(TillyAccount, {
 		resolve: query,
-	})
+        select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null
+    })
 
-	let currentMe = subscribedMe ?? data
+	let currentMe = me?.$isLoaded ? me : data
+
+	if (!currentMe?.$isLoaded) {
+		return (
+			<RemindersLayout>
+				<div className="text-center">
+					<p>Loading...</p>
+				</div>
+			</RemindersLayout>
+		)
+	}
 
 	let { remindersSearchQuery } = useAppStore()
 	let deferredSearchQuery = useDeferredValue(remindersSearchQuery)
 
-	let people = (currentMe?.root?.people ?? []).filter(
-		person => person && !isDeleted(person),
+	let people = [...(currentMe.root?.people ?? [])].filter(
+		(person: co.loaded<typeof Person>) => person && !isDeleted(person),
 	)
 
 	let reminders = useReminders(people, deferredSearchQuery)
@@ -129,7 +140,7 @@ function Reminders() {
 						<li key={reminder.$jazz.id}>
 							<ReminderListItem
 								reminder={reminder}
-								person={person}
+								person={person as co.loaded<typeof Person, typeof query>}
 								userId={currentMe.$jazz.id}
 								searchQuery={deferredSearchQuery}
 								noLazy={index < eagerCount}
@@ -157,7 +168,7 @@ function Reminders() {
 										<li key={reminder.$jazz.id}>
 											<ReminderListItem
 												reminder={reminder}
-												person={person}
+												person={person as co.loaded<typeof Person, typeof query>}
 												userId={currentMe.$jazz.id}
 												searchQuery={deferredSearchQuery}
 												noLazy={index < eagerCount}
@@ -182,7 +193,7 @@ function Reminders() {
 										<li key={reminder.$jazz.id}>
 											<ReminderListItem
 												reminder={reminder}
-												person={person}
+												person={person as co.loaded<typeof Person, typeof query>}
 												userId={currentMe.$jazz.id}
 												searchQuery={deferredSearchQuery}
 												noLazy={index < eagerCount}
@@ -211,7 +222,7 @@ function Reminders() {
 									<li key={reminder.$jazz.id}>
 										<ReminderListItem
 											reminder={reminder}
-											person={person}
+											person={person as co.loaded<typeof Person, typeof query>}
 											userId={currentMe.$jazz.id}
 											searchQuery={deferredSearchQuery}
 											noLazy={index < eagerCount}
@@ -234,7 +245,7 @@ function Reminders() {
 									<li key={reminder.$jazz.id}>
 										<ReminderListItem
 											reminder={reminder}
-											person={person}
+											person={person as co.loaded<typeof Person, typeof query>}
 											userId={currentMe.$jazz.id}
 											searchQuery={deferredSearchQuery}
 											noLazy={index < eagerCount}

@@ -10,6 +10,8 @@ export {
 	sortByDeletedAt,
 }
 
+export const PersonList = co.list(Person)
+
 export let PushDevice = z.object({
 	isEnabled: z.boolean(),
 	deviceName: z.string(),
@@ -149,7 +151,7 @@ async function markOldDeletedItemsAsPermanent(
 			root: migrationResolveQuery,
 		},
 	})
-	if (!root.people) return
+	if (!root.people.$isLoaded) return
 
 	let thirtyDaysAgo = new Date()
 	thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)

@@ -16,16 +16,21 @@ function NoteTour({
 	onSuccess?: () => void
 	personId?: string
 }) {
-	let { me } = useAccount(UserAccount, {
+	let me = useAccount(TillyAccount, {
 		resolve: { root: { people: { $each: true } } },
-	})
+        select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null
+    })
 
-	let people = (me?.root?.people ?? []).filter(
-		person => person && !isDeleted(person),
+	if (!me.$isLoaded) {
+		return null
+	}
+
+	let people = [...(me.root?.people ?? [])].filter(
+		(person: co.loaded<typeof Person>) => person && !isDeleted(person),
 	)
 
 	let targetPerson = personId
-		? people.find(p => p.$jazz.id === personId)
+		? people.find((p: co.loaded<typeof Person>) => p.$jazz.id === personId)
 		: people.at(0)
 
 	return (

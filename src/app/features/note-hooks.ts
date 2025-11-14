@@ -12,15 +12,17 @@ function usePersonNotes<Q extends ResolveQuery<typeof Person>>(
 	person: co.loaded<typeof Person, Q>,
 	searchQuery: string,
 ) {
-	if (!person.notes) return { active: [], deleted: [] }
+	if (!person?.$isLoaded || !person.notes) return { active: [], deleted: [] }
 
 	let filteredNotes = searchQuery
-		? person.notes.filter(note => {
+		? [...person.notes].filter((note: co.loaded<typeof Note>) => {
 				if (!note || isPermanentlyDeleted(note)) return false
 				let searchLower = searchQuery.toLowerCase()
 				return note.content.toLowerCase().includes(searchLower)
 			})
-		: person.notes.filter(note => note && !isPermanentlyDeleted(note))
+		: [...person.notes].filter(
+				(note: co.loaded<typeof Note>) => note && !isPermanentlyDeleted(note),
+			)
 
 	let active: Array<{
 		type: "note"
@@ -36,7 +38,7 @@ function usePersonNotes<Q extends ResolveQuery<typeof Person>>(
 		priority: "high" | "normal"
 	}> = []
 
-	filteredNotes.forEach(note => {
+	filteredNotes.forEach((note: co.loaded<typeof Note>) => {
 		if (!note) return
 
 		let item = {

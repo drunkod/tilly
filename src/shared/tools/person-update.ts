@@ -26,8 +26,10 @@ async function updatePerson(
 		avatarFile?: File | null
 	},
 ): Promise<PersonUpdated> {
-	let person = await Person.load(personId)
-	if (!person) throw errors.PERSON_NOT_FOUND
+	let loadedPerson = await Person.load(personId)
+	if (!loadedPerson) throw errors.PERSON_NOT_FOUND
+
+	let person = await loadedPerson.$jazz.ensureLoaded()
 
 	let previous = {
 		name: person.name,

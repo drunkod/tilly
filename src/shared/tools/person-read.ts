@@ -2,7 +2,9 @@ import { tool, type InferUITool } from "ai"
 import { z } from "zod"
 import { co } from "jazz-tools"
 import {
+	Note,
 	Person,
+	Reminder,
 	UserAccount,
 	isDeleted,
 	isPermanentlyDeleted,
@@ -73,15 +75,16 @@ async function listPeopleExecute(
 	userId: string,
 	input: _ListPeopleTool["input"],
 ): Promise<_ListPeopleTool["output"]> {
-	let me = await UserAccount.load(userId, {
+	let loadedMe = await UserAccount.load(userId, {
 		resolve: { root: { people: { $each: true } } },
 	})
-	if (!me?.root?.people) {
+	if (!loadedMe) {
 		return { error: "No people data available" }
 	}
+	let me = await loadedMe.$jazz.ensureLoaded()
 
 	let allPeople = me.root.people
-		.filter(person => person != null)
+		.filter((person): person is co.loaded<typeof Person> => person != null)
 		.filter(person => !isPermanentlyDeleted(person))
 		.filter(person => input.includeDeleted || !isDeleted(person))
 
@@ -173,19 +176,21 @@ async function getPersonDetailsExecute(
 	_userId: string,
 	input: _GetPersonDetailsTool["input"],
 ): Promise<_GetPersonDetailsTool["output"]> {
-	let fullPerson = await Person.load(input.personId, {
+	let loadedFullPerson = await Person.load(input.personId, {
 		resolve: {
 			reminders: { $each: true },
 			notes: { $each: true },
 		},
 	})
 
-	if (!fullPerson) {
+	if (!loadedFullPerson) {
 		return { error: `Person with ID "${input.personId}" not found` }
 	}
 
+	let fullPerson = await loadedFullPerson.$jazz.ensureLoaded()
+
 	let filteredNotes =
-		fullPerson.notes?.filter(n => {
+		fullPerson.notes?.filter((n): n is co.loaded<typeof Note> => {
 			if (!n) return false
 			if (isPermanentlyDeleted(n)) return false
 			if (!input.includeDeletedNotes && isDeleted(n)) return false
@@ -193,7 +198,7 @@ async function getPersonDetailsExecute(
 		}) || []
 
 	let filteredReminders =
-		fullPerson.reminders?.filter(r => {
+		fullPerson.reminders?.filter((r): r is co.loaded<typeof Reminder> => {
 			if (!r) return false
 			if (isPermanentlyDeleted(r)) return false
 			if (!input.includeDeletedReminders && isDeleted(r)) return false

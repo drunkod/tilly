@@ -43,7 +43,8 @@ import { useAppStore } from "#app/lib/store"
 import { nanoid } from "nanoid"
 import { ScrollIntoView } from "#app/components/scroll-into-view"
 import { T, useIntl } from "#shared/intl/setup"
-import { useAuth } from "@clerk/clerk-react"
+import { TillyAccount } from "#shared/schema/account"
+import { authenticatedFetch } from "#app/lib/api-client"
 import { PUBLIC_ENABLE_PAYWALL } from "astro:env/client"
 
 export let Route = createFileRoute("/_app/assistant")({
@@ -61,7 +62,7 @@ export let Route = createFileRoute("/_app/assistant")({
 
 let query = {
 	root: { people: { $each: true } },
-} as const satisfies ResolveQuery<typeof UserAccount>
+} as const satisfies ResolveQuery<typeof TillyAccount>
 
 function AssistantScreen() {
 	let access = useAssistantAccess()
@@ -136,36 +137,40 @@ function SubscribePrompt() {
 }
 
 function useAssistantAccess() {
-	let clerkAuth = useAuth()
 	let isSignedIn = useIsAuthenticated()
+	let me = useAccount(TillyAccount, {
+		resolve: { root: { subscription: true } },
+	})
 	let isOnline = useOnlineStatus()
 
-	if (!isSignedIn) return { status: "denied", isSignedIn }
+	if (!isSignedIn) return { status: "denied" as const, isSignedIn }
 
-	if (!PUBLIC_ENABLE_PAYWALL) return { status: "granted", isSignedIn }
+	if (!PUBLIC_ENABLE_PAYWALL) return { status: "granted" as const, isSignedIn }
 
 	// When offline, allow access to interface but chat will be disabled by canUseChat
 	if (!isOnline) {
 		// If auth is loaded, we can determine access status
-		if (clerkAuth.isLoaded) {
-			let status = determineAccessStatus({ auth: clerkAuth })
+		if (me.$isLoaded) {
+			let status = determineAccessStatus(me)
 			return { status, isSignedIn }
 		}
 		// If auth isn't loaded yet, assume granted to avoid infinite loading
-		return { status: "granted", isSignedIn }
+		return { status: "granted" as const, isSignedIn }
 	}
 
-	let status = determineAccessStatus({ auth: clerkAuth })
+	if (!me.$isLoaded) return { status: "loading" as const, isSignedIn }
+
+	let status = determineAccessStatus(me)
 
 	return { status, isSignedIn }
 }
 
 function AuthenticatedChat() {
 	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let subscribedMe = useAccount(TillyAccount, {
 		resolve: query,
 	})
-	let currentMe = subscribedMe ?? data.me
+	let currentMe = subscribedMe.$isLoaded ? subscribedMe : data.me
 	let t = useIntl()
 
 	let {
@@ -188,7 +193,10 @@ function AuthenticatedChat() {
 		error,
 	} = useChat({
 		messages: initialMessages,
-		transport: new DefaultChatTransport({ api: "/api/chat" }),
+		transport: new DefaultChatTransport({
+			api: "/api/chat",
+			fetch: authenticatedFetch,
+		}),
 		sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithToolCalls,
 		onFinish: ({ messages }) => setChat(messages),
 		onToolCall: async ({ toolCall }) => {
@@ -479,9 +487,11 @@ function UserInput(props: {
 	let textareaRef = useRef<HTMLTextAreaElement>(null)
 	let t = useIntl()
 	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, { resolve: query })
-	let currentMe = subscribedMe ?? data.me
-	let locale = currentMe?.root?.language || "en"
+	let subscribedMe = useAccount(TillyAccount, { resolve: query })
+	let currentMe = subscribedMe.$isLoaded ? subscribedMe : data.me
+	let locale = currentMe?.$isLoaded
+		? currentMe.root?.language || "en"
+		: "en"
 	let langCode = locale === "de" ? "de-DE" : "en-US"
 
 	let form = useForm({
@@ -665,12 +675,17 @@ function UserInput(props: {
 	)
 }
 
-function determineAccessStatus({ auth }: { auth: ReturnType<typeof useAuth> }) {
-	if (!auth.isLoaded) return "loading"
-
-	if (!auth.isSignedIn) return "denied"
-
-	return auth.has({ plan: "plus" }) ? "granted" : "denied"
+function determineAccessStatus(
+	account: co.loaded<typeof TillyAccount, { root: { subscription: true } }>,
+): "granted" | "denied" | "loading" {
+	if (!account.root?.$isLoaded) {
+		return "loading"
+	}
+	if (!account.root.subscription?.$isLoaded) {
+		return "loading"
+	}
+	if (account.root.subscription.tier === "plus") return "granted"
+	return "denied"
 }
 
 function isUsageLimitError(error: unknown): boolean {
