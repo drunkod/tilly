@@ -1,7 +1,7 @@
 import { type AuthObject, type User } from "@clerk/backend"
 import { createMiddleware } from "hono/factory"
 
-import { clerkClient } from "./auth-client"
+import { clerkClient } from "#shared/clerk/server"
 
 type AuthAppContext = {
 	Variables: {

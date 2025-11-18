@@ -1,7 +1,7 @@
 import { zValidator } from "@hono/zod-validator"
 import { Hono } from "hono"
 import { z } from "zod"
-import { authMiddleware, requireAuth } from "../lib/auth-middleware"
+import { authMiddleware, requireAuth, type User } from "#shared/clerk/server"
 import { initUserWorker } from "../lib/utils"
 import {
 	getEnabledDevices,
@@ -19,8 +19,9 @@ let testNotificationApp = new Hono().post(
 	zValidator("json", z.object({ endpoint: z.string() })),
 	async c => {
 		let { endpoint } = c.req.valid("json")
+		let user = c.get("user") as User
 
-		let { worker } = await initUserWorker(c.get("user"))
+		let { worker } = await initUserWorker(user)
 		let workerWithSettings = await worker.$jazz.ensureLoaded({
 			resolve: settingsQuery,
 		})
@@ -49,7 +50,7 @@ let testNotificationApp = new Hono().post(
 			icon: "/favicon.ico",
 			badge: "/favicon.ico",
 			url: "/app/settings",
-			userId: c.get("user").id,
+			userId: user.id,
 		}
 
 		let sendResult = await sendNotificationToDevice(device, testPayload)

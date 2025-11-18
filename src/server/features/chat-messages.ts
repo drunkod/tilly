@@ -10,8 +10,7 @@ import {
 	type TillyUIMessage,
 } from "#shared/tools/tools"
 import { z } from "zod"
-import { authMiddleware, requireAuth } from "../lib/auth-middleware"
-import { requirePlus } from "../lib/chat-subscription"
+import { authMiddleware, requireAuth, requirePlus } from "#shared/clerk/server"
 import {
 	checkInputSize,
 	checkUsageLimits,

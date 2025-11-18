@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 
 import { UsageTracking } from "../src/shared/schema/user"
-import { createClerkClient } from "@clerk/backend"
+import { getAllUsers } from "#shared/clerk/server"
 import { startWorker } from "jazz-tools/worker"
 import { ServerAccount } from "../src/shared/schema/server"
 
@@ -83,29 +83,12 @@ async function resetAllUsage() {
 	// Initialize Jazz worker to load CoValues
 	await initJazzWorker()
 
-	// Initialize Clerk client
-	let clerkClient = createClerkClient({
-		secretKey: CLERK_SECRET_KEY,
-		publishableKey: PUBLIC_CLERK_PUBLISHABLE_KEY,
-	})
-
 	try {
 		console.log("📋 Fetching users from Clerk...")
 
 		let users = []
-		let hasMore = true
-		let offset = 0
-		let limit = 100
-
-		while (hasMore) {
-			let response = await clerkClient.users.getUserList({
-				limit,
-				offset,
-			})
-
-			users.push(...response.data)
-			hasMore = response.data.length === limit
-			offset += limit
+		for await (let user of getAllUsers()) {
+			users.push(user)
 		}
 
 		console.log(`📊 Found ${users.length} users`)
