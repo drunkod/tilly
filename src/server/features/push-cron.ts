@@ -1,7 +1,5 @@
-import { CRON_SECRET, CLERK_SECRET_KEY } from "astro:env/server"
-import { PUBLIC_CLERK_PUBLISHABLE_KEY } from "astro:env/client"
-import { createClerkClient } from "@clerk/backend"
-import type { User } from "@clerk/backend"
+import { CRON_SECRET } from "astro:env/server"
+import { type User, getUsersWithJazz } from "#shared/clerk/server"
 import { isDeleted } from "#shared/schema/user"
 import { initUserWorker } from "../lib/utils"
 import { tryCatch } from "#shared/lib/trycatch"
@@ -39,7 +37,7 @@ let cronDeliveryApp = new Hono().get(
 		let processingPromises: Promise<void>[] = []
 		let maxConcurrentUsers = 50
 
-		for await (let user of userGenerator()) {
+		for await (let user of getUsersWithJazz()) {
 			await waitForConcurrencyLimit(processingPromises, maxConcurrentUsers)
 
 			let userPromise = loadNotificationSettings(user)
@@ -70,47 +68,6 @@ let cronDeliveryApp = new Hono().get(
 		})
 	},
 )
-
-async function* userGenerator() {
-	let clerkClient = createClerkClient({
-		secretKey: CLERK_SECRET_KEY,
-		publishableKey: PUBLIC_CLERK_PUBLISHABLE_KEY,
-	})
-
-	let offset = 0
-	let limit = 500
-	let totalUsers = 0
-	let jazzUsers = 0
-
-	while (true) {
-		let response = await clerkClient.users.getUserList({
-			limit,
-			offset,
-		})
-
-		totalUsers += response.data.length
-
-		for (let user of response.data) {
-			if (
-				user.unsafeMetadata.jazzAccountID &&
-				user.unsafeMetadata.jazzAccountSecret
-			) {
-				jazzUsers++
-				yield user
-			}
-		}
-
-		if (response.data.length < limit) {
-			break
-		}
-
-		offset += limit
-	}
-
-	console.log(
-		`🚀 Found ${jazzUsers} users with Jazz accounts out of ${totalUsers} total users`,
-	)
-}
 
 async function loadNotificationSettings(user: User) {
 	let workerResult = await tryCatch(initUserWorker(user))

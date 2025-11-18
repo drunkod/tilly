@@ -1,5 +1,5 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router"
-import { SignOutButton, useAuth, useUser } from "@clerk/clerk-react"
+import { SignOutButton, useAuth, useUser } from "#shared/clerk/client"
 import { getSignInUrl, getSignUpUrl } from "#app/lib/auth-utils"
 import { useAccount, useIsAuthenticated } from "jazz-tools/react"
 import { Button } from "#shared/ui/button"

@@ -43,7 +43,7 @@ import { useAppStore } from "#app/lib/store"
 import { nanoid } from "nanoid"
 import { ScrollIntoView } from "#app/components/scroll-into-view"
 import { T, useIntl } from "#shared/intl/setup"
-import { useAuth } from "@clerk/clerk-react"
+import { useAuth } from "#shared/clerk/client"
 import { PUBLIC_ENABLE_PAYWALL } from "astro:env/client"
 
 export let Route = createFileRoute("/_app/assistant")({

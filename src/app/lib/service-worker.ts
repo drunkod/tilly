@@ -1,4 +1,4 @@
-import { useUser } from "@clerk/clerk-react"
+import { useUser } from "#shared/clerk/client"
 import { tryCatch } from "#shared/lib/trycatch"
 import { useEffect, useCallback } from "react"
 
