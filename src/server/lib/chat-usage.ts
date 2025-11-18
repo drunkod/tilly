@@ -10,8 +10,7 @@ import {
 } from "astro:env/server"
 import { addDays, isPast } from "date-fns"
 import { co, Group, type ResolveQuery } from "jazz-tools"
-import { clerkClient } from "./auth-client"
-import { type SubscriptionStatus } from "./chat-subscription"
+import { clerkClient, type SubscriptionStatus } from "#shared/clerk/server"
 import { initServerWorker, initUserWorker } from "./utils"
 
 export { checkInputSize, checkUsageLimits, updateUsage }

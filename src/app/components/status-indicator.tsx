@@ -6,7 +6,7 @@ import {
 	Check,
 	ExclamationTriangleFill,
 } from "react-bootstrap-icons"
-import { useAuth } from "@clerk/clerk-react"
+import { useAuth } from "#shared/clerk/client"
 
 import { Button } from "#shared/ui/button"
 import {

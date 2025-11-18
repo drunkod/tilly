@@ -4,7 +4,7 @@ import { logger } from "hono/logger"
 import { chatMessagesApp } from "./features/chat-messages"
 import { cronDeliveryApp } from "./features/push-cron"
 import { testNotificationApp } from "./features/push-test"
-import { authMiddleware } from "./lib/auth-middleware"
+import { authMiddleware } from "#shared/clerk/server"
 
 let authenticatedRoutes = new Hono()
 	.use(authMiddleware)

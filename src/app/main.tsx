@@ -1,10 +1,7 @@
-import { ClerkProvider, useClerk } from "@clerk/clerk-react"
+import { AuthProvider, useClerk } from "#shared/clerk/client"
 import { JazzReactProviderWithClerk, useAccount } from "jazz-tools/react"
 import { RouterProvider, createRouter } from "@tanstack/react-router"
-import {
-	PUBLIC_JAZZ_SYNC_SERVER,
-	PUBLIC_CLERK_PUBLISHABLE_KEY,
-} from "astro:env/client"
+import { PUBLIC_JAZZ_SYNC_SERVER } from "astro:env/client"
 import { UserAccount } from "#shared/schema/user"
 import { routeTree } from "#app/routeTree.gen"
 import { IntlProvider } from "#shared/intl/setup"
@@ -17,12 +14,9 @@ import { MainErrorBoundary } from "#app/components/main-error-boundary"
 export function PWA() {
 	return (
 		<MainErrorBoundary>
-			<ClerkProvider
-				publishableKey={PUBLIC_CLERK_PUBLISHABLE_KEY}
-				afterSignOutUrl="/app"
-			>
+			<AuthProvider>
 				<JazzWithClerk />
-			</ClerkProvider>
+			</AuthProvider>
 		</MainErrorBoundary>
 	)
 }
