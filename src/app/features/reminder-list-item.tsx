@@ -18,7 +18,6 @@ import {
 } from "#shared/ui/alert-dialog"
 import { Avatar, AvatarFallback } from "#shared/ui/avatar"
 import { Person, Reminder } from "#shared/schema/user"
-import { co } from "jazz-tools"
 import {
 	Calendar,
 	PencilSquare,
@@ -30,9 +29,10 @@ import {
 	ArrowCounterclockwise,
 } from "react-bootstrap-icons"
 import { useState } from "react"
-import { ReminderForm } from "./reminder-form"
 import { Link } from "@tanstack/react-router"
-import { Image as JazzImage } from "jazz-tools/react"
+import { ReminderForm } from "./reminder-form"
+import { co } from "#shared/jazz-core"
+import { Image as JazzImage } from "#app/lib/jazz-react"
 import {
 	isBefore,
 	isToday,

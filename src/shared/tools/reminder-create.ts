@@ -1,7 +1,7 @@
 import { tool, type InferUITool } from "ai"
 import { z } from "zod"
 import { Person, Reminder } from "#shared/schema/user"
-import { co } from "jazz-tools"
+import { co } from "#shared/jazz-core"
 import { tryCatch } from "#shared/lib/trycatch"
 
 export { addReminderTool, addReminderExecute, createReminder }

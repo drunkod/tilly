@@ -1,4 +1,4 @@
-import { Group, co, z, type ResolveQuery } from "jazz-tools"
+import { Group, co, z, type ResolveQuery } from "#shared/jazz-core"
 import { isBefore, isToday } from "date-fns"
 
 export {

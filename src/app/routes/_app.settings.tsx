@@ -1,11 +1,11 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router"
 import { SignOutButton, useAuth, useUser } from "#shared/clerk/client"
 import { getSignInUrl, getSignUpUrl } from "#app/lib/auth-utils"
-import { useAccount, useIsAuthenticated } from "jazz-tools/react"
+import { useAccount, useIsAuthenticated } from "#app/lib/jazz-react"
 import { Button } from "#shared/ui/button"
 import { Input } from "#shared/ui/input"
 import { UserAccount } from "#shared/schema/user"
-import type { ResolveQuery } from "jazz-tools"
+import type { ResolveQuery } from "#shared/jazz-core"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -53,7 +53,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "#shared/ui/alert"
 import { WifiOff, Lightbulb, Book, Compass } from "react-bootstrap-icons"
 import { tryCatch } from "#shared/lib/trycatch"
-import { co } from "jazz-tools"
+import { co } from "#shared/jazz-core"
 import { Person } from "#shared/schema/user"
 
 export const Route = createFileRoute("/_app/settings")({

@@ -1,4 +1,4 @@
-import { startWorker } from "jazz-tools/worker"
+import { startWorker } from "./jazz-worker"
 
 import {
 	PUBLIC_JAZZ_SYNC_SERVER,

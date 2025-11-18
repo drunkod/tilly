@@ -1,11 +1,11 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router"
 import { z } from "zod"
-import { useCoState } from "jazz-tools/react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "#shared/ui/tabs"
 import { Person, Note, Reminder, isDueToday } from "#shared/schema/user"
 import { usePersonNotes } from "#app/features/note-hooks"
 import { usePersonReminders } from "#app/features/reminder-hooks"
-import { co, type ResolveQuery } from "jazz-tools"
+import { useCoState } from "#app/lib/jazz-react"
+import { co, type ResolveQuery } from "#shared/jazz-core"
 import { useState, useDeferredValue } from "react"
 import { Journal, Plus, Bell, X, Search } from "react-bootstrap-icons"
 import { useAutoFocusInput } from "#app/hooks/use-auto-focus-input"
@@ -77,7 +77,9 @@ function PersonScreen() {
 	let notes = usePersonNotes(person, deferredSearchQuery)
 
 	let reminders = usePersonReminders(person, deferredSearchQuery)
-	let hasDueReminders = reminders.open.some(reminder => isDueToday(reminder))
+	let hasDueReminders = reminders.open.some(
+		(reminder: co.loaded<typeof Reminder>) => isDueToday(reminder),
+	)
 
 	if (!me) {
 		return (

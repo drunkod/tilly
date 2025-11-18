@@ -4,7 +4,7 @@ import {
 	isDeleted,
 	isPermanentlyDeleted,
 } from "#shared/schema/user"
-import { co, type ResolveQuery } from "jazz-tools"
+import { co, type ResolveQuery } from "#shared/jazz-core"
 
 export { usePersonNotes }
 

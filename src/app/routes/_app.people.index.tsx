@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Button } from "#shared/ui/button"
 import { Input } from "#shared/ui/input"
-import { useAccount } from "jazz-tools/react"
-import { UserAccount } from "#shared/schema/user"
+import { UserAccount, Person } from "#shared/schema/user"
+import { useAccount } from "#app/lib/jazz-react"
+import { co } from "#shared/jazz-core"
 import { usePeople } from "#app/features/person-hooks"
-import { type ResolveQuery } from "jazz-tools"
+import { type ResolveQuery } from "#shared/jazz-core"
 import { useDeferredValue, type ReactNode } from "react"
 import { PersonListItem } from "#app/features/person-list-item"
 import { useAppStore } from "#app/lib/store"
@@ -96,16 +97,18 @@ function PeopleScreen() {
 
 			{people.active.length > 0 ? (
 				<ul className="divide-border divide-y">
-					{people.active.map((person, index) => (
-						<li key={person.$jazz.id}>
-							<PersonListItem
-								// eslint-disable-next-line @typescript-eslint/no-explicit-any
-								person={person as any} // TODO: ouch :(
-								searchQuery={deferredSearchQuery}
-								noLazy={index < eagerCount}
-							/>
-						</li>
-					))}
+					{people.active.map(
+						(person: co.loaded<typeof Person>, index: number) => (
+							<li key={person.$jazz.id}>
+								<PersonListItem
+									// eslint-disable-next-line @typescript-eslint/no-explicit-any
+									person={person as any} // TODO: ouch :(
+									searchQuery={deferredSearchQuery}
+									noLazy={index < eagerCount}
+								/>
+							</li>
+						),
+					)}
 				</ul>
 			) : (
 				<div className="flex flex-col items-center justify-center space-y-4 py-12 text-center">
@@ -140,16 +143,18 @@ function PeopleScreen() {
 							</AccordionTrigger>
 							<AccordionContent>
 								<ul className="divide-border divide-y">
-									{people.deleted.map((person, index) => (
-										<li key={person.$jazz.id}>
-											<PersonListItem
-												// eslint-disable-next-line @typescript-eslint/no-explicit-any
-												person={person as any} // TODO: ouch :(
-												searchQuery={deferredSearchQuery}
-												noLazy={index < eagerCount}
-											/>
-										</li>
-									))}
+									{people.deleted.map(
+										(person: co.loaded<typeof Person>, index: number) => (
+											<li key={person.$jazz.id}>
+												<PersonListItem
+													// eslint-disable-next-line @typescript-eslint/no-explicit-any
+													person={person as any} // TODO: ouch :(
+													searchQuery={deferredSearchQuery}
+													noLazy={index < eagerCount}
+												/>
+											</li>
+										),
+									)}
 								</ul>
 							</AccordionContent>
 						</AccordionItem>
@@ -168,16 +173,18 @@ function PeopleScreen() {
 								/>
 							</h3>
 							<ul className="divide-border divide-y">
-								{people.deleted.map((person, index) => (
-									<li key={person.$jazz.id}>
-										<PersonListItem
-											// eslint-disable-next-line @typescript-eslint/no-explicit-any
-											person={person as any} // TODO: ouch :(
-											searchQuery={deferredSearchQuery}
-											noLazy={index < eagerCount}
-										/>
-									</li>
-								))}
+								{people.deleted.map(
+									(person: co.loaded<typeof Person>, index: number) => (
+										<li key={person.$jazz.id}>
+											<PersonListItem
+												// eslint-disable-next-line @typescript-eslint/no-explicit-any
+												person={person as any} // TODO: ouch :(
+												searchQuery={deferredSearchQuery}
+												noLazy={index < eagerCount}
+											/>
+										</li>
+									),
+								)}
 							</ul>
 						</>
 					)}

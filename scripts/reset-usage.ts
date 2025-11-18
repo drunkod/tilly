@@ -2,7 +2,7 @@
 
 import { UsageTracking } from "../src/shared/schema/user"
 import { getAllUsers } from "#shared/clerk/server"
-import { startWorker } from "jazz-tools/worker"
+import { startWorker } from "../src/server/lib/jazz-worker"
 import { ServerAccount } from "../src/shared/schema/server"
 
 type ServerWorker = Awaited<ReturnType<typeof startWorker>>["worker"]

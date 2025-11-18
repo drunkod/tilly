@@ -1,4 +1,4 @@
-import { useAccount } from "jazz-tools/react"
+import { useAccount } from "#app/lib/jazz-react"
 import { UserAccount } from "#shared/schema/user"
 import { type ReactNode } from "react"
 import {

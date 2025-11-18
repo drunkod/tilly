@@ -1,8 +1,8 @@
 import { tool, type InferUITool } from "ai"
 import { z } from "zod"
 import { Person } from "#shared/schema/user"
-import { co } from "jazz-tools"
-import { createImage } from "jazz-tools/media"
+import { co } from "#shared/jazz-core"
+import { createImage } from "#shared/lib/jazz-media"
 import { tryCatch } from "#shared/lib/trycatch"
 
 export {

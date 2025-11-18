@@ -8,7 +8,7 @@ import {
 	isPermanentlyDeleted,
 } from "#shared/schema/user"
 import { tryCatch } from "#shared/lib/trycatch"
-import type { co, ResolveQuery } from "jazz-tools"
+import type { co, ResolveQuery } from "#shared/jazz-core"
 
 export { listRemindersTool, listRemindersExecute }
 

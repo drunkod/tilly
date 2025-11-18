@@ -1,4 +1,4 @@
-import { useIsAuthenticated } from "jazz-tools/react"
+import { useIsAuthenticated } from "#app/lib/jazz-react"
 import { Button } from "#shared/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "#shared/ui/card"
 import { Cloud, Gear } from "react-bootstrap-icons"

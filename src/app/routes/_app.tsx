@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router"
-import { useAccount } from "jazz-tools/react"
-import type { ResolveQuery } from "jazz-tools"
+import { useAccount } from "#app/lib/jazz-react"
+import type { ResolveQuery } from "#shared/jazz-core"
 import { useEffect } from "react"
 import { UserAccount, isDeleted, isDueToday } from "#shared/schema/user"
 import { Navigation } from "#app/components/navigation"

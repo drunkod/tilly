@@ -1,6 +1,6 @@
 import { tool, type InferUITool } from "ai"
 import { z } from "zod"
-import { co } from "jazz-tools"
+import { co } from "#shared/jazz-core"
 import {
 	Person,
 	UserAccount,

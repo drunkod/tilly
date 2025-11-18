@@ -7,7 +7,7 @@ import {
 	sortByUpdatedAt,
 	sortByDeletedAt,
 } from "#shared/schema/user"
-import { co, type ResolveQuery } from "jazz-tools"
+import { co, type ResolveQuery } from "#shared/jazz-core"
 
 export { useReminders, usePersonReminders }
 

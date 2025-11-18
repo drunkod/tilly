@@ -1,4 +1,4 @@
-import { Image as JazzImage } from "jazz-tools/react"
+import { Image as JazzImage } from "#app/lib/jazz-react"
 import { Avatar, AvatarFallback } from "#shared/ui/avatar"
 import { Button } from "#shared/ui/button"
 import {
@@ -18,7 +18,7 @@ import {
 	AlertDialogTitle,
 } from "#shared/ui/alert-dialog"
 import { Person, UserAccount } from "#shared/schema/user"
-import { co } from "jazz-tools"
+import { co } from "#shared/jazz-core"
 import { PencilSquare, Trash } from "react-bootstrap-icons"
 import { PersonForm } from "./person-form"
 import { useState } from "react"

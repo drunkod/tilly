@@ -1,5 +1,5 @@
 import { ClerkProvider, useClerk } from "@clerk/clerk-react"
-import { JazzReactProviderWithClerk, useAccount } from "jazz-tools/react"
+import { JazzReactProviderWithClerk, useAccount } from "#app/lib/jazz-react"
 import { RouterProvider, createRouter } from "@tanstack/react-router"
 import {
 	PUBLIC_JAZZ_SYNC_SERVER,

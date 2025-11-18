@@ -9,7 +9,7 @@ import {
 	WEEKLY_BUDGET,
 } from "astro:env/server"
 import { addDays, isPast } from "date-fns"
-import { co, Group, type ResolveQuery } from "jazz-tools"
+import { co, Group, type ResolveQuery } from "#shared/jazz-core"
 import { clerkClient, type SubscriptionStatus } from "#shared/clerk/server"
 import { initServerWorker, initUserWorker } from "./utils"
 

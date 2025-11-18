@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Download } from "react-bootstrap-icons"
-import { type ResolveQuery, type co } from "jazz-tools"
-import { highestResAvailable } from "jazz-tools/media"
+import { type ResolveQuery, type co } from "#shared/jazz-core"
+import { highestResAvailable } from "#shared/lib/jazz-media"
 import { toast } from "sonner"
 
 import { Button } from "#shared/ui/button"

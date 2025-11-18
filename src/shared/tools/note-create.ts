@@ -1,7 +1,7 @@
 import { tool, type InferUITool } from "ai"
 import { z } from "zod"
 import { Note, Person } from "#shared/schema/user"
-import type { co } from "jazz-tools"
+import type { co } from "#shared/jazz-core"
 import { tryCatch } from "#shared/lib/trycatch"
 
 export { addNoteTool, addNoteExecute, createNote }

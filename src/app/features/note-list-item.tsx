@@ -17,7 +17,7 @@ import {
 	AlertDialogTitle,
 } from "#shared/ui/alert-dialog"
 import { Note, Person } from "#shared/schema/user"
-import { co } from "jazz-tools"
+import { co } from "#shared/jazz-core"
 import { PencilSquare, Trash, PinFill } from "react-bootstrap-icons"
 import { useState, useRef, useEffect } from "react"
 import { NoteForm } from "./note-form"

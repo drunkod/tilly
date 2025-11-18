@@ -1,5 +1,5 @@
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router"
-import { co } from "jazz-tools"
+import { co } from "#shared/jazz-core"
 import { UserAccount } from "#shared/schema/user"
 import { ScrollReset } from "#app/components/scroll-reset"
 import { ErrorUI } from "#app/components/error-ui"

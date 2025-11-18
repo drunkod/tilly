@@ -3,7 +3,7 @@ import { NewReminder } from "#app/features/new-reminder"
 import { NewPerson } from "#app/features/new-person"
 import { TypographyH2, TypographyLead } from "#shared/ui/typography"
 import { BellFill, PersonPlusFill } from "react-bootstrap-icons"
-import { useAccount } from "jazz-tools/react"
+import { useAccount } from "#app/lib/jazz-react"
 import { UserAccount, isDeleted } from "#shared/schema/user"
 import { T } from "#shared/intl"
 

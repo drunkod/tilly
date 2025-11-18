@@ -10,8 +10,8 @@ import { Form, FormControl, FormField, FormItem } from "#shared/ui/form"
 import { Alert, AlertDescription, AlertTitle } from "#shared/ui/alert"
 import { Avatar, AvatarFallback, AvatarImage } from "#shared/ui/avatar"
 import { UserAccount } from "#shared/schema/user"
-import type { ResolveQuery } from "jazz-tools"
-import { useAccount, useIsAuthenticated } from "jazz-tools/react"
+import type { ResolveQuery } from "#shared/jazz-core"
+import { useAccount, useIsAuthenticated } from "#app/lib/jazz-react"
 import {
 	Send,
 	Pause,

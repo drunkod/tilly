@@ -1,8 +1,8 @@
 import { createFileRoute, notFound } from "@tanstack/react-router"
 import { UserAccount, isDeleted } from "#shared/schema/user"
 import { useReminders } from "#app/features/reminder-hooks"
-import { useAccount } from "jazz-tools/react"
-import { type ResolveQuery } from "jazz-tools"
+import { useAccount } from "#app/lib/jazz-react"
+import { type ResolveQuery } from "#shared/jazz-core"
 import { ReminderListItem } from "#app/features/reminder-list-item"
 
 import { TypographyH1 } from "#shared/ui/typography"

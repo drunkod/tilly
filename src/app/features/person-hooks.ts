@@ -5,7 +5,7 @@ import {
 	sortByUpdatedAt,
 	sortByDeletedAt,
 } from "#shared/schema/user"
-import { co } from "jazz-tools"
+import { co } from "#shared/jazz-core"
 
 export { usePeople }
 
