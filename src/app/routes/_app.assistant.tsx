@@ -12,6 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "#shared/ui/avatar"
 import { UserAccount } from "#shared/schema/user"
 import type { ResolveQuery } from "jazz-tools"
 import { useAccount, useIsAuthenticated } from "jazz-tools/react"
+import { generateAuthToken } from "jazz-tools"
 import {
 	Send,
 	Pause,
@@ -179,7 +180,12 @@ function AuthenticatedChat() {
 		error,
 	} = useChat({
 		messages: initialMessages,
-		transport: new DefaultChatTransport({ api: "/api/chat" }),
+		transport: new DefaultChatTransport({
+			api: "/api/chat",
+			headers: {
+				Authorization: `Jazz ${generateAuthToken()}`,
+			},
+		}),
 		sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithToolCalls,
 		onFinish: ({ messages }) => setChat(messages),
 		onToolCall: async ({ toolCall }) => {

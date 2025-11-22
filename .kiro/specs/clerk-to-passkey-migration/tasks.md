@@ -54,7 +54,7 @@
   - Update sign-in button to use handleSignIn
   - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
-- [ ] 7. Implement client-side API authentication
+- [x] 7. Implement client-side API authentication
   - Modify `src/app/routes/_app.assistant.tsx`
   - Import generateAuthToken from jazz-tools
   - Add headers to useChat configuration
