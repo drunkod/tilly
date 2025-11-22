@@ -14,9 +14,12 @@
 		}
 	],
 	"crons": [
-		{
-			"path": "/api/push/deliver-notifications",
-			"schedule": "0 * * * *"
-		}
+		// Temporarily disabled: Requires Clerk's central user enumeration
+		// Will be re-enabled once Global Directory CoMap is implemented
+		// See docs/CRON_JOBS_LIMITATION.md for details
+		// {
+		// 	"path": "/api/push/deliver-notifications",
+		// 	"schedule": "0 * * * *"
+		// }
 	]
 }
