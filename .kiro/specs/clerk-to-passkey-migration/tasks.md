@@ -44,7 +44,7 @@
   - Disable actions when offline using useOnlineStatus
   - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
 
-- [ ] 6. Update Welcome page sign-in
+- [x] 6. Update Welcome page sign-in
   - Modify `src/app/routes/index.tsx`
   - Import usePasskeyAuth hook
   - Import APP_NAME from passkey-auth component

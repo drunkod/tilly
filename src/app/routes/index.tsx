@@ -1,9 +1,10 @@
 import { createFileRoute, Link, redirect } from "@tanstack/react-router"
 import { motion } from "motion/react"
+import { usePasskeyAuth } from "jazz-tools/react"
 import { Button } from "#shared/ui/button"
 import { TypographyH1, TypographyLead } from "#shared/ui/typography"
 import { useAppStore } from "#app/lib/store"
-import { getSignInUrl } from "#app/lib/auth-utils"
+import { APP_NAME } from "#app/components/passkey-auth"
 import { T } from "#shared/intl/setup"
 import {
 	SkipForwardFill,
@@ -24,10 +25,11 @@ export const Route = createFileRoute("/")({
 
 function WelcomeIndex() {
 	let setTourSkipped = useAppStore(state => state.setTourSkipped)
+	let auth = usePasskeyAuth({ appName: APP_NAME })
 
 	function handleSignIn() {
 		setTourSkipped(true)
-		window.location.href = getSignInUrl("/")
+		auth.logIn()
 	}
 
 	return (
