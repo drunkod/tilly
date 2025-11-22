@@ -1,7 +1,4 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router"
-// TODO: Replace with passkey auth in task 2
-// import { SignOutButton, useAuth, useUser } from "#shared/clerk/client"
-// import { getSignInUrl, getSignUpUrl } from "#app/lib/auth-utils"
 import { useAccount, useIsAuthenticated } from "jazz-tools/react"
 import { Button } from "#shared/ui/button"
 import { Input } from "#shared/ui/input"
@@ -38,6 +35,8 @@ import { useIsPWAInstalled, useIsMobileDevice } from "#app/hooks/use-pwa"
 import { useOnlineStatus } from "#app/hooks/use-online-status"
 import { PWAInstallDialog } from "#app/components/pwa-install-dialog"
 import { Progress } from "#shared/ui/progress"
+import { PasskeyAuthDialog } from "#app/components/passkey-auth"
+import { Key } from "react-bootstrap-icons"
 import { useAppStore } from "#app/lib/store"
 import { T, useIntl } from "#shared/intl/setup"
 import { toast } from "sonner"
@@ -175,45 +174,112 @@ function LanguageSection() {
 function AuthenticationSection() {
 	let t = useIntl()
 	let isAuthenticated = useIsAuthenticated()
-	// TODO: Replace with passkey auth in task 2
-	// let auth = useAuth()
-	// let { user } = useUser()
-
 	let isOnline = useOnlineStatus()
+	let [showSignUpDialog, setShowSignUpDialog] = useState(false)
+	let [showLogInDialog, setShowLogInDialog] = useState(false)
+
+	function handleLogOut() {
+		// Session refresh (logout) by reloading the page
+		window.location.reload()
+	}
+
+	function handleSignUp() {
+		setShowSignUpDialog(true)
+	}
+
+	function handleLogIn() {
+		setShowLogInDialog(true)
+	}
 
 	return (
-		<SettingsSection
-			title={t("settings.auth.title")}
-			description={
-				isAuthenticated
-					? t("settings.auth.description.signedIn")
-					: isOnline
-						? t("settings.auth.description.signedOut.online")
-						: t("settings.auth.description.signedOut.offline")
-			}
-		>
-			<div className="space-y-6">
-				{/* TODO: Implement passkey authentication UI in task 5 */}
-				<div>
-					<p className="text-muted-foreground text-sm">
-						Authentication section will be implemented with passkey auth
-					</p>
-				</div>
-				<div className="space-y-2">
-					{!isOnline && (
-						<Alert variant="destructive">
-							<WifiOff className="h-4 w-4" />
-							<AlertTitle>
-								<T k="settings.auth.requiresInternet" />
-							</AlertTitle>
-							<AlertDescription>
-								<T k="settings.auth.offlineDescription" />
-							</AlertDescription>
-						</Alert>
+		<>
+			<SettingsSection
+				title={t("settings.auth.title")}
+				description={
+					isAuthenticated
+						? t("settings.auth.description.signedIn")
+						: isOnline
+							? t("settings.auth.description.signedOut.online")
+							: t("settings.auth.description.signedOut.offline")
+				}
+			>
+				<div className="space-y-6">
+					{isAuthenticated ? (
+						<div className="space-y-4">
+							<div className="space-y-2">
+								<p className="text-sm font-medium">
+									<T k="settings.auth.status.label" />
+								</p>
+								<div className="flex items-center gap-2">
+									<Key className="h-4 w-4 text-green-600 dark:text-green-400" />
+									<p className="text-muted-foreground text-sm">
+										<T k="settings.auth.status.authenticated" />
+									</p>
+								</div>
+							</div>
+							<div>
+								<Button
+									variant="outline"
+									onClick={handleLogOut}
+									disabled={!isOnline}
+								>
+									<T k="settings.auth.logout" />
+								</Button>
+								{!isOnline && (
+									<p className="text-muted-foreground mt-2 text-xs">
+										<T k="settings.auth.requiresInternet" />
+									</p>
+								)}
+							</div>
+						</div>
+					) : (
+						<div className="space-y-4">
+							<div className="space-y-2">
+								<p className="text-sm font-medium">
+									<T k="settings.auth.status.label" />
+								</p>
+								<p className="text-muted-foreground text-sm">
+									<T k="settings.auth.status.unauthenticated" />
+								</p>
+							</div>
+							<div className="flex gap-2">
+								<Button onClick={handleLogIn} disabled={!isOnline}>
+									<T k="settings.auth.login" />
+								</Button>
+								<Button
+									variant="outline"
+									onClick={handleSignUp}
+									disabled={!isOnline}
+								>
+									<T k="settings.auth.signup" />
+								</Button>
+							</div>
+							{!isOnline && (
+								<Alert variant="destructive">
+									<WifiOff className="h-4 w-4" />
+									<AlertTitle>
+										<T k="settings.auth.requiresInternet" />
+									</AlertTitle>
+									<AlertDescription>
+										<T k="settings.auth.offlineDescription" />
+									</AlertDescription>
+								</Alert>
+							)}
+						</div>
 					)}
 				</div>
-			</div>
-		</SettingsSection>
+			</SettingsSection>
+			<PasskeyAuthDialog
+				open={showSignUpDialog}
+				onOpenChange={setShowSignUpDialog}
+				mode="signup"
+			/>
+			<PasskeyAuthDialog
+				open={showLogInDialog}
+				onOpenChange={setShowLogInDialog}
+				mode="login"
+			/>
+		</>
 	)
 }
 

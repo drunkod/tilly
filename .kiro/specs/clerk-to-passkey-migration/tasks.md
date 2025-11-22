@@ -16,7 +16,7 @@
   - Export APP_NAME constant
   - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
 
-- [ ] 3. Update UserAccount schema with public profile migration
+- [x] 3. Update UserAccount schema with public profile migration
   - Modify `src/shared/schema/user.ts`
   - Add profile initialization check in migration
   - Create Group with account as owner
@@ -25,7 +25,7 @@
   - Set profile on account with public group
   - _Requirements: 3.1, 3.2, 3.3, 3.4_
 
-- [ ] 4. Replace ClerkProvider with JazzReactProvider
+- [x] 4. Replace ClerkProvider with JazzReactProvider
   - Modify `src/app/main.tsx`
   - Remove ClerkProvider import and wrapper
   - Add JazzReactProvider import
@@ -34,7 +34,7 @@
   - Remove Clerk-specific configuration
   - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-- [ ] 5. Update Settings page authentication section
+- [x] 5. Update Settings page authentication section
   - Modify `src/app/routes/_app.settings.tsx`
   - Import usePasskeyAuth and useIsAuthenticated hooks
   - Create AuthenticationSection component
