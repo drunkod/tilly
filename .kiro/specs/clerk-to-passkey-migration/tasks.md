@@ -6,7 +6,7 @@
   - Remove Clerk imports from codebase
   - _Requirements: 1.1, 1.2, 1.3, 1.4_
 
-- [ ] 2. Create PasskeyAuthDialog component
+- [x] 2. Create PasskeyAuthDialog component
   - Create new file `src/app/components/passkey-auth.tsx`
   - Implement dual-mode dialog (signup/login)
   - Add username input for signup mode
