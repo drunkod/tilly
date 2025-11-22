@@ -15,7 +15,10 @@ import { co, Group, type ResolveQuery } from "jazz-tools"
 import { initServerWorker, initUserWorker } from "./utils"
 
 // Temporary type stubs - will be removed when implementing Jazz-based subscription
-type SubscriptionStatus = "free" | "plus"
+type SubscriptionStatus = {
+	tier: "free" | "plus"
+	isTrial: boolean
+}
 
 export { checkInputSize, checkUsageLimits, updateUsage }
 

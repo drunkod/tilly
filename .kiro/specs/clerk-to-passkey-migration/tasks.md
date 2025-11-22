@@ -62,7 +62,7 @@
   - Attach token to Authorization header in "Jazz <token>" format
   - _Requirements: 7.1_
 
-- [ ] 8. Implement server-side API authentication
+- [x] 8. Implement server-side API authentication
   - Modify `src/server/features/chat-messages.ts`
   - Import authenticateRequest from jazz-tools
   - Remove Clerk imports and middleware

@@ -3,6 +3,7 @@ import { convertToModelMessages, stepCountIs, streamText } from "ai"
 import { GOOGLE_AI_API_KEY } from "astro:env/server"
 import { format, toZonedTime } from "date-fns-tz"
 import { Hono } from "hono"
+import { authenticateRequest } from "jazz-tools"
 
 import {
 	tools as allTools,
@@ -10,8 +11,6 @@ import {
 	type TillyUIMessage,
 } from "#shared/tools/tools"
 import { z } from "zod"
-// TODO: Replace with Jazz auth in task 8
-// import { authMiddleware, requireAuth, requirePlus } from "#shared/clerk/server"
 import {
 	checkInputSize,
 	checkUsageLimits,
@@ -20,71 +19,81 @@ import {
 
 export { chatMessagesApp }
 
-let chatMessagesApp = new Hono()
-	// TODO: Add Jazz auth middleware in task 8
-	// .use("*", authMiddleware)
-	// .use("*", requireAuth)
-	// .use("*", requirePlus)
-	.post("/", async c => {
-		let { messages } = await c.req.json()
+let chatMessagesApp = new Hono().post("/", async c => {
+	// Validate Jazz Token
+	let { account, error } = await authenticateRequest(c.req.raw)
 
-		if (!Array.isArray(messages)) {
-			return c.json({ error: "Invalid messages payload" }, 400)
+	if (error) {
+		return c.json({ error: "Invalid or expired token" }, 401)
+	}
+
+	if (!account) {
+		return c.json({ error: "Unauthorized" }, 401)
+	}
+
+	let { messages } = await c.req.json()
+
+	if (!Array.isArray(messages)) {
+		return c.json({ error: "Invalid messages payload" }, 400)
+	}
+
+	let userContextMessages = addUserContextToMessages(messages)
+
+	// Use authenticated account as user context
+	let user = {
+		id: account.$jazz.id,
+		unsafeMetadata: {},
+	}
+	let subscriptionStatus = { tier: "free" as const, isTrial: false }
+
+	let usageLimits = await checkUsageLimits(user)
+	if (usageLimits.exceeded) {
+		let errorMessage = "Usage budget exceeded"
+		let errorResponse: UsageLimitExceededResponse = {
+			error: errorMessage,
+			code: "usage-limit-exceeded",
+			limitExceeded: true,
+			percentUsed: usageLimits.percentUsed,
+			resetDate: usageLimits.resetDate
+				? usageLimits.resetDate.toISOString()
+				: null,
 		}
 
-		let userContextMessages = addUserContextToMessages(messages)
+		return c.json(errorResponse, 429)
+	}
 
-		let user = c.get("user")
-		let subscriptionStatus = c.get("subscription")
-
-		let usageLimits = await checkUsageLimits(user)
-		if (usageLimits.exceeded) {
-			let errorMessage = "Usage budget exceeded"
-			let errorResponse: UsageLimitExceededResponse = {
-				error: errorMessage,
-				code: "usage-limit-exceeded",
-				limitExceeded: true,
-				percentUsed: usageLimits.percentUsed,
-				resetDate: usageLimits.resetDate
-					? usageLimits.resetDate.toISOString()
-					: null,
-			}
-
-			return c.json(errorResponse, 429)
-		}
-
-		let modelMessages = convertToModelMessages(userContextMessages, {
-			ignoreIncompleteToolCalls: true,
-			tools: allTools,
-		})
-
-		if (!checkInputSize(user, modelMessages)) {
-			return c.json({ error: "Request too large" }, 413)
-		}
-
-		let google = createGoogleGenerativeAI({ apiKey: GOOGLE_AI_API_KEY })
-
-		let result = streamText({
-			model: google("gemini-2.5-flash"),
-			messages: modelMessages,
-			system: makeStaticSystemPrompt(),
-			tools: allTools,
-			stopWhen: stepCountIs(100),
-			onFinish: async ({ usage, providerMetadata }) => {
-				let inputTokens = usage.inputTokens ?? 0
-				let outputTokens = usage.outputTokens ?? 0
-				let cachedTokens = getCachedTokenCount(providerMetadata)
-
-				await updateUsage(user, subscriptionStatus, {
-					inputTokens,
-					cachedTokens,
-					outputTokens,
-				})
-			},
-		})
-
-		return result.toUIMessageStreamResponse()
+	let modelMessages = convertToModelMessages(userContextMessages, {
+		ignoreIncompleteToolCalls: true,
+		tools: allTools,
 	})
+
+	if (!checkInputSize(user, modelMessages)) {
+		return c.json({ error: "Request too large" }, 413)
+	}
+
+	let google = createGoogleGenerativeAI({ apiKey: GOOGLE_AI_API_KEY })
+
+	let result = streamText({
+		model: google("gemini-2.5-flash"),
+		messages: modelMessages,
+		system: makeStaticSystemPrompt(),
+		tools: allTools,
+		stopWhen: stepCountIs(100),
+		onFinish: async ({ usage, providerMetadata }) => {
+			let inputTokens = usage.inputTokens ?? 0
+			let outputTokens = usage.outputTokens ?? 0
+			let cachedTokens = getCachedTokenCount(providerMetadata)
+
+			await updateUsage(user, subscriptionStatus, {
+				inputTokens,
+				cachedTokens,
+				outputTokens,
+			})
+		},
+	})
+
+	return result.toUIMessageStreamResponse()
+})
 
 function getCachedTokenCount(metadata: unknown): number {
 	let providerMetadataSchema = z.object({
