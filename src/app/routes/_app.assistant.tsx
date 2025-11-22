@@ -43,7 +43,8 @@ import { useAppStore } from "#app/lib/store"
 import { nanoid } from "nanoid"
 import { ScrollIntoView } from "#app/components/scroll-into-view"
 import { T, useIntl } from "#shared/intl/setup"
-import { useAuth } from "#shared/clerk/client"
+// TODO: Remove Clerk auth - will be replaced with passkey auth
+// import { useAuth } from "#shared/clerk/client"
 import { PUBLIC_ENABLE_PAYWALL } from "astro:env/client"
 
 export let Route = createFileRoute("/_app/assistant")({
@@ -136,28 +137,18 @@ function SubscribePrompt() {
 }
 
 function useAssistantAccess() {
-	let clerkAuth = useAuth()
+	// TODO: Replace with passkey auth in task 7
+	// let clerkAuth = useAuth()
 	let isSignedIn = useIsAuthenticated()
-	let isOnline = useOnlineStatus()
+	// let isOnline = useOnlineStatus() // Will be used in task 7
 
 	if (!isSignedIn) return { status: "denied", isSignedIn }
 
 	if (!PUBLIC_ENABLE_PAYWALL) return { status: "granted", isSignedIn }
 
-	// When offline, allow access to interface but chat will be disabled by canUseChat
-	if (!isOnline) {
-		// If auth is loaded, we can determine access status
-		if (clerkAuth.isLoaded) {
-			let status = determineAccessStatus({ auth: clerkAuth })
-			return { status, isSignedIn }
-		}
-		// If auth isn't loaded yet, assume granted to avoid infinite loading
-		return { status: "granted", isSignedIn }
-	}
-
-	let status = determineAccessStatus({ auth: clerkAuth })
-
-	return { status, isSignedIn }
+	// TODO: Implement proper access control with passkey auth
+	// For now, grant access to all signed-in users
+	return { status: "granted", isSignedIn }
 }
 
 function AuthenticatedChat() {
@@ -665,13 +656,12 @@ function UserInput(props: {
 	)
 }
 
-function determineAccessStatus({ auth }: { auth: ReturnType<typeof useAuth> }) {
-	if (!auth.isLoaded) return "loading"
-
-	if (!auth.isSignedIn) return "denied"
-
-	return auth.has({ plan: "plus" }) ? "granted" : "denied"
-}
+// TODO: Remove this function - no longer needed after Clerk removal
+// function determineAccessStatus({ auth }: { auth: ReturnType<typeof useAuth> }) {
+// 	if (!auth.isLoaded) return "loading"
+// 	if (!auth.isSignedIn) return "denied"
+// 	return auth.has({ plan: "plus" }) ? "granted" : "denied"
+// }
 
 function isUsageLimitError(error: unknown): boolean {
 	let payload = extractUsageLimitErrorPayload(error)

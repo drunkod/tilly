@@ -4,10 +4,12 @@ import { logger } from "hono/logger"
 import { chatMessagesApp } from "./features/chat-messages"
 import { cronDeliveryApp } from "./features/push-cron"
 import { testNotificationApp } from "./features/push-test"
-import { authMiddleware } from "#shared/clerk/server"
+// TODO: Replace with Jazz auth middleware in task 8
+// import { authMiddleware } from "#shared/clerk/server"
 
 let authenticatedRoutes = new Hono()
-	.use(authMiddleware)
+	// TODO: Add Jazz auth middleware in task 8
+	// .use(authMiddleware)
 	.route("/chat", chatMessagesApp)
 
 export let app = new Hono()

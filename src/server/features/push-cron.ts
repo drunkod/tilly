@@ -1,6 +1,10 @@
 import { CRON_SECRET } from "astro:env/server"
-import { type User, getUsersWithJazz } from "#shared/clerk/server"
+// TODO: Replace with Jazz-based user enumeration in task 9
+// import { type User, getUsersWithJazz } from "#shared/clerk/server"
 import { isDeleted } from "#shared/schema/user"
+
+// Temporary type stub - will be removed in task 9
+type User = { id: string; unsafeMetadata?: Record<string, unknown> }
 import { initUserWorker } from "../lib/utils"
 import { tryCatch } from "#shared/lib/trycatch"
 import { toZonedTime, format, fromZonedTime } from "date-fns-tz"
@@ -37,28 +41,27 @@ let cronDeliveryApp = new Hono().get(
 		let processingPromises: Promise<void>[] = []
 		let maxConcurrentUsers = 50
 
-		for await (let user of getUsersWithJazz()) {
-			await waitForConcurrencyLimit(processingPromises, maxConcurrentUsers)
-
-			let userPromise = loadNotificationSettings(user)
-				.then(data => shouldReceiveNotification(data))
-				.then(data => hasDueNotifications(data))
-				.then(data => getDevices(data))
-				.then(userWithDevices => processDevicesPipeline(userWithDevices))
-				.then(results => {
-					deliveryResults.push(...results)
-				})
-				.catch(error => {
-					if (typeof error === "string") {
-						console.log(`❌ User ${user.id}: ${error}`)
-					} else {
-						console.log(`❌ User ${user.id}: ${error.message || error}`)
-					}
-				})
-				.finally(() => removeFromList(processingPromises, userPromise))
-
-			processingPromises.push(userPromise)
-		}
+		// TODO: Replace with Jazz-based user enumeration in task 9
+		// for await (let user of getUsersWithJazz()) {
+		// 	await waitForConcurrencyLimit(processingPromises, maxConcurrentUsers)
+		// 	let userPromise = loadNotificationSettings(user)
+		// 		.then(data => shouldReceiveNotification(data))
+		// 		.then(data => hasDueNotifications(data))
+		// 		.then(data => getDevices(data))
+		// 		.then(userWithDevices => processDevicesPipeline(userWithDevices))
+		// 		.then(results => {
+		// 			deliveryResults.push(...results)
+		// 		})
+		// 		.catch(error => {
+		// 			if (typeof error === "string") {
+		// 				console.log(`❌ User ${user.id}: ${error}`)
+		// 			} else {
+		// 				console.log(`❌ User ${user.id}: ${error.message || error}`)
+		// 			}
+		// 		})
+		// 		.finally(() => removeFromList(processingPromises, userPromise))
+		// 	processingPromises.push(userPromise)
+		// }
 
 		await Promise.allSettled(processingPromises)
 

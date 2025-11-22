@@ -10,7 +10,8 @@ import {
 	type TillyUIMessage,
 } from "#shared/tools/tools"
 import { z } from "zod"
-import { authMiddleware, requireAuth, requirePlus } from "#shared/clerk/server"
+// TODO: Replace with Jazz auth in task 8
+// import { authMiddleware, requireAuth, requirePlus } from "#shared/clerk/server"
 import {
 	checkInputSize,
 	checkUsageLimits,
@@ -20,9 +21,10 @@ import {
 export { chatMessagesApp }
 
 let chatMessagesApp = new Hono()
-	.use("*", authMiddleware)
-	.use("*", requireAuth)
-	.use("*", requirePlus)
+	// TODO: Add Jazz auth middleware in task 8
+	// .use("*", authMiddleware)
+	// .use("*", requireAuth)
+	// .use("*", requirePlus)
 	.post("/", async c => {
 		let { messages } = await c.req.json()
 

@@ -1,10 +1,6 @@
-import { ClerkProvider, useClerk } from "@clerk/clerk-react"
-import { JazzReactProviderWithClerk, useAccount } from "jazz-tools/react"
+import { JazzReactProvider, useAccount } from "jazz-tools/react"
 import { RouterProvider, createRouter } from "@tanstack/react-router"
-import {
-	PUBLIC_JAZZ_SYNC_SERVER,
-	PUBLIC_CLERK_PUBLISHABLE_KEY,
-} from "astro:env/client"
+import { PUBLIC_JAZZ_SYNC_SERVER } from "astro:env/client"
 import { UserAccount } from "#shared/schema/user"
 import { routeTree } from "#app/routeTree.gen"
 import { IntlProvider } from "#shared/intl/setup"
@@ -15,33 +11,20 @@ import { Toaster } from "#shared/ui/sonner"
 import { MainErrorBoundary } from "#app/components/main-error-boundary"
 
 export function PWA() {
-	return (
-		<MainErrorBoundary>
-			<ClerkProvider
-				publishableKey={PUBLIC_CLERK_PUBLISHABLE_KEY}
-				afterSignOutUrl="/app"
-			>
-				<JazzWithClerk />
-			</ClerkProvider>
-		</MainErrorBoundary>
-	)
-}
-
-function JazzWithClerk() {
 	useServiceWorker({ updateCheckIntervalMs: 2 * 60 * 60 * 1000 })
-	let clerk = useClerk()
 	let syncConfig = buildSyncConfig()
 
 	return (
-		<JazzReactProviderWithClerk
-			clerk={clerk}
-			AccountSchema={UserAccount}
-			sync={syncConfig}
-			fallback={<SplashScreen />}
-		>
-			<RouterWithJazz />
-			<Toaster richColors />
-		</JazzReactProviderWithClerk>
+		<MainErrorBoundary>
+			<JazzReactProvider
+				AccountSchema={UserAccount}
+				sync={syncConfig}
+				fallback={<SplashScreen />}
+			>
+				<RouterWithJazz />
+				<Toaster richColors />
+			</JazzReactProvider>
+		</MainErrorBoundary>
 	)
 }
 
@@ -88,7 +71,7 @@ function isSyncPeer(value: string | undefined): value is SyncPeer {
 	return value.startsWith("ws://") || value.startsWith("wss://")
 }
 
-type JazzSyncProps = Parameters<typeof JazzReactProviderWithClerk>[0]["sync"]
+type JazzSyncProps = Parameters<typeof JazzReactProvider>[0]["sync"]
 type JazzSyncConfig = NonNullable<JazzSyncProps>
 type SyncPeer = JazzSyncConfig["peer"]
 

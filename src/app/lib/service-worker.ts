@@ -1,4 +1,5 @@
-import { useUser } from "#shared/clerk/client"
+// TODO: Replace with Jazz account in task 2
+// import { useUser } from "#shared/clerk/client"
 import { tryCatch } from "#shared/lib/trycatch"
 import { useEffect, useCallback } from "react"
 
@@ -129,43 +130,43 @@ async function getServiceWorkerRegistration() {
 	return result.data
 }
 
-function setUserIdInServiceWorker(userId: string) {
-	if (!navigator.serviceWorker?.controller) {
-		console.log("[App] No service worker controller available")
-		return
-	}
+// TODO: Re-enable these functions when implementing Jazz account sync in task 2
+// function setUserIdInServiceWorker(userId: string) {
+// 	if (!navigator.serviceWorker?.controller) {
+// 		console.log("[App] No service worker controller available")
+// 		return
+// 	}
+// 	navigator.serviceWorker.controller.postMessage({
+// 		type: "SET_USER_ID",
+// 		userId: userId,
+// 	})
+// 	console.log("[App] Sent user ID to service worker:", userId)
+// }
 
-	navigator.serviceWorker.controller.postMessage({
-		type: "SET_USER_ID",
-		userId: userId,
-	})
-	console.log("[App] Sent user ID to service worker:", userId)
-}
-
-function clearUserIdInServiceWorker() {
-	if (!navigator.serviceWorker?.controller) {
-		console.log("[App] No service worker controller available")
-		return
-	}
-
-	navigator.serviceWorker.controller.postMessage({
-		type: "CLEAR_USER_ID",
-	})
-	console.log("[App] Cleared user ID in service worker")
-}
+// function clearUserIdInServiceWorker() {
+// 	if (!navigator.serviceWorker?.controller) {
+// 		console.log("[App] No service worker controller available")
+// 		return
+// 	}
+// 	navigator.serviceWorker.controller.postMessage({
+// 		type: "CLEAR_USER_ID",
+// 	})
+// 	console.log("[App] Cleared user ID in service worker")
+// }
 
 function useSyncUserIdToServiceWorker() {
-	let { user, isLoaded } = useUser()
+	// TODO: Replace with Jazz account in task 2
+	// let { user, isLoaded } = useUser()
 
 	let syncUserId = useCallback(() => {
-		if (!isLoaded) return
-
-		if (user?.id) {
-			setUserIdInServiceWorker(user.id)
-		} else {
-			clearUserIdInServiceWorker()
-		}
-	}, [user, isLoaded])
+		// TODO: Implement with Jazz account
+		// if (!isLoaded) return
+		// if (user?.id) {
+		// 	setUserIdInServiceWorker(user.id)
+		// } else {
+		// 	clearUserIdInServiceWorker()
+		// }
+	}, [])
 
 	useEffect(() => {
 		syncUserId()

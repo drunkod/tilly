@@ -16,6 +16,12 @@ export let onRequest = defineMiddleware(async (context, next) => {
 
 	if (response.status === 404) {
 		let pathname = context.url.pathname
+		
+		// Skip 404 rewrite for service worker files
+		if (pathname === "/sw.js" || pathname.startsWith("/workbox-")) {
+			return response
+		}
+		
 		let locale = pathname.startsWith("/de") ? "de" : "en"
 		let notFoundPage = `/${locale}/404`
 		console.log("404 rewrite:", { pathname, locale, notFoundPage })

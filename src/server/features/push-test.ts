@@ -1,8 +1,12 @@
 import { zValidator } from "@hono/zod-validator"
 import { Hono } from "hono"
 import { z } from "zod"
-import { authMiddleware, requireAuth, type User } from "#shared/clerk/server"
+// TODO: Replace with Jazz auth in task 8
+// import { authMiddleware, requireAuth, type User } from "#shared/clerk/server"
 import { initUserWorker } from "../lib/utils"
+
+// Temporary type stub - will be removed in task 8
+type User = { id: string; unsafeMetadata?: Record<string, unknown> }
 import {
 	getEnabledDevices,
 	getIntl,
@@ -14,8 +18,9 @@ export { testNotificationApp }
 
 let testNotificationApp = new Hono().post(
 	"/send-test-notification",
-	authMiddleware,
-	requireAuth,
+	// TODO: Add Jazz auth middleware in task 8
+	// authMiddleware,
+	// requireAuth,
 	zValidator("json", z.object({ endpoint: z.string() })),
 	async c => {
 		let { endpoint } = c.req.valid("json")

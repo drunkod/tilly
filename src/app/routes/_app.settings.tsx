@@ -1,6 +1,7 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router"
-import { SignOutButton, useAuth, useUser } from "#shared/clerk/client"
-import { getSignInUrl, getSignUpUrl } from "#app/lib/auth-utils"
+// TODO: Replace with passkey auth in task 2
+// import { SignOutButton, useAuth, useUser } from "#shared/clerk/client"
+// import { getSignInUrl, getSignUpUrl } from "#app/lib/auth-utils"
 import { useAccount, useIsAuthenticated } from "jazz-tools/react"
 import { Button } from "#shared/ui/button"
 import { Input } from "#shared/ui/input"
@@ -37,7 +38,7 @@ import { useIsPWAInstalled, useIsMobileDevice } from "#app/hooks/use-pwa"
 import { useOnlineStatus } from "#app/hooks/use-online-status"
 import { PWAInstallDialog } from "#app/components/pwa-install-dialog"
 import { Progress } from "#shared/ui/progress"
-import { resetAppStore, useAppStore } from "#app/lib/store"
+import { useAppStore } from "#app/lib/store"
 import { T, useIntl } from "#shared/intl/setup"
 import { toast } from "sonner"
 import {
@@ -174,8 +175,9 @@ function LanguageSection() {
 function AuthenticationSection() {
 	let t = useIntl()
 	let isAuthenticated = useIsAuthenticated()
-	let auth = useAuth()
-	let { user } = useUser()
+	// TODO: Replace with passkey auth in task 2
+	// let auth = useAuth()
+	// let { user } = useUser()
 
 	let isOnline = useOnlineStatus()
 
@@ -191,76 +193,12 @@ function AuthenticationSection() {
 			}
 		>
 			<div className="space-y-6">
-				{isAuthenticated ? (
-					<>
-						<div>
-							<p className="mb-1 text-sm font-medium">
-								<T k="settings.auth.status.label" />
-							</p>
-							<p className="text-muted-foreground text-sm">
-								{t("settings.auth.status.signedIn", {
-									email: user?.emailAddresses[0]?.emailAddress || "",
-								})}
-							</p>
-							<div className="mt-3 inline-flex flex-wrap gap-3">
-								<Button asChild variant="secondary" disabled={!isOnline}>
-									<a href={`${getAccountsUrl()}/user`}>
-										<T k="settings.auth.manageAccount" />
-									</a>
-								</Button>
-								<SignOutButton redirectUrl="/app">
-									<Button
-										onClick={() => resetAppStore()}
-										variant="outline"
-										disabled={!isOnline}
-									>
-										<T k="settings.auth.signOut" />
-									</Button>
-								</SignOutButton>
-							</div>
-						</div>
-						{auth.isLoaded && auth.isSignedIn && (
-							<div>
-								<p className="mb-1 text-sm font-medium">
-									<T k="settings.auth.tier.label" />
-								</p>
-								<p className="text-muted-foreground text-sm">
-									{auth.has({ plan: "plus" })
-										? t("settings.auth.tier.plus")
-										: t("settings.auth.tier.free")}
-								</p>
-								<div className="mt-3">
-									<Button asChild variant="secondary" disabled={!isOnline}>
-										<a href={`${getAccountsUrl()}/user/billing`}>
-											<T k="settings.auth.manageSubscription" />
-										</a>
-									</Button>
-								</div>
-							</div>
-						)}
-					</>
-				) : (
-					<div>
-						<p className="mb-1 text-sm font-medium">
-							<T k="settings.auth.status.label" />
-						</p>
-						<p className="text-muted-foreground text-sm">
-							{t("settings.auth.status.signedOut")}
-						</p>
-						<div className="mt-3 space-x-2">
-							<Button asChild disabled={!isOnline}>
-								<a href={getSignInUrl("/app/settings")}>
-									<T k="auth.signIn.button" />
-								</a>
-							</Button>
-							<Button asChild variant="outline" disabled={!isOnline}>
-								<a href={getSignUpUrl("/app/settings")}>
-									<T k="auth.signUp.button" />
-								</a>
-							</Button>
-						</div>
-					</div>
-				)}
+				{/* TODO: Implement passkey authentication UI in task 5 */}
+				<div>
+					<p className="text-muted-foreground text-sm">
+						Authentication section will be implemented with passkey auth
+					</p>
+				</div>
 				<div className="space-y-2">
 					{!isOnline && (
 						<Alert variant="destructive">
@@ -796,8 +734,8 @@ function AboutSection() {
 	)
 }
 
-import { PUBLIC_CLERK_ACCOUNTS_URL } from "astro:env/client"
-
-function getAccountsUrl(): string {
-	return PUBLIC_CLERK_ACCOUNTS_URL
-}
+// TODO: Remove Clerk accounts URL reference - no longer needed with passkey auth
+// import { PUBLIC_CLERK_ACCOUNTS_URL } from "astro:env/client"
+// function getAccountsUrl(): string {
+// 	return PUBLIC_CLERK_ACCOUNTS_URL
+// }

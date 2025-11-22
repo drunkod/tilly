@@ -36,21 +36,25 @@ export default defineConfig({
 	integrations: [
 		react({ babel: { plugins: ["babel-plugin-react-compiler"] } }),
 		pwa({
-			registerType: "prompt",
-			scope: "/app/",
-			strategies: "injectManifest",
-			injectRegister: false,
-			srcDir: "src/app",
-			filename: "sw.ts",
-			manifest: false,
-			injectManifest: {
-				maximumFileSizeToCacheInBytes: 5_000_000,
-				globPatterns: [
-					"_astro/**/*",
-					"app/**/*.{css,html,ico,js,json,png,svg,txt,webp,woff2}",
-				],
-				globIgnores: ["**/images/**", "**/videos/**"],
-			},
+		registerType: "prompt",
+		scope: "/app/",
+		strategies: "injectManifest",
+		injectRegister: false,
+		srcDir: "src/app",
+		filename: "sw.ts",
+		manifest: false,
+		devOptions: {
+			enabled: true,
+			type: "module",
+		},
+		injectManifest: {
+			maximumFileSizeToCacheInBytes: 5_000_000,
+			globPatterns: [
+			"_astro/**/*",
+			"app/**/*.{css,html,ico,js,json,png,svg,txt,webp,woff2}",
+			],
+			globIgnores: ["**/images/**", "**/videos/**"],
+		},
 		}),
 	],
 	env: {
@@ -58,18 +62,6 @@ export default defineConfig({
 			GOOGLE_AI_API_KEY: envField.string({
 				context: "server",
 				access: "secret",
-			}),
-			CLERK_SECRET_KEY: envField.string({
-				context: "server",
-				access: "secret",
-			}),
-			PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({
-				context: "client",
-				access: "public",
-			}),
-			PUBLIC_CLERK_ACCOUNTS_URL: envField.string({
-				context: "client",
-				access: "public",
 			}),
 			PUBLIC_JAZZ_SYNC_SERVER: envField.string({
 				context: "client",

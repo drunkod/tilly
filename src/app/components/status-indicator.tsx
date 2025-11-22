@@ -6,7 +6,8 @@ import {
 	Check,
 	ExclamationTriangleFill,
 } from "react-bootstrap-icons"
-import { useAuth } from "#shared/clerk/client"
+// TODO: Replace with Jazz auth in task 2
+// import { useAuth } from "#shared/clerk/client"
 
 import { Button } from "#shared/ui/button"
 import {
@@ -30,7 +31,10 @@ export { StatusIndicator }
 function StatusIndicator() {
 	let { updateAvailable } = useServiceWorkerUpdate()
 	let isOnline = useOnlineStatus()
-	let { isLoaded, isSignedIn } = useAuth()
+	// TODO: Replace with Jazz auth in task 2
+	// let { isLoaded, isSignedIn } = useAuth()
+	let isLoaded = true
+	let isSignedIn = true // Temporary - will be replaced with passkey auth
 
 	if (!isOnline) {
 		return <OfflineIndicator />

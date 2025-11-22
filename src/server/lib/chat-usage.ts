@@ -10,8 +10,12 @@ import {
 } from "astro:env/server"
 import { addDays, isPast } from "date-fns"
 import { co, Group, type ResolveQuery } from "jazz-tools"
-import { clerkClient, type SubscriptionStatus } from "#shared/clerk/server"
+// TODO: Replace with Jazz-based subscription management
+// import { clerkClient, type SubscriptionStatus } from "#shared/clerk/server"
 import { initServerWorker, initUserWorker } from "./utils"
+
+// Temporary type stubs - will be removed when implementing Jazz-based subscription
+type SubscriptionStatus = "free" | "plus"
 
 export { checkInputSize, checkUsageLimits, updateUsage }
 
@@ -288,26 +292,24 @@ async function ensureMetadata(
 		return
 	}
 
-	let updatedMetadata = {
-		...user.unsafeMetadata,
-		usageTrackingId: currentUsageId,
-	}
-
-	let updateResult = await tryCatch(
-		clerkClient.users.updateUserMetadata(user.id, {
-			unsafeMetadata: updatedMetadata,
-		}),
-	)
-
-	if (!updateResult.ok) {
-		console.error(
-			`[Usage] ${user.id} | Failed to update Clerk metadata`,
-			updateResult.error,
-		)
-		throw new Error("Failed to update user metadata")
-	}
-
-	user.unsafeMetadata = updatedMetadata
+	// TODO: Replace with Jazz-based metadata storage
+	// let updatedMetadata = {
+	// 	...user.unsafeMetadata,
+	// 	usageTrackingId: currentUsageId,
+	// }
+	// let updateResult = await tryCatch(
+	// 	clerkClient.users.updateUserMetadata(user.id, {
+	// 		unsafeMetadata: updatedMetadata,
+	// 	}),
+	// )
+	// if (!updateResult.ok) {
+	// 	console.error(
+	// 		`[Usage] ${user.id} | Failed to update Clerk metadata`,
+	// 		updateResult.error,
+	// 	)
+	// 	throw new Error("Failed to update user metadata")
+	// }
+	// user.unsafeMetadata = updatedMetadata
 }
 
 async function applyUsageUpdate(

@@ -1,25 +1,28 @@
 #!/usr/bin/env tsx
 
 import { UsageTracking } from "../src/shared/schema/user"
-import { getAllUsers } from "#shared/clerk/server"
+// TODO: Replace with Jazz-based user enumeration
+// import { getAllUsers } from "#shared/clerk/server"
 import { startWorker } from "jazz-tools/worker"
 import { ServerAccount } from "../src/shared/schema/server"
 
 type ServerWorker = Awaited<ReturnType<typeof startWorker>>["worker"]
 
 // Load environment variables
-let CLERK_SECRET_KEY = process.env.CLERK_SECRET_KEY
-let PUBLIC_CLERK_PUBLISHABLE_KEY = process.env.PUBLIC_CLERK_PUBLISHABLE_KEY
+// TODO: Remove Clerk environment variables
+// let CLERK_SECRET_KEY = process.env.CLERK_SECRET_KEY
+// let PUBLIC_CLERK_PUBLISHABLE_KEY = process.env.PUBLIC_CLERK_PUBLISHABLE_KEY
 let PUBLIC_JAZZ_SYNC_SERVER = process.env.PUBLIC_JAZZ_SYNC_SERVER
 let PUBLIC_JAZZ_WORKER_ACCOUNT = process.env.PUBLIC_JAZZ_WORKER_ACCOUNT
 let JAZZ_WORKER_SECRET = process.env.JAZZ_WORKER_SECRET
 
-if (!CLERK_SECRET_KEY || !PUBLIC_CLERK_PUBLISHABLE_KEY) {
-	console.error(
-		"❌ Missing required Clerk environment variables: CLERK_SECRET_KEY, PUBLIC_CLERK_PUBLISHABLE_KEY",
-	)
-	process.exit(1)
-}
+// TODO: Update validation after Clerk removal
+// if (!CLERK_SECRET_KEY || !PUBLIC_CLERK_PUBLISHABLE_KEY) {
+// 	console.error(
+// 		"❌ Missing required Clerk environment variables: CLERK_SECRET_KEY, PUBLIC_CLERK_PUBLISHABLE_KEY",
+// 	)
+// 	process.exit(1)
+// }
 
 if (
 	!PUBLIC_JAZZ_SYNC_SERVER ||
@@ -84,41 +87,38 @@ async function resetAllUsage() {
 	await initJazzWorker()
 
 	try {
-		console.log("📋 Fetching users from Clerk...")
+		// TODO: Replace with Jazz-based user enumeration in task 9
+		console.log("⚠️  This script is temporarily disabled - Clerk user enumeration removed")
+		console.log("Will be re-implemented with Jazz Global Directory in task 9")
+		return
 
-		let users = []
-		for await (let user of getAllUsers()) {
-			users.push(user)
-		}
-
-		console.log(`📊 Found ${users.length} users`)
-
-		let resetCount = 0
-		let skipCount = 0
-
-		for (let [index, user] of users.entries()) {
-			console.log(`\n[${index + 1}/${users.length}] Processing user ${user.id}`)
-
-			// Get usage tracking ID from user metadata
-			let usageTrackingId = user.unsafeMetadata?.usageTrackingId as
-				| string
-				| undefined
-
-			if (!usageTrackingId) {
-				console.log(`  ⏭️  No usage tracking found, skipping`)
-				skipCount++
-				continue
-			}
-
-			let success = await resetUsageForUser(usageTrackingId, user.id)
-			if (success) {
-				resetCount++
-			}
-		}
-
-		console.log(`\n🎉 Reset completed!`)
-		console.log(`✅ Successfully reset: ${resetCount} users`)
-		console.log(`⏭️  Skipped (no usage tracking): ${skipCount} users`)
+		// console.log("📋 Fetching users from Clerk...")
+		// let users = []
+		// for await (let user of getAllUsers()) {
+		// 	users.push(user)
+		// }
+		// console.log(`📊 Found ${users.length} users`)
+		// let resetCount = 0
+		// let skipCount = 0
+		// for (let [index, user] of users.entries()) {
+		// 	console.log(`\n[${index + 1}/${users.length}] Processing user ${user.id}`)
+		// 	// Get usage tracking ID from user metadata
+		// 	let usageTrackingId = user.unsafeMetadata?.usageTrackingId as
+		// 		| string
+		// 		| undefined
+		// 	if (!usageTrackingId) {
+		// 		console.log(`  ⏭️  No usage tracking found, skipping`)
+		// 		skipCount++
+		// 		continue
+		// 	}
+		// 	let success = await resetUsageForUser(usageTrackingId, user.id)
+		// 	if (success) {
+		// 		resetCount++
+		// 	}
+		// }
+		// console.log(`\n🎉 Reset completed!`)
+		// console.log(`✅ Successfully reset: ${resetCount} users`)
+		// console.log(`⏭️  Skipped (no usage tracking): ${skipCount} users`)
 	} catch (error) {
 		console.error("❌ Failed to fetch users or reset usage:", error)
 	}
