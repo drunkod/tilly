@@ -41,11 +41,12 @@ pnpm dev
 
 Copy `.env.example` to `.env` and add:
 
-- **Clerk keys** - Authentication (create free account at clerk.com)
-- **Jazz sync server** - Client-side encrypted sync storage (get key from jazz.tools)
+- **Jazz sync server** - Client-side encrypted sync storage and authentication (get key from jazz.tools)
 - **Google Gemini API key** - For Tilly Chat assistant
 - **VAPID keys** - Push notifications (generate with `npx web-push generate-vapid-keys`)
 - **Cron secret** - Random string for scheduled jobs
+
+**Note**: Tilly now uses Jazz's built-in Passkey authentication instead of Clerk. Your data is encrypted with keys derived from your passkey, providing secure, passwordless authentication.
 
 ## Architecture
 
@@ -53,8 +54,8 @@ Tilly is a **React PWA** built with:
 
 - **App**: React + TanStack Router + Shadcn/ui + Tailwind CSS
 - **API Endpoints**: Astro serving marketing pages + Hono API routes
-- **Database**: [Jazz](https://jazz.tools) - Client-side encrypted, distributed, offline-first (keys managed via Clerk for multi-device use)
-- **Auth**: Clerk
+- **Database**: [Jazz](https://jazz.tools) - Client-side encrypted, distributed, offline-first
+- **Auth**: Jazz Passkey Authentication (WebAuthn-based, biometric)
 - **AI**: AI SDK with Google
 - **Deployment**: Vercel
 
@@ -62,7 +63,9 @@ Tilly is a **React PWA** built with:
 
 ## Data & Privacy
 
-**Encryption**: Data is encrypted in the browser before syncing to Jazz. Encryption keys are generated at signup and stored with Clerk so you can sign in from new devices. The Tilly server uses those keys only to deliver push notifications and power Tilly Assistant. Jazz never sees plaintext data and Clerk only stores the keys alongside your account metadata.
+**Encryption**: Data is encrypted in the browser before syncing to Jazz. Encryption keys are derived from your passkey (stored securely by your device/browser) and managed by Jazz's cryptographic system. The Tilly server worker has limited access only to deliver push notifications and power Tilly Assistant. Jazz Cloud stores only encrypted data.
+
+**Authentication**: Uses WebAuthn passkeys for secure, passwordless authentication. Your passkey is stored by your device (via FaceID, TouchID, Windows Hello, or security keys) and syncs across your devices through your browser/OS ecosystem.
 
 **Offline-First**: All data syncs through Jazz and works offline. AI assistant is the only feature requiring an active internet connection and shares the conversation you send with the AI provider.
 
@@ -80,10 +83,11 @@ pnpm check        # TypeScript compilation check
 
 Deploy to Vercel with your own:
 
-- Clerk account (authentication)
-- Jazz sync server (database)
+- Jazz sync server (database and authentication)
 - Google Gemini API key (assistant)
 - VAPID keys (push notifications)
+
+See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed deployment instructions.
 
 ## Contributing
 

@@ -155,7 +155,7 @@
   - Verify no Clerk references remain
   - _Requirements: 2.1, 2.2, 2.3, 2.4, 3.4, 5.1, 5.2, 5.3, 5.5, 6.1, 7.1, 7.2, 9.1, 9.2_
 
-- [ ] 16. Perform security review
+- [x] 16. Perform security review
   - Review passkey implementation for vulnerabilities
   - Review token generation and validation
   - Review local storage security
@@ -164,7 +164,7 @@
   - Review user input sanitization
   - _Requirements: 2.5, 7.1, 7.2, 7.3, 7.4_
 
-- [ ] 17. Perform cross-browser testing
+- [x] 17. Perform cross-browser testing
   - Test in Chrome/Edge (Chromium)
   - Test in Firefox
   - Test in Safari
@@ -173,7 +173,7 @@
   - Test fallback behavior for unsupported browsers
   - _Requirements: 2.5, 9.1, 9.2_
 
-- [ ] 18. Update documentation
+- [x] 18. Update documentation
   - Document authentication changes in README
   - Create migration guide for existing users
   - Document Global Directory future enhancement
