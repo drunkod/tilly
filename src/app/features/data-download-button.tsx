@@ -43,7 +43,7 @@ export function ExportButton(props: {
 				resolve: exportQuery,
 			})
 
-			if (!accountData?.root?.people || accountData.root.people.length === 0) {
+			if (!accountData?.root?.people.$isLoaded || accountData.root.people.length === 0) {
 				toast.warning(t("data.export.noData"))
 				return
 			}
@@ -51,7 +51,7 @@ export function ExportButton(props: {
 			let peopleWithDataURLs: FilePerson[] = await Promise.all(
 				accountData.root.people.map(async (person): Promise<FilePerson> => {
 					let avatar = null
-					if (person.avatar) {
+					if (person.avatar?.$isLoaded) {
 						let bestImage = highestResAvailable(person.avatar, 2048, 2048)
 						let blob = bestImage?.image.toBlob()
 						let dataURL = blob

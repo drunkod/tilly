@@ -48,7 +48,7 @@ export const Route = createFileRoute("/_app/people/$personID")({
 		let person = await Person.load(params.personID, {
 			resolve: query,
 		})
-		if (!person) throw notFound()
+		if (!person.$isLoaded) throw notFound()
 		return { person }
 	},
 	component: PersonScreen,
@@ -66,7 +66,8 @@ function PersonScreen() {
 	let data = Route.useLoaderData()
 	let subscribedPerson = useCoState(Person, personID, {
 		resolve: query,
-	})
+        select: (subscribedPerson) => subscribedPerson.$isLoaded ? subscribedPerson : subscribedPerson.$jazz.loadingState === "loading" ? undefined : null
+    })
 	let person = subscribedPerson ?? data.person
 	let { tab } = Route.useSearch()
 	let isMobile = useIsMobile()

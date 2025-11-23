@@ -76,14 +76,14 @@ async function listPeopleExecute(
 	let me = await UserAccount.load(userId, {
 		resolve: { root: { people: { $each: true } } },
 	})
-	if (!me?.root?.people) {
+	if (!me?.$isLoaded) {
 		return { error: "No people data available" }
 	}
 
 	let allPeople = me.root.people
-		.filter(person => person != null)
-		.filter(person => !isPermanentlyDeleted(person))
-		.filter(person => input.includeDeleted || !isDeleted(person))
+		.filter((person): person is co.loaded<typeof Person> => person != null)
+		.filter((person) => !isPermanentlyDeleted(person))
+		.filter((person) => input.includeDeleted || !isDeleted(person))
 
 	let people
 	if (input.search) {
@@ -180,13 +180,13 @@ async function getPersonDetailsExecute(
 		},
 	})
 
-	if (!fullPerson) {
+	if (!fullPerson.$isLoaded) {
 		return { error: `Person with ID "${input.personId}" not found` }
 	}
 
 	let filteredNotes =
 		fullPerson.notes?.filter(n => {
-			if (!n) return false
+			if (!n.$isLoaded) return false
 			if (isPermanentlyDeleted(n)) return false
 			if (!input.includeDeletedNotes && isDeleted(n)) return false
 			return true
@@ -194,7 +194,7 @@ async function getPersonDetailsExecute(
 
 	let filteredReminders =
 		fullPerson.reminders?.filter(r => {
-			if (!r) return false
+			if (!r.$isLoaded) return false
 			if (isPermanentlyDeleted(r)) return false
 			if (!input.includeDeletedReminders && isDeleted(r)) return false
 			if (!input.includeDeletedReminders && r.done) return false

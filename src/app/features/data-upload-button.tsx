@@ -76,8 +76,9 @@ export function UploadButton({ userID }: { userID: string }) {
 				},
 			},
 		})
-		let root = account?.root
-		if (!root?.people) return
+		if (!account?.$isLoaded) return
+		let root = account.root
+		if (!root.people.$isLoaded) return
 
 		let jsonData: FileData = check.data
 
@@ -90,13 +91,13 @@ export function UploadButton({ userID }: { userID: string }) {
 				let existingPersonIndex = -1
 				if (values.mode === "merge") {
 					existingPersonIndex = root.people.findIndex(
-						p => p?.$jazz.id === personData.id,
+						(p) => p?.$jazz.id === personData.id,
 					)
 				}
 
 				if (existingPersonIndex >= 0) {
 					let existingPerson = root.people[existingPersonIndex]
-					if (!existingPerson) continue
+					if (!existingPerson.$isLoaded) continue
 
 					if (personData.name) {
 						existingPerson.$jazz.set("name", personData.name)
@@ -147,10 +148,10 @@ export function UploadButton({ userID }: { userID: string }) {
 						existingPerson.$jazz.delete("avatar")
 					}
 
-					if (personData.notes && existingPerson.notes) {
+					if (personData.notes && existingPerson.notes.$isLoaded) {
 						for (let noteData of personData.notes) {
 							let existingNoteIndex = existingPerson.notes.findIndex(
-								n => n?.$jazz.id === noteData.id,
+								(n) => n?.$jazz.id === noteData.id,
 							)
 							if (
 								existingNoteIndex >= 0 &&
@@ -209,10 +210,10 @@ export function UploadButton({ userID }: { userID: string }) {
 						}
 					}
 
-					if (personData.reminders && existingPerson.reminders) {
+					if (personData.reminders && existingPerson.reminders.$isLoaded) {
 						for (let reminderData of personData.reminders) {
 							let existingReminderIndex = existingPerson.reminders.findIndex(
-								r => r?.$jazz.id === reminderData.id,
+								(r) => r?.$jazz.id === reminderData.id,
 							)
 							if (
 								existingReminderIndex >= 0 &&

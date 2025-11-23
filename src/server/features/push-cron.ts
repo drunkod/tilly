@@ -5,8 +5,9 @@ import { isDeleted } from "#shared/schema/user"
 
 // Temporary type stub - will be removed in task 9
 type User = { id: string; unsafeMetadata?: Record<string, unknown> }
-import { initUserWorker } from "../lib/utils"
-import { tryCatch } from "#shared/lib/trycatch"
+// Disabled for Clerk to Passkey migration
+// import { initUserWorker } from "../lib/utils"
+// import { tryCatch } from "#shared/lib/trycatch"
 import { toZonedTime, format, fromZonedTime } from "date-fns-tz"
 import { Hono } from "hono"
 import { bearerAuth } from "hono/bearer-auth"
@@ -14,7 +15,7 @@ import {
 	getEnabledDevices,
 	sendNotificationToDevice,
 	markNotificationSettingsAsDelivered,
-	settingsQuery,
+	// settingsQuery, // Disabled for Clerk to Passkey migration
 	peopleQuery,
 	getIntl,
 } from "./push-shared"
@@ -39,7 +40,6 @@ let cronDeliveryApp = new Hono().get(
 			success: boolean
 		}> = []
 		let processingPromises: Promise<void>[] = []
-		let maxConcurrentUsers = 50
 
 		// TODO: Replace with Jazz-based user enumeration in task 9
 		// for await (let user of getUsersWithJazz()) {
@@ -72,6 +72,8 @@ let cronDeliveryApp = new Hono().get(
 	},
 )
 
+// Disabled for Clerk to Passkey migration - will be re-enabled with Jazz-based user enumeration
+/*
 async function loadNotificationSettings(user: User) {
 	let workerResult = await tryCatch(initUserWorker(user))
 	if (!workerResult.ok) {
@@ -82,7 +84,7 @@ async function loadNotificationSettings(user: User) {
 		resolve: settingsQuery,
 	})
 	let notificationSettings = workerWithSettings.root.notificationSettings
-	if (!notificationSettings) {
+	if (!notificationSettings?.$isLoaded) {
 		throw "No notification settings configured"
 	}
 
@@ -95,7 +97,9 @@ async function loadNotificationSettings(user: User) {
 		currentUtc: new Date(),
 	}
 }
+*/
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function shouldReceiveNotification<
 	T extends {
 		notificationSettings: LoadedNotificationSettings
@@ -129,6 +133,7 @@ async function shouldReceiveNotification<
 	return data
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function hasDueNotifications(
 	data: NotificationProcessingContext,
 ): Promise<DueNotificationContext> {
@@ -157,6 +162,7 @@ async function hasDueNotifications(
 	}
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function getDevices(
 	data: DueNotificationContext,
 ): Promise<DeviceNotificationContext> {
@@ -189,6 +195,7 @@ async function getDevices(
 	}
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function processDevicesPipeline(
 	userWithDevices: DeviceNotificationContext,
 ) {
@@ -321,11 +328,13 @@ function getDueReminderCount(
 	let userLocalDateStr = format(userLocalTime, "yyyy-MM-dd")
 
 	let people = userAccount?.root?.people ?? []
+	if (!people.$isLoaded) return 0
 	let dueReminderCount = 0
-	for (let person of people) {
-		if (!person?.reminders || isDeleted(person)) continue
-		for (let reminder of person.reminders) {
-			if (!reminder || reminder.done || isDeleted(reminder)) continue
+	for (let person of Array.from(people)) {
+		if (!person?.$isLoaded || !person.reminders?.$isLoaded || isDeleted(person))
+			continue
+		for (let reminder of Array.from(person.reminders)) {
+			if (!reminder?.$isLoaded || reminder.done || isDeleted(reminder)) continue
 			let dueDate = new Date(reminder.dueAtDate)
 			let dueDateInUserTimezone = toZonedTime(dueDate, userTimezone)
 			let dueDateStr = format(dueDateInUserTimezone, "yyyy-MM-dd")
@@ -337,6 +346,7 @@ function getDueReminderCount(
 	return dueReminderCount
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function waitForConcurrencyLimit(
 	promises: Promise<void>[],
 	maxConcurrency: number,
@@ -346,6 +356,7 @@ async function waitForConcurrencyLimit(
 	}
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function removeFromList<T>(list: T[], item: T) {
 	let index = list.indexOf(item)
 	if (index > -1) list.splice(index, 1)

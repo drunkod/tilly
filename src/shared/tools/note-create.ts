@@ -16,7 +16,7 @@ async function createNote(
 		resolve: { notes: { $each: true } },
 	})
 
-	if (!person) throw errors.PERSON_NOT_FOUND
+	if (!person.$isLoaded) throw errors.PERSON_NOT_FOUND
 
 	let now = new Date()
 	let note = Note.create({

@@ -154,9 +154,10 @@ function useAssistantAccess() {
 
 function AuthenticatedChat() {
 	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-	})
+        select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
+    });
 	let currentMe = subscribedMe ?? data.me
 	let t = useIntl()
 
@@ -219,9 +220,14 @@ function AuthenticatedChat() {
 
 	function handleSubmit(prompt: string) {
 		let metadata = {
-			userName: currentMe?.profile?.name || "Anonymous",
-			timezone: currentMe?.root?.notificationSettings?.timezone || "UTC",
-			locale: currentMe?.root?.language || "en",
+			userName:
+				currentMe?.profile?.$isLoaded ? currentMe.profile.name : "Anonymous",
+			timezone:
+				currentMe?.root?.notificationSettings?.$isLoaded
+					? currentMe.root.notificationSettings.timezone || "UTC"
+					: "UTC",
+			locale:
+				currentMe?.root?.$isLoaded ? currentMe.root.language || "en" : "en",
 			timestamp: Date.now(),
 		}
 
@@ -476,7 +482,9 @@ function UserInput(props: {
 	let textareaRef = useRef<HTMLTextAreaElement>(null)
 	let t = useIntl()
 	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, { resolve: query })
+	let subscribedMe = useAccount(UserAccount, { resolve: query,
+        select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
+    });
 	let currentMe = subscribedMe ?? data.me
 	let locale = currentMe?.root?.language || "en"
 	let langCode = locale === "de" ? "de-DE" : "en-US"

@@ -1,5 +1,6 @@
+import { co } from "jazz-tools"
 import { useAccount } from "jazz-tools/react"
-import { UserAccount, isDeleted } from "#shared/schema/user"
+import { UserAccount, Person, isDeleted } from "#shared/schema/user"
 import { type ReactNode } from "react"
 import {
 	Dialog,
@@ -28,7 +29,7 @@ function NewNote({
 	onSuccess?: (noteId: string) => void
 	personId?: string
 }) {
-	let { me } = useAccount(UserAccount, {
+	let me = useAccount(UserAccount, {
 		resolve: {
 			root: {
 				people: {
@@ -36,16 +37,17 @@ function NewNote({
 				},
 			},
 		},
-	})
+        select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null
+    })
 	let t = useIntl()
 	let [selectedPersonId, setSelectedPersonId] = useState(initialPersonId ?? "")
 	let [dialogOpen, setDialogOpen] = useState(false)
 
-	let people = (me?.root?.people ?? []).filter(
-		person => person && !isDeleted(person),
+	let people = (me?.$isLoaded ? me.root.people : []).filter(
+		(person): person is co.loaded<typeof Person> => person != null && !isDeleted(person),
 	)
 
-	let peopleOptions = people.map(person => ({
+	let peopleOptions = people.map((person) => ({
 		value: person.$jazz.id,
 		label: person.name,
 	}))
@@ -55,7 +57,7 @@ function NewNote({
 	}
 
 	async function handleSave(values: { content: string; pinned: boolean }) {
-		if (!me || !selectedPersonId) return
+		if (!me?.$isLoaded || !selectedPersonId) return
 
 		let result = await tryCatch(
 			createNote(selectedPersonId, {

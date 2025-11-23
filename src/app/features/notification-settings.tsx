@@ -42,7 +42,8 @@ import {
 import { SettingsSection } from "#app/components/settings-section"
 import { toast } from "sonner"
 import { cn } from "#app/lib/utils"
-import { apiClient } from "#app/lib/api-client"
+// Disabled for Clerk to Passkey migration
+// import { apiClient } from "#app/lib/api-client"
 import { PUBLIC_VAPID_KEY } from "astro:env/client"
 import { getServiceWorkerRegistration } from "#app/lib/service-worker"
 import { tryCatch } from "#shared/lib/trycatch"
@@ -198,7 +199,7 @@ function TimezoneSection({ me }: { me: co.loaded<typeof UserAccount, Query> }) {
 	})
 
 	function updateTimezone(timezone: string) {
-		if (!notifications) return
+		if (!notifications?.$isLoaded) return
 		notifications.$jazz.set("timezone", timezone)
 	}
 
@@ -342,7 +343,7 @@ function NotificationTimeSection({
 	})
 
 	function updateNotificationTime(time: string) {
-		if (!notifications) return
+		if (!notifications?.$isLoaded) return
 		notifications.$jazz.set("notificationTime", time)
 	}
 
@@ -498,7 +499,7 @@ function LastDeliveredSection({
 	let dfnsLocale = locale === "de" ? dfnsDe : undefined
 
 	function resetLastDeliveredAt() {
-		if (!notifications) return
+		if (!notifications?.$isLoaded) return
 		notifications.$jazz.delete("lastDeliveredAt")
 	}
 
@@ -583,10 +584,11 @@ function DeviceListItem({ device, me }: DeviceListItemProps) {
 	let [actionsDialogOpen, setActionsDialogOpen] = useState(false)
 	let [editDialogOpen, setEditDialogOpen] = useState(false)
 	let [editName, setEditName] = useState(device.deviceName)
-	let [isSendingTest, setIsSendingTest] = useState(false)
+	// Disabled for Clerk to Passkey migration
+	// let [isSendingTest, setIsSendingTest] = useState(false)
 
 	function deletePushDevice(endpoint: string) {
-		if (!notifications) return
+		if (!notifications?.$isLoaded) return
 
 		notifications.$jazz.set(
 			"pushDevices",
@@ -599,7 +601,7 @@ function DeviceListItem({ device, me }: DeviceListItemProps) {
 		endpoint: string,
 		updates: Partial<z.infer<typeof PushDevice>>,
 	) {
-		if (!notifications) return
+		if (!notifications?.$isLoaded) return
 
 		notifications.$jazz.set(
 			"pushDevices",
@@ -664,6 +666,14 @@ function DeviceListItem({ device, me }: DeviceListItemProps) {
 	}
 
 	async function handleSendTestNotification() {
+		// Disabled for Clerk to Passkey migration - push notifications temporarily unavailable
+		toast.error(
+			"Test notifications are temporarily disabled during the authentication migration",
+		)
+		return
+
+		// Original code commented out - will be restored with Jazz-based user enumeration
+		/*
 		setIsSendingTest(true)
 		let result = await tryCatch(
 			apiClient.push["send-test-notification"].$post({
@@ -687,12 +697,13 @@ function DeviceListItem({ device, me }: DeviceListItemProps) {
 		} else {
 			let data = await tryCatch(result.data.json())
 			let message =
-				data.ok && "message" in data.data
+				data.ok && "message" in data.data && typeof data.data.message === "string"
 					? data.data.message
 					: t("notifications.toast.testSendFailed")
 			toast.error(message)
 		}
 		setIsSendingTest(false)
+		*/
 	}
 
 	return (
@@ -763,13 +774,9 @@ function DeviceListItem({ device, me }: DeviceListItemProps) {
 								variant="outline"
 								className="w-full"
 								onClick={handleSendTestNotification}
-								disabled={isSendingTest}
+								disabled={true}
 							>
-								{isSendingTest ? (
-									<T k="notifications.devices.sendingTest" />
-								) : (
-									<T k="notifications.devices.sendTest" />
-								)}
+								<T k="notifications.devices.sendTest" />
 							</Button>
 						)}
 						<div className="flex items-center gap-3">
@@ -858,7 +865,7 @@ function AddDeviceDialog({ me, disabled }: AddDeviceDialogProps) {
 		endpoint: string
 		keys: { p256dh: string; auth: string }
 	}) {
-		if (!notifications) return
+		if (!notifications?.$isLoaded) return
 
 		let devices = notifications.pushDevices || []
 		let existingDeviceIndex = devices.findIndex(

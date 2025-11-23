@@ -149,12 +149,14 @@ async function markOldDeletedItemsAsPermanent(
 			root: migrationResolveQuery,
 		},
 	})
-	if (!root.people) return
+	if (!root.people.$isLoaded) return
 
 	let thirtyDaysAgo = new Date()
 	thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
 
-	for (let person of root.people) {
+	if (!root.people.$isLoaded) return
+	for (let person of Array.from(root.people)) {
+		if (!person?.$isLoaded) continue
 		if (
 			person.deletedAt &&
 			!person.permanentlyDeletedAt &&
@@ -163,40 +165,56 @@ async function markOldDeletedItemsAsPermanent(
 			person.$jazz.set("permanentlyDeletedAt", person.deletedAt)
 		}
 
-		for (let reminder of person.reminders) {
-			if (
-				reminder.deletedAt &&
-				!reminder.permanentlyDeletedAt &&
-				reminder.deletedAt < thirtyDaysAgo
-			) {
-				reminder.$jazz.set("permanentlyDeletedAt", reminder.deletedAt)
+		if (person.reminders.$isLoaded) {
+			for (let reminder of Array.from(person.reminders)) {
+				if (
+					reminder?.$isLoaded &&
+					reminder.deletedAt &&
+					!reminder.permanentlyDeletedAt &&
+					reminder.deletedAt < thirtyDaysAgo
+				) {
+					reminder.$jazz.set("permanentlyDeletedAt", reminder.deletedAt)
+				}
 			}
 		}
 
-		for (let note of person.notes) {
-			if (
-				note.deletedAt &&
-				!note.permanentlyDeletedAt &&
-				note.deletedAt < thirtyDaysAgo
-			) {
-				note.$jazz.set("permanentlyDeletedAt", note.deletedAt)
+		if (person.notes.$isLoaded) {
+			for (let note of Array.from(person.notes)) {
+				if (
+					note?.$isLoaded &&
+					note.deletedAt &&
+					!note.permanentlyDeletedAt &&
+					note.deletedAt < thirtyDaysAgo
+				) {
+					note.$jazz.set("permanentlyDeletedAt", note.deletedAt)
+				}
 			}
 		}
 	}
 }
 
 function isDeleted(item: {
+	$isLoaded?: boolean
 	deletedAt?: Date
 	permanentlyDeletedAt?: Date
 }): boolean {
+	if (!item.$isLoaded) return false
 	return item.permanentlyDeletedAt !== undefined || item.deletedAt !== undefined
 }
 
-function isPermanentlyDeleted(item: { permanentlyDeletedAt?: Date }): boolean {
+function isPermanentlyDeleted(item: {
+	$isLoaded?: boolean
+	permanentlyDeletedAt?: Date
+}): boolean {
+	if (!item.$isLoaded) return false
 	return item.permanentlyDeletedAt !== undefined
 }
 
-function isDueToday(reminder: { dueAtDate: string }): boolean {
+function isDueToday(reminder: {
+	$isLoaded?: boolean
+	dueAtDate: string
+}): boolean {
+	if (!reminder.$isLoaded) return false
 	let dateToCheck = new Date(reminder.dueAtDate)
 	return isToday(dateToCheck) || isBefore(dateToCheck, new Date())
 }

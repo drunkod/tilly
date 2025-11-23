@@ -35,10 +35,10 @@ async function updateReminder(
 	},
 ): Promise<ReminderUpdated> {
 	let person = await Person.load(options.personId)
-	if (!person) throw errors.PERSON_NOT_FOUND
+	if (!person.$isLoaded) throw errors.PERSON_NOT_FOUND
 
 	let reminder = await Reminder.load(options.reminderId)
-	if (!reminder) throw errors.REMINDER_NOT_FOUND
+	if (!reminder.$isLoaded) throw errors.REMINDER_NOT_FOUND
 
 	let previous = { ...reminder }
 

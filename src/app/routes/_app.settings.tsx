@@ -64,7 +64,7 @@ export const Route = createFileRoute("/_app/settings")({
 		let loadedMe = await UserAccount.load(context.me.$jazz.id, {
 			resolve: query,
 		})
-		if (!loadedMe) throw notFound()
+		if (!loadedMe.$isLoaded) throw notFound()
 		return { me: loadedMe }
 	},
 	component: SettingsScreen,
@@ -81,9 +81,10 @@ let query = {
 function SettingsScreen() {
 	let t = useIntl()
 	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-	})
+        select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
+    });
 	let currentMe = subscribedMe ?? data.me
 
 	if (!currentMe) {
@@ -125,9 +126,10 @@ function SettingsScreen() {
 function LanguageSection() {
 	let t = useIntl()
 	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-	})
+        select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
+    });
 	let currentMe = subscribedMe ?? data.me
 
 	let currentLang = currentMe?.root?.language || "en"
@@ -298,7 +300,7 @@ function AgentSection({
 	let t = useIntl()
 
 	function onSubmit(values: z.infer<typeof agentFormSchema>) {
-		if (me?.profile) {
+		if (me?.profile.$isLoaded) {
 			me.profile.$jazz.set("name", values.name)
 		}
 		setIsDisplayNameDialogOpen(false)
@@ -571,9 +573,10 @@ function PWASection() {
 function DataSection() {
 	let t = useIntl()
 	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-	})
+        select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
+    });
 	let currentMe = subscribedMe ?? data.me
 
 	if (!currentMe) {
@@ -650,13 +653,13 @@ function DeleteDataButton({
 				resolve: { root: { people: true } },
 			}),
 		)
-		if (!accountResult.ok || !accountResult.data) {
+		if (!accountResult.ok || !accountResult.data.$isLoaded) {
 			toast.error(t("settings.data.delete.error.load"))
 			return
 		}
 
 		let account = accountResult.data
-		if (!account.root) {
+		if (!account.root.$isLoaded) {
 			toast.error(t("settings.data.delete.error.rootMissing"))
 			return
 		}
@@ -756,9 +759,10 @@ function AboutSection() {
 	let t = useIntl()
 	let setTourSkipped = useAppStore(s => s.setTourSkipped)
 	let data = Route.useLoaderData()
-	let { me: subscribedMe } = useAccount(UserAccount, {
+	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-	})
+        select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
+    });
 	let currentMe = subscribedMe ?? data.me
 	let currentLang = currentMe?.root?.language || "en"
 

@@ -29,14 +29,15 @@ export function PWA() {
 }
 
 function RouterWithJazz() {
-	let { me } = useAccount(UserAccount)
+	let me = useAccount(UserAccount, { select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null })
 
 	// Only show splash screen if account is still loading
 	if (me === undefined) return <SplashScreen />
 
 	// Pass null for unauthenticated users, me object for authenticated users
 	let contextMe = me ? me : null
-	let locale = me?.root?.language || "en"
+	let locale =
+		(me?.$isLoaded && me.root?.$isLoaded ? me.root.language : undefined) || "en"
 
 	if (locale === "de") {
 		return (

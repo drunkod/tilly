@@ -2,8 +2,9 @@ import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { logger } from "hono/logger"
 import { chatMessagesApp } from "./features/chat-messages"
-import { cronDeliveryApp } from "./features/push-cron"
-import { testNotificationApp } from "./features/push-test"
+// Disabled for Clerk to Passkey migration - will be re-enabled with Jazz-based user enumeration
+// import { cronDeliveryApp } from "./features/push-cron"
+// import { testNotificationApp } from "./features/push-test"
 // TODO: Replace with Jazz auth middleware in task 8
 // import { authMiddleware } from "#shared/clerk/server"
 
@@ -15,8 +16,9 @@ let authenticatedRoutes = new Hono()
 export let app = new Hono()
 	.use(logger())
 	.use(cors())
-	.route("/push", testNotificationApp)
-	.route("/push", cronDeliveryApp)
+	// Disabled for Clerk to Passkey migration
+	// .route("/push", testNotificationApp)
+	// .route("/push", cronDeliveryApp)
 	.route("/", authenticatedRoutes)
 
 export type AppType = typeof app

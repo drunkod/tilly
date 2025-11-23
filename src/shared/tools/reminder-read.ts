@@ -36,20 +36,23 @@ async function listReminders(options: {
 	if (!userResult.ok) throw errors.USER_NOT_FOUND
 
 	let user = userResult.data
-	if (!user) throw errors.USER_NOT_FOUND
+	if (!user.$isLoaded) throw errors.USER_NOT_FOUND
 
-	let people = user.root?.people ?? []
+	let people = user.root.people
+	if (!people.$isLoaded) throw errors.USER_NOT_FOUND
 
 	let allReminders: Array<{
 		reminder: co.loaded<typeof Reminder>
 		person: co.loaded<typeof Person>
 	}> = []
 
-	for (let person of people) {
+	for (let person of Array.from(people)) {
+		if (!person?.$isLoaded) continue
 		if (isPermanentlyDeleted(person) || isDeleted(person)) continue
-		if (!person.reminders) continue
+		if (!person.reminders?.$isLoaded) continue
 
 		for (let reminder of person.reminders) {
+			if (!reminder?.$isLoaded) continue
 			if (isPermanentlyDeleted(reminder)) continue
 			if (!options.includeDone && reminder.done) continue
 			if (!options.includeDeleted && isDeleted(reminder)) continue

@@ -25,10 +25,10 @@ async function updateNote(
 	>,
 ): Promise<NoteUpdated> {
 	let person = await Person.load(personId)
-	if (!person) throw errors.PERSON_NOT_FOUND
+	if (!person.$isLoaded) throw errors.PERSON_NOT_FOUND
 
 	let note = await Note.load(noteId)
-	if (!note) throw errors.NOTE_NOT_FOUND
+	if (!note.$isLoaded) throw errors.NOTE_NOT_FOUND
 
 	let previous = { ...note }
 

@@ -16,9 +16,10 @@ function ReminderTour({
 	onSuccess?: () => void
 	personId?: string
 }) {
-	let { me } = useAccount(UserAccount, {
+	let me = useAccount(UserAccount, {
 		resolve: { root: { people: { $each: true } } },
-	})
+        select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null
+    });
 
 	let people = (me?.root?.people ?? []).filter(
 		person => person && !isDeleted(person),

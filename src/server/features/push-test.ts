@@ -1,5 +1,15 @@
-import { zValidator } from "@hono/zod-validator"
+// Disabled for Clerk to Passkey migration - will be re-enabled with Jazz-based user enumeration
+// This file is temporarily disabled because it depends on Clerk authentication
+
 import { Hono } from "hono"
+
+export { testNotificationApp }
+
+// Placeholder export to prevent import errors
+let testNotificationApp = new Hono()
+
+/*
+import { zValidator } from "@hono/zod-validator"
 import { z } from "zod"
 // TODO: Replace with Jazz auth in task 8
 // import { authMiddleware, requireAuth, type User } from "#shared/clerk/server"
@@ -7,14 +17,14 @@ import { initUserWorker } from "../lib/utils"
 
 // Temporary type stub - will be removed in task 8
 type User = { id: string; unsafeMetadata?: Record<string, unknown> }
+// Original code commented out - will be restored with Jazz-based user enumeration
+/*
 import {
 	getEnabledDevices,
 	getIntl,
 	sendNotificationToDevice,
 	settingsQuery,
 } from "./push-shared"
-
-export { testNotificationApp }
 
 let testNotificationApp = new Hono().post(
 	"/send-test-notification",
@@ -32,7 +42,7 @@ let testNotificationApp = new Hono().post(
 		})
 
 		let notificationSettings = workerWithSettings.root.notificationSettings
-		if (!notificationSettings) {
+		if (!notificationSettings?.$isLoaded) {
 			let t = getIntl(workerWithSettings)
 			return c.json(
 				{ message: t("server.error.notificationSettingsNotConfigured") },
@@ -68,3 +78,4 @@ let testNotificationApp = new Hono().post(
 		return c.json({ message: "success" })
 	},
 )
+*/
