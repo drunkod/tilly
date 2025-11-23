@@ -1,0 +1,266 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e3]:
+    - navigation [ref=e4]:
+      - link "Tilly" [ref=e5] [cursor=pointer]:
+        - /url: /en/
+        - generic [ref=e6]: Tilly
+      - generic [ref=e7]:
+        - link "Features" [ref=e8] [cursor=pointer]:
+          - /url: "#features"
+        - link "Experience" [ref=e9] [cursor=pointer]:
+          - /url: "#experience"
+        - link "FAQ" [ref=e10] [cursor=pointer]:
+          - /url: "#faq"
+        - link "Blog" [ref=e11] [cursor=pointer]:
+          - /url: /en/blog
+        - button "🇺🇸" [ref=e12]
+      - link "Go to App" [ref=e14] [cursor=pointer]:
+        - /url: /app
+  - generic [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - generic [ref=e20]: Tilly is Open Source
+        - link "Check out the Repo" [ref=e21] [cursor=pointer]:
+          - /url: https://github.com/ccssmnn/tilly
+          - text: Check out the Repo
+          - generic [ref=e22]: →
+      - heading "Never forget to follow up again" [level=1] [ref=e23]
+      - paragraph [ref=e24]: Your friends tell you important things. Tilly helps you remember and follow up when it matters.
+      - generic [ref=e25]:
+        - link "Start remembering" [ref=e26] [cursor=pointer]:
+          - /url: /app
+        - link "Learn more" [ref=e27] [cursor=pointer]:
+          - /url: "#features"
+          - text: Learn more
+          - generic [ref=e28]: →
+    - img "Phone showing the Tilly People list" [ref=e30]
+  - generic [ref=e32]:
+    - heading "Here's the problem." [level=2] [ref=e34]
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - paragraph [ref=e37]: Your friend mentions their job interview. You care deeply. But weeks pass, and you realize you never asked how it went.
+        - paragraph [ref=e38]: With Tilly, you log it once and get reminded to check in.
+      - figure "Carl Assmann The guy who wrote Tilly" [ref=e40]:
+        - blockquote [ref=e41]:
+          - paragraph [ref=e42]: “I needed this. So I built it.”
+        - generic [ref=e44]:
+          - generic [ref=e45]: Carl Assmann
+          - generic [ref=e46]: The guy who wrote Tilly
+  - generic [ref=e49]:
+    - generic [ref=e50]:
+      - heading "Situations where Tilly helps" [level=2] [ref=e51]
+      - paragraph [ref=e52]: Real problems Tilly solves
+    - generic [ref=e53]:
+      - generic [ref=e54]:
+        - term [ref=e55]: Forget to reach out
+        - definition [ref=e56]: Life gets busy and important people slip your mind
+      - generic [ref=e57]:
+        - term [ref=e58]: Can't scroll up real conversations
+        - definition [ref=e59]: Real conversations are outside your whatsapp chat history
+      - generic [ref=e60]:
+        - term [ref=e61]: Notes and todo apps feel like work
+        - definition [ref=e62]: Friendship shouldn't feel like a chore
+      - generic [ref=e63]:
+        - term [ref=e64]: Social media is noisy and distracting
+        - definition [ref=e65]: Friends deserve their own space, free of work and distractions
+  - generic [ref=e68]:
+    - generic [ref=e70]:
+      - generic [ref=e71]: How it works
+      - heading "Simple. Practical. Actually works." [level=2] [ref=e72]
+      - list [ref=e73]:
+        - listitem [ref=e74]: Log what friends tell youStore notes for each person. See what matters most, not just their phone number.
+        - listitem [ref=e75]: Get reminded to follow upSet reminders so you never miss important moments.
+        - listitem [ref=e76]: Build stronger friendshipsShow up when it matters. Be the friend who remembers.
+    - img "Phone showing Tilly person notes" [ref=e79]
+  - generic [ref=e81]:
+    - generic [ref=e82]:
+      - heading "Simple by design" [level=2] [ref=e83]
+      - paragraph [ref=e84]: Everything you need to be a better friend. Nothing you don't.
+    - generic [ref=e86]:
+      - generic [ref=e87]:
+        - term [ref=e88]:
+          - img [ref=e90]
+          - text: People & Notes
+        - definition [ref=e92]: Store what matters about each person - birthdays, interests, life updates, and meaningful moments
+      - generic [ref=e93]:
+        - term [ref=e94]:
+          - img [ref=e96]
+          - text: Reminders
+        - definition [ref=e98]: Gentle nudges to reach out at the right time, so you never miss important moments
+      - generic [ref=e99]:
+        - term [ref=e100]:
+          - img [ref=e102]
+          - text: Push Notifications
+        - definition [ref=e104]: Never miss a birthday or important reminder with timely notifications on all your devices
+      - generic [ref=e105]:
+        - term [ref=e106]:
+          - img [ref=e108]
+          - text: Tilly Agent (Plus Tier)
+        - definition [ref=e110]: Agentic AI assistant that autonomously organizes your thoughts and takes action to help you connect
+      - generic [ref=e111]:
+        - term [ref=e112]:
+          - img [ref=e114]
+          - text: Complete Data Control
+        - definition [ref=e116]: Client-side encrypted sync with securely managed keys for notifications and Tilly Assistant. Export your data anytime. No vendor lock-in ever.
+      - generic [ref=e117]:
+        - term [ref=e118]:
+          - img [ref=e120]
+          - text: Works Everywhere
+        - definition [ref=e122]: Instant sync across all your devices. Full functionality works offline when needed.
+  - generic [ref=e125]:
+    - generic [ref=e126]:
+      - heading "What Users Say" [level=2] [ref=e127]
+      - paragraph [ref=e128]: People love Tilly for various reasons
+    - generic [ref=e130]:
+      - figure [ref=e131]:
+        - blockquote [ref=e132]:
+          - paragraph [ref=e133]: “Today I learned my design peer's favorite color. Thought about how to remember it ...Tilly! That's when it clicked - the app really comes in handy for collecting small but important details”
+      - figure [ref=e134]:
+        - blockquote [ref=e135]:
+          - paragraph [ref=e136]: “I didn't know I was missing something like this. Now I know I could have used exactly this for a very long time.”
+      - figure [ref=e137]:
+        - blockquote [ref=e138]:
+          - paragraph [ref=e139]: “Does exactly what it should and is fast. The chat works surprisingly well.”
+      - figure [ref=e140]:
+        - blockquote [ref=e141]:
+          - paragraph [ref=e142]: “This is a cheat code for being a better friend!”
+  - generic [ref=e146]:
+    - generic [ref=e148]:
+      - generic [ref=e149]: "Tilly Agent: Your Relationship Assistant"
+      - heading "Tilly Agent reads and writes your journal." [level=2] [ref=e150]
+      - list [ref=e151]:
+        - listitem [ref=e152]: Just talk:'Sarah has a new project, Sophie has a new client, she seemed more relaxed.'
+        - listitem [ref=e153]: Tilly organizes:Finds Sarah and Sophie, adds notes, suggests reminders.
+        - listitem [ref=e154]: Before meeting:'Catch me up on Sarah' - Then you know what to ask.
+        - listitem [ref=e155]: When reaching out:'Help me message Sophie' - Get suggestions.
+      - paragraph [ref=e156]: The convenience is real. It's so easy that you actually use it.
+    - img "Phone showing the Tilly Agent chat" [ref=e159]
+  - generic [ref=e161]:
+    - generic [ref=e162]:
+      - heading "Choose Your Experience" [level=2] [ref=e163]
+      - paragraph [ref=e164]: Free or Plus - simple pricing for everyone.
+    - generic [ref=e165]:
+      - generic [ref=e167]:
+        - heading "Free" [level=3] [ref=e168]
+        - paragraph [ref=e169]:
+          - generic [ref=e170]: Free
+        - paragraph [ref=e171]: Free requires a sign in for sync and push notifications
+        - list [ref=e172]:
+          - listitem [ref=e173]:
+            - img [ref=e174]
+            - text: Unlimited people, notes and reminders
+          - listitem [ref=e176]:
+            - img [ref=e177]
+            - text: Push notifications
+          - listitem [ref=e179]:
+            - img [ref=e180]
+            - text: Sync to the cloud
+          - listitem [ref=e182]:
+            - img [ref=e183]
+            - text: Sync between devices
+          - listitem [ref=e185]:
+            - img [ref=e186]
+            - text: Import and export data
+        - link "Sign Up Free" [ref=e189] [cursor=pointer]:
+          - /url: /app
+      - generic [ref=e191]:
+        - heading "Plus" [level=3] [ref=e192]
+        - paragraph [ref=e193]:
+          - generic [ref=e194]: $6
+          - generic [ref=e195]: /month
+        - paragraph [ref=e196]: AI agent for ultimate convenience
+        - list [ref=e197]:
+          - listitem [ref=e198]:
+            - img [ref=e199]
+            - text: Everything in Free
+          - listitem [ref=e201]:
+            - img [ref=e202]
+            - text: Tilly Agent
+          - listitem [ref=e204]:
+            - img [ref=e205]
+            - text: Natural language input
+          - listitem [ref=e207]:
+            - img [ref=e208]
+            - text: Message suggestions
+          - listitem [ref=e210]:
+            - img [ref=e211]
+            - text: Automated note organization
+          - listitem [ref=e213]:
+            - img [ref=e214]
+            - text: Smart follow-up reminders
+          - listitem [ref=e216]:
+            - img [ref=e217]
+            - text: Support sustainable development
+        - link "Upgrade to Plus" [ref=e220] [cursor=pointer]:
+          - /url: /app
+  - generic [ref=e223]:
+    - heading "Frequently Asked Questions" [level=2] [ref=e225]
+    - generic [ref=e227]:
+      - heading "How is this different from my contacts app, todos or notes?" [level=3] [ref=e229]:
+        - button "How is this different from my contacts app, todos or notes?" [ref=e230]:
+          - text: How is this different from my contacts app, todos or notes?
+          - img
+      - heading "Will Tilly automatically sync with my contacts or social media?" [level=3] [ref=e232]:
+        - button "Will Tilly automatically sync with my contacts or social media?" [ref=e233]:
+          - text: Will Tilly automatically sync with my contacts or social media?
+          - img
+      - heading "What if I forget to use it?" [level=3] [ref=e235]:
+        - button "What if I forget to use it?" [ref=e236]:
+          - text: What if I forget to use it?
+          - img
+      - heading "Is my data private?" [level=3] [ref=e238]:
+        - button "Is my data private?" [ref=e239]:
+          - text: Is my data private?
+          - img
+      - heading "Doesn't this feel artificial?" [level=3] [ref=e241]:
+        - button "Doesn't this feel artificial?" [ref=e242]:
+          - text: Doesn't this feel artificial?
+          - img
+      - heading "Why pay for AI when there are free AI apps?" [level=3] [ref=e244]:
+        - button "Why pay for AI when there are free AI apps?" [ref=e245]:
+          - text: Why pay for AI when there are free AI apps?
+          - img
+  - generic [ref=e247]:
+    - heading "Ready to remember what matters?" [level=2] [ref=e248]
+    - link "Try Tilly free" [ref=e250] [cursor=pointer]:
+      - /url: /app
+  - contentinfo [ref=e251]:
+    - generic [ref=e252]:
+      - navigation "Footer" [ref=e253]:
+        - link "Features" [ref=e254] [cursor=pointer]:
+          - /url: "#features"
+        - link "Experience" [ref=e255] [cursor=pointer]:
+          - /url: "#experience"
+        - link "FAQ" [ref=e256] [cursor=pointer]:
+          - /url: "#faq"
+        - link "Blog" [ref=e257] [cursor=pointer]:
+          - /url: /en/blog
+        - link "Imprint" [ref=e258] [cursor=pointer]:
+          - /url: /en/imprint
+        - link "Privacy" [ref=e259] [cursor=pointer]:
+          - /url: /en/privacy
+      - generic [ref=e260]:
+        - link "English" [ref=e262] [cursor=pointer]:
+          - /url: /en/
+        - generic [ref=e263]:
+          - generic [ref=e264]: •
+          - link "Deutsch" [ref=e265] [cursor=pointer]:
+            - /url: /de/
+      - generic [ref=e266]:
+        - link "Twitter" [ref=e267] [cursor=pointer]:
+          - /url: https://twitter.com/tillydotsocial
+          - generic [ref=e268]: Twitter
+          - img [ref=e269]
+        - link "Instagram" [ref=e271] [cursor=pointer]:
+          - /url: https://instagram.com/tilly.social
+          - generic [ref=e272]: Instagram
+          - img [ref=e273]
+        - link "GitHub" [ref=e275] [cursor=pointer]:
+          - /url: https://github.com/ccssmnn/tilly
+          - generic [ref=e276]: GitHub
+          - img [ref=e277]
+      - paragraph [ref=e279]: © 2025 Tilly. All rights reserved.
+```

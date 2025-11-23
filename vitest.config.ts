@@ -5,9 +5,13 @@ export default defineConfig({
 	plugins: [react()],
 	test: {
 		globals: true,
+		environment: "jsdom",
+		setupFiles: ["./src/test-setup.ts"],
+		exclude: ["**/node_modules/**", "**/dist/**", "**/tests/e2e/**"],
 		typecheck: {
 			enabled: true,
 			include: ["**/*.{test,spec}.{ts,tsx}"],
+			exclude: ["**/tests/e2e/**"],
 			tsconfig: "./tsconfig.vitest.json",
 		},
 	},

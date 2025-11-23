@@ -86,12 +86,36 @@
   - Verify proper Jazz type inference
   - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5_
 
-- [ ] 11. Write unit tests for PasskeyAuthDialog
+- [x] 11. Write unit tests for PasskeyAuthDialog
   - Test signup mode renders username input
   - Test login mode hides username input
   - Test submit button triggers correct auth method
   - Test error handling displays messages
   - Test loading states disable interactions
+  - _Requirements: 2.1, 2.2, 2.3, 2.4_
+
+- [x] 11.1. Write Playwright E2E tests for PasskeyAuthDialog
+  - Create tests/e2e directory structure
+  - Configure Playwright with Node adapter preview
+  - Test home page loads successfully
+  - Test navigation to settings page
+  - Test signup dialog opens and displays correctly
+  - Test login dialog opens and displays correctly
+  - Test mode switching between signup and login
+  - Test username validation in signup mode
+  - Test submit button enable/disable states
+  - Test dialog close on escape and backdrop click
+  - Test keyboard interactions
+  - _Requirements: 2.1, 2.2, 2.3, 2.4_
+
+- [x] 11.2. Create GitHub Actions workflow for E2E tests
+  - Create .github/workflows/playwright.yml
+  - Configure workflow to run on push and PR
+  - Set up Node.js and pnpm
+  - Install Playwright browsers
+  - Build project with Node adapter
+  - Run Playwright tests
+  - Upload test reports as artifacts
   - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
 - [ ] 12. Write unit tests for account schema migration
