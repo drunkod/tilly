@@ -118,7 +118,7 @@
   - Upload test reports as artifacts
   - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
-- [ ] 12. Write unit tests for account schema migration
+- [x] 12. Write unit tests for account schema migration
   - Test root initialization creates expected structure
   - Test profile initialization creates public group
   - Test "everyone" reader permission is set
