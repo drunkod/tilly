@@ -136,4 +136,9 @@ test.describe("My Feature", () => {
 **Solution**: Check that the preview server is running on the correct port (4321)
 
 **Issue**: Passkey tests fail
-**Solution**: Note that actual passkey authentication cannot be tested in Playwright without mocking the WebAuthn API. Tests focus on UI behavior only.
+**Solution**: Note that actual passkey authentication cannot be fully tested in Playwright without complex WebAuthn API mocking. The E2E tests include virtual authenticator setup and focus on UI behavior. Full passkey flows are tested via integration tests using Jazz's testing utilities.
+
+### Integration Tests
+
+**Issue**: Cross-account tests fail with JSON parsing errors
+**Solution**: This is a known limitation of Jazz's testing utilities when dealing with cross-account scenarios. These tests are better suited for E2E tests with real browser environments.

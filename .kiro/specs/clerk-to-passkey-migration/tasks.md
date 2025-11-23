@@ -125,7 +125,7 @@
   - Test migration is idempotent
   - _Requirements: 3.1, 3.2, 3.3, 3.4_
 
-- [ ] 13. Write integration tests for authentication flows
+- [x] 13. Write integration tests for authentication flows
   - Test complete signup creates new account
   - Test profile is publicly readable
   - Test user is redirected after signup
@@ -135,14 +135,14 @@
   - Test failed login shows error
   - _Requirements: 2.3, 2.4, 3.4, 6.2, 6.3_
 
-- [ ] 14. Write integration tests for API authentication
+- [x] 14. Write integration tests for API authentication
   - Test authenticated requests succeed
   - Test unauthenticated requests return 401
   - Test expired tokens return 401
   - Test invalid tokens return 401
   - _Requirements: 7.2, 7.3, 7.4_
 
-- [ ] 15. Perform manual testing
+- [x] 15. Perform manual testing
   - Test new user signup with passkey
   - Test returning user login with passkey
   - Test profile visibility to other users
