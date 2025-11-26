@@ -188,9 +188,7 @@ function AuthenticationSection() {
 			window.location.reload()
 		} catch (error) {
 			console.error("Logout failed:", error)
-			toast.error(t("settings.auth.logout.error"), {
-				description: String(error),
-			})
+			toast.error(t("settings.auth.logout.error"))
 		}
 	}
 
