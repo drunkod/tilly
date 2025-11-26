@@ -4,6 +4,7 @@ import { Button } from "#shared/ui/button"
 import {
 	Dialog,
 	DialogContent,
+	DialogDescription,
 	DialogHeader,
 	DialogTitle,
 } from "#shared/ui/dialog"
@@ -182,9 +183,9 @@ export function PersonDetails({
 							(
 								person.updatedAt || new Date(person.$jazz.lastUpdatedAt)
 							).getTime() !==
-								(
-									person.createdAt || new Date(person.$jazz.createdAt)
-								).getTime() &&
+							(
+								person.createdAt || new Date(person.$jazz.createdAt)
+							).getTime() &&
 							t("person.updated.suffix", {
 								ago: formatDistanceToNow(
 									person.updatedAt || new Date(person.$jazz.lastUpdatedAt),
@@ -204,6 +205,9 @@ export function PersonDetails({
 							<DialogTitle>
 								<T k="person.actions.title" />
 							</DialogTitle>
+							<DialogDescription>
+								<T k="person.actions.description" />
+							</DialogDescription>
 						</DialogHeader>
 					}
 				>

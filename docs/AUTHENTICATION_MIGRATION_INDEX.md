@@ -63,6 +63,15 @@ Tilly has migrated from Clerk (third-party authentication) to Jazz's native Pass
    - CSP headers
    - Input sanitization
 
+### Troubleshooting
+
+8. **[TROUBLESHOOTING_AUTH.md](TROUBLESHOOTING_AUTH.md)** - Authentication troubleshooting
+   - Sign out issues and solutions
+   - Sign in problems
+   - Data access issues
+   - Cross-device authentication
+   - Performance and security issues
+
 ### Technical Documentation
 
 8. **[CRON_JOBS_LIMITATION.md](CRON_JOBS_LIMITATION.md)** - Current limitation
@@ -80,6 +89,8 @@ Tilly has migrated from Clerk (third-party authentication) to Jazz's native Pass
 - **Understand the future roadmap** → [GLOBAL_DIRECTORY_FUTURE.md](GLOBAL_DIRECTORY_FUTURE.md)
 - **Test authentication** → [AUTHENTICATION_TESTING.md](AUTHENTICATION_TESTING.md)
 - **Review security** → [SECURITY_REVIEW.md](SECURITY_REVIEW.md)
+- **Fix sign out issues** → [TROUBLESHOOTING_AUTH.md](TROUBLESHOOTING_AUTH.md#sign-out-issues)
+- **Troubleshoot authentication** → [TROUBLESHOOTING_AUTH.md](TROUBLESHOOTING_AUTH.md)
 
 ## Key Changes Summary
 

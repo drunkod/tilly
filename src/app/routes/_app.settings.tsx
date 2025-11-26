@@ -1,5 +1,5 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router"
-import { useAccount, useIsAuthenticated } from "jazz-tools/react"
+import { useAccount, useIsAuthenticated, useLogOut } from "jazz-tools/react"
 import { Button } from "#shared/ui/button"
 import { Input } from "#shared/ui/input"
 import { UserAccount } from "#shared/schema/user"
@@ -177,12 +177,19 @@ function AuthenticationSection() {
 	let t = useIntl()
 	let isAuthenticated = useIsAuthenticated()
 	let isOnline = useOnlineStatus()
+	let logOut = useLogOut()
 	let [showSignUpDialog, setShowSignUpDialog] = useState(false)
 	let [showLogInDialog, setShowLogInDialog] = useState(false)
 
-	function handleLogOut() {
-		// Session refresh (logout) by reloading the page
-		window.location.reload()
+	async function handleLogOut() {
+		try {
+			await logOut()
+			// Reload page to reset app state after logout
+			window.location.reload()
+		} catch (error) {
+			console.error("Logout failed:", error)
+			toast.error(t("settings.auth.logout.error"))
+		}
 	}
 
 	function handleSignUp() {

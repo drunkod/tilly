@@ -112,6 +112,17 @@ To use Tilly on a device without your passkey:
 - Try using a security key instead
 - Clear browser cache and try again
 
+### "Sign out not working"
+
+If clicking "Log out" doesn't work:
+- Ensure you have an internet connection (logout requires online access)
+- Try clearing your browser's local storage manually:
+  1. Open browser DevTools (F12)
+  2. Go to Application → Local Storage
+  3. Delete all Tilly-related entries
+  4. Refresh the page
+- If the issue persists, clear all browser data for the site
+
 ### "Cannot import data"
 
 - Verify the JSON file is not corrupted

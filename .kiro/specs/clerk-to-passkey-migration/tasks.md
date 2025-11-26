@@ -181,7 +181,7 @@
   - Document rollback procedures
   - _Requirements: 8.3, 9.1, 9.2_
 
-- [ ] 19. Deploy to staging environment
+- [x] 19. Deploy to staging environment
   - Merge feature branch to staging
   - Deploy to staging server
   - Run smoke tests on staging

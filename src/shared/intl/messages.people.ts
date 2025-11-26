@@ -48,6 +48,7 @@ const basePeopleMessages = messages({
 	"person.detail.addNote": "Add Note",
 	"person.detail.addReminder": "Add Reminder",
 	"person.actions.title": "Actions",
+	"person.actions.description": "Choose an action for this person",
 	"person.edit.title": "Edit Person",
 	"person.delete.title": "Delete Person",
 	"person.restore.title": "Restore {$name}",
@@ -114,6 +115,7 @@ const dePeopleMessages = translate(basePeopleMessages, {
 	"person.form.summary.placeholder":
 		"Einige wichtige Fakten, die dir helfen, sie/ihn wiederzufinden",
 	"person.actions.title": "Aktionen",
+	"person.actions.description": "Wähle eine Aktion für diese Person",
 	"person.edit.title": "Person bearbeiten",
 	"person.delete.title": "Person löschen",
 	"person.restore.title": "{$name} wiederherstellen",
