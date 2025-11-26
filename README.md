@@ -29,6 +29,8 @@ There are other apps already. Tilly is my take on simplicity and joy of use. And
 
 ## Quick Start
 
+### With pnpm (Recommended)
+
 ```bash
 git clone https://github.com/ccssmnn/tilly.git
 cd tilly
@@ -36,6 +38,18 @@ pnpm install
 cp .env.example .env # (see setup section)
 pnpm dev
 ```
+
+### With Bun (Fast Alternative)
+
+```bash
+git clone https://github.com/ccssmnn/tilly.git
+cd tilly
+bun install
+cp .env.example .env # (see setup section)
+bun run dev:bun
+```
+
+See [BUILD_INSTRUCTIONS.md](./BUILD_INSTRUCTIONS.md) for full build options and details.
 
 ## Setup
 

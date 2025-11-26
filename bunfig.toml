@@ -1,0 +1,11 @@
+# Bun configuration for Tilly
+# This file configures Bun.js as an alternative package manager and runtime
+
+[install]
+# Use pnpm-style node_modules structure for compatibility
+peer = true
+production = false
+
+[run]
+# Enable compatibility with Node.js modules
+bun = true

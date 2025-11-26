@@ -183,12 +183,14 @@ function AuthenticationSection() {
 
 	async function handleLogOut() {
 		try {
-			await logOut()
+			logOut()
 			// Reload page to reset app state after logout
 			window.location.reload()
 		} catch (error) {
 			console.error("Logout failed:", error)
-			toast.error(t("settings.auth.logout.error"))
+			toast.error(t("settings.auth.logout.error"), {
+				description: String(error),
+			})
 		}
 	}
 

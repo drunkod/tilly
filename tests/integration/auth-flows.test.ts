@@ -6,7 +6,7 @@ import {
 	runWithoutActiveAccount,
 } from "jazz-tools/testing"
 import { UserAccount, UserProfile } from "#shared/schema/user"
-import { co } from "jazz-tools"
+
 
 describe("Authentication Flows Integration Tests", () => {
 	beforeEach(async () => {

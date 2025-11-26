@@ -196,3 +196,14 @@
   - Monitor authentication metrics
   - Communicate changes to users
   - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
+
+- [-] 21. Add Bun.js build support
+  - Create `bunfig.toml` configuration file
+  - Update `package.json` with Bun script variants
+  - Create `BUILD_INSTRUCTIONS.md` documentation
+  - Create `scripts/setup-bun.sh` setup script
+  - Update README with Bun quick start
+  - Test build with Bun package manager
+  - Verify all dependencies are Bun-compatible
+  - Document Bun compatibility notes
+  - _Requirements: 10.1, 10.2, 10.3, 10.4_

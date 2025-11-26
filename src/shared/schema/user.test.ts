@@ -3,7 +3,7 @@ import {
 	createJazzTestAccount,
 	setupJazzTestSync,
 } from "jazz-tools/testing"
-import { UserAccount, UserAccountRoot, UserProfile } from "./user"
+import { UserAccount } from "./user"
 
 describe("UserAccount migration", () => {
 	beforeEach(async () => {
