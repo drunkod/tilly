@@ -151,7 +151,7 @@
   - Test getFeatureStatus returns correct status
   - _Requirements: 11.1, 11.2, 11.3, 11.4_
 
-- [ ] 15. Write unit tests for API client
+- [x] 15. Write unit tests for API client
   - Test getServerUrl priority (settings > env)
   - Test isServerAvailable with mock responses
   - Test createApiClient methods
