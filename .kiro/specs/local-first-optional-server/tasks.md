@@ -10,8 +10,8 @@
     - Add serverSettings field to UserAccountRoot as optional
     - _Requirements: 3.2, 3.3, 3.4_
 
-- [ ] 2. Create Feature Detection Module
-  - [ ] 2.1 Create `src/app/lib/feature-detection.ts` file
+- [x] 2. Create Feature Detection Module
+  - [x] 2.1 Create `src/app/lib/feature-detection.ts` file
     - Implement hasServerFeatures() function
     - Implement hasAIChat() function
     - Implement hasPushNotifications() function
