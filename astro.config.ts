@@ -19,9 +19,18 @@ let runtimeAdapter = isStatic
 		? node({ mode: "standalone" })
 		: vercel()
 
+// GitHub Pages configuration
+let githubPagesBase = process.env.GITHUB_PAGES_BASE
+let site = githubPagesBase ? `https://${githubPagesBase.split("/")[0]}` : undefined
+let base = githubPagesBase?.includes("/")
+	? `/${githubPagesBase.split("/").slice(1).join("/")}/`
+	: undefined
+
 export default defineConfig({
 	output: isStatic ? "static" : "server",
 	adapter: runtimeAdapter,
+	site: site,
+	base: base,
 	devToolbar: { enabled: false },
 	i18n: {
 		locales: ["en", "de", "ru"],

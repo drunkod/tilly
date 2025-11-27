@@ -99,15 +99,15 @@
     - Keep existing build and build:node scripts unchanged
     - _Requirements: 1.1, 10.1, 10.2_
 
-- [ ] 10. Add GitHub Pages Deployment
-  - [ ] 10.1 Create `.github/workflows/deploy-pages.yml` workflow
+- [x] 10. Add GitHub Pages Deployment
+  - [x] 10.1 Create `.github/workflows/deploy-pages.yml` workflow
     - Configure trigger on push to main branch
     - Set up pnpm and Node.js
     - Run build:static command
     - Upload dist folder as pages artifact
     - Deploy to GitHub Pages
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
-  - [ ] 10.2 Add GitHub Pages base path support to astro.config.ts
+  - [x] 10.2 Add GitHub Pages base path support to astro.config.ts
     - Add site configuration for GitHub Pages URL
     - Add base path configuration from env var
     - _Requirements: 9.4_
