@@ -4,7 +4,7 @@ import { useIsAuthenticated } from "jazz-tools/react"
 import { co } from "jazz-tools"
 import { PushDevice, UserAccount } from "#shared/schema/user"
 import { Alert, AlertTitle, AlertDescription } from "#shared/ui/alert"
-import { ExclamationTriangle } from "react-bootstrap-icons"
+import { ExclamationTriangle, GearFill } from "react-bootstrap-icons"
 import { Label } from "#shared/ui/label"
 import { Button } from "#shared/ui/button"
 import { Input } from "#shared/ui/input"
@@ -48,6 +48,8 @@ import { PUBLIC_VAPID_KEY } from "astro:env/client"
 import { getServiceWorkerRegistration } from "#app/lib/service-worker"
 import { tryCatch } from "#shared/lib/trycatch"
 import { useIsInAppBrowser } from "#app/hooks/use-pwa"
+import { hasPushNotifications } from "#app/lib/feature-detection"
+import { Link } from "@tanstack/react-router"
 
 export function NotificationSettings({
 	me,
@@ -68,6 +70,42 @@ export function NotificationSettings({
 	let isPushSupported = "PushManager" in window && "Notification" in window
 	let canAddDevice = isServiceWorkerSupported && isPushSupported
 	let browserRecommendation = getBrowserRecommendation(isInAppBrowser)
+
+	// Check if push notifications are available based on server configuration
+	let pushNotificationsAvailable = hasPushNotifications(me)
+
+	// If push notifications are not available (server not configured or disabled), show configuration prompt
+	if (!pushNotificationsAvailable) {
+		return (
+			<SettingsSection
+				title={t("notifications.title")}
+				description={t("notifications.description")}
+			>
+				<div className="space-y-4">
+					<Alert>
+						<GearFill className="h-4 w-4" />
+						<AlertTitle>
+							<T k="notifications.serverNotConfigured.title" />
+						</AlertTitle>
+						<AlertDescription>
+							<T k="notifications.serverNotConfigured.description" />
+						</AlertDescription>
+					</Alert>
+					<div className="space-y-2">
+						<p className="text-muted-foreground text-sm">
+							<T k="notifications.serverNotConfigured.alternative" />
+						</p>
+						<Button variant="outline" asChild>
+							<Link to="/settings" hash="server-settings">
+								<GearFill className="mr-2 h-4 w-4" />
+								<T k="notifications.serverNotConfigured.configureButton" />
+							</Link>
+						</Button>
+					</div>
+				</div>
+			</SettingsSection>
+		)
+	}
 
 	return (
 		<SettingsSection
@@ -158,7 +196,7 @@ export function NotificationSettings({
 }
 
 type Query = {
-	root: { notificationSettings: true }
+	root: { notificationSettings: true; serverSettings: true }
 }
 
 let timezoneFormSchema = z.object({

@@ -70,8 +70,8 @@
     - Handle missing server URL gracefully
     - _Requirements: 4.3, 5.1_
 
-- [ ] 7. Make Push Notifications Optional
-  - [ ] 7.1 Update `src/app/features/notification-settings.tsx`
+- [x] 7. Make Push Notifications Optional
+  - [x] 7.1 Update `src/app/features/notification-settings.tsx`
     - Import hasPushNotifications from feature-detection
     - Check if push notifications are available
     - Show configuration prompt when unavailable

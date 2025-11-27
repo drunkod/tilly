@@ -322,6 +322,15 @@ const baseSettingsMessages = messages({
 		"On macOS, please use Chrome or Safari for the full Tilly experience.",
 	"notifications.browserNotSupported.recommendation.generic":
 		"Please try using Chrome, Edge, or Safari for the full Tilly experience.",
+	// Server not configured messages for push notifications
+	"notifications.serverNotConfigured.title":
+		"Server configuration required",
+	"notifications.serverNotConfigured.description":
+		"Push notifications require a server connection. Configure a server URL in the Server Features section to enable push notifications.",
+	"notifications.serverNotConfigured.alternative":
+		"Without a server, you can still use Tilly's core features. Your data is stored locally and synced via Jazz.",
+	"notifications.serverNotConfigured.configureButton":
+		"Configure Server",
 	// Status messages
 	"status.offline.title": "You're offline",
 	"status.update.title": "Update available",
@@ -694,6 +703,15 @@ const deSettingsMessages = translate(baseSettingsMessages, {
 		"In macOS verwende bitte Chrome oder Safari für die vollständige Tilly-Erfahrung.",
 	"notifications.browserNotSupported.recommendation.generic":
 		"Bitte verwende Chrome, Edge oder Safari für die vollständige Tilly-Erfahrung.",
+	// Server not configured messages for push notifications
+	"notifications.serverNotConfigured.title":
+		"Server-Konfiguration erforderlich",
+	"notifications.serverNotConfigured.description":
+		"Push-Benachrichtigungen erfordern eine Server-Verbindung. Konfiguriere eine Server-URL im Bereich Server-Funktionen, um Push-Benachrichtigungen zu aktivieren.",
+	"notifications.serverNotConfigured.alternative":
+		"Ohne Server kannst du weiterhin die Kernfunktionen von Tilly nutzen. Deine Daten werden lokal gespeichert und über Jazz synchronisiert.",
+	"notifications.serverNotConfigured.configureButton":
+		"Server konfigurieren",
 
 	// Status messages
 	"status.offline.title": "Du bist offline",
@@ -1064,6 +1082,15 @@ const ruSettingsMessages = translate(baseSettingsMessages, {
 		"На macOS пожалуйста используйте Chrome или Safari для полного опыта Tilly.",
 	"notifications.browserNotSupported.recommendation.generic":
 		"Пожалуйста попробуйте использовать Chrome, Edge или Safari для полного опыта Tilly.",
+	// Server not configured messages for push notifications
+	"notifications.serverNotConfigured.title":
+		"Требуется настройка сервера",
+	"notifications.serverNotConfigured.description":
+		"Push-уведомления требуют подключения к серверу. Настройте URL сервера в разделе Серверные функции, чтобы включить push-уведомления.",
+	"notifications.serverNotConfigured.alternative":
+		"Без сервера вы все еще можете использовать основные функции Tilly. Ваши данные хранятся локально и синхронизируются через Jazz.",
+	"notifications.serverNotConfigured.configureButton":
+		"Настроить сервер",
 	// Status messages
 	"status.offline.title": "Вы оффлайн",
 	"status.update.title": "Доступно обновление",
