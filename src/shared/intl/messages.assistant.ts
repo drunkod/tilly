@@ -17,6 +17,10 @@ const baseAssistantMessages = messages({
 	"assistant.chatUnavailable.title": "Chat unavailable",
 	"assistant.chatUnavailable.description":
 		"Tilly chat requires an internet connection. All other features work offline.",
+	"assistant.serverNotConfigured.title": "Server Not Configured",
+	"assistant.serverNotConfigured.description":
+		"AI chat requires a server connection. Configure your server URL in settings to enable this feature.",
+	"assistant.serverNotConfigured.configureServer": "Configure Server",
 	"assistant.emptyState":
 		"Share a story, and I'll help you remember what matters",
 	"assistant.generating": "Generating response...",
@@ -218,6 +222,10 @@ const deAssistantMessages = translate(baseAssistantMessages, {
 	"assistant.chatUnavailable.title": "Chat nicht verfügbar",
 	"assistant.chatUnavailable.description":
 		"Der Tilly-Chat benötigt eine Internetverbindung. Alle anderen Funktionen funktionieren offline.",
+	"assistant.serverNotConfigured.title": "Server nicht konfiguriert",
+	"assistant.serverNotConfigured.description":
+		"Der KI-Chat erfordert eine Serververbindung. Konfiguriere deine Server-URL in den Einstellungen, um diese Funktion zu aktivieren.",
+	"assistant.serverNotConfigured.configureServer": "Server konfigurieren",
 	"assistant.emptyState":
 		"Erzähle eine Geschichte – ich helfe dir, das Wichtige zu behalten",
 	"assistant.generating": "Antwort wird erstellt...",
@@ -433,6 +441,10 @@ const ruAssistantMessages = translate(baseAssistantMessages, {
 	"assistant.chatUnavailable.title": "Чат недоступен",
 	"assistant.chatUnavailable.description":
 		"Для чата с Тилли требуется подключение к интернету. Все остальные функции работают оффлайн.",
+	"assistant.serverNotConfigured.title": "Сервер не настроен",
+	"assistant.serverNotConfigured.description":
+		"Для AI-чата требуется подключение к серверу. Настройте URL сервера в настройках, чтобы включить эту функцию.",
+	"assistant.serverNotConfigured.configureServer": "Настроить сервер",
 	"assistant.emptyState":
 		"Расскажите историю, и я помогу вам запомнить то, что важно",
 	"assistant.generating": "Создание ответа...",

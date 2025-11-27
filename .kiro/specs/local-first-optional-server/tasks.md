@@ -57,14 +57,14 @@
     - Display status label text
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
 
-- [ ] 6. Make AI Chat Feature Optional
-  - [ ] 6.1 Update `src/app/routes/_app.assistant.tsx`
+- [x] 6. Make AI Chat Feature Optional
+  - [x] 6.1 Update `src/app/routes/_app.assistant.tsx`
     - Import hasAIChat from feature-detection
     - Check if AI chat is available before rendering chat UI
     - Show configuration prompt when AI chat unavailable
     - Add link to settings page for configuration
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
-  - [ ] 6.2 Update chat API client to use configurable server URL
+  - [x] 6.2 Update chat API client to use configurable server URL
     - Import getServerUrl from api-client-with-fallback
     - Use server URL from settings or env var
     - Handle missing server URL gracefully

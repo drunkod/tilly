@@ -34,6 +34,8 @@ import { useInputFocusState } from "#app/hooks/use-input-focus-state"
 import { useOnlineStatus } from "#app/hooks/use-online-status"
 import { useIsAndroid } from "#app/hooks/use-pwa"
 import { cn } from "#app/lib/utils"
+import { hasAIChat } from "#app/lib/feature-detection"
+import { getServerUrl } from "#app/lib/api-client-with-fallback"
 import {
 	DefaultChatTransport,
 	lastAssistantMessageIsCompleteWithToolCalls,
@@ -72,6 +74,14 @@ function AssistantScreen() {
 		return (
 			<AssistantLayout>
 				<AssistantLoading />
+			</AssistantLayout>
+		)
+	}
+
+	if (access.status === "server-not-configured") {
+		return (
+			<AssistantLayout>
+				<ServerConfigurationPrompt />
 			</AssistantLayout>
 		)
 	}
@@ -137,19 +147,55 @@ function SubscribePrompt() {
 	)
 }
 
+function ServerConfigurationPrompt() {
+	return (
+		<div className="flex min-h-[calc(100dvh-12rem-env(safe-area-inset-bottom))] flex-col items-center justify-center gap-8 text-center md:min-h-[calc(100dvh-6rem)]">
+			<div className="max-w-md space-y-3 text-left">
+				<ChatFill className="text-muted-foreground size-16" />
+				<TypographyH2>
+					<T k="assistant.serverNotConfigured.title" />
+				</TypographyH2>
+				<TypographyLead>
+					<T k="assistant.serverNotConfigured.description" />
+				</TypographyLead>
+				<div className="mt-8 flex justify-end">
+					<Button asChild>
+						<Link to="/settings">
+							<T k="assistant.serverNotConfigured.configureServer" />
+						</Link>
+					</Button>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+let serverSettingsQuery = {
+	root: { serverSettings: true },
+} as const satisfies ResolveQuery<typeof UserAccount>
+
 function useAssistantAccess() {
-	// TODO: Replace with passkey auth in task 7
-	// let clerkAuth = useAuth()
 	let isSignedIn = useIsAuthenticated()
-	// let isOnline = useOnlineStatus() // Will be used in task 7
+	let me = useAccount(UserAccount, {
+		resolve: serverSettingsQuery,
+		select: (me) =>
+			me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null,
+	})
 
-	if (!isSignedIn) return { status: "denied", isSignedIn }
+	// Still loading account data
+	if (me === undefined) return { status: "loading" as const, isSignedIn }
 
-	if (!PUBLIC_ENABLE_PAYWALL) return { status: "granted", isSignedIn }
+	if (!isSignedIn) return { status: "denied" as const, isSignedIn }
 
-	// TODO: Implement proper access control with passkey auth
-	// For now, grant access to all signed-in users
-	return { status: "granted", isSignedIn }
+	// Check if AI chat is available (server configured and enabled)
+	let aiChatAvailable = hasAIChat(me)
+	if (!aiChatAvailable) {
+		return { status: "server-not-configured" as const, isSignedIn }
+	}
+
+	if (!PUBLIC_ENABLE_PAYWALL) return { status: "granted" as const, isSignedIn }
+
+	return { status: "granted" as const, isSignedIn }
 }
 
 function AuthenticatedChat() {
@@ -160,6 +206,14 @@ function AuthenticatedChat() {
 	});
 	let currentMe = subscribedMe ?? data.me
 	let t = useIntl()
+
+	// Get server URL from settings or env var for chat API
+	let meWithSettings = useAccount(UserAccount, {
+		resolve: serverSettingsQuery,
+		select: (me) => me.$isLoaded ? me : null,
+	})
+	let serverUrl = getServerUrl(meWithSettings)
+	let chatApiUrl = serverUrl ? `${serverUrl}/api/chat` : "/api/chat"
 
 	let {
 		chat: initialMessages,
@@ -182,7 +236,7 @@ function AuthenticatedChat() {
 	} = useChat({
 		messages: initialMessages,
 		transport: new DefaultChatTransport({
-			api: "/api/chat",
+			api: chatApiUrl,
 			headers: {
 				Authorization: `Jazz ${generateAuthToken()}`,
 			},
