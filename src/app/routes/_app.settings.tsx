@@ -30,6 +30,7 @@ import { ExportButton as DownloadButton } from "#app/features/data-download-butt
 import { UploadButton } from "#app/features/data-upload-button"
 import { TypographyH1, TypographyMuted } from "#shared/ui/typography"
 import { NotificationSettings } from "#app/features/notification-settings"
+import { ServerSettingsSection } from "#app/features/server-settings"
 import { SettingsSection } from "#app/components/settings-section"
 import { useIsPWAInstalled, useIsMobileDevice } from "#app/hooks/use-pwa"
 import { useOnlineStatus } from "#app/hooks/use-online-status"
@@ -75,6 +76,7 @@ let query = {
 	root: {
 		notificationSettings: true,
 		usageTracking: true,
+		serverSettings: true,
 	},
 } as const satisfies ResolveQuery<typeof UserAccount>
 
@@ -115,6 +117,7 @@ function SettingsScreen() {
 				<AgentSection me={currentMe} />
 				<LanguageSection />
 				<NotificationSettings me={currentMe} />
+				<ServerSettingsSection me={currentMe} />
 				<PWASection />
 				<DataSection />
 				<AboutSection />

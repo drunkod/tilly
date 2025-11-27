@@ -28,21 +28,21 @@
     - Add testConnection() method
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
 
-- [ ] 4. Add Server Settings UI
-  - [ ] 4.1 Create `src/app/features/server-settings.tsx` component
+- [x] 4. Add Server Settings UI
+  - [x] 4.1 Create `src/app/features/server-settings.tsx` component
     - Add server URL input field
     - Add connection test button with status display
     - Add AI chat enable/disable toggle
     - Add push notifications enable/disable toggle
     - Show "not configured" message when no URL
     - _Requirements: 3.1, 7.1, 7.2, 7.3, 7.4, 7.5_
-  - [ ] 4.2 Add server settings translations to `src/shared/intl/messages.settings.ts`
+  - [x] 4.2 Add server settings translations to `src/shared/intl/messages.settings.ts`
     - Add settings.server.title, description, url.label
     - Add settings.server.test, connected, connectionFailed
     - Add settings.server.aiChat.label, push.label
     - Add settings.server.notConfigured message
     - _Requirements: 3.1_
-  - [ ] 4.3 Update `src/app/routes/_app.settings.tsx` to include ServerSettingsSection
+  - [x] 4.3 Update `src/app/routes/_app.settings.tsx` to include ServerSettingsSection
     - Import ServerSettingsSection component
     - Add to settings page after notification settings
     - Pass me prop with serverSettings resolved

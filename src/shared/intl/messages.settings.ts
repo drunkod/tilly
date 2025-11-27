@@ -345,6 +345,25 @@ const baseSettingsMessages = messages({
 	"status.notSignedIn.benefits":
 		"Sign in to back up and sync your data, and receive push notifications",
 	"status.notSignedIn.signIn": "Sign In",
+
+	// Server settings
+	"settings.server.title": "Server Features",
+	"settings.server.description":
+		"Configure optional server features like AI chat and push notifications.",
+	"settings.server.url.label": "Server URL",
+	"settings.server.url.placeholder": "https://your-server.com",
+	"settings.server.test": "Test",
+	"settings.server.testing": "Testing...",
+	"settings.server.connected": "Connected successfully",
+	"settings.server.connectionFailed": "Connection failed",
+	"settings.server.aiChat.label": "Enable AI Chat",
+	"settings.server.push.label": "Enable Push Notifications",
+	"settings.server.notConfigured":
+		"No server URL configured. Server features like AI chat and push notifications require a server connection.",
+	"settings.server.status.connected": "Connected",
+	"settings.server.status.disconnected": "Disconnected",
+	"settings.server.status.notConfigured": "Not configured",
+	"settings.server.status.checking": "Checking...",
 })
 
 const deSettingsMessages = translate(baseSettingsMessages, {
@@ -701,6 +720,25 @@ const deSettingsMessages = translate(baseSettingsMessages, {
 	"status.notSignedIn.benefits":
 		"Melde dich an, um deine Daten zu sichern, zu synchronisieren und Push-Benachrichtigungen zu erhalten",
 	"status.notSignedIn.signIn": "Anmelden",
+
+	// Server settings
+	"settings.server.title": "Server-Funktionen",
+	"settings.server.description":
+		"Konfiguriere optionale Server-Funktionen wie KI-Chat und Push-Benachrichtigungen.",
+	"settings.server.url.label": "Server-URL",
+	"settings.server.url.placeholder": "https://dein-server.com",
+	"settings.server.test": "Testen",
+	"settings.server.testing": "Teste...",
+	"settings.server.connected": "Erfolgreich verbunden",
+	"settings.server.connectionFailed": "Verbindung fehlgeschlagen",
+	"settings.server.aiChat.label": "KI-Chat aktivieren",
+	"settings.server.push.label": "Push-Benachrichtigungen aktivieren",
+	"settings.server.notConfigured":
+		"Keine Server-URL konfiguriert. Server-Funktionen wie KI-Chat und Push-Benachrichtigungen erfordern eine Server-Verbindung.",
+	"settings.server.status.connected": "Verbunden",
+	"settings.server.status.disconnected": "Getrennt",
+	"settings.server.status.notConfigured": "Nicht konfiguriert",
+	"settings.server.status.checking": "Prüfe...",
 })
 
 const ruSettingsMessages = translate(baseSettingsMessages, {
@@ -1049,4 +1087,23 @@ const ruSettingsMessages = translate(baseSettingsMessages, {
 	"status.notSignedIn.benefits":
 		"Войдите, чтобы сохранять и синхронизировать данные, и получать push-уведомления",
 	"status.notSignedIn.signIn": "Войти",
+
+	// Server settings
+	"settings.server.title": "Серверные функции",
+	"settings.server.description":
+		"Настройте дополнительные серверные функции, такие как AI-чат и push-уведомления.",
+	"settings.server.url.label": "URL сервера",
+	"settings.server.url.placeholder": "https://ваш-сервер.com",
+	"settings.server.test": "Тест",
+	"settings.server.testing": "Тестирование...",
+	"settings.server.connected": "Успешно подключено",
+	"settings.server.connectionFailed": "Ошибка подключения",
+	"settings.server.aiChat.label": "Включить AI-чат",
+	"settings.server.push.label": "Включить push-уведомления",
+	"settings.server.notConfigured":
+		"URL сервера не настроен. Серверные функции, такие как AI-чат и push-уведомления, требуют подключения к серверу.",
+	"settings.server.status.connected": "Подключено",
+	"settings.server.status.disconnected": "Отключено",
+	"settings.server.status.notConfigured": "Не настроено",
+	"settings.server.status.checking": "Проверка...",
 })
