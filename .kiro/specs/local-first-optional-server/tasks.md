@@ -119,8 +119,8 @@
     - Keep locale detection for client-side use
     - _Requirements: 8.1, 8.2, 8.3, 8.4_
 
-- [ ] 12. Add 404 Handling for GitHub Pages
-  - [ ] 12.1 Create 404.html for SPA fallback
+- [x] 12. Add 404 Handling for GitHub Pages
+  - [x] 12.1 Create 404.html for SPA fallback
     - Create public/404.html that redirects to index
     - Handle client-side routing on 404
     - _Requirements: 8.2_

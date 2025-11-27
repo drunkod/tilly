@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { JazzReactProvider, useAccount } from "jazz-tools/react"
 import { RouterProvider, createRouter } from "@tanstack/react-router"
 import { PUBLIC_JAZZ_SYNC_SERVER } from "astro:env/client"
@@ -30,6 +31,13 @@ export function PWA() {
 
 function RouterWithJazz() {
 	let me = useAccount(UserAccount, { select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null })
+
+	// Handle SPA redirect navigation after router is ready
+	useEffect(() => {
+		if (initialRedirectPath) {
+			router.navigate({ to: initialRedirectPath })
+		}
+	}, [])
 
 	// Only show splash screen if account is still loading
 	if (me === undefined) return <SplashScreen />
@@ -82,6 +90,24 @@ function isSyncPeer(value: string | undefined): value is SyncPeer {
 type JazzSyncProps = Parameters<typeof JazzReactProvider>[0]["sync"]
 type JazzSyncConfig = NonNullable<JazzSyncProps>
 type SyncPeer = JazzSyncConfig["peer"]
+
+// Handle SPA redirect from GitHub Pages 404.html
+function handleSpaRedirect() {
+	let redirectPath = sessionStorage.getItem("spa-redirect-path")
+	if (redirectPath) {
+		sessionStorage.removeItem("spa-redirect-path")
+		// Only handle /app/* paths
+		if (redirectPath.startsWith("/app")) {
+			// Remove the /app prefix since router uses basepath
+			let routerPath = redirectPath.slice(4) || "/"
+			window.history.replaceState(null, "", redirectPath)
+			return routerPath
+		}
+	}
+	return null
+}
+
+let initialRedirectPath = handleSpaRedirect()
 
 let router = createRouter({
 	basepath: "/app",
