@@ -48,8 +48,8 @@
     - Pass me prop with serverSettings resolved
     - _Requirements: 3.1_
 
-- [ ] 5. Create Server Status Indicator
-  - [ ] 5.1 Create `src/app/components/server-status-indicator.tsx` component
+- [x] 5. Create Server Status Indicator
+  - [x] 5.1 Create `src/app/components/server-status-indicator.tsx` component
     - Show green dot when connected
     - Show red dot when disconnected
     - Show gray dot when not configured
