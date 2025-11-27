@@ -144,7 +144,7 @@
     - Push notification setup with custom server
     - _Requirements: 12.3, 12.4_
 
-- [ ] 14. Write unit tests for feature detection
+- [x] 14. Write unit tests for feature detection
   - Test hasServerFeatures with/without settings
   - Test hasAIChat with various configurations
   - Test hasPushNotifications with browser support
