@@ -158,7 +158,7 @@
   - Test error handling for missing server
   - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-- [ ] 16. Write integration tests for static build
+- [x] 16. Write integration tests for static build
   - Test build succeeds without server vars
   - Test app loads in static mode
   - Test Jazz sync works in static mode

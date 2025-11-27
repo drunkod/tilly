@@ -3,8 +3,17 @@ import { PWA } from "#app/main"
 import "#app/index.css"
 import { SplashScreen } from "#app/components/splash-screen"
 import { PUBLIC_PLAUSIBLE_DOMAIN } from "astro:env/client"
+import type { GetStaticPaths } from "astro"
 
-export let prerender = false
+// In static mode, generate a single entry point for the SPA
+// Client-side routing handles all /app/* paths
+export let getStaticPaths: GetStaticPaths = () => {
+	// Return a single path for the SPA entry point
+	return [{ params: { all: undefined } }]
+}
+
+// In server mode, disable prerendering to handle all paths dynamically
+export let prerender = import.meta.env.ASTRO_OUTPUT === "static"
 let isProduction = import.meta.env.PROD
 let requestUrl = new URL(Astro.request.url)
 let siteBaseUrl = Astro.site ?? new URL(requestUrl.origin)
