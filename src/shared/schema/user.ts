@@ -1,5 +1,6 @@
 import { Group, co, z, type ResolveQuery } from "jazz-tools"
 import { isBefore, isToday } from "date-fns"
+import { ServerSettings } from "./server-settings"
 
 export {
 	isDeleted,
@@ -89,6 +90,7 @@ export let UserAccountRoot = co.map({
 	notificationSettings: NotificationSettings.optional(),
 	usageTracking: UsageTracking.optional(),
 	language: z.enum(["de", "en"]).optional(),
+	serverSettings: ServerSettings.optional(),
 })
 
 export let UserAccount = co
