@@ -4,7 +4,7 @@ import { Person, isDueToday, isDeleted } from "#shared/schema/user"
 import { co } from "jazz-tools"
 import { Link } from "@tanstack/react-router"
 import { formatDistanceToNow } from "date-fns"
-import { de as dfnsDe } from "date-fns/locale"
+import { de as dfnsDe, ru as dfnsRu } from "date-fns/locale"
 import { Button } from "#shared/ui/button"
 import { TextHighlight } from "#shared/ui/text-highlight"
 import { isTextSelectionOngoing } from "#app/lib/utils"
@@ -133,7 +133,8 @@ function PersonItemHeader({
 		?.some(reminder => isDueToday(reminder))
 
 	let locale = useLocale()
-	let dfnsLocale = locale === "de" ? dfnsDe : undefined
+	let dfnsLocale =
+		locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined
 	return (
 		<div
 			className="flex items-center justify-between leading-none select-text"
@@ -147,8 +148,8 @@ function PersonItemHeader({
 				<p className="text-muted-foreground text-xs text-nowrap">
 					{formatDistanceToNow(
 						person.updatedAt ||
-							person.createdAt ||
-							new Date(person.$jazz.lastUpdatedAt || person.$jazz.createdAt),
+						person.createdAt ||
+						new Date(person.$jazz.lastUpdatedAt || person.$jazz.createdAt),
 						{
 							addSuffix: true,
 							locale: dfnsLocale,
@@ -187,7 +188,8 @@ function RestorePersonDialog({
 	children: ReactNode
 }) {
 	let locale = useLocale()
-	let dfnsLocale = locale === "de" ? dfnsDe : undefined
+	let dfnsLocale =
+		locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined
 	let [open, setOpen] = useState(false)
 	let [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false)
 
@@ -248,11 +250,11 @@ function RestorePersonDialog({
 									params={{
 										timeAgo: formatDistanceToNow(
 											person.deletedAt ||
-												person.updatedAt ||
-												person.createdAt ||
-												new Date(
-													person.$jazz.lastUpdatedAt || person.$jazz.createdAt,
-												),
+											person.updatedAt ||
+											person.createdAt ||
+											new Date(
+												person.$jazz.lastUpdatedAt || person.$jazz.createdAt,
+											),
 											{
 												addSuffix: true,
 												locale: dfnsLocale,

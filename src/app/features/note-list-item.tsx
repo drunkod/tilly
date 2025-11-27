@@ -28,7 +28,7 @@ import { updateNote } from "#shared/tools/note-update"
 import { tryCatch } from "#shared/lib/trycatch"
 import { Badge } from "#shared/ui/badge"
 import { T, useIntl, useLocale } from "#shared/intl/setup"
-import { de as dfnsDe } from "date-fns/locale"
+import { de as dfnsDe, ru as dfnsRu } from "date-fns/locale"
 import { Markdown } from "#shared/ui/markdown"
 
 export { NoteListItem }
@@ -195,7 +195,8 @@ function TimeStamp({
 	}
 }) {
 	let locale = useLocale()
-	let dfnsLocale = locale === "de" ? dfnsDe : undefined
+	let dfnsLocale =
+		locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined
 	let createdText = formatDistanceToNow(
 		record.createdAt || new Date(record.$jazz.createdAt),
 		{
@@ -506,14 +507,19 @@ function RestoreNoteDialog({
 									params={{
 										timeAgo: formatDistanceToNow(
 											note.deletedAt ||
-												note.updatedAt ||
-												note.createdAt ||
-												new Date(
-													note.$jazz.lastUpdatedAt || note.$jazz.createdAt,
-												),
+											note.updatedAt ||
+											note.createdAt ||
+											new Date(
+												note.$jazz.lastUpdatedAt || note.$jazz.createdAt,
+											),
 											{
 												addSuffix: true,
-												locale: useLocale() === "de" ? dfnsDe : undefined,
+												locale:
+													useLocale() === "de"
+														? dfnsDe
+														: useLocale() === "ru"
+															? dfnsRu
+															: undefined,
 											},
 										),
 									}}

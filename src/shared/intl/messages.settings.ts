@@ -1,6 +1,6 @@
 import { messages, translate } from "@ccssmnn/intl"
 
-export { baseSettingsMessages, deSettingsMessages }
+export { baseSettingsMessages, deSettingsMessages, ruSettingsMessages }
 
 const baseSettingsMessages = messages({
 	// Settings page messages
@@ -701,4 +701,352 @@ const deSettingsMessages = translate(baseSettingsMessages, {
 	"status.notSignedIn.benefits":
 		"Melde dich an, um deine Daten zu sichern, zu synchronisieren und Push-Benachrichtigungen zu erhalten",
 	"status.notSignedIn.signIn": "Anmelden",
+})
+
+const ruSettingsMessages = translate(baseSettingsMessages, {
+	// Settings page messages
+	"settings.title": "Настройки",
+	"settings.pageTitle": "Настройки - Тилли",
+	"settings.auth.title": "Аутентификация",
+	"settings.auth.description.signedIn":
+		"Управляйте настройками аккаунта, изменяйте email/пароль или выходите из системы.",
+	"settings.auth.description.signedOut.online":
+		"Войдите, чтобы синхронизировать ваши отношения и использовать Tilly на всех ваших устройствах.",
+	"settings.auth.description.signedOut.offline":
+		"Для входа требуется подключение к интернету для синхронизации данных между устройствами.",
+	"settings.auth.status.label": "Статус",
+	"settings.auth.status.signedIn": "Вы вошли как {$email}",
+	"settings.auth.status.signedOut": "Вы не вошли",
+	"settings.auth.tier.label": "Тариф",
+	"settings.auth.tier.plus": "Tilly Plus",
+	"settings.auth.tier.free": "Бесплатно",
+	"settings.auth.requiresInternet":
+		"Функции аккаунта требуют подключения к интернету",
+	"settings.auth.offlineDescription":
+		"Пожалуйста, подключитесь к интернету для входа или управления аккаунтом.",
+	"settings.auth.manageAccount": "Управление аккаунтом",
+	"settings.auth.manageSubscription": "Управление подпиской",
+	"settings.auth.signOut": "Выйти",
+	"settings.auth.status.authenticated": "Аутентификация с ключом доступа",
+	"settings.auth.status.unauthenticated": "Не аутентифицирован",
+	"settings.auth.logout": "Выйти",
+	"settings.auth.logout.error": "Не удалось выйти. Попробуйте снова.",
+	"settings.auth.login": "Войти",
+	"settings.auth.signup": "Зарегистрироваться",
+	"settings.profile.title": "О вас",
+	"settings.profile.description": "Обновите вашу личную информацию.",
+	"settings.profile.displayName.label": "Отображаемое имя",
+	"settings.profile.displayName.placeholder": "Имя не установлено",
+	"settings.profile.displayName.change": "Изменить",
+	"settings.profile.displayName.dialog.title": "Изменить отображаемое имя",
+	"settings.profile.displayName.current.label": "Текущее отображаемое имя",
+	"settings.profile.displayName.new.label": "Новое отображаемое имя",
+	"settings.profile.displayName.new.placeholder": "Введите ваше имя",
+	"settings.profile.displayName.new.description":
+		"Это имя будет отображаться в вашем профиле",
+	"settings.profile.displayName.new.required": "Имя обязательно.",
+	"settings.profile.displayName.cancel": "Отмена",
+	"settings.profile.displayName.save": "Сохранить",
+	"settings.agent.title": "AI Ассистент",
+	"settings.agent.description":
+		"Настройте вашего AI ассистента и просмотрите статистику использования.",
+	"settings.agent.displayName.label": "Ваше имя",
+	"settings.agent.displayName.placeholder": "Имя не установлено",
+	"settings.agent.displayName.change": "Изменить",
+	"settings.agent.displayName.dialog.title": "Изменить ваше имя",
+	"settings.agent.displayName.current.label": "Текущее имя",
+	"settings.agent.displayName.new.label": "Новое имя",
+	"settings.agent.displayName.new.placeholder": "Введите ваше имя",
+	"settings.agent.displayName.new.description":
+		"Это имя будет использовать Тилли для обращения к вам в разговорах",
+	"settings.agent.displayName.cancel": "Отмена",
+	"settings.agent.displayName.save": "Сохранить",
+	"settings.agent.usage.title": "Использование",
+	"settings.agent.usage.budget.label": "Использование в этом цикле",
+	"settings.agent.usage.budget.reset": "Обновляется {$date}",
+	"settings.data.title": "Ваши данные",
+	"settings.data.description":
+		"Экспортируйте, импортируйте или управляйте вашими заметками об отношениях.",
+	"settings.data.export.label": "Экспорт данных",
+	"settings.data.export.description":
+		"Скачайте все ваши заметки и детали как JSON",
+	"settings.data.import.label": "Импорт данных",
+	"settings.data.import.description":
+		"Загрузите JSON файл для восстановления или объединения ваших заметок",
+	// Data deletion
+	"settings.data.delete.title": "Удалить все ваши данные",
+	"settings.data.delete.description":
+		"Окончательно удалить все ваши данные для этого аккаунта. Это действие нельзя отменить. Мы рекомендуем сначала экспортировать данные, чтобы вы могли импортировать их позже.",
+	"settings.data.delete.button": "Удалить все данные",
+	"settings.data.delete.dialog.title": "Удалить все данные",
+	"settings.data.delete.dialog.description":
+		"Это действие окончательно удалит все ваши данные: людей, заметки и напоминания. Это нельзя отменить. Мы рекомендуем сначала экспортировать данные, чтобы вы могли импортировать их позже.",
+	"settings.data.delete.confirm.label": 'Введите "delete all my data" для подтверждения:',
+	"settings.data.delete.confirm.placeholder": "delete all my data",
+	"settings.data.delete.confirm.error":
+		'Вы должны ввести точно "delete all my data"',
+	"settings.data.delete.deleting": "Удаление...",
+	"settings.data.delete.success": "Все данные успешно удалены",
+	"settings.data.delete.error.load": "Не удалось загрузить данные аккаунта",
+	"settings.data.delete.error.rootMissing": "Отсутствует корень аккаунта",
+	"settings.about.title": "О программе",
+	"settings.about.description":
+		"Узнайте больше о Тилли или повторите вводный тур.",
+	"settings.about.visit": "Посетить сайт",
+	"settings.about.learnMore": "Узнать о ведении дневника",
+	"settings.about.redoTour": "Пройти тур",
+	"settings.language.title": "Язык",
+	"settings.language.description": "Выберите предпочитаемый язык.",
+	"settings.language.select.label": "Язык",
+	"settings.language.comingSoon": "Скоро будут доступны другие языки",
+	// PWA-related settings
+	"settings.pwa.title": "Установка приложения",
+	"settings.pwa.description.mobile":
+		"Получите лучший опыт с push-уведомлениями и быстрым доступом.",
+	"settings.pwa.description.desktop":
+		"Установите Тилли как приложение для чистого интерфейса и быстрого доступа.",
+	"settings.pwa.status.label": "Статус",
+	"settings.pwa.status.installed": "✅ Тилли установлена как приложение",
+	"settings.pwa.status.browser": "📱 Тилли работает в браузере",
+	"settings.pwa.install.button": "Установить приложение",
+	"settings.pwa.install.description.mobile":
+		"Добавьте Тилли на главный экран для быстрого доступа. Push-уведомления требуют входа.",
+	"settings.pwa.install.description.desktop":
+		"Установите Тилли как приложение для удаления UI браузера и запуска как любое другое приложение.",
+	"settings.pwa.benefits.title": "Преимущества, которыми вы пользуетесь:",
+	"settings.pwa.benefits.mobile.notifications":
+		"• Push-уведомления (при входе)",
+	"settings.pwa.benefits.mobile.startup": "• Более быстрый запуск приложения",
+	"settings.pwa.benefits.mobile.experience": "• Опыт нативного приложения",
+	"settings.pwa.benefits.mobile.icon":
+		"• Специальная иконка приложения на главном экране",
+	"settings.pwa.benefits.desktop.interface":
+		"• Чистый интерфейс без UI браузера",
+	"settings.pwa.benefits.desktop.launch":
+		"• Запуск как любое другое десктопное приложение",
+	"settings.pwa.benefits.desktop.startup": "• Более быстрый запуск приложения",
+	"settings.pwa.benefits.desktop.window": "• Отдельное окно приложения",
+	"settings.pwa.hideInstall.label": "Скрыть кнопку установки",
+	"settings.pwa.hideInstall.description":
+		"Скрыть кнопку установки из меню навигации",
+	// PWA installation dialogs
+	"pwa.install.title": "Установить Тилли",
+	"pwa.install.addToHomeScreen.chrome":
+		'Выберите "Добавить на главный экран" или "Установить приложение"',
+	"pwa.install.addToHomeScreen.confirm":
+		'Нажмите "Добавить" или "Установить" для подтверждения',
+	"pwa.install.safari.scrollDown":
+		'Прокрутите вниз и нажмите "Добавить на главный экран"',
+	"pwa.install.safari.confirm": 'Нажмите "Добавить" для подтверждения',
+	"pwa.install.chrome.browser": "Chrome/Edge:",
+	"pwa.install.safari.browser": "Safari (Mac):",
+	"pwa.install.firefox.browser": "Firefox:",
+	"pwa.install.generic.instruction":
+		'Найдите опцию "Установить" или "Добавить на главный экран" в вашем браузере',
+	"pwa.install.followPrompts":
+		"Следуйте подсказкам для добавления Тилли на главный экран",
+	"pwa.install.dialog.title": "Установить Тилли",
+	"pwa.install.dialog.description.mobile":
+		"Установите Тилли как приложение для быстрого доступа и push-уведомлений.",
+	"pwa.install.dialog.description.desktop":
+		"Установите Тилли как приложение для чистого интерфейса и быстрого доступа.",
+	"pwa.install.dialog.later": "Может быть позже",
+	"pwa.install.dialog.browser.title":
+		"Установите Тилли прямо из браузера для лучшего опыта.",
+	"pwa.install.dialog.install": "Установить сейчас",
+	"pwa.install.android.title":
+		"Чтобы установить Тилли как PWA на Android устройство:",
+	"pwa.install.android.step1":
+		'Выберите "Добавить на главный экран" или "Установить приложение"',
+	"pwa.install.android.step2":
+		'Нажмите "Добавить" или "Установить" для подтверждения',
+	"pwa.install.ios.title":
+		"Чтобы установить Тилли как PWA на iPhone или iPad:",
+	"pwa.install.ios.step1": 'Прокрутите вниз и нажмите "Добавить на главный экран"',
+	"pwa.install.ios.step2": 'Нажмите "Добавить" для подтверждения',
+	"pwa.install.ios.note":
+		"Примечание: На iOS установка доступна только через браузер Safari.",
+	"pwa.install.desktop.browser.title":
+		"Установите Тилли прямо из браузера для более чистого опыта.",
+	"pwa.install.desktop.title":
+		"Чтобы установить Тилли как PWA на десктопе:",
+	"pwa.install.desktop.chrome": "Chrome/Edge:",
+	"pwa.install.desktop.chrome.instruction":
+		"Найдите кнопку установки в адресной строке",
+	"pwa.install.desktop.safari": "Safari (Mac):",
+	"pwa.install.desktop.safari.instruction": "Нажмите ... Поделиться → Добавить в Dock",
+	"pwa.install.desktop.firefox": "Firefox:",
+	"pwa.install.desktop.firefox.instruction": "Поддержка установки варьируется",
+	"pwa.install.generic.title": "Чтобы установить Тилли как PWA:",
+	"pwa.install.generic.step1":
+		'Найдите опцию "Установить" или "Добавить на главный экран" в меню браузера',
+	"pwa.install.generic.step2":
+		"Следуйте подсказкам для добавления Тилли на главный экран",
+	"pwa.install.android.menuStep":
+		"Нажмите меню (⋮) или кнопку {#shareIcon}поделиться{/shareIcon} в браузере",
+	"pwa.install.ios.shareStep":
+		"Нажмите кнопку {#shareIcon}Поделиться{/shareIcon} внизу Safari",
+	// Notifications settings
+	"notifications.title": "Push-уведомления",
+	"notifications.description":
+		"Выберите, когда вы хотите получать уведомления-напоминания и управляйте устройствами.",
+	"notifications.signInRequired.title":
+		"Войдите для доступа к push-уведомлениям",
+	"notifications.timing.heading": "Время",
+	"notifications.timezone.label": "Часовой пояс",
+	"notifications.timezone.change": "Изменить",
+	"notifications.timezone.usingDefault":
+		"Используется часовой пояс вашего устройства по умолчанию",
+	"notifications.timezone.dialog.title": "Изменить часовой пояс",
+	"notifications.timezone.current.label": "Текущий часовой пояс",
+	"notifications.timezone.new.label": "Новый часовой пояс",
+	"notifications.timezone.new.placeholder": "например, Europe/Moscow",
+	"notifications.timezone.new.description":
+		'Введите действительный IANA идентификатор часового пояса, например "Europe/Moscow", "America/New_York" или "Asia/Tokyo"',
+	"notifications.timezone.detectDevice": "Определить часовой пояс устройства",
+	"notifications.timezone.cancel": "Отмена",
+	"notifications.timezone.save": "Сохранить",
+	"notifications.timezone.invalid": "Неверный идентификатор часового пояса",
+	"notifications.time.label": "Время уведомления",
+	"notifications.time.change": "Изменить",
+	"notifications.time.defaultMessage":
+		"Используется 12:00 в качестве времени уведомления по умолчанию",
+	"notifications.time.customMessage":
+		"Вы будете получать уведомления в это время каждый день в вашем часовом поясе",
+	"notifications.time.dialog.title": "Изменить время уведомления",
+	"notifications.time.current.label": "Текущее время уведомления",
+	"notifications.time.new.label": "Новое время уведомления",
+	"notifications.time.new.placeholder": "Выберите время уведомления",
+	"notifications.time.description":
+		"Выберите, когда вы хотите получать ежедневные уведомления-напоминания.",
+	"notifications.devices.heading": "Устройства",
+	"notifications.devices.description":
+		"Управляйте устройствами, зарегистрированными для push-уведомлений.",
+	"notifications.devices.noDevices.description":
+		"Добавьте устройства для получения push-уведомлений.",
+	"notifications.devices.noDevices.title": "Устройства не добавлены",
+	"notifications.devices.noDevices.warning":
+		"Вы НЕ будете получать никаких уведомлений, пока не добавите хотя бы одно устройство. Добавьте это устройство, чтобы начать получать напоминания.",
+	"notifications.devices.thisDevice": "Это устройство",
+	"notifications.devices.actions.title": "Действия с устройством",
+	"notifications.devices.actions.description":
+		'Что вы хотите сделать с "{$deviceName}"?',
+	"notifications.devices.table.device": "Устройство",
+	"notifications.devices.table.browser": "Браузер",
+	"notifications.devices.table.os": "ОС",
+	"notifications.devices.table.lastActive": "Последняя активность",
+	"notifications.devices.table.status": "Статус",
+	"notifications.devices.remove": "Удалить",
+	"notifications.devices.editName": "Редактировать имя",
+	"notifications.devices.editDialog.title": "Редактировать имя устройства",
+	"notifications.devices.editDialog.description":
+		"Измените отображаемое имя для этого устройства.",
+	"notifications.devices.remove.confirm.title": "Удалить устройство",
+	"notifications.devices.remove.confirm.description":
+		"Вы уверены, что хотите удалить это устройство? Вы перестанете получать на него уведомления.",
+	"notifications.devices.remove.confirm.cancel": "Отмена",
+	"notifications.devices.remove.confirm.remove": "Удалить",
+	"notifications.devices.status.active": "Активно",
+	"notifications.devices.status.inactive": "Неактивно",
+	"notifications.devices.empty":
+		"Пока не зарегистрировано устройств для уведомлений.",
+	"notifications.devices.enabled": "Включено",
+	"notifications.devices.disabled": "Отключено",
+	"notifications.devices.sendTest": "Отправить тестовое уведомление",
+	"notifications.devices.sendingTest": "Отправка...",
+	"notifications.devices.enable": "Включить уведомления",
+	"notifications.devices.disable": "Отключить уведомления",
+	"notifications.devices.endpointPrefix": "Конечная точка:",
+	"notifications.enable.heading": "Включить уведомления",
+	"notifications.enable.description":
+		"Чтобы получать напоминания как push-уведомления, включите уведомления для вашего аккаунта.",
+	"notifications.enable.step1":
+		"Предоставьте разрешение при запросе браузера.",
+	"notifications.enable.step2":
+		"Оставьте это устройство зарегистрированным для уведомлений.",
+	"notifications.enable.button": "Включить Push-уведомления",
+	"notifications.enable.success": "Уведомления успешно включены!",
+	"notifications.enable.error": "Не удалось включить уведомления.",
+	"notifications.permission.denied.title": "Разрешение отклонено",
+	"notifications.permission.denied.description":
+		"Уведомления заблокированы в настройках браузера. Пожалуйста, включите их для получения напоминаний.",
+	"notifications.permission.openSettings": "Открыть настройки браузера",
+	"notifications.register.title": "Зарегистрировать устройство",
+	"notifications.register.description":
+		"Зарегистрируйте это устройство для получения push-уведомлений.",
+	"notifications.register.button": "Зарегистрировать",
+	"notifications.register.success": "Устройство успешно зарегистрировано!",
+	"notifications.register.error": "Не удалось зарегистрировать устройство.",
+	"notifications.unregister.title": "Отменить регистрацию устройства",
+	"notifications.unregister.description":
+		"Прекратить получение уведомлений на это устройство.",
+	"notifications.unregister.button": "Отменить регистрацию",
+	"notifications.unregister.success": "Регистрация устройства успешно отменена!",
+	"notifications.unregister.error": "Не удалось отменить регистрацию устройства.",
+	"notifications.devices.permissionError":
+		"Не удалось запросить разрешение на уведомления",
+	"notifications.toast.unsubscribeFailed":
+		"Не удалось отписаться от уведомлений",
+	"notifications.toast.subscribeFailed":
+		"Не удалось подписаться на push-уведомления",
+	"notifications.toast.testSendFailed": "Не удалось отправить тестовое уведомление",
+	"notifications.toast.testSendSuccess": "Тестовое уведомление отправлено",
+	"notifications.toast.deviceRemoved": "Устройство успешно удалено",
+	"notifications.toast.deviceAdded": "Устройство успешно добавлено!",
+	"notifications.toast.nameUpdated": "Имя устройства обновлено",
+	"notifications.lastDelivery.label": "Последняя проверка уведомлений",
+	"notifications.lastDelivery.reset": "Сбросить",
+	"notifications.lastDelivery.description":
+		"Когда последний раз проверялись напоминания и, при необходимости, доставлялись. Сбросьте это, чтобы принудительно выполнить еще одну проверку при следующем часовом запуске.",
+	"notifications.devices.addButton": "Добавить это устройство",
+	"notifications.devices.addDialog.title": "Добавить это устройство",
+	"notifications.devices.addDialog.description.enabled":
+		"Включите push-уведомления для этого устройства, чтобы получать напоминания.",
+	"notifications.devices.addDialog.description.blocked":
+		"Push-уведомления заблокированы. Пожалуйста, включите их в настройках браузера.",
+	"notifications.devices.nameLabel": "Имя устройства",
+	"notifications.devices.name.required": "Имя устройства обязательно",
+	"notifications.devices.adding": "Добавление...",
+	"notifications.iosRequirement.title":
+		"Push-уведомления требуют установки приложения",
+	"notifications.iosRequirement.description":
+		"На iOS push-уведомления доступны только после установки Tilly на главный экран. Установите приложение из раздела установки приложений ниже, чтобы включить push-уведомления.",
+	"notifications.browserNotSupported.title": "Push-уведомления недоступны",
+	"notifications.browserNotSupported.recommendation.ios":
+		"На iOS пожалуйста используйте Safari и установите приложение для полного опыта Tilly.",
+	"notifications.browserNotSupported.recommendation.iosInApp":
+		"На iOS пожалуйста откройте эту ссылку в Safari и установите приложение для полного опыта Tilly.",
+	"notifications.browserNotSupported.recommendation.android":
+		"На Android пожалуйста используйте Chrome и установите приложение для полного опыта Tilly.",
+	"notifications.browserNotSupported.recommendation.androidInApp":
+		"На Android пожалуйста откройте эту ссылку в Chrome и установите приложение для полного опыта Tilly.",
+	"notifications.browserNotSupported.recommendation.windows":
+		"На Windows пожалуйста используйте Chrome или Edge для полного опыта Tilly.",
+	"notifications.browserNotSupported.recommendation.macos":
+		"На macOS пожалуйста используйте Chrome или Safari для полного опыта Tilly.",
+	"notifications.browserNotSupported.recommendation.generic":
+		"Пожалуйста попробуйте использовать Chrome, Edge или Safari для полного опыта Tilly.",
+	// Status messages
+	"status.offline.title": "Вы оффлайн",
+	"status.update.title": "Доступно обновление",
+	"status.offline.tooltip": "Вы оффлайн",
+	"status.offline.dialog.title": "Режим оффлайн",
+	"status.offline.description": "Большая часть Tilly работает оффлайн.",
+	"status.offline.feature.core": "Просмотр и редактирование людей, заметок и напоминаний",
+	"status.offline.feature.requiresInternet":
+		"Синхронизация, push-уведомления и Ассистент Tilly требуют интернет",
+	"status.update.tooltip": "Доступно обновление",
+	"status.update.dialog.title": "Доступно обновление",
+	"status.update.description":
+		"Доступна новая версия Tilly с улучшениями и исправлениями ошибок.",
+	"status.update.updating": "Обновление...",
+	"status.update.updateNow": "Обновить сейчас",
+	"status.update.later": "Позже",
+	"status.notSignedIn.tooltip": "Вы не вошли",
+	"status.notSignedIn.dialog.title": "Вы не вошли",
+	"status.notSignedIn.browserOnly":
+		"Без входа данные хранятся только в браузере",
+	"status.notSignedIn.benefits":
+		"Войдите, чтобы сохранять и синхронизировать данные, и получать push-уведомления",
+	"status.notSignedIn.signIn": "Войти",
 })

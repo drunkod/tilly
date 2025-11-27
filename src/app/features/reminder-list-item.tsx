@@ -40,7 +40,7 @@ import {
 	differenceInDays,
 } from "date-fns"
 import { toast } from "sonner"
-import { de as dfnsDe } from "date-fns/locale"
+import { de as dfnsDe, ru as dfnsRu } from "date-fns/locale"
 import { useLocale, useIntl, T } from "#shared/intl/setup"
 import { cn, isTextSelectionOngoing } from "#app/lib/utils"
 import { updateReminder } from "#shared/tools/reminder-update"
@@ -273,7 +273,8 @@ function ReminderItemHeader({
 	searchQuery?: string
 }) {
 	let locale = useLocale()
-	let dfnsLocale = locale === "de" ? dfnsDe : undefined
+	let dfnsLocale =
+		locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined
 	return (
 		<div className="flex items-center gap-3">
 			{showPerson && (
@@ -284,8 +285,8 @@ function ReminderItemHeader({
 			<div className="text-muted-foreground text-xs">
 				{formatDistanceToNow(
 					reminder.updatedAt ||
-						reminder.createdAt ||
-						new Date(reminder.$jazz.lastUpdatedAt || reminder.$jazz.createdAt),
+					reminder.createdAt ||
+					new Date(reminder.$jazz.lastUpdatedAt || reminder.$jazz.createdAt),
 					{
 						addSuffix: true,
 						locale: dfnsLocale,
@@ -574,15 +575,20 @@ function RestoreReminderDialog({
 									params={{
 										timeAgo: formatDistanceToNow(
 											reminder.deletedAt ||
-												reminder.updatedAt ||
-												reminder.createdAt ||
-												new Date(
-													reminder.$jazz.lastUpdatedAt ||
-														reminder.$jazz.createdAt,
-												),
+											reminder.updatedAt ||
+											reminder.createdAt ||
+											new Date(
+												reminder.$jazz.lastUpdatedAt ||
+												reminder.$jazz.createdAt,
+											),
 											{
 												addSuffix: true,
-												locale: useLocale() === "de" ? dfnsDe : undefined,
+												locale:
+													useLocale() === "de"
+														? dfnsDe
+														: useLocale() === "ru"
+															? dfnsRu
+															: undefined,
 											},
 										),
 									}}
@@ -705,11 +711,11 @@ type ReminderUpdateInput = {
 	text: string
 	dueAtDate: string
 	repeat?:
-		| {
-				interval: number
-				unit: "day" | "week" | "month" | "year"
-		  }
-		| undefined
+	| {
+		interval: number
+		unit: "day" | "week" | "month" | "year"
+	}
+	| undefined
 }
 
 type NoteFormInput = {

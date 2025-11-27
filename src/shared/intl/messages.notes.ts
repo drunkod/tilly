@@ -1,6 +1,6 @@
 import { messages, translate } from "@ccssmnn/intl"
 
-export { baseNotesMessages, deNotesMessages }
+export { baseNotesMessages, deNotesMessages, ruNotesMessages }
 
 const baseNotesMessages = messages({
 	// Notes collection messages
@@ -109,4 +109,59 @@ const deNotesMessages = translate(baseNotesMessages, {
 
 	"note.form.placeholder":
 		"Dokumentiere euer Gespräch und was am wichtigsten ist",
+})
+
+const ruNotesMessages = translate(baseNotesMessages, {
+	// Notes collection messages
+	"notes.empty.withSearch": 'Нет заметок, соответствующих "{$query}"',
+	"notes.empty.noSearch": "Пока нет заметок",
+	"notes.empty.suggestion.withSearch": "Попробуйте изменить поисковый запрос",
+	"notes.empty.suggestion.noSearch":
+		"Заметки - это место, где вы записываете то, что хотите запомнить о человеке.",
+	"notes.deleted.count":
+		".input {$count :number} .match $count one {{{$count} удаленная заметка}} * {{{$count} удаленных заметок}}",
+	"notes.deleted.heading": "Удаленные ({$count :number})",
+	"notes.created.success": "Заметка создана",
+
+	// Individual note messages
+	"note.add.title": "Добавить заметку",
+	"note.add.description":
+		"Запишите момент, разговор или опыт, которым вы поделились вместе.",
+	"note.actions.title": "Действия с заметкой",
+	"note.actions.description": "Что вы хотите сделать с этой заметкой?",
+	"note.actions.edit": "Редактировать",
+	"note.actions.delete": "Удалить",
+	"note.actions.pin": "Закрепить",
+	"note.actions.unpin": "Открепить",
+	"note.status.pinned": "Закреплено",
+	"note.status.deleted": "Удалено",
+	"note.showMore": "Показать больше",
+	"note.showLess": "Показать меньше",
+	"note.timestamp.editedSuffix": " • Отредактировано {$ago}",
+	"note.restore.title": "Восстановить заметку",
+	"note.restore.deletionInfo": "Эта заметка была удалена {$timeAgo}",
+	"note.restore.permanentDeletionWarning":
+		" и готова к окончательному удалению.",
+	"note.restore.permanentDeletionCountdown":
+		" и будет окончательно удалена через {$days :number} дней.",
+	"note.restore.question": "Хотите восстановить её?",
+	"note.restore.button": "Восстановить заметку",
+	"note.restore.permanentDelete": "Удалить навсегда",
+	"note.permanentDelete.title": "Окончательно удалить заметку",
+	"note.permanentDelete.confirmation":
+		"Вы уверены, что хотите окончательно удалить эту заметку? Это действие нельзя отменить.",
+	"note.permanentDelete.cancel": "Отмена",
+	"note.permanentDelete.confirm": "Удалить навсегда",
+	"note.toast.updated": "Заметка обновлена",
+	"note.toast.updateUndone": "Обновление заметки отменено",
+	"note.toast.deleted": "Заметка удалена - будет окончательно удалена через 30 дней",
+	"note.toast.restored": "Заметка восстановлена",
+	"note.toast.permanentlyDeleted": "Заметка окончательно удалена",
+	"note.toast.pinned": "Заметка закреплена",
+	"note.toast.unpinned": "Заметка откреплена",
+	"note.toast.added": "Заметка добавлена",
+	"note.toast.removed": "Заметка удалена",
+
+	"note.form.placeholder":
+		"Задокументируйте ваш разговор и то, что наиболее важно",
 })

@@ -1,22 +1,24 @@
 import { merge, check } from "@ccssmnn/intl"
 
 // Consolidated catalog modules
-import { basePeopleMessages, dePeopleMessages } from "./messages.people"
+import { basePeopleMessages, dePeopleMessages, ruPeopleMessages } from "./messages.people"
 import {
 	baseRemindersMessages,
 	deRemindersMessages,
+	ruRemindersMessages,
 } from "./messages.reminders"
-import { baseNotesMessages, deNotesMessages } from "./messages.notes"
-import { baseSettingsMessages, deSettingsMessages } from "./messages.settings"
+import { baseNotesMessages, deNotesMessages, ruNotesMessages } from "./messages.notes"
+import { baseSettingsMessages, deSettingsMessages, ruSettingsMessages } from "./messages.settings"
 import {
 	baseAssistantMessages,
 	deAssistantMessages,
+	ruAssistantMessages,
 } from "./messages.assistant"
-import { baseUiMessages, deUiMessages } from "./messages.ui"
-import { baseServerMessages, deServerMessages } from "./messages.server"
-import { baseTourMessages, deTourMessages } from "./messages.tour"
+import { baseUiMessages, deUiMessages, ruUiMessages } from "./messages.ui"
+import { baseServerMessages, deServerMessages, ruServerMessages } from "./messages.server"
+import { baseTourMessages, deTourMessages, ruTourMessages } from "./messages.tour"
 
-export { messagesEn, messagesDe }
+export { messagesEn, messagesDe, messagesRu }
 
 let messagesEn = merge(
 	basePeopleMessages,
@@ -39,4 +41,16 @@ let messagesDe = check(
 	deUiMessages,
 	deServerMessages,
 	deTourMessages,
+)
+
+let messagesRu = check(
+	messagesEn,
+	ruPeopleMessages,
+	ruRemindersMessages,
+	ruNotesMessages,
+	ruSettingsMessages,
+	ruAssistantMessages,
+	ruUiMessages,
+	ruServerMessages,
+	ruTourMessages,
 )

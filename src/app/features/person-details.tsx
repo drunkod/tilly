@@ -26,7 +26,7 @@ import { useState } from "react"
 import { useNavigate } from "@tanstack/react-router"
 import { toast } from "sonner"
 import { formatDistanceToNow } from "date-fns"
-import { de as dfnsDe } from "date-fns/locale"
+import { de as dfnsDe, ru as dfnsRu } from "date-fns/locale"
 import { isTextSelectionOngoing } from "#app/lib/utils"
 import { updatePerson } from "#shared/tools/person-update"
 import { tryCatch } from "#shared/lib/trycatch"
@@ -173,7 +173,8 @@ export function PersonDetails({
 								person.createdAt || new Date(person.$jazz.createdAt),
 								{
 									addSuffix: true,
-									locale: locale === "de" ? dfnsDe : undefined,
+									locale:
+										locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined,
 								},
 							),
 						})}
@@ -191,7 +192,8 @@ export function PersonDetails({
 									person.updatedAt || new Date(person.$jazz.lastUpdatedAt),
 									{
 										addSuffix: true,
-										locale: locale === "de" ? dfnsDe : undefined,
+										locale:
+											locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined,
 									},
 								),
 							})}

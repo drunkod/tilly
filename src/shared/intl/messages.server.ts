@@ -1,6 +1,6 @@
 import { messages, translate } from "@ccssmnn/intl"
 
-export { baseServerMessages, deServerMessages }
+export { baseServerMessages, deServerMessages, ruServerMessages }
 
 let baseServerMessages = messages({
 	"server.push.test-title": "Test Notification",
@@ -32,4 +32,20 @@ let deServerMessages = translate(baseServerMessages, {
 	"server.error.deviceNotInList": "Das Gerät ist nicht in der Geräteliste.",
 	"server.error.failedToSendNotification":
 		"Benachrichtigung konnte nicht an den Push-Benachrichtigungsserver gesendet werden.",
+})
+
+let ruServerMessages = translate(baseServerMessages, {
+	"server.push.test-title": "Тестовое уведомление",
+	"server.push.test-body":
+		"Это тестовое push-уведомление. Ваше устройство настроено правильно! 🚀",
+	"server.push.dueReminders.title":
+		".input {$count :number} .match $count one {{У вас одно напоминание на сегодня}} * {{У вас {$count} напоминаний на сегодня}}",
+	"server.push.dueReminders.body":
+		"Несколько моментов внимания могут скрасить чей-то день ✨",
+
+	"server.error.notificationSettingsNotConfigured":
+		"Настройки уведомлений не настроены",
+	"server.error.deviceNotInList": "Устройство отсутствует в списке устройств.",
+	"server.error.failedToSendNotification":
+		"Не удалось отправить уведомление на сервер push-уведомлений.",
 })

@@ -4,7 +4,7 @@ import { PUBLIC_JAZZ_SYNC_SERVER } from "astro:env/client"
 import { UserAccount } from "#shared/schema/user"
 import { routeTree } from "#app/routeTree.gen"
 import { IntlProvider } from "#shared/intl/setup"
-import { messagesDe } from "#shared/intl/messages"
+import { messagesDe, messagesRu } from "#shared/intl/messages"
 import { useServiceWorker } from "#app/lib/service-worker"
 import { SplashScreen } from "./components/splash-screen"
 import { Toaster } from "#shared/ui/sonner"
@@ -42,6 +42,13 @@ function RouterWithJazz() {
 	if (locale === "de") {
 		return (
 			<IntlProvider messages={messagesDe} locale="de">
+				<RouterProvider router={router} context={{ me: contextMe }} />
+			</IntlProvider>
+		)
+	}
+	if (locale === "ru") {
+		return (
+			<IntlProvider messages={messagesRu} locale="ru">
 				<RouterProvider router={router} context={{ me: contextMe }} />
 			</IntlProvider>
 		)

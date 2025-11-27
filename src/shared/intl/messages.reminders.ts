@@ -1,6 +1,6 @@
 import { messages, translate } from "@ccssmnn/intl"
 
-export { baseRemindersMessages, deRemindersMessages }
+export { baseRemindersMessages, deRemindersMessages, ruRemindersMessages }
 
 const baseRemindersMessages = messages({
 	// Reminders page messages
@@ -186,4 +186,98 @@ const deRemindersMessages = translate(baseRemindersMessages, {
 		"Aktualisierung der Erinnerung rückgängig gemacht",
 	"reminder.toast.deleted":
 		"Erinnerung gelöscht – wird in 30 Tagen endgültig gelöscht",
+})
+
+const ruRemindersMessages = translate(baseRemindersMessages, {
+	// Reminders page messages
+	"reminders.title": "Напоминания",
+	"reminders.pageTitle": "Напоминания - Тилли",
+	"reminders.search.placeholder": "Найти напоминания...",
+	"reminders.addButton": "Добавить напоминание",
+	"reminders.noPeople.title": "Сначала добавьте людей",
+	"reminders.noPeople.description":
+		"Вам нужно добавить людей, прежде чем создавать для них напоминания",
+	"reminders.noPeople.addButton": "Добавить человека",
+	"reminders.noReminders.title": "Оставайтесь на связи",
+	"reminders.noReminders.description":
+		"Напоминания помогают вам оставаться на связи и не забывать связаться.",
+	"reminders.noResults.message": 'Нет напоминаний, соответствующих "{$query}"',
+	"reminders.noResults.suggestion": "Попробуйте изменить поисковый запрос",
+	"reminders.allCaughtUp.title": "Всё выполнено!",
+	"reminders.allCaughtUp.description":
+		"Тилли поможет вам запомнить то, что важно",
+	"reminders.done.count":
+		".input {$count :number} .match $count one {{{$count} выполненное напоминание}} * {{{$count} выполненных напоминаний}}",
+	"reminders.done.heading": "Выполненные ({$count :number})",
+	"reminders.deleted.count":
+		".input {$count :number} .match $count one {{{$count} удаленное напоминание}} * {{{$count} удаленных напоминаний}}",
+	"reminders.deleted.heading": "Удаленные ({$count :number})",
+	"reminders.created.success": "Напоминание создано",
+	"reminders.empty.withSearch":
+		'Нет напоминаний, соответствующих "{$query}"',
+	"reminders.empty.noSearch": "Напоминания не установлены",
+	"reminders.empty.suggestion.withSearch": "Попробуйте изменить поисковый запрос",
+	"reminders.empty.suggestion.noSearch":
+		"Напоминания помогают вам оставаться на связи и не забывать связаться.",
+	"reminders.add.title": "Напоминание",
+	"reminders.add.description":
+		"Установите напоминание, чтобы связаться, узнать как дела или запомнить что-то важное о них.",
+
+	// Individual reminder messages
+	"reminder.select.title": "Выбрать человека",
+	"reminder.select.description": "Выберите, для кого это напоминание.",
+	"reminder.select.placeholder": "Выберите человека...",
+	"reminder.select.empty": "Люди не найдены.",
+	"reminder.select.search": "Поиск людей...",
+	"reminder.add.title": "Добавить напоминание",
+	"reminder.add.description": "Установите напоминание для {$person}.",
+	"reminder.form.placeholder":
+		"Установите напоминание, чтобы связаться в нужный момент",
+	"reminder.actions.title": "Действия с напоминанием",
+	"reminder.actions.description":
+		"Что вы хотите сделать с этим напоминанием?",
+	"reminder.actions.markDone": "Отметить как выполненное",
+	"reminder.actions.viewPerson": "Посмотреть контакт",
+	"reminder.actions.addNote": "Добавить заметку",
+	"reminder.actions.delete": "Удалить",
+	"reminder.actions.edit": "Редактировать",
+	"reminder.status.deleted": "Удалено",
+	"reminder.status.done": "Выполнено",
+	"reminder.edit.title": "Редактировать напоминание",
+	"reminder.edit.description": "Обновите детали напоминания.",
+	"reminder.addNote.title": "Добавить заметку для {$personName}",
+	"reminder.addNote.description":
+		"Запишите заметку о вашем взаимодействии с {$personName}.",
+	"reminder.restore.title": "Восстановить напоминание",
+	"reminder.restore.deletionInfo": "Это напоминание было удалено {$timeAgo}",
+	"reminder.restore.permanentDeletionWarning":
+		" и готово к окончательному удалению.",
+	"reminder.restore.permanentDeletionCountdown":
+		" и будет окончательно удалено через {$days :number} дней.",
+	"reminder.restore.question": "Хотите восстановить его?",
+	"reminder.restore.button": "Восстановить напоминание",
+	"reminder.restore.permanentDelete": "Удалить навсегда",
+	"reminder.permanentDelete.title": "Окончательно удалить напоминание",
+	"reminder.permanentDelete.confirmation":
+		"Вы уверены, что хотите окончательно удалить это напоминание? Это действие нельзя отменить.",
+	"reminder.permanentDelete.cancel": "Отмена",
+	"reminder.permanentDelete.confirm": "Удалить навсегда",
+	"reminder.done.actions.title": "Действия с выполненным напоминанием",
+	"reminder.done.actions.description":
+		"Что вы хотите сделать с этим выполненным напоминанием?",
+	"reminder.done.markUndone": "Отметить как невыполненное",
+	"reminder.done.delete": "Удалить",
+	"reminder.toast.restored": "Напоминание восстановлено",
+	"reminder.toast.permanentlyDeleted": "Напоминание окончательно удалено",
+	"reminder.toast.rescheduled": "Напоминание перенесено",
+	"reminder.toast.markedDone": "Напоминание отмечено как выполненное",
+	"reminder.toast.markedUndone": "Напоминание отмечено как невыполненное",
+	"reminder.toast.markedDoneAgain": "Напоминание снова отмечено как выполненное",
+	"reminder.toast.restoredToPreviousDate":
+		"Напоминание восстановлено на предыдущую дату",
+	"reminder.toast.markedNotDone": "Напоминание отмечено как невыполненное",
+	"reminder.toast.updated": "Напоминание обновлено",
+	"reminder.toast.updateUndone": "Обновление напоминания отменено",
+	"reminder.toast.deleted":
+		"Напоминание удалено - будет окончательно удалено через 30 дней",
 })

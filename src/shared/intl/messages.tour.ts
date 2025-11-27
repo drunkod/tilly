@@ -1,6 +1,6 @@
 import { messages, translate } from "@ccssmnn/intl"
 
-export { baseTourMessages, deTourMessages }
+export { baseTourMessages, deTourMessages, ruTourMessages }
 
 const baseTourMessages = messages({
 	// Welcome page messages
@@ -69,4 +69,38 @@ const deTourMessages = translate(baseTourMessages, {
 	// Navigation
 	"navigation.previous": "Zurück",
 	"navigation.next": "Weiter",
+})
+
+const ruTourMessages = translate(baseTourMessages, {
+	// Welcome page messages
+	"welcome.title": "Тилли",
+	"welcome.subtitle": "Добро пожаловать в ваш журнал отношений!",
+	"welcome.takeTour": "Пройти тур",
+	"welcome.skip": "Пропустить",
+	"welcome.signIn": "Войти",
+	// Tour step messages
+	"welcome.description":
+		"Тилли - это практичный журнал отношений. Создан, чтобы помочь вам запомнить то, что важно, и поддерживать связь.",
+	"install.title": "Установите Тилли для лучшего опыта",
+	"addPerson.title": "У каждого человека есть своё пространство",
+	"addPerson.description":
+		"Тилли организует ваш журнал по людям. Начните с добавления важного человека.",
+	"addPerson.button": "Добавить человека",
+	"addNote.title": "Заметки, чтобы запомнить",
+	"addNote.description":
+		"Заметки - это место, где вы записываете то, что хотите запомнить о человеке.",
+	"addNote.button": "Добавить заметку для {$name}",
+	"addReminder.title": "Напоминания, чтобы связаться",
+	"addReminder.description":
+		"Напоминания помогают вам оставаться на связи и не забывать связаться.",
+	"addReminder.button": "Добавить напоминание для {$name}",
+	"finish.title": "Завершите настройку",
+	"finish.backup": "Зарегистрируйтесь для резервного копирования и синхронизации данных",
+	"finish.notifications": "Включить Push-уведомления",
+	"finish.plus": "Получите Tilly Plus для помощи AI",
+	"finish.description": "Вы можете сделать всё это в настройках",
+	"finish.button": "Поехали",
+	// Navigation
+	"navigation.previous": "Назад",
+	"navigation.next": "Далее",
 })

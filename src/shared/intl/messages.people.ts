@@ -1,6 +1,6 @@
 import { messages, translate } from "@ccssmnn/intl"
 
-export { basePeopleMessages, dePeopleMessages }
+export { basePeopleMessages, dePeopleMessages, ruPeopleMessages }
 
 const basePeopleMessages = messages({
 	// People page messages
@@ -131,4 +131,69 @@ const dePeopleMessages = translate(basePeopleMessages, {
 	"person.permanentDelete.title": "Person endgültig löschen",
 	"person.permanentDelete.confirmation":
 		"Möchtest du diese Person wirklich endgültig löschen? Dadurch werden alle zugehörigen Notizen und Erinnerungen dauerhaft gelöscht.",
+})
+
+const ruPeopleMessages = translate(basePeopleMessages, {
+	// People page messages
+	"people.title": "Люди",
+	"people.pageTitle": "Люди - Тилли",
+	"people.search.placeholder": "Найти кого-то...",
+	"people.search.clearLabel": "Очистить поиск",
+	"people.newPersonLabel": "Новый человек",
+	"people.empty.heading": "У каждого человека есть своё пространство",
+	"people.empty.description":
+		"Тилли организует ваш журнал по людям. Начните с добавления важного человека.",
+	"people.empty.addButton": "Добавить особенного человека",
+	"people.noActive.message": "Начните добавлять людей, которые вам важны.",
+	"people.noActive.addButton": "Добавить особенного человека",
+	"people.search.noResults.message": 'Никто не найден, соответствующий "{$query}"',
+	"people.search.noResults.suggestion":
+		"Попробуйте изменить поисковый запрос или добавьте нового человека",
+	"people.deleted.count":
+		".input {$count :number} .match $count one {{{$count} удаленный человек}} * {{{$count} удаленных людей}}",
+	"people.deleted.heading": "Удаленные ({$count :number})",
+
+	// Person detail and form messages
+	"person.new.title": "Новый человек",
+	"person.new.description": "Добавить нового человека в Тилли",
+	"person.create.button": "Создать человека",
+	"person.created.success": "Контакт создан",
+	"person.form.avatar.label": "Аватар",
+	"person.form.name.label": "Имя",
+	"person.form.name.required": "Имя обязательно",
+	"person.form.summary.label": "Краткое описание",
+	"person.form.name.placeholder": "Как вы называете этого человека",
+	"person.form.summary.placeholder":
+		"Несколько ключевых фактов, которые помогают вам найти его",
+	"person.form.avatar.upload": "Загрузить изображение",
+	"person.form.avatar.change": "Изменить изображение",
+	"person.form.avatar.remove": "Удалить аватар",
+	"person.form.saving": "Сохранение...",
+	"person.form.saveChanges": "Сохранить изменения",
+	"person.crop.title": "Обрезать аватар",
+	"person.crop.cancel": "Отмена",
+	"person.crop.confirm": "Обрезать",
+	"person.detail.pageTitle": "{$name} - Тилли",
+	"person.detail.search.placeholder": "Поиск заметок и напоминаний...",
+	"person.detail.notes.tab": "Заметки ({$count :number})",
+	"person.detail.reminders.tab": "Напоминания ({$count :number})",
+	"person.detail.addNote": "Добавить заметку",
+	"person.detail.addReminder": "Добавить напоминание",
+	"person.actions.title": "Действия",
+	"person.actions.description": "Выберите действие для этого человека",
+	"person.edit.title": "Редактировать контакт",
+	"person.delete.title": "Удалить контакт",
+	"person.restore.title": "Восстановить {$name}",
+	"person.restore.deletionInfo": "Этот человек был удалён {$timeAgo}",
+	"person.restore.permanentDeletionWarning":
+		" и готов к окончательному удалению.",
+	"person.restore.permanentDeletionCountdown":
+		" и будет окончательно удалён через {$days :number} дней.",
+	"person.restore.question": "Хотите восстановить его?",
+	"person.form.canvas.empty": "Холст пуст",
+	"person.added.suffix": "добавлен {$ago}",
+	"person.updated.suffix": " • Обновлено {$ago}",
+	"person.permanentDelete.title": "Окончательно удалить контакт",
+	"person.permanentDelete.confirmation":
+		"Вы уверены, что хотите окончательно удалить этого человека? Это также окончательно удалит все связанные заметки и напоминания.",
 })

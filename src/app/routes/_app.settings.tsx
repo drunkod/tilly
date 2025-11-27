@@ -83,8 +83,8 @@ function SettingsScreen() {
 	let data = Route.useLoaderData()
 	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-        select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
-    });
+		select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
+	});
 	let currentMe = subscribedMe ?? data.me
 
 	if (!currentMe) {
@@ -128,13 +128,13 @@ function LanguageSection() {
 	let data = Route.useLoaderData()
 	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-        select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
-    });
+		select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
+	});
 	let currentMe = subscribedMe ?? data.me
 
 	let currentLang = currentMe?.root?.language || "en"
 
-	function setLanguage(lang: "de" | "en") {
+	function setLanguage(lang: "de" | "en" | "ru") {
 		if (!currentMe?.root) return
 		currentMe.root.$jazz.set("language", lang)
 	}
@@ -162,6 +162,9 @@ function LanguageSection() {
 						</SelectItem>
 						<SelectItem value="de">
 							<T k="language.name.de" />
+						</SelectItem>
+						<SelectItem value="ru">
+							<T k="language.name.ru" />
 						</SelectItem>
 					</SelectContent>
 				</Select>
@@ -582,8 +585,8 @@ function DataSection() {
 	let data = Route.useLoaderData()
 	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-        select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
-    });
+		select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
+	});
 	let currentMe = subscribedMe ?? data.me
 
 	if (!currentMe) {
@@ -768,8 +771,8 @@ function AboutSection() {
 	let data = Route.useLoaderData()
 	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-        select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
-    });
+		select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
+	});
 	let currentMe = subscribedMe ?? data.me
 	let currentLang = currentMe?.root?.language || "en"
 

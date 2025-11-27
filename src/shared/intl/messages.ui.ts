@@ -1,6 +1,6 @@
 import { messages, translate } from "@ccssmnn/intl"
 
-export { baseUiMessages, deUiMessages }
+export { baseUiMessages, deUiMessages, ruUiMessages }
 
 const baseUiMessages = messages({
 	// Common UI messages
@@ -57,6 +57,7 @@ const baseUiMessages = messages({
 	// Language messages
 	"language.name.en": "🇺🇸 English",
 	"language.name.de": "🇩🇪 German",
+	"language.name.ru": "🇷🇺 Russian",
 
 	// Error messages
 	"error.title": "Something went wrong",
@@ -193,6 +194,7 @@ const deUiMessages = translate(baseUiMessages, {
 	// Language messages
 	"language.name.en": "🇺🇸 Englisch",
 	"language.name.de": "🇩🇪 Deutsch",
+	"language.name.ru": "🇷🇺 Russisch",
 
 	// Error messages
 	"error.title": "Etwas ist schief gelaufen",
@@ -273,4 +275,142 @@ const deUiMessages = translate(baseUiMessages, {
 	"markdown.list": "Liste",
 	"markdown.heading": "Überschrift",
 	"markdown.noPreview": "Nichts zum Anzeigen",
+})
+
+const ruUiMessages = translate(baseUiMessages, {
+	// Common UI messages
+	"common.cancel": "Отмена",
+	"common.save": "Сохранить",
+	"common.change": "Изменить",
+	"common.clear": "Очистить",
+	"common.add": "Добавить",
+	"common.close": "Закрыть",
+	"common.undo": "Отменить",
+
+	// Authentication messages
+	"auth.signIn.title": "Синхронизация между устройствами",
+	"auth.signIn.description":
+		"Войдите, чтобы сохранить данные и получить доступ с любого устройства. Уже есть аккаунт? Ваши данные будут синхронизированы автоматически.",
+	"auth.signIn.requiresInternet": "Требуется подключение к интернету",
+	"auth.signIn.button": "Войти",
+	"auth.signUp.button": "Зарегистрироваться",
+	"auth.signInRequired": "Требуется вход",
+	"auth.goToSettings": "Перейдите в Настройки для входа",
+	"auth.settingsLink": "Войти через Настройки",
+
+	// Form messages
+	"reminder.form.text.label": "Что не стоит забыть?",
+	"reminder.form.text.required": "Текст напоминания обязателен",
+	"reminder.form.date.label": "Когда?",
+	"reminder.form.date.required": "Дата выполнения обязательна",
+	"reminder.form.repeat.label": "Повторять напоминание",
+	"reminder.form.repeatEvery.label": "Повторять каждые",
+	"reminder.form.repeatEvery.placeholder": "1",
+	"reminder.form.repeatUnit.label": "Единица повтора",
+	"reminder.form.repeatUnit.placeholder": "Выберите единицу",
+	"reminder.form.repeatUnit.day": "День (дни)",
+	"reminder.form.repeatUnit.week": "Неделя (недели)",
+	"reminder.form.repeatUnit.month": "Месяц (месяцы)",
+	"reminder.form.repeatUnit.year": "Год (годы)",
+	"note.form.content.label": "Заметка",
+	"note.form.content.required": "Содержимое обязательно",
+	"note.form.pin.label": "Закрепить эту заметку",
+	"note.form.pin.description":
+		"Закрепленные заметки всегда отображаются вверху списка",
+	"form.cancel": "Отмена",
+	"form.save": "Сохранить",
+	"form.saving": "Сохранение...",
+
+	// Navigation messages
+	"nav.people": "Люди",
+	"nav.reminders": "Напоминания",
+	"nav.assistant": "Тилли",
+	"nav.settings": "Настройки",
+	"nav.install": "Установить",
+	"nav.notifications.count.max": "9+",
+
+	// Language messages
+	"language.name.en": "🇺🇸 Английский",
+	"language.name.de": "🇩🇪 Немецкий",
+	"language.name.ru": "🇷🇺 Русский",
+
+	// Error messages
+	"error.title": "Что-то пошло не так",
+	"error.description":
+		"Если вы можете воспроизвести это, я буду рад услышать от вас.",
+	"error.feedback": "Отправить отзыв",
+	"error.showDetails": "Показать детали ошибки",
+	"error.copy": "Копировать",
+	"error.copySuccess": "Детали ошибки скопированы в буфер обмена",
+	"error.copyFailure": "Не удалось скопировать детали ошибки",
+	"error.goBack": "Вернуться в приложение",
+	"error.details": "Детали ошибки:",
+	"error.message": "Сообщение:",
+	"error.stackTrace": "Трассировка стека:",
+
+	// Not found messages
+	"notFound.title": "Страница не найдена",
+	"notFound.description": "Страница, которую вы ищете, не существует.",
+	"notFound.goBack": "Назад",
+	"notFound.goToPeople": "К списку людей",
+
+	// Toast messages
+	"toast.personUpdated": "Контакт обновлен",
+	"toast.personRestored": "Контакт восстановлен",
+	"toast.personUpdateUndone": "Обновление контакта отменено",
+	"toast.personDeletedScheduled":
+		"Контакт удален - будет окончательно удален через 30 дней",
+	"toast.noteUpdated": "Заметка обновлена",
+	"toast.noteUpdateUndone": "Обновление заметки отменено",
+	"toast.notePinned": "Заметка закреплена",
+	"toast.noteUnpinned": "Заметка откреплена",
+	"toast.noteRestored": "Заметка восстановлена",
+	"toast.noteDeleted": "Заметка окончательно удалена",
+
+	// Data import/export messages
+	"data.export.noData": "Нет данных для экспорта.",
+	"data.export.success": "Данные успешно экспортированы!",
+	"data.export.error": "Не удалось экспортировать данные",
+	"data.export.button": "Экспортировать данные",
+	"data.export.dialog.title": "Экспорт данных",
+	"data.export.dialog.description":
+		"Скачайте все ваши заметки и детали как JSON для резервного копирования или переноса на другое устройство.",
+	"data.export.dialog.cancel": "Отмена",
+	"data.export.dialog.exporting": "Экспорт...",
+	"data.export.dialog.download": "Скачать данные",
+	"data.import.noFile": "Пожалуйста, выберите файл",
+	"data.import.invalidFormat":
+		"Загруженный файл не соответствует ожидаемому формату.",
+	"data.import.personError": "Ошибка обработки контакта {$name}",
+	"data.import.success.merge": "Данные успешно объединены!",
+	"data.import.success.replace": "Данные успешно заменены!",
+	"data.import.button": "Импортировать данные",
+	"data.import.dialog.title": "Импорт данных",
+	"data.import.dialog.fileLabel": "Файл Tilly",
+	"data.import.dialog.chooseFile": "Выбрать файл",
+	"data.import.dialog.noFileSelected": "Файл не выбран",
+	"data.import.dialog.modeLabel": "Режим импорта",
+	"data.import.mode.merge": "Объединить",
+	"data.import.mode.merge.description":
+		"Добавить новых людей и обновить существующих",
+	"data.import.mode.replace": "Заменить",
+	"data.import.mode.replace.description":
+		"Удалить все текущие данные и импортировать новые",
+	"data.import.dialog.cancel": "Отмена",
+	"data.import.dialog.importing": "Импорт...",
+	"data.import.dialog.import": "Импортировать данные",
+
+	// Splash screen messages
+	"splash.title": "Тилли",
+	"splash.logoAlt": "Логотип Tilly",
+
+	// Markdown editor messages
+	"markdown.preview": "Предпросмотр",
+	"markdown.edit": "Редактировать",
+	"markdown.bold": "Жирный",
+	"markdown.italic": "Курсив",
+	"markdown.link": "Ссылка",
+	"markdown.list": "Список",
+	"markdown.heading": "Заголовок",
+	"markdown.noPreview": "Нечего предпросмотреть",
 })

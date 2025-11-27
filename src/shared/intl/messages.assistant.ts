@@ -1,6 +1,6 @@
 import { messages, translate } from "@ccssmnn/intl"
 
-export { baseAssistantMessages, deAssistantMessages }
+export { baseAssistantMessages, deAssistantMessages, ruAssistantMessages }
 
 const baseAssistantMessages = messages({
 	// Assistant interface messages
@@ -416,4 +416,205 @@ const deAssistantMessages = translate(baseAssistantMessages, {
 
 	// Action messages (general actions)
 	"action.undo": "Rückgängig",
+})
+
+const ruAssistantMessages = translate(baseAssistantMessages, {
+	// Assistant interface messages
+	"assistant.title": "Чат с Тилли",
+	"assistant.pageTitle": "Чат - Тилли",
+	"assistant.subscribe.title": "Получите AI помощника с Tilly Plus",
+	"assistant.subscribe.description":
+		"Агент Тилли может превратить ваши мысли в заметки и напоминания. Это как разговор с вашим дневником!",
+	"assistant.subscribe.settings": "Попробовать бесплатно",
+	"assistant.subscribe.currentPlan": "Текущий план: {$plan}",
+	"assistant.subscribe.currentPlan.unknown": "Неизвестно",
+	"assistant.subscribe.trialStatus": "Пробный период активен",
+	"assistant.subscribe.loading": "Проверка подписки...",
+	"assistant.chatUnavailable.title": "Чат недоступен",
+	"assistant.chatUnavailable.description":
+		"Для чата с Тилли требуется подключение к интернету. Все остальные функции работают оффлайн.",
+	"assistant.emptyState":
+		"Расскажите историю, и я помогу вам запомнить то, что важно",
+	"assistant.generating": "Создание ответа...",
+	"assistant.error.title": "Что-то пошло не так",
+	"assistant.responseFailure.title": "Проблема с ответом",
+	"assistant.responseFailure.emptyDescription":
+		"Извините, но я ответил неправильно. Это иногда случается с AI моделями. Пожалуйста, попробуйте ваш вопрос снова.",
+	"assistant.usageLimit.title": "Достигнут лимит использования",
+	"assistant.usageLimit.description":
+		"Вы достигли лимита использования. Проверьте настройки, чтобы узнать, когда лимиты обновятся.",
+	"assistant.usageLimit.viewSettings": "Посмотреть настройки",
+	"assistant.clearChat": "Очистить чат",
+	"assistant.clearChatHint.title": "Экономьте использование с новыми разговорами",
+	"assistant.clearChatHint.description":
+		"Начало нового разговора помогает сэкономить ваш бюджет. Очистите чат, чтобы начать заново.",
+	"assistant.clearChatHint.dismiss": "Понятно",
+	"assistant.placeholder.disabled": "Для чата требуется подключение к интернету",
+	"assistant.placeholder.initial": "Чат с Тилли",
+	"assistant.placeholder.reply": "Ответить Тилли...",
+	"assistant.speak": "Говорить",
+	"assistant.listening": "Слушаю...",
+
+	// Speech recognition
+	"assistant.speech.start": "Начать голосовой ввод",
+	"assistant.speech.stop": "Остановить голосовой ввод",
+
+	// Speech recognition errors
+	"assistant.speech.error.permission":
+		"Доступ к микрофону запрещен. Пожалуйста, разрешите доступ к микрофону.",
+	"assistant.speech.error.network":
+		"Ошибка сети. Пожалуйста, проверьте ваше подключение.",
+	"assistant.speech.error.noSpeech": "Речь не обнаружена. Пожалуйста, попробуйте снова.",
+	"assistant.speech.error.audioCapture":
+		"Не удалось получить доступ к микрофону. Пожалуйста, проверьте настройки устройства.",
+	"assistant.speech.error.generic":
+		"Ошибка распознавания речи. Пожалуйста, попробуйте снова.",
+
+	// Tool-related messages
+	"tool.cancel": "Отмена",
+	"tool.create": "Создать",
+	"tool.undo": "Отменить",
+	"tool.viewPerson": "Посмотреть контакт",
+	"tool.viewNotes": "Посмотреть заметки",
+	"tool.viewReminders": "Посмотреть напоминания",
+	"tool.restore": "Восстановить",
+	"tool.undone": "(отменено)",
+	"tool.pinned": "📌 Закреплено",
+	"tool.error.failedToCreate": "Не удалось создать контакт",
+	"tool.error.unknown": "Неизвестная ошибка",
+	"tool.error.failedToUndo": "❌ Не удалось отменить: {$error}",
+	"tool.person.createConfirm.title": "Создать новый контакт {$name}?",
+	"tool.person.createConfirm.description":
+		"Тилли хочет создать новый контакт.",
+	"tool.person.createCancel.reason": "Пользователь отказался создавать этот контакт",
+	"tool.person.created.message": "Создан контакт: {$name}",
+	"tool.person.created.undone": 'Создан контакт "{$name}" (отменено)',
+	"tool.person.created.dialog.title": "Контакт создан",
+	"tool.person.created.dialog.description":
+		"Детали созданного контакта.",
+	"tool.person.created.dialog.section": "Контакт",
+	"tool.person.created.undo.success": '✅ Отмена: Удален контакт "{$name}"',
+	"tool.person.updated.message": "Обновлен контакт: {$name}",
+	"tool.person.updated.undone": 'Обновлен контакт "{$name}" (отменено)',
+	"tool.person.updated.dialog.title": "Контакт обновлен",
+	"tool.person.updated.dialog.description":
+		"Сравнение изменений контакта до и после.",
+	"tool.person.updated.dialog.current": "Текущий",
+	"tool.person.updated.dialog.previous": "Предыдущий",
+	"tool.person.updated.undo.success":
+		'✅ Отмена: Восстановлено обновление контакта "{$name}"',
+	"tool.person.deleted.message": "Удален контакт: {$name}",
+	"tool.person.deleted.undone": 'Удален контакт "{$name}" (отменено)',
+	"tool.person.deleted.dialog.title": "Контакт удален",
+	"tool.person.deleted.dialog.description": "Детали удаленного контакта.",
+	"tool.person.deleted.dialog.section": "Удаленный контакт",
+	"tool.person.deleted.undo.success": '✅ Отмена: Восстановлен контакт "{$name}"',
+	"tool.people.found.count":
+		".input {$count :number} .match $count one {{Найден {$count} человек}} * {{Найдено {$count} человек}}",
+	"tool.people.found.withQuery":
+		'.input {$count :number} .match $count one {{Найден {$count} человек, соответствующий "{$query}"}} * {{Найдено {$count} человек, соответствующих "{$query}"}}',
+	"tool.people.dialog.title": "Найденные люди",
+	"tool.people.dialog.description":
+		"Результаты поиска людей в ваших контактах.",
+	"tool.people.dialog.results": "Результаты",
+	"tool.people.viewSearchResults": "Посмотреть результаты поиска",
+	"tool.person.read.message":
+		"Прочитан контакт {$name} ({$notesCount :number} заметок) ({$remindersCount :number} напоминаний)",
+	"tool.person.read.dialog.title": "Детали контакта",
+	"tool.person.read.dialog.description": "Найденная информация об этом человеке.",
+	"tool.person.read.dialog.section": "Контакт",
+	"tool.person.read.dialog.notesCount":
+		".input {$count :number} .match $count one {{{$count} заметка}} * {{{$count} заметок}}",
+	"tool.person.read.dialog.remindersCount":
+		".input {$count :number} .match $count one {{{$count} напоминание}} * {{{$count} напоминаний}}",
+	"tool.note.created.message": "Добавлена заметка: {$content}",
+	"tool.note.created.undone": "Добавлена заметка (отменено)",
+	"tool.note.created.dialog.title": "Заметка добавлена",
+	"tool.note.created.dialog.description":
+		"Детали созданной заметки.",
+	"tool.note.created.dialog.section": "Заметка",
+	"tool.note.created.undo.success": "✅ Отмена: Заметка удалена",
+	"tool.note.pinned": "📌 Закреплено",
+	"tool.note.updated.message": "Обновлена заметка: {$content}",
+	"tool.note.updated.undone": "Обновлена заметка (отменено)",
+	"tool.note.updated.dialog.title": "Заметка обновлена",
+	"tool.note.updated.dialog.description":
+		"Сравнение изменений заметки до и после.",
+	"tool.note.updated.dialog.current": "Текущая",
+	"tool.note.updated.dialog.previous": "Предыдущая",
+	"tool.note.updated.undo.success": "✅ Отмена: Заметка восстановлена",
+	"tool.note.deleted.message": "Удалена заметка: {$content}",
+	"tool.note.deleted.undone": "Удалена заметка (отменено)",
+	"tool.note.deleted.dialog.title": "Заметка удалена",
+	"tool.note.deleted.dialog.description":
+		"Детали удаленной заметки.",
+	"tool.note.deleted.dialog.section": "Удаленная заметка",
+	"tool.note.deleted.undo.success": "✅ Отмена: Заметка восстановлена",
+	"tool.reminder.created.message": "Добавлено напоминание: {$text}",
+	"tool.reminder.created.undone": "Добавлено напоминание {$text} (отменено)",
+	"tool.reminder.created.dialog.title": "Напоминание добавлено",
+	"tool.reminder.created.dialog.description":
+		"Детали созданного напоминания.",
+	"tool.reminder.created.dialog.section": "Напоминание",
+	"tool.reminder.created.undo.success": '✅ Отмена: Удалено напоминание "{$text}"',
+	"tool.reminder.noDate": "Без даты",
+	"tool.reminder.repeats": "Повторяется каждые {$interval :number} {$unit}",
+	"tool.reminder.done": "Выполнено",
+	"tool.reminder.notDone": "Не выполнено",
+	"tool.reminder.updated.message": "Напоминание обновлено",
+	"tool.reminder.updated.undone": "Напоминание обновлено (отменено)",
+	"tool.reminder.updated.dialog.title": "Напоминание обновлено",
+	"tool.reminder.updated.dialog.description":
+		"Сравнение изменений напоминания до и после.",
+	"tool.reminder.updated.dialog.current": "Текущее",
+	"tool.reminder.updated.dialog.previous": "Предыдущее",
+	"tool.reminder.updated.undo.success": "✅ Отмена: Напоминание восстановлено",
+	"tool.reminder.deleted.message": "Удалено напоминание",
+	"tool.reminder.deleted.undone": "Удалено напоминание (отменено)",
+	"tool.reminder.deleted.dialog.title": "Напоминание удалено",
+	"tool.reminder.deleted.dialog.description":
+		"Детали удаленного напоминания.",
+	"tool.reminder.deleted.dialog.section": "Удаленное напоминание",
+	"tool.reminder.deleted.undo.success": "✅ Отмена: Напоминание восстановлено",
+	"tool.reminder.list.message.none": "Напоминания не найдены",
+	"tool.reminder.list.message.count":
+		".input {$count :number} .match $count one {{Найдено {$count} напоминание}} * {{Найдено {$count} напоминаний}}",
+	"tool.reminder.list.dialog.title": "Напоминания",
+	"tool.reminder.list.dialog.description": "Ваши предстоящие напоминания.",
+	"tool.reminder.list.empty.noDue": "Сейчас нет напоминаний к выполнению.",
+	"tool.reminder.list.empty.noMatch": "Нет напоминаний, соответствующих вашему поиску.",
+	"tool.reminder.list.empty.noActive": "Активные напоминания не найдены.",
+	"tool.reminder.list.showingFirst": "Показаны первые {$count :number} напоминаний",
+	"tool.reminder.list.person": "Для: {$name}",
+	"tool.reminder.list.andMore":
+		".input {$count :number} .match $count one {{и ещё {$count} напоминание}} * {{и ещё {$count} напоминаний}}",
+	"tool.userQuestion.selectOption": "Пожалуйста, выберите опцию",
+	"tool.userQuestion.selectPlaceholder": "Выберите опцию...",
+	"tool.userQuestion.failedToProcess": "Не удалось обработать ответ",
+	"tool.userQuestion.cancelled": "Пользователь отменил вопрос",
+	"tool.userQuestion.yes": "Да",
+	"tool.userQuestion.no": "Нет",
+	"tool.userQuestion.cancel": "Отмена",
+	"tool.userQuestion.submit": "Отправить",
+
+	// Voice recording messages
+	"assistant.voiceRecording.title": "Голосовое сообщение",
+	"assistant.voiceRecording.recording": "Запись...",
+	"assistant.voiceRecording.maxDuration": "Максимум 10 минут",
+	"assistant.voiceRecording.send": "Отправить сообщение",
+	"assistant.voiceRecording.start": "Начать запись",
+	"assistant.voiceRecording.stop": "Остановить запись",
+	"assistant.voiceRecording.continue": "Продолжить",
+	"assistant.voiceRecording.restart": "Начать заново",
+	"assistant.voiceRecording.play": "Воспроизвести",
+	"assistant.voiceRecording.pause": "Пауза",
+
+	// New message dialog
+	"assistant.newMessage.title": "Новое сообщение",
+	"assistant.newMessage.placeholder": "Введите ваше сообщение...",
+	"assistant.newMessage.voiceButton": "Голос",
+	"assistant.newMessage.send": "Отправить",
+
+	// Action messages (general actions)
+	"action.undo": "Отменить",
 })

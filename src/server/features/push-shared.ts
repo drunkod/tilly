@@ -5,7 +5,7 @@ import { tryCatch } from "#shared/lib/trycatch"
 import type { co, ResolveQuery } from "jazz-tools"
 import webpush from "web-push"
 import { createIntl } from "@ccssmnn/intl"
-import { messagesEn, messagesDe } from "#shared/intl/messages"
+import { messagesEn, messagesDe, messagesRu } from "#shared/intl/messages"
 
 export {
 	getEnabledDevices,
@@ -142,6 +142,8 @@ function getIntl(worker: { root: { language?: string } }) {
 
 	if (userLanguage === "de") {
 		return createIntl(messagesDe, "de")
+	} else if (userLanguage === "ru") {
+		return createIntl(messagesRu, "ru")
 	} else {
 		return createIntl(messagesEn, "en")
 	}

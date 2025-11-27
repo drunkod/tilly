@@ -60,7 +60,7 @@ function ErrorFallback({
 	let [locale] = useState(() => {
 		try {
 			let stored = localStorage.getItem("tilly-locale")
-			return stored === "de" ? "de" : "en"
+			return stored === "de" ? "de" : stored === "ru" ? "ru" : "en"
 		} catch {
 			return "en"
 		}

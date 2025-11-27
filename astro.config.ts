@@ -15,7 +15,7 @@ export default defineConfig({
 	adapter: runtimeAdapter,
 	devToolbar: { enabled: false },
 	i18n: {
-		locales: ["en", "de"],
+		locales: ["en", "de", "ru"],
 		defaultLocale: "en",
 		routing: {
 			prefixDefaultLocale: false,
@@ -36,25 +36,25 @@ export default defineConfig({
 	integrations: [
 		react({ babel: { plugins: ["babel-plugin-react-compiler"] } }),
 		pwa({
-		registerType: "prompt",
-		scope: "/app/",
-		strategies: "injectManifest",
-		injectRegister: false,
-		srcDir: "src/app",
-		filename: "sw.ts",
-		manifest: false,
-		devOptions: {
-			enabled: true,
-			type: "module",
-		},
-		injectManifest: {
-			maximumFileSizeToCacheInBytes: 5_000_000,
-			globPatterns: [
-			"_astro/**/*",
-			"app/**/*.{css,html,ico,js,json,png,svg,txt,webp,woff2}",
-			],
-			globIgnores: ["**/images/**", "**/videos/**"],
-		},
+			registerType: "prompt",
+			scope: "/app/",
+			strategies: "injectManifest",
+			injectRegister: false,
+			srcDir: "src/app",
+			filename: "sw.ts",
+			manifest: false,
+			devOptions: {
+				enabled: true,
+				type: "module",
+			},
+			injectManifest: {
+				maximumFileSizeToCacheInBytes: 5_000_000,
+				globPatterns: [
+					"_astro/**/*",
+					"app/**/*.{css,html,ico,js,json,png,svg,txt,webp,woff2}",
+				],
+				globIgnores: ["**/images/**", "**/videos/**"],
+			},
 		}),
 	],
 	env: {

@@ -6,7 +6,7 @@ import { Footer } from "#www/components/Footer"
 export interface Props {
 	title: string
 	description?: string
-	locale?: "en" | "de"
+	locale?: "en" | "de" | "ru"
 }
 
 let { title, description, locale = "en" } = Astro.props
@@ -40,24 +40,43 @@ let localizedNav =
 					goToApp: "Zur App",
 				},
 			}
-		: {
-				home: "/en/",
-				features: "/en/#features",
-				pricing: "/en/#pricing",
-				faq: "/en/#faq",
-				blog: "/en/blog",
-				imprint: "/en/imprint",
-				privacy: "/en/privacy",
-				labels: {
-					features: "Features",
-					pricing: "Pricing",
-					faq: "FAQ",
-					blog: "Blog",
-					imprint: "Imprint",
-					privacy: "Privacy",
-					goToApp: "Go to App",
-				},
-			}
+		: locale === "ru"
+			? {
+					home: "/ru/",
+					features: "/ru/#features",
+					pricing: "/ru/#pricing",
+					faq: "/ru/#faq",
+					blog: "/ru/blog",
+					imprint: "/ru/imprint",
+					privacy: "/ru/privacy",
+					labels: {
+						features: "Возможности",
+						pricing: "Цены",
+						faq: "FAQ",
+						blog: "Блог",
+						imprint: "Выходные данные",
+						privacy: "Конфиденциальность",
+						goToApp: "Перейти к приложению",
+					},
+				}
+			: {
+					home: "/en/",
+					features: "/en/#features",
+					pricing: "/en/#pricing",
+					faq: "/en/#faq",
+					blog: "/en/blog",
+					imprint: "/en/imprint",
+					privacy: "/en/privacy",
+					labels: {
+						features: "Features",
+						pricing: "Pricing",
+						faq: "FAQ",
+						blog: "Blog",
+						imprint: "Imprint",
+						privacy: "Privacy",
+						goToApp: "Go to App",
+					},
+				}
 ---
 
 <!doctype html>
@@ -102,6 +121,7 @@ let localizedNav =
 			languages={[
 				{ name: "English", href: "/en/" },
 				{ name: "Deutsch", href: "/de/" },
+				{ name: "Русский", href: "/ru/" },
 			]}
 		/>
 
@@ -127,6 +147,7 @@ let localizedNav =
 				languages: [
 					{ name: "English", href: "/en/" },
 					{ name: "Deutsch", href: "/de/" },
+					{ name: "Русский", href: "/ru/" },
 				],
 			}}
 			company={{
