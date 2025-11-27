@@ -19,8 +19,8 @@
     - Check user settings first, then fall back to env vars
     - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5_
 
-- [ ] 3. Create API Client with Fallback
-  - [ ] 3.1 Create `src/app/lib/api-client-with-fallback.ts` file
+- [x] 3. Create API Client with Fallback
+  - [x] 3.1 Create `src/app/lib/api-client-with-fallback.ts` file
     - Implement getServerUrl() function (settings priority over env)
     - Implement isServerAvailable() health check function
     - Implement createApiClient() factory function
