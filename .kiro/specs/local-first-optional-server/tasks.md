@@ -112,8 +112,8 @@
     - Add base path configuration from env var
     - _Requirements: 9.4_
 
-- [ ] 11. Update Middleware for Static Compatibility
-  - [ ] 11.1 Update `src/middleware.ts` for client-side routing
+- [x] 11. Update Middleware for Static Compatibility
+  - [x] 11.1 Update `src/middleware.ts` for client-side routing
     - Check if running in static mode
     - Skip server-only redirects in static mode
     - Keep locale detection for client-side use
