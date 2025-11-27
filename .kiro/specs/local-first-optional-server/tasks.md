@@ -78,13 +78,13 @@
     - Hide notification settings when server not configured
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5_
 
-- [ ] 8. Update Astro Configuration for Static Build
-  - [ ] 8.1 Modify `astro.config.ts` for dual output modes
+- [x] 8. Update Astro Configuration for Static Build
+  - [x] 8.1 Modify `astro.config.ts` for dual output modes
     - Add ASTRO_OUTPUT environment variable check
     - Conditionally set output to "static" or "server"
     - Conditionally include adapter only for server mode
     - _Requirements: 1.1, 1.2, 1.3_
-  - [ ] 8.2 Make server environment variables optional
+  - [x] 8.2 Make server environment variables optional
     - Add optional: true for GOOGLE_AI_API_KEY in static mode
     - Add optional: true for VAPID_PRIVATE_KEY in static mode
     - Add optional: true for CRON_SECRET in static mode
