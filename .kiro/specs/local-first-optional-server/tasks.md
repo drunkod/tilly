@@ -92,8 +92,8 @@
     - Add PUBLIC_SERVER_URL as new optional public variable
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
 
-- [ ] 9. Update Package Scripts
-  - [ ] 9.1 Add static build scripts to `package.json`
+- [x] 9. Update Package Scripts
+  - [x] 9.1 Add static build scripts to `package.json`
     - Add build:static script with ASTRO_OUTPUT=static
     - Add preview:static script for local testing
     - Keep existing build and build:node scripts unchanged
