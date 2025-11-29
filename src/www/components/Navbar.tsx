@@ -37,9 +37,13 @@ function Navbar({ logo, navigation, cta, locale, languages }: NavbarProps) {
 	let currentLanguageEmoji =
 		locale === "de" ? "🇩🇪" : locale === "ru" ? "🇷🇺" : "🇺🇸"
 
+	// Cast messages to the same type as messagesEn for IntlProvider compatibility
+	// The check() function from @ccssmnn/intl returns a compatible but differently-typed object
+	let messages = locale === "de" ? messagesDe : locale === "ru" ? messagesRu : messagesEn
+
 	return (
 		<IntlProvider
-			messages={locale === "de" ? messagesDe : locale === "ru" ? messagesRu : messagesEn}
+			messages={messages as typeof messagesEn}
 			locale={locale}
 		>
 			<header className="bg-background border-border sticky inset-x-0 top-0 z-50 border-b">

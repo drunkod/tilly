@@ -172,7 +172,7 @@
   - Verify Node adapter deployment works
   - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5_
 
-- [ ] 18. Manual testing
+- [x] 18. Manual testing
   - Test static build completes without server vars
   - Test app loads on local static server
   - Test Jazz sync works in static mode

@@ -89,7 +89,7 @@ export let UserAccountRoot = co.map({
 	people: co.list(Person),
 	notificationSettings: NotificationSettings.optional(),
 	usageTracking: UsageTracking.optional(),
-	language: z.enum(["de", "en"]).optional(),
+	language: z.enum(["de", "en", "ru"]).optional(),
 	serverSettings: ServerSettings.optional(),
 })
 

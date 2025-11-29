@@ -15,10 +15,16 @@ type ConnectionTestResult = {
 	error?: string
 }
 
+// Use a subset of RequestInit to avoid ESLint no-undef error
+type FetchOptions = {
+	headers?: Record<string, string>
+	signal?: AbortSignal
+}
+
 type ApiClient = {
 	serverUrl: string | null
 	isConfigured: boolean
-	chat: (messages: unknown[], options?: RequestInit) => Promise<Response>
+	chat: (messages: unknown[], options?: FetchOptions) => Promise<Response>
 	testConnection: () => Promise<ConnectionTestResult>
 }
 
@@ -49,7 +55,7 @@ function createApiClient(me: LoadedAccount): ApiClient {
 		serverUrl,
 		isConfigured: !!serverUrl,
 
-		async chat(messages: unknown[], options?: RequestInit): Promise<Response> {
+		async chat(messages: unknown[], options?: FetchOptions): Promise<Response> {
 			if (!serverUrl) {
 				throw new Error(
 					"Server not configured. Configure server URL in settings.",
