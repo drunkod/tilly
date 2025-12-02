@@ -27,9 +27,10 @@ function checkInputSize(
 	messages: Array<TokenCountMessage | ModelMessage>,
 ) {
 	let estimatedTokens = estimateTokenCount(messages)
+	let maxTokens = MAX_REQUEST_TOKENS ?? 0
 
-	if (estimatedTokens > MAX_REQUEST_TOKENS) {
-		let overflow = estimatedTokens - MAX_REQUEST_TOKENS
+	if (estimatedTokens > maxTokens) {
+		let overflow = estimatedTokens - maxTokens
 		console.warn(
 			`[Chat] ${user.id} | Request too large: ${estimatedTokens} tokens exceeds limit by ${overflow}`,
 		)
@@ -196,9 +197,10 @@ async function loadUsageTrackingForUser(
 	}
 
 	let nextResetDate = createWeeklyResetDate()
+	let weeklyBudget = WEEKLY_BUDGET ?? 0
 
 	console.log(
-		`[Usage] ${user.id} | Creating usage tracking | Weekly budget ${WEEKLY_BUDGET} | Reset ${nextResetDate.toISOString()}`,
+		`[Usage] ${user.id} | Creating usage tracking | Weekly budget ${weeklyBudget} | Reset ${nextResetDate.toISOString()}`,
 	)
 
 	let usageTrackingGroup = Group.create({ owner: serverWorker })
@@ -335,7 +337,8 @@ async function applyUsageUpdate(
 		usage.cachedTokens,
 	)
 
-	let percentIncrease = (cost / WEEKLY_BUDGET) * 100
+	let weeklyBudget = WEEKLY_BUDGET ?? 1 // Default to 1 to avoid division by zero
+	let percentIncrease = (cost / weeklyBudget) * 100
 
 	let previousPercent = serverUsageTracking.weeklyPercentUsed ?? 0
 
@@ -358,10 +361,11 @@ function calculateCost(
 	let nonCachedTokens = inputTokens - cachedTokens
 
 	let cachedInputCost =
-		(cachedTokens / 1_000_000) * CACHED_INPUT_TOKEN_COST_PER_MILLION
+		(cachedTokens / 1_000_000) * (CACHED_INPUT_TOKEN_COST_PER_MILLION ?? 0)
 	let nonCachedCost =
-		(nonCachedTokens / 1_000_000) * INPUT_TOKEN_COST_PER_MILLION
-	let outputCost = (outputTokens / 1_000_000) * OUTPUT_TOKEN_COST_PER_MILLION
+		(nonCachedTokens / 1_000_000) * (INPUT_TOKEN_COST_PER_MILLION ?? 0)
+	let outputCost =
+		(outputTokens / 1_000_000) * (OUTPUT_TOKEN_COST_PER_MILLION ?? 0)
 
 	return cachedInputCost + nonCachedCost + outputCost
 }

@@ -24,11 +24,13 @@ export type {
 	LoadedNotificationSettings,
 }
 
-webpush.setVapidDetails(
-	"mailto:support@tilly.app",
-	PUBLIC_VAPID_KEY,
-	VAPID_PRIVATE_KEY,
-)
+if (PUBLIC_VAPID_KEY && VAPID_PRIVATE_KEY) {
+	webpush.setVapidDetails(
+		"mailto:support@tilly.app",
+		PUBLIC_VAPID_KEY,
+		VAPID_PRIVATE_KEY,
+	)
+}
 
 type PushDevice = {
 	isEnabled: boolean

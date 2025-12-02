@@ -31,7 +31,7 @@ export { cronDeliveryApp }
 
 let cronDeliveryApp = new Hono().get(
 	"/deliver-notifications",
-	bearerAuth({ token: CRON_SECRET }),
+	bearerAuth({ token: CRON_SECRET || "static-build-placeholder" }),
 	async c => {
 		console.log("🔔 Starting notification delivery cron job")
 		let deliveryResults: Array<{
@@ -121,9 +121,9 @@ async function shouldReceiveNotification<
 		let userTimezone = notificationSettings.timezone || "UTC"
 		let lastDelivered = notificationSettings.lastDeliveredAt
 			? format(
-					toZonedTime(notificationSettings.lastDeliveredAt, userTimezone),
-					"yyyy-MM-dd HH:mm",
-				)
+				toZonedTime(notificationSettings.lastDeliveredAt, userTimezone),
+				"yyyy-MM-dd HH:mm",
+			)
 			: "never"
 		throw `Already delivered today (last delivered: ${lastDelivered})`
 	}
