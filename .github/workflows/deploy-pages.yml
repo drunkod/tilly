@@ -31,6 +31,22 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Debug environment variables
+        run: |
+          echo "=== Repository Variables Status ==="
+          echo "PUBLIC_JAZZ_SYNC_SERVER is set: ${{ vars.PUBLIC_JAZZ_SYNC_SERVER != '' }}"
+          echo "PUBLIC_JAZZ_SYNC_SERVER value: ${PUBLIC_JAZZ_SYNC_SERVER:-<not set>}"
+          echo "PUBLIC_SERVER_URL is set: ${{ vars.PUBLIC_SERVER_URL != '' }}"
+          echo "PUBLIC_SERVER_URL value: ${PUBLIC_SERVER_URL:-<not set>}"
+          echo "GITHUB_PAGES_BASE is set: ${{ vars.GITHUB_PAGES_BASE != '' }}"
+          echo "GITHUB_PAGES_BASE value: ${GITHUB_PAGES_BASE:-<not set>}"
+          echo "=== All Environment Variables ==="
+          env | grep -E 'PUBLIC_|GITHUB_' || echo "No PUBLIC_ or GITHUB_ variables found"
+        env:
+          PUBLIC_JAZZ_SYNC_SERVER: ${{ vars.PUBLIC_JAZZ_SYNC_SERVER }}
+          PUBLIC_SERVER_URL: ${{ vars.PUBLIC_SERVER_URL }}
+          GITHUB_PAGES_BASE: ${{ vars.GITHUB_PAGES_BASE }}
+
       - name: Build static site
         run: pnpm build:static
         env:
