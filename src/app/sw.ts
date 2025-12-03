@@ -5,6 +5,7 @@ import { registerRoute } from "workbox-routing"
 
 declare let self: ServiceWorkerGlobalScope & {
 	__WB_MANIFEST: Array<{ url: string; revision?: string }>
+	__BASE_PATH__: string
 }
 
 // Injected at build time by Vite plugin
