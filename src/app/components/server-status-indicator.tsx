@@ -27,7 +27,10 @@ type CheckState = {
 	result: boolean | null
 }
 
-function deriveStatus(serverUrl: string | null, checkState: CheckState): ServerStatus {
+function deriveStatus(
+	serverUrl: string | null,
+	checkState: CheckState,
+): ServerStatus {
 	if (!serverUrl) return "not-configured"
 	if (checkState.url !== serverUrl || checkState.result === null)
 		return "checking"
@@ -45,17 +48,14 @@ function useServerStatus(
 	}))
 
 	// Memoize the callback to handle async result
-	let handleResult = useCallback(
-		(url: string, available: boolean) => {
-			setCheckState(prev => {
-				if (prev.url === url) {
-					return { url, result: available }
-				}
-				return prev
-			})
-		},
-		[],
-	)
+	let handleResult = useCallback((url: string, available: boolean) => {
+		setCheckState(prev => {
+			if (prev.url === url) {
+				return { url, result: available }
+			}
+			return prev
+		})
+	}, [])
 
 	// Effect only handles the async check - no synchronous setState
 	useEffect(() => {

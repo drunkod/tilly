@@ -43,7 +43,10 @@ export function ExportButton(props: {
 				resolve: exportQuery,
 			})
 
-			if (!accountData?.root?.people.$isLoaded || accountData.root.people.length === 0) {
+			if (
+				!accountData?.root?.people.$isLoaded ||
+				accountData.root.people.length === 0
+			) {
 				toast.warning(t("data.export.noData"))
 				return
 			}

@@ -213,10 +213,10 @@ const ruRemindersMessages = translate(baseRemindersMessages, {
 		".input {$count :number} .match $count one {{{$count} удаленное напоминание}} * {{{$count} удаленных напоминаний}}",
 	"reminders.deleted.heading": "Удаленные ({$count :number})",
 	"reminders.created.success": "Напоминание создано",
-	"reminders.empty.withSearch":
-		'Нет напоминаний, соответствующих "{$query}"',
+	"reminders.empty.withSearch": 'Нет напоминаний, соответствующих "{$query}"',
 	"reminders.empty.noSearch": "Напоминания не установлены",
-	"reminders.empty.suggestion.withSearch": "Попробуйте изменить поисковый запрос",
+	"reminders.empty.suggestion.withSearch":
+		"Попробуйте изменить поисковый запрос",
 	"reminders.empty.suggestion.noSearch":
 		"Напоминания помогают вам оставаться на связи и не забывать связаться.",
 	"reminders.add.title": "Напоминание",
@@ -234,8 +234,7 @@ const ruRemindersMessages = translate(baseRemindersMessages, {
 	"reminder.form.placeholder":
 		"Установите напоминание, чтобы связаться в нужный момент",
 	"reminder.actions.title": "Действия с напоминанием",
-	"reminder.actions.description":
-		"Что вы хотите сделать с этим напоминанием?",
+	"reminder.actions.description": "Что вы хотите сделать с этим напоминанием?",
 	"reminder.actions.markDone": "Отметить как выполненное",
 	"reminder.actions.viewPerson": "Посмотреть контакт",
 	"reminder.actions.addNote": "Добавить заметку",
@@ -272,7 +271,8 @@ const ruRemindersMessages = translate(baseRemindersMessages, {
 	"reminder.toast.rescheduled": "Напоминание перенесено",
 	"reminder.toast.markedDone": "Напоминание отмечено как выполненное",
 	"reminder.toast.markedUndone": "Напоминание отмечено как невыполненное",
-	"reminder.toast.markedDoneAgain": "Напоминание снова отмечено как выполненное",
+	"reminder.toast.markedDoneAgain":
+		"Напоминание снова отмечено как выполненное",
 	"reminder.toast.restoredToPreviousDate":
 		"Напоминание восстановлено на предыдущую дату",
 	"reminder.toast.markedNotDone": "Напоминание отмечено как невыполненное",

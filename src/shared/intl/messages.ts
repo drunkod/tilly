@@ -1,22 +1,42 @@
 import { merge, check } from "@ccssmnn/intl"
 
 // Consolidated catalog modules
-import { basePeopleMessages, dePeopleMessages, ruPeopleMessages } from "./messages.people"
+import {
+	basePeopleMessages,
+	dePeopleMessages,
+	ruPeopleMessages,
+} from "./messages.people"
 import {
 	baseRemindersMessages,
 	deRemindersMessages,
 	ruRemindersMessages,
 } from "./messages.reminders"
-import { baseNotesMessages, deNotesMessages, ruNotesMessages } from "./messages.notes"
-import { baseSettingsMessages, deSettingsMessages, ruSettingsMessages } from "./messages.settings"
+import {
+	baseNotesMessages,
+	deNotesMessages,
+	ruNotesMessages,
+} from "./messages.notes"
+import {
+	baseSettingsMessages,
+	deSettingsMessages,
+	ruSettingsMessages,
+} from "./messages.settings"
 import {
 	baseAssistantMessages,
 	deAssistantMessages,
 	ruAssistantMessages,
 } from "./messages.assistant"
 import { baseUiMessages, deUiMessages, ruUiMessages } from "./messages.ui"
-import { baseServerMessages, deServerMessages, ruServerMessages } from "./messages.server"
-import { baseTourMessages, deTourMessages, ruTourMessages } from "./messages.tour"
+import {
+	baseServerMessages,
+	deServerMessages,
+	ruServerMessages,
+} from "./messages.server"
+import {
+	baseTourMessages,
+	deTourMessages,
+	ruTourMessages,
+} from "./messages.tour"
 
 export { messagesEn, messagesDe, messagesRu }
 

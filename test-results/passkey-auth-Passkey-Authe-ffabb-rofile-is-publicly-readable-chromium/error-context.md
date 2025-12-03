@@ -2,64 +2,64 @@
 
 ```yaml
 - generic [active] [ref=e1]:
-  - banner [ref=e3]:
-    - navigation [ref=e4]:
-      - link "Tilly" [ref=e5] [cursor=pointer]:
-        - /url: /en/
-        - generic [ref=e6]: Tilly
-      - generic [ref=e7]:
-        - link "Features" [ref=e8] [cursor=pointer]:
-          - /url: /en/#features
-        - link "Pricing" [ref=e9] [cursor=pointer]:
-          - /url: /en/#pricing
-        - link "FAQ" [ref=e10] [cursor=pointer]:
-          - /url: /en/#faq
-        - link "Blog" [ref=e11] [cursor=pointer]:
-          - /url: /en/blog
-        - button "🇺🇸" [ref=e12]
-      - link "Go to App" [ref=e14] [cursor=pointer]:
-        - /url: /app
-  - main [ref=e15]:
-    - generic [ref=e16]:
-      - heading "Page Not Found" [level=1] [ref=e17]
-      - paragraph [ref=e18]: The page you're looking for doesn't exist.
-      - paragraph [ref=e19]:
-        - link "Go back home" [ref=e20] [cursor=pointer]:
-          - /url: /en/
-        - text: or
-        - link "open the app" [ref=e21] [cursor=pointer]:
-          - /url: /app
-        - text: .
-  - contentinfo [ref=e22]:
-    - generic [ref=e23]:
-      - navigation "Footer" [ref=e24]:
-        - link "Features" [ref=e25] [cursor=pointer]:
-          - /url: /en/#features
-        - link "Pricing" [ref=e26] [cursor=pointer]:
-          - /url: /en/#pricing
-        - link "FAQ" [ref=e27] [cursor=pointer]:
-          - /url: /en/#faq
-        - link "Blog" [ref=e28] [cursor=pointer]:
-          - /url: /en/blog
-        - link "Imprint" [ref=e29] [cursor=pointer]:
-          - /url: /en/imprint
-        - link "Privacy" [ref=e30] [cursor=pointer]:
-          - /url: /en/privacy
-      - generic [ref=e31]:
-        - link "English" [ref=e33] [cursor=pointer]:
-          - /url: /en/
-        - generic [ref=e34]:
-          - generic [ref=e35]: •
-          - link "Deutsch" [ref=e36] [cursor=pointer]:
-            - /url: /de/
-      - generic [ref=e37]:
-        - link "Twitter" [ref=e38] [cursor=pointer]:
-          - /url: "#"
-          - generic [ref=e39]: Twitter
-          - img [ref=e40]
-        - link "GitHub" [ref=e42] [cursor=pointer]:
-          - /url: "#"
-          - generic [ref=e43]: GitHub
-          - img [ref=e44]
-      - paragraph [ref=e46]: © 2025 Tilly. All rights reserved.
+    - banner [ref=e3]:
+        - navigation [ref=e4]:
+            - link "Tilly" [ref=e5] [cursor=pointer]:
+                - /url: /en/
+                - generic [ref=e6]: Tilly
+            - generic [ref=e7]:
+                - link "Features" [ref=e8] [cursor=pointer]:
+                    - /url: /en/#features
+                - link "Pricing" [ref=e9] [cursor=pointer]:
+                    - /url: /en/#pricing
+                - link "FAQ" [ref=e10] [cursor=pointer]:
+                    - /url: /en/#faq
+                - link "Blog" [ref=e11] [cursor=pointer]:
+                    - /url: /en/blog
+                - button "🇺🇸" [ref=e12]
+            - link "Go to App" [ref=e14] [cursor=pointer]:
+                - /url: /app
+    - main [ref=e15]:
+        - generic [ref=e16]:
+            - heading "Page Not Found" [level=1] [ref=e17]
+            - paragraph [ref=e18]: The page you're looking for doesn't exist.
+            - paragraph [ref=e19]:
+                - link "Go back home" [ref=e20] [cursor=pointer]:
+                    - /url: /en/
+                - text: or
+                - link "open the app" [ref=e21] [cursor=pointer]:
+                    - /url: /app
+                - text: .
+    - contentinfo [ref=e22]:
+        - generic [ref=e23]:
+            - navigation "Footer" [ref=e24]:
+                - link "Features" [ref=e25] [cursor=pointer]:
+                    - /url: /en/#features
+                - link "Pricing" [ref=e26] [cursor=pointer]:
+                    - /url: /en/#pricing
+                - link "FAQ" [ref=e27] [cursor=pointer]:
+                    - /url: /en/#faq
+                - link "Blog" [ref=e28] [cursor=pointer]:
+                    - /url: /en/blog
+                - link "Imprint" [ref=e29] [cursor=pointer]:
+                    - /url: /en/imprint
+                - link "Privacy" [ref=e30] [cursor=pointer]:
+                    - /url: /en/privacy
+            - generic [ref=e31]:
+                - link "English" [ref=e33] [cursor=pointer]:
+                    - /url: /en/
+                - generic [ref=e34]:
+                    - generic [ref=e35]: •
+                    - link "Deutsch" [ref=e36] [cursor=pointer]:
+                        - /url: /de/
+            - generic [ref=e37]:
+                - link "Twitter" [ref=e38] [cursor=pointer]:
+                    - /url: "#"
+                    - generic [ref=e39]: Twitter
+                    - img [ref=e40]
+                - link "GitHub" [ref=e42] [cursor=pointer]:
+                    - /url: "#"
+                    - generic [ref=e43]: GitHub
+                    - img [ref=e44]
+            - paragraph [ref=e46]: © 2025 Tilly. All rights reserved.
 ```

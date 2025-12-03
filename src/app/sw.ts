@@ -7,6 +7,9 @@ declare let self: ServiceWorkerGlobalScope & {
 	__WB_MANIFEST: Array<{ url: string; revision?: string }>
 }
 
+// Injected at build time by Vite plugin
+const BASE_PATH = "%%BASE_PATH%%";
+
 type MessageEventData =
 	| { type: "SKIP_WAITING" }
 	| { type: "SET_USER_ID"; userId: string }
@@ -30,13 +33,30 @@ let APP_SHELL_CACHE = "tilly-pages-v1"
 cleanupOutdatedCaches()
 precacheAndRoute(self.__WB_MANIFEST)
 
+// Helper to add base path to URL
+function withBasePath(path: string): string {
+	if (!BASE_PATH) return path
+	if (path.startsWith(BASE_PATH)) return path
+	return `${BASE_PATH}${path}`
+}
+
 registerRoute(
-	({ request, url }) =>
-		request.mode === "navigate" &&
-		(url.pathname === "/app" || url.pathname.startsWith("/app/")),
+	({ request, url }) => {
+		let pathname = url.pathname
+		// Remove base path for matching
+		if (BASE_PATH && pathname.startsWith(BASE_PATH)) {
+			pathname = pathname.slice(BASE_PATH.length) || "/"
+		}
+		return (
+			request.mode === "navigate" &&
+			(pathname === "/app" || pathname.startsWith("/app/"))
+		)
+	},
 	async ({ request, event }) => {
 		let cache = await caches.open(APP_SHELL_CACHE)
-		let appShellRequest = new Request("/app", { credentials: "same-origin" })
+		let appShellRequest = new Request(withBasePath("/app"), {
+			credentials: "same-origin",
+		})
 
 		try {
 			let preloadPromise = Reflect.get(event, "preloadResponse")
@@ -103,7 +123,7 @@ sw.addEventListener("notificationclick", event => {
 	}
 
 	let notificationData = toNotificationPayload(event.notification.data)
-	let targetUrl = notificationData?.url || "/app/reminders"
+	let targetUrl = notificationData?.url || withBasePath("/app/reminders")
 
 	event.waitUntil(openOrFocusClient(targetUrl))
 })
@@ -167,8 +187,10 @@ async function openOrFocusClient(targetUrl: string): Promise<void> {
 		includeUncontrolled: true,
 	})
 
+	let appPath = withBasePath("/app")
+
 	for (let client of clientList) {
-		if (isWindowClient(client) && client.url.includes("/app")) {
+		if (isWindowClient(client) && client.url.includes(appPath)) {
 			await client.focus()
 			if (typeof client.navigate === "function") {
 				await client.navigate(targetUrl)
@@ -214,8 +236,8 @@ function getDefaultNotificationPayload(): NotificationPayload {
 	return {
 		title: "Tilly",
 		body: "You have a new notification",
-		icon: "/app/icons/icon-192x192.png",
-		badge: "/app/icons/transparent-96x96.png",
+		icon: withBasePath("/app/icons/icon-192x192.png"),
+		badge: withBasePath("/app/icons/transparent-96x96.png"),
 		tag: "tilly-notification",
 	}
 }

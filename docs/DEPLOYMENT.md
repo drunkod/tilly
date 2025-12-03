@@ -42,6 +42,7 @@ npx web-push generate-vapid-keys
 ```
 
 This will output:
+
 ```
 Public Key: BN...
 Private Key: ...
@@ -54,16 +55,19 @@ Add these to your `.env` file.
 ### Vercel (Recommended)
 
 1. **Install Vercel CLI**:
+
 ```bash
 npm i -g vercel
 ```
 
 2. **Deploy**:
+
 ```bash
 vercel
 ```
 
 3. **Set Environment Variables**:
+
 ```bash
 vercel env add PUBLIC_JAZZ_SYNC_SERVER
 vercel env add NEXT_PUBLIC_JAZZ_API_KEY
@@ -75,6 +79,7 @@ vercel env add CRON_SECRET
 ```
 
 4. **Deploy to Production**:
+
 ```bash
 vercel --prod
 ```
@@ -82,11 +87,13 @@ vercel --prod
 ### Docker
 
 1. **Build Image**:
+
 ```bash
 docker build -t tilly .
 ```
 
 2. **Run Container**:
+
 ```bash
 docker run -p 3000:3000 \
   -e PUBLIC_JAZZ_SYNC_SERVER=wss://cloud.jazz.tools/?key=YOUR_KEY \
@@ -137,6 +144,7 @@ If you want to enable cron jobs in the future:
 ### 4. Monitor Logs
 
 Check your deployment platform's logs for:
+
 - Authentication errors
 - Sync connection issues
 - API errors
@@ -147,6 +155,7 @@ Check your deployment platform's logs for:
 ### HTTPS Required
 
 Passkeys require a secure context (HTTPS). Ensure your deployment:
+
 - Uses HTTPS in production
 - Has a valid SSL certificate
 - Redirects HTTP to HTTPS
@@ -160,6 +169,7 @@ Passkeys require a secure context (HTTPS). Ensure your deployment:
 ### CORS Configuration
 
 If deploying API and frontend separately:
+
 - Configure CORS headers appropriately
 - Whitelist only your frontend domain
 - Use secure cookie settings
@@ -169,6 +179,7 @@ If deploying API and frontend separately:
 ### Jazz Cloud Limits
 
 Free tier includes:
+
 - 100 MB storage
 - 10 GB bandwidth/month
 - Unlimited sync connections
@@ -178,6 +189,7 @@ For higher limits, upgrade your Jazz Cloud plan.
 ### Database Performance
 
 Jazz is designed for offline-first, client-side operation:
+
 - Most operations happen locally
 - Sync is incremental and efficient
 - No database scaling needed on your end
@@ -185,6 +197,7 @@ Jazz is designed for offline-first, client-side operation:
 ### API Rate Limiting
 
 Consider implementing rate limiting for:
+
 - AI assistant endpoints (to control Gemini API costs)
 - Push notification endpoints
 - Data export/import endpoints
@@ -221,6 +234,7 @@ Consider implementing rate limiting for:
 ### Data Backup
 
 Jazz handles data persistence, but you should:
+
 1. Regularly export your data via Settings → Download Data
 2. Store backups securely
 3. Test restore process periodically
@@ -228,6 +242,7 @@ Jazz handles data persistence, but you should:
 ### Disaster Recovery
 
 If your deployment fails:
+
 1. Redeploy from your Git repository
 2. Restore environment variables
 3. Users' data is safe in Jazz Cloud
@@ -306,6 +321,7 @@ git push origin main
 ## Support
 
 For deployment issues:
+
 - Check [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
 - Review [AUTHENTICATION_TESTING.md](AUTHENTICATION_TESTING.md)
 - File an issue on GitHub

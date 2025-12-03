@@ -50,32 +50,32 @@ export let onRequest = defineMiddleware(async (context, next) => {
 				"frame-ancestors 'none'",
 				"base-uri 'self'",
 				"form-action 'self'",
-			].join("; ")
+			].join("; "),
 		)
 	}
-	
+
 	// Prevent clickjacking
 	response.headers.set("X-Frame-Options", "DENY")
-	
+
 	// Prevent MIME type sniffing
 	response.headers.set("X-Content-Type-Options", "nosniff")
-	
+
 	// Control referrer information
 	response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
-	
+
 	// Restrict browser features
 	response.headers.set(
 		"Permissions-Policy",
-		"camera=(), microphone=(), geolocation=()"
+		"camera=(), microphone=(), geolocation=()",
 	)
 
 	if (response.status === 404) {
 		let pathname = context.url.pathname
-		
+
 		if (pathname === "/sw.js" || pathname.startsWith("/workbox-")) {
 			return response
 		}
-		
+
 		let locale = pathname.startsWith("/de") ? "de" : "en"
 		let notFoundPage = `/${locale}/404`
 		return context.rewrite(notFoundPage)
@@ -105,9 +105,7 @@ let scriptSrc = isDev
 	? "'self' 'unsafe-inline' 'unsafe-eval' https://cloud.jazz.tools"
 	: "'self' 'nonce-{NONCE}' https://cloud.jazz.tools"
 
-let styleSrc = isDev
-	? "'self' 'unsafe-inline'"
-	: "'self' 'nonce-{NONCE}'"
+let styleSrc = isDev ? "'self' 'unsafe-inline'" : "'self' 'nonce-{NONCE}'"
 ```
 
 ---
@@ -126,7 +124,7 @@ pnpm add -D @types/dompurify
 Create `src/shared/lib/sanitize.ts`:
 
 ```typescript
-import DOMPurify from 'dompurify'
+import DOMPurify from "dompurify"
 
 /**
  * Sanitize plain text input (removes all HTML)
@@ -134,7 +132,7 @@ import DOMPurify from 'dompurify'
 export function sanitizeText(input: string): string {
 	return DOMPurify.sanitize(input, {
 		ALLOWED_TAGS: [],
-		ALLOWED_ATTR: []
+		ALLOWED_ATTR: [],
 	}).trim()
 }
 
@@ -144,11 +142,24 @@ export function sanitizeText(input: string): string {
 export function sanitizeMarkdown(input: string): string {
 	return DOMPurify.sanitize(input, {
 		ALLOWED_TAGS: [
-			'b', 'i', 'em', 'strong', 'a', 'p', 'br', 
-			'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'code', 'pre'
+			"b",
+			"i",
+			"em",
+			"strong",
+			"a",
+			"p",
+			"br",
+			"ul",
+			"ol",
+			"li",
+			"h1",
+			"h2",
+			"h3",
+			"code",
+			"pre",
 		],
-		ALLOWED_ATTR: ['href', 'title', 'target'],
-		ALLOW_DATA_ATTR: false
+		ALLOWED_ATTR: ["href", "title", "target"],
+		ALLOW_DATA_ATTR: false,
 	}).trim()
 }
 
@@ -157,7 +168,7 @@ export function sanitizeMarkdown(input: string): string {
  */
 export function sanitizeUsername(input: string): string {
 	return input
-		.replace(/[^a-zA-Z0-9\s\-_]/g, '')
+		.replace(/[^a-zA-Z0-9\s\-_]/g, "")
 		.trim()
 		.slice(0, 50)
 }
@@ -167,7 +178,7 @@ export function sanitizeUsername(input: string): string {
  */
 export function sanitizePersonName(input: string): string {
 	return input
-		.replace(/[<>]/g, '') // Remove angle brackets
+		.replace(/[<>]/g, "") // Remove angle brackets
 		.trim()
 		.slice(0, 100)
 }
@@ -176,13 +187,13 @@ export function sanitizePersonName(input: string): string {
  * Sanitize file upload data
  */
 export function sanitizeFileData(data: unknown): unknown {
-	if (typeof data === 'string') {
+	if (typeof data === "string") {
 		return sanitizeText(data)
 	}
 	if (Array.isArray(data)) {
 		return data.map(sanitizeFileData)
 	}
-	if (data && typeof data === 'object') {
+	if (data && typeof data === "object") {
 		let sanitized: Record<string, unknown> = {}
 		for (let [key, value] of Object.entries(data)) {
 			sanitized[key] = sanitizeFileData(value)
@@ -197,18 +208,18 @@ export function sanitizeFileData(data: unknown): unknown {
  */
 export function sanitizeDataURL(dataURL: string): string | null {
 	// Only allow image data URLs
-	if (!dataURL.startsWith('data:image/')) {
+	if (!dataURL.startsWith("data:image/")) {
 		return null
 	}
-	
+
 	// Check for valid image formats
-	let validFormats = ['jpeg', 'jpg', 'png', 'gif', 'webp']
+	let validFormats = ["jpeg", "jpg", "png", "gif", "webp"]
 	let format = dataURL.match(/data:image\/(\w+);/)?.[1]
-	
+
 	if (!format || !validFormats.includes(format.toLowerCase())) {
 		return null
 	}
-	
+
 	return dataURL
 }
 ```
@@ -223,7 +234,7 @@ import { sanitizeUsername } from "#shared/lib/sanitize"
 // In handleSignUp function:
 async function handleSignUp() {
 	let sanitizedUsername = sanitizeUsername(username)
-	
+
 	if (!sanitizedUsername) {
 		setError("Please enter a valid username")
 		return
@@ -275,7 +286,7 @@ for (let personData of jsonData.people) {
 	if (personData.summary) {
 		personData.summary = sanitizeText(personData.summary)
 	}
-	
+
 	// Sanitize avatar data URL
 	if (personData.avatar?.dataURL) {
 		let sanitized = sanitizeDataURL(personData.avatar.dataURL)
@@ -286,14 +297,14 @@ for (let personData of jsonData.people) {
 			personData.avatar.dataURL = sanitized
 		}
 	}
-	
+
 	// Sanitize notes
 	if (personData.notes) {
 		for (let note of personData.notes) {
 			note.content = sanitizeMarkdown(note.content)
 		}
 	}
-	
+
 	// Sanitize reminders
 	if (personData.reminders) {
 		for (let reminder of personData.reminders) {
@@ -319,8 +330,8 @@ let maliciousInputs = [
 for (let input of maliciousInputs) {
 	let sanitized = sanitizeText(input)
 	console.assert(
-		!sanitized.includes('<script>'),
-		'Script tags should be removed'
+		!sanitized.includes("<script>"),
+		"Script tags should be removed",
 	)
 }
 ```
@@ -339,9 +350,9 @@ Create `src/app/lib/passkey-support.ts`:
  */
 export function isPasskeySupported(): boolean {
 	return (
-		typeof window !== 'undefined' &&
+		typeof window !== "undefined" &&
 		window.PublicKeyCredential !== undefined &&
-		typeof window.PublicKeyCredential === 'function'
+		typeof window.PublicKeyCredential === "function"
 	)
 }
 
@@ -352,10 +363,10 @@ export async function isConditionalUISupported(): Promise<boolean> {
 	if (!isPasskeySupported()) {
 		return false
 	}
-	
+
 	try {
-		let available = await window.PublicKeyCredential
-			.isConditionalMediationAvailable()
+		let available =
+			await window.PublicKeyCredential.isConditionalMediationAvailable()
 		return available
 	} catch {
 		return false
@@ -367,13 +378,13 @@ export async function isConditionalUISupported(): Promise<boolean> {
  */
 export function getBrowserName(): string {
 	let userAgent = navigator.userAgent
-	
-	if (userAgent.includes('Firefox')) return 'Firefox'
-	if (userAgent.includes('Chrome')) return 'Chrome'
-	if (userAgent.includes('Safari')) return 'Safari'
-	if (userAgent.includes('Edge')) return 'Edge'
-	
-	return 'your browser'
+
+	if (userAgent.includes("Firefox")) return "Firefox"
+	if (userAgent.includes("Chrome")) return "Chrome"
+	if (userAgent.includes("Safari")) return "Safari"
+	if (userAgent.includes("Edge")) return "Edge"
+
+	return "your browser"
 }
 ```
 
@@ -434,11 +445,11 @@ export let messages = {
 	en: {
 		auth: {
 			passkeyNotSupported: "Passkeys are not supported in {browser}",
-			passkeyNotSupportedDescription: 
+			passkeyNotSupportedDescription:
 				"Please use a modern browser like Chrome, Safari, or Edge to use passkey authentication.",
 			useModernBrowser: "Use a modern browser",
-		}
-	}
+		},
+	},
 }
 ```
 
@@ -455,13 +466,13 @@ let MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 async function onSubmit(values: z.infer<typeof uploadFormSchema>) {
 	let file = values.file[0]
 	if (!file) return
-	
+
 	// Check file size
 	if (file.size > MAX_FILE_SIZE) {
 		toast.error("File too large. Maximum size is 10MB.")
 		return
 	}
-	
+
 	// ... rest of upload logic
 }
 ```
@@ -472,28 +483,28 @@ async function onSubmit(values: z.infer<typeof uploadFormSchema>) {
 // src/app/lib/rate-limit.ts
 export class RateLimiter {
 	private attempts: Map<string, number[]> = new Map()
-	
+
 	constructor(
 		private maxAttempts: number,
-		private windowMs: number
+		private windowMs: number,
 	) {}
-	
+
 	canAttempt(key: string): boolean {
 		let now = Date.now()
 		let attempts = this.attempts.get(key) || []
-		
+
 		// Remove old attempts outside the window
 		attempts = attempts.filter(time => now - time < this.windowMs)
-		
+
 		if (attempts.length >= this.maxAttempts) {
 			return false
 		}
-		
+
 		attempts.push(now)
 		this.attempts.set(key, attempts)
 		return true
 	}
-	
+
 	reset(key: string): void {
 		this.attempts.delete(key)
 	}
@@ -503,11 +514,11 @@ export class RateLimiter {
 let authRateLimiter = new RateLimiter(5, 60000) // 5 attempts per minute
 
 async function handleSignUp() {
-	if (!authRateLimiter.canAttempt('signup')) {
+	if (!authRateLimiter.canAttempt("signup")) {
 		setError("Too many attempts. Please wait a minute.")
 		return
 	}
-	
+
 	// ... rest of signup logic
 }
 ```
@@ -532,34 +543,38 @@ Add security tests:
 
 ```typescript
 // tests/security/sanitization.test.ts
-import { describe, it, expect } from 'vitest'
-import { sanitizeText, sanitizeMarkdown, sanitizeUsername } from '#shared/lib/sanitize'
+import { describe, it, expect } from "vitest"
+import {
+	sanitizeText,
+	sanitizeMarkdown,
+	sanitizeUsername,
+} from "#shared/lib/sanitize"
 
-describe('Input Sanitization', () => {
-	it('should remove script tags', () => {
+describe("Input Sanitization", () => {
+	it("should remove script tags", () => {
 		let input = '<script>alert("XSS")</script>Hello'
 		let result = sanitizeText(input)
-		expect(result).not.toContain('<script>')
-		expect(result).toBe('Hello')
+		expect(result).not.toContain("<script>")
+		expect(result).toBe("Hello")
 	})
-	
-	it('should remove event handlers', () => {
+
+	it("should remove event handlers", () => {
 		let input = '<img src=x onerror=alert("XSS")>'
 		let result = sanitizeText(input)
-		expect(result).not.toContain('onerror')
+		expect(result).not.toContain("onerror")
 	})
-	
-	it('should allow safe markdown', () => {
-		let input = '**Bold** and *italic*'
+
+	it("should allow safe markdown", () => {
+		let input = "**Bold** and *italic*"
 		let result = sanitizeMarkdown(input)
-		expect(result).toContain('<strong>')
-		expect(result).toContain('<em>')
+		expect(result).toContain("<strong>")
+		expect(result).toContain("<em>")
 	})
-	
-	it('should sanitize usernames', () => {
+
+	it("should sanitize usernames", () => {
 		let input = '<script>alert("XSS")</script>John'
 		let result = sanitizeUsername(input)
-		expect(result).toBe('scriptalertXSSscriptJohn')
+		expect(result).toBe("scriptalertXSSscriptJohn")
 	})
 })
 ```

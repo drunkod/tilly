@@ -118,12 +118,14 @@ pm2 start dist/server/entry.mjs --name tilly-staging
 ### 1. Smoke Tests
 
 #### Basic Functionality
+
 - [ ] Application loads at staging URL
 - [ ] No console errors on page load
 - [ ] Service worker registers successfully
 - [ ] Jazz sync connection establishes
 
 #### Authentication Flow Tests
+
 - [ ] **Sign Up Flow**
   - [ ] Click "Sign Up" button
   - [ ] Passkey creation prompt appears
@@ -158,7 +160,7 @@ pm2 start dist/server/entry.mjs --name tilly-staging
 Open browser DevTools (F12) and check:
 
 - [ ] **Console Tab**: No errors (red messages)
-- [ ] **Network Tab**: 
+- [ ] **Network Tab**:
   - [ ] WebSocket connection to Jazz sync server is established
   - [ ] No failed requests (except expected 404s)
 - [ ] **Application Tab**:
@@ -271,14 +273,17 @@ pm2 restart tilly-staging
 Document any issues found during staging testing:
 
 ### Critical Issues (Block Production)
+
 - [ ] Issue 1: [Description]
 - [ ] Issue 2: [Description]
 
 ### Major Issues (Should Fix Before Production)
+
 - [ ] Issue 1: [Description]
 - [ ] Issue 2: [Description]
 
 ### Minor Issues (Can Fix After Production)
+
 - [ ] Issue 1: [Description]
 - [ ] Issue 2: [Description]
 
@@ -293,10 +298,10 @@ Once all checks pass:
 - [ ] Stakeholders notified of staging deployment
 - [ ] Ready for production deployment
 
-**Tested By**: _______________  
-**Date**: _______________  
-**Staging URL**: _______________  
-**Notes**: _______________
+**Tested By**: ******\_\_\_******
+**Date**: ******\_\_\_******
+**Staging URL**: ******\_\_\_******
+**Notes**: ******\_\_\_******
 
 ## Next Steps
 

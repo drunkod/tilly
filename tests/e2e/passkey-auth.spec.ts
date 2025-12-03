@@ -85,18 +85,14 @@ test.describe("Passkey Authentication - UI Tests", () => {
 		await expect(page.getByLabel(/username/i)).toBeVisible()
 
 		// Click the switch to login button
-		await page
-			.getByRole("button", { name: /already have an account/i })
-			.click()
+		await page.getByRole("button", { name: /already have an account/i }).click()
 
 		// Verify we switched to login mode
 		await expect(page.getByRole("heading", { name: /log in/i })).toBeVisible()
 		await expect(page.getByLabel(/username/i)).not.toBeVisible()
 
 		// Click the switch to signup button
-		await page
-			.getByRole("button", { name: /don't have an account/i })
-			.click()
+		await page.getByRole("button", { name: /don't have an account/i }).click()
 
 		// Verify we switched back to signup mode
 		await expect(page.getByRole("heading", { name: /sign up/i })).toBeVisible()
@@ -164,7 +160,7 @@ test.describe("Passkey Authentication - UI Tests", () => {
 		await expect(page.getByRole("dialog")).toBeVisible()
 
 		// Click outside the dialog (on the backdrop)
-		await page.locator('[data-radix-dialog-overlay]').click({ force: true })
+		await page.locator("[data-radix-dialog-overlay]").click({ force: true })
 
 		// Verify dialog is closed
 		await expect(page.getByRole("dialog")).not.toBeVisible()
@@ -276,5 +272,3 @@ test.describe("Passkey Authentication - Integration Tests", () => {
 		await expect(page.getByRole("dialog")).toBeVisible()
 	})
 })
-
-

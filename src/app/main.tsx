@@ -11,6 +11,9 @@ import { SplashScreen } from "./components/splash-screen"
 import { Toaster } from "#shared/ui/sonner"
 import { MainErrorBoundary } from "#app/components/main-error-boundary"
 
+// Get base path from Vite env (set in astro.config.ts)
+const BASE_PATH = import.meta.env.BASE_PATH || ""
+
 export function PWA() {
 	useServiceWorker({ updateCheckIntervalMs: 2 * 60 * 60 * 1000 })
 	let syncConfig = buildSyncConfig()
@@ -30,7 +33,14 @@ export function PWA() {
 }
 
 function RouterWithJazz() {
-	let me = useAccount(UserAccount, { select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null })
+	let me = useAccount(UserAccount, {
+		select: me =>
+			me.$isLoaded
+				? me
+				: me.$jazz.loadingState === "loading"
+					? undefined
+					: null,
+	})
 
 	// Handle SPA redirect navigation after router is ready
 	useEffect(() => {
@@ -96,10 +106,15 @@ function handleSpaRedirect() {
 	let redirectPath = sessionStorage.getItem("spa-redirect-path")
 	if (redirectPath) {
 		sessionStorage.removeItem("spa-redirect-path")
+		// Remove base path if present
+		let pathWithoutBase = redirectPath
+		if (BASE_PATH && redirectPath.startsWith(BASE_PATH)) {
+			pathWithoutBase = redirectPath.slice(BASE_PATH.length)
+		}
 		// Only handle /app/* paths
-		if (redirectPath.startsWith("/app")) {
+		if (pathWithoutBase.startsWith("/app")) {
 			// Remove the /app prefix since router uses basepath
-			let routerPath = redirectPath.slice(4) || "/"
+			let routerPath = pathWithoutBase.slice(4) || "/"
 			window.history.replaceState(null, "", redirectPath)
 			return routerPath
 		}
@@ -110,7 +125,7 @@ function handleSpaRedirect() {
 let initialRedirectPath = handleSpaRedirect()
 
 let router = createRouter({
-	basepath: "/app",
+	basepath: BASE_PATH ? `${BASE_PATH}/app` : "/app",
 	routeTree,
 	defaultGcTime: 0,
 	context: { me: undefined! },

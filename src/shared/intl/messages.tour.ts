@@ -95,7 +95,8 @@ const ruTourMessages = translate(baseTourMessages, {
 		"Напоминания помогают вам оставаться на связи и не забывать связаться.",
 	"addReminder.button": "Добавить напоминание для {$name}",
 	"finish.title": "Завершите настройку",
-	"finish.backup": "Зарегистрируйтесь для резервного копирования и синхронизации данных",
+	"finish.backup":
+		"Зарегистрируйтесь для резервного копирования и синхронизации данных",
 	"finish.notifications": "Включить Push-уведомления",
 	"finish.plus": "Получите Tilly Plus для помощи AI",
 	"finish.description": "Вы можете сделать всё это в настройках",

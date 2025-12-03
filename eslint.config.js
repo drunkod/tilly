@@ -67,6 +67,34 @@ export default [
 		rules: commonRules,
 	},
 	{
+		files: ["**/*.test.ts", "**/*.spec.ts", "**/*.test.tsx"],
+		languageOptions: {
+			parser: tsparser,
+			parserOptions: {
+				ecmaVersion: "latest",
+				sourceType: "module",
+				jsx: true,
+			},
+			globals: {
+				...globals.node,
+				...globals.browser,
+				...globals.vitest,
+				vi: "readonly",
+				vitest: "readonly",
+				assert: "readonly",
+				expect: "readonly",
+				describe: "readonly",
+				it: "readonly",
+				beforeEach: "readonly",
+				afterEach: "readonly",
+				beforeAll: "readonly",
+				afterAll: "readonly",
+			},
+		},
+		plugins: { "@typescript-eslint": tseslint },
+		rules: { ...tseslint.configs.recommended.rules, ...commonRules },
+	},
+	{
 		ignores: [
 			"dist/",
 			"build/",

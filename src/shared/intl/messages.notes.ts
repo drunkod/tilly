@@ -154,7 +154,8 @@ const ruNotesMessages = translate(baseNotesMessages, {
 	"note.permanentDelete.confirm": "Удалить навсегда",
 	"note.toast.updated": "Заметка обновлена",
 	"note.toast.updateUndone": "Обновление заметки отменено",
-	"note.toast.deleted": "Заметка удалена - будет окончательно удалена через 30 дней",
+	"note.toast.deleted":
+		"Заметка удалена - будет окончательно удалена через 30 дней",
 	"note.toast.restored": "Заметка восстановлена",
 	"note.toast.permanentlyDeleted": "Заметка окончательно удалена",
 	"note.toast.pinned": "Заметка закреплена",

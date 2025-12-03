@@ -103,15 +103,15 @@ bun run test:run:bun       # Run tests with Bun
 
 Create a `.env` file with the following variables:
 
-| Variable | Description | How to Get |
-|----------|-------------|-----------|
-| `PUBLIC_JAZZ_SYNC_SERVER` | Jazz database sync server | [jazz.tools](https://jazz.tools) |
-| `NEXT_PUBLIC_JAZZ_API_KEY` | Jazz Cloud API key | [jazz.tools/cloud](https://jazz.tools/cloud) |
-| `GOOGLE_GENERATIVE_AI_API_KEY` | AI assistant (Gemini) | [Google AI Studio](https://aistudio.google.com) |
-| `PUBLIC_VAPID_KEY` | Push notifications (public) | `npx web-push generate-vapid-keys` |
-| `VAPID_PRIVATE_KEY` | Push notifications (private) | `npx web-push generate-vapid-keys` |
-| `VAPID_SUBJECT` | Push notifications subject | `mailto:your@email.com` |
-| `CRON_SECRET` | Scheduled jobs authentication | Any random string |
+| Variable                       | Description                   | How to Get                                      |
+| ------------------------------ | ----------------------------- | ----------------------------------------------- |
+| `PUBLIC_JAZZ_SYNC_SERVER`      | Jazz database sync server     | [jazz.tools](https://jazz.tools)                |
+| `NEXT_PUBLIC_JAZZ_API_KEY`     | Jazz Cloud API key            | [jazz.tools/cloud](https://jazz.tools/cloud)    |
+| `GOOGLE_GENERATIVE_AI_API_KEY` | AI assistant (Gemini)         | [Google AI Studio](https://aistudio.google.com) |
+| `PUBLIC_VAPID_KEY`             | Push notifications (public)   | `npx web-push generate-vapid-keys`              |
+| `VAPID_PRIVATE_KEY`            | Push notifications (private)  | `npx web-push generate-vapid-keys`              |
+| `VAPID_SUBJECT`                | Push notifications subject    | `mailto:your@email.com`                         |
+| `CRON_SECRET`                  | Scheduled jobs authentication | Any random string                               |
 
 ### Generating VAPID Keys
 
@@ -120,6 +120,7 @@ npx web-push generate-vapid-keys
 ```
 
 This outputs:
+
 ```
 Public Key: BN...
 Private Key: ...
