@@ -92,10 +92,10 @@ import { co, z } from "jazz-tools"
 export { ServerSettings }
 
 let ServerSettings = co.map({
-  serverUrl: z.string().optional(),
-  enableAIChat: z.boolean().optional(),
-  enablePushNotifications: z.boolean().optional(),
-  apiKey: z.string().optional(),
+	serverUrl: z.string().optional(),
+	enableAIChat: z.boolean().optional(),
+	enablePushNotifications: z.boolean().optional(),
+	apiKey: z.string().optional(),
 })
 ```
 
@@ -107,11 +107,11 @@ let ServerSettings = co.map({
 
 ```typescript
 export let UserAccountRoot = co.map({
-  people: co.list(Person),
-  notificationSettings: NotificationSettings.optional(),
-  usageTracking: UsageTracking.optional(),
-  language: z.enum(["de", "en"]).optional(),
-  serverSettings: ServerSettings.optional(), // NEW
+	people: co.list(Person),
+	notificationSettings: NotificationSettings.optional(),
+	usageTracking: UsageTracking.optional(),
+	language: z.enum(["de", "en"]).optional(),
+	serverSettings: ServerSettings.optional(), // NEW
 })
 ```
 
@@ -128,51 +128,57 @@ import type { UserAccount } from "#shared/schema/user"
 export { hasServerFeatures, hasAIChat, hasPushNotifications, getFeatureStatus }
 
 type FeatureStatus = {
-  serverConfigured: boolean
-  aiChatAvailable: boolean
-  pushNotificationsAvailable: boolean
-  serverUrl: string | null
+	serverConfigured: boolean
+	aiChatAvailable: boolean
+	pushNotificationsAvailable: boolean
+	serverUrl: string | null
 }
 
 function hasServerFeatures(me: co.loaded<typeof UserAccount> | null): boolean {
-  // Check user settings first
-  let serverUrl = me?.root?.serverSettings?.serverUrl
-  if (serverUrl) return true
-  
-  // Fall back to environment variable
-  let envServerUrl = import.meta.env.PUBLIC_SERVER_URL
-  return !!envServerUrl
+	// Check user settings first
+	let serverUrl = me?.root?.serverSettings?.serverUrl
+	if (serverUrl) return true
+
+	// Fall back to environment variable
+	let envServerUrl = import.meta.env.PUBLIC_SERVER_URL
+	return !!envServerUrl
 }
 
 function hasAIChat(me: co.loaded<typeof UserAccount> | null): boolean {
-  if (!hasServerFeatures(me)) return false
-  
-  // Check if explicitly disabled in settings
-  let enabled = me?.root?.serverSettings?.enableAIChat
-  return enabled !== false // Default to true if server available
+	if (!hasServerFeatures(me)) return false
+
+	// Check if explicitly disabled in settings
+	let enabled = me?.root?.serverSettings?.enableAIChat
+	return enabled !== false // Default to true if server available
 }
 
-function hasPushNotifications(me: co.loaded<typeof UserAccount> | null): boolean {
-  if (!hasServerFeatures(me)) return false
-  
-  // Check browser support
-  if (!("PushManager" in window) || !("Notification" in window)) return false
-  
-  // Check if explicitly disabled in settings
-  let enabled = me?.root?.serverSettings?.enablePushNotifications
-  return enabled !== false
+function hasPushNotifications(
+	me: co.loaded<typeof UserAccount> | null,
+): boolean {
+	if (!hasServerFeatures(me)) return false
+
+	// Check browser support
+	if (!("PushManager" in window) || !("Notification" in window)) return false
+
+	// Check if explicitly disabled in settings
+	let enabled = me?.root?.serverSettings?.enablePushNotifications
+	return enabled !== false
 }
 
-function getFeatureStatus(me: co.loaded<typeof UserAccount> | null): FeatureStatus {
-  let serverUrl = me?.root?.serverSettings?.serverUrl || 
-                  import.meta.env.PUBLIC_SERVER_URL || null
-  
-  return {
-    serverConfigured: !!serverUrl,
-    aiChatAvailable: hasAIChat(me),
-    pushNotificationsAvailable: hasPushNotifications(me),
-    serverUrl,
-  }
+function getFeatureStatus(
+	me: co.loaded<typeof UserAccount> | null,
+): FeatureStatus {
+	let serverUrl =
+		me?.root?.serverSettings?.serverUrl ||
+		import.meta.env.PUBLIC_SERVER_URL ||
+		null
+
+	return {
+		serverConfigured: !!serverUrl,
+		aiChatAvailable: hasAIChat(me),
+		pushNotificationsAvailable: hasPushNotifications(me),
+		serverUrl,
+	}
 }
 ```
 
@@ -190,68 +196,70 @@ import { tryCatch } from "#shared/lib/trycatch"
 export { getServerUrl, isServerAvailable, createApiClient }
 
 function getServerUrl(me: co.loaded<typeof UserAccount> | null): string | null {
-  // User settings take priority
-  let userServerUrl = me?.root?.serverSettings?.serverUrl
-  if (userServerUrl) return userServerUrl
-  
-  // Fall back to environment variable
-  return import.meta.env.PUBLIC_SERVER_URL || null
+	// User settings take priority
+	let userServerUrl = me?.root?.serverSettings?.serverUrl
+	if (userServerUrl) return userServerUrl
+
+	// Fall back to environment variable
+	return import.meta.env.PUBLIC_SERVER_URL || null
 }
 
 async function isServerAvailable(serverUrl: string): Promise<boolean> {
-  let result = await tryCatch(
-    fetch(`${serverUrl}/health`, { 
-      method: "GET",
-      signal: AbortSignal.timeout(5000)
-    })
-  )
-  
-  if (!result.ok) return false
-  return result.value.ok
+	let result = await tryCatch(
+		fetch(`${serverUrl}/health`, {
+			method: "GET",
+			signal: AbortSignal.timeout(5000),
+		}),
+	)
+
+	if (!result.ok) return false
+	return result.value.ok
 }
 
 function createApiClient(me: co.loaded<typeof UserAccount> | null) {
-  let serverUrl = getServerUrl(me)
-  
-  return {
-    serverUrl,
-    isConfigured: !!serverUrl,
-    
-    async chat(messages: unknown[], options?: RequestInit) {
-      if (!serverUrl) {
-        throw new Error("Server not configured. Configure server URL in settings.")
-      }
-      
-      let response = await fetch(`${serverUrl}/api/chat`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...options?.headers,
-        },
-        body: JSON.stringify({ messages }),
-        ...options,
-      })
-      
-      if (!response.ok) {
-        throw new Error(`Chat API error: ${response.status}`)
-      }
-      
-      return response
-    },
-    
-    async testConnection(): Promise<{ ok: boolean; error?: string }> {
-      if (!serverUrl) {
-        return { ok: false, error: "Server URL not configured" }
-      }
-      
-      let result = await tryCatch(isServerAvailable(serverUrl))
-      if (!result.ok) {
-        return { ok: false, error: result.error.message }
-      }
-      
-      return { ok: result.value }
-    },
-  }
+	let serverUrl = getServerUrl(me)
+
+	return {
+		serverUrl,
+		isConfigured: !!serverUrl,
+
+		async chat(messages: unknown[], options?: RequestInit) {
+			if (!serverUrl) {
+				throw new Error(
+					"Server not configured. Configure server URL in settings.",
+				)
+			}
+
+			let response = await fetch(`${serverUrl}/api/chat`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					...options?.headers,
+				},
+				body: JSON.stringify({ messages }),
+				...options,
+			})
+
+			if (!response.ok) {
+				throw new Error(`Chat API error: ${response.status}`)
+			}
+
+			return response
+		},
+
+		async testConnection(): Promise<{ ok: boolean; error?: string }> {
+			if (!serverUrl) {
+				return { ok: false, error: "Server URL not configured" }
+			}
+
+			let result = await tryCatch(isServerAvailable(serverUrl))
+			if (!result.ok) {
+				return { ok: false, error: result.error.message }
+			}
+
+			return { ok: result.value }
+		},
+	}
 }
 ```
 
@@ -284,46 +292,46 @@ function ServerSettingsSection({ me }: Props) {
   let t = useIntl()
   let [testing, setTesting] = useState(false)
   let [testResult, setTestResult] = useState<{ ok: boolean; error?: string } | null>(null)
-  
+
   let settings = me.root.serverSettings
   let serverUrl = settings?.serverUrl || ""
   let enableAIChat = settings?.enableAIChat ?? true
   let enablePush = settings?.enablePushNotifications ?? true
-  
+
   function ensureSettings() {
     if (!me.root.serverSettings) {
       me.root.$jazz.set("serverSettings", ServerSettings.create({}))
     }
     return me.root.serverSettings!
   }
-  
+
   function handleServerUrlChange(url: string) {
     let s = ensureSettings()
     s.$jazz.set("serverUrl", url || undefined)
     setTestResult(null)
   }
-  
+
   function handleAIChatToggle(enabled: boolean) {
     let s = ensureSettings()
     s.$jazz.set("enableAIChat", enabled)
   }
-  
+
   function handlePushToggle(enabled: boolean) {
     let s = ensureSettings()
     s.$jazz.set("enablePushNotifications", enabled)
   }
-  
+
   async function handleTestConnection() {
     setTesting(true)
     setTestResult(null)
-    
+
     let client = createApiClient(me)
     let result = await client.testConnection()
-    
+
     setTestResult(result)
     setTesting(false)
   }
-  
+
   return (
     <SettingsSection
       title={t("settings.server.title")}
@@ -350,13 +358,13 @@ function ServerSettingsSection({ me }: Props) {
           </div>
           {testResult && (
             <p className={testResult.ok ? "text-green-600" : "text-red-600"}>
-              {testResult.ok 
-                ? t("settings.server.connected") 
+              {testResult.ok
+                ? t("settings.server.connected")
                 : testResult.error || t("settings.server.connectionFailed")}
             </p>
           )}
         </div>
-        
+
         {serverUrl && (
           <>
             <div className="flex items-center justify-between">
@@ -367,7 +375,7 @@ function ServerSettingsSection({ me }: Props) {
                 onCheckedChange={handleAIChatToggle}
               />
             </div>
-            
+
             <div className="flex items-center justify-between">
               <Label htmlFor="enablePush">{t("settings.server.push.label")}</Label>
               <Switch
@@ -378,7 +386,7 @@ function ServerSettingsSection({ me }: Props) {
             </div>
           </>
         )}
-        
+
         {!serverUrl && (
           <p className="text-sm text-muted-foreground">
             {t("settings.server.notConfigured")}
@@ -413,34 +421,34 @@ type Props = {
 function ServerStatusIndicator({ me }: Props) {
   let [status, setStatus] = useState<Status>("checking")
   let serverUrl = getServerUrl(me)
-  
+
   useEffect(() => {
     if (!serverUrl) {
       setStatus("not-configured")
       return
     }
-    
+
     setStatus("checking")
-    
+
     isServerAvailable(serverUrl).then(available => {
       setStatus(available ? "connected" : "disconnected")
     })
   }, [serverUrl])
-  
+
   let colors = {
     connected: "bg-green-500",
     disconnected: "bg-red-500",
     "not-configured": "bg-gray-400",
     checking: "bg-yellow-500 animate-pulse",
   }
-  
+
   let labels = {
     connected: "Server connected",
     disconnected: "Server disconnected",
     "not-configured": "Server not configured",
     checking: "Checking connection...",
   }
-  
+
   return (
     <div className="flex items-center gap-2">
       <div className={`w-2 h-2 rounded-full ${colors[status]}`} />
@@ -467,63 +475,63 @@ let isStatic = outputMode === "static"
 let adapter = isStatic ? undefined : await getAdapter()
 
 async function getAdapter() {
-  if (process.env.ASTRO_ADAPTER === "node") {
-    let { default: node } = await import("@astrojs/node")
-    return node({ mode: "standalone" })
-  }
-  let { default: vercel } = await import("@astrojs/vercel")
-  return vercel()
+	if (process.env.ASTRO_ADAPTER === "node") {
+		let { default: node } = await import("@astrojs/node")
+		return node({ mode: "standalone" })
+	}
+	let { default: vercel } = await import("@astrojs/vercel")
+	return vercel()
 }
 
 export default defineConfig({
-  output: isStatic ? "static" : "server",
-  adapter,
-  
-  env: {
-    schema: {
-      // Server variables - optional in static mode
-      GOOGLE_AI_API_KEY: envField.string({
-        context: "server",
-        access: "secret",
-        optional: isStatic,
-      }),
-      VAPID_PRIVATE_KEY: envField.string({
-        context: "server",
-        access: "secret",
-        optional: isStatic,
-      }),
-      CRON_SECRET: envField.string({
-        context: "server",
-        access: "secret",
-        optional: isStatic,
-      }),
-      JAZZ_WORKER_SECRET: envField.string({
-        context: "server",
-        access: "secret",
-        optional: isStatic,
-      }),
-      
-      // New: Public server URL for static builds
-      PUBLIC_SERVER_URL: envField.string({
-        context: "client",
-        access: "public",
-        optional: true,
-      }),
-      
-      // Existing public variables (always required)
-      PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({
-        context: "client",
-        access: "public",
-      }),
-      PUBLIC_JAZZ_SYNC_SERVER: envField.string({
-        context: "client",
-        access: "public",
-      }),
-      // ... other existing vars ...
-    },
-  },
-  
-  // ... rest of config ...
+	output: isStatic ? "static" : "server",
+	adapter,
+
+	env: {
+		schema: {
+			// Server variables - optional in static mode
+			GOOGLE_AI_API_KEY: envField.string({
+				context: "server",
+				access: "secret",
+				optional: isStatic,
+			}),
+			VAPID_PRIVATE_KEY: envField.string({
+				context: "server",
+				access: "secret",
+				optional: isStatic,
+			}),
+			CRON_SECRET: envField.string({
+				context: "server",
+				access: "secret",
+				optional: isStatic,
+			}),
+			JAZZ_WORKER_SECRET: envField.string({
+				context: "server",
+				access: "secret",
+				optional: isStatic,
+			}),
+
+			// New: Public server URL for static builds
+			PUBLIC_SERVER_URL: envField.string({
+				context: "client",
+				access: "public",
+				optional: true,
+			}),
+
+			// Existing public variables (always required)
+			PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({
+				context: "client",
+				access: "public",
+			}),
+			PUBLIC_JAZZ_SYNC_SERVER: envField.string({
+				context: "client",
+				access: "public",
+			}),
+			// ... other existing vars ...
+		},
+	},
+
+	// ... rest of config ...
 })
 ```
 
@@ -555,24 +563,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: pnpm/action-setup@v2
         with:
           version: 9
-          
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-          
+
       - run: pnpm install --frozen-lockfile
-      
+
       - name: Build static site
         run: pnpm build:static
         env:
           PUBLIC_JAZZ_SYNC_SERVER: ${{ vars.PUBLIC_JAZZ_SYNC_SERVER }}
           PUBLIC_SERVER_URL: ${{ vars.PUBLIC_SERVER_URL }}
-          
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -596,14 +604,14 @@ jobs:
 
 ```json
 {
-  "scripts": {
-    "dev": "astro dev",
-    "build": "pnpm test:run && astro check && astro build",
-    "build:static": "ASTRO_OUTPUT=static astro check && ASTRO_OUTPUT=static astro build",
-    "build:node": "ASTRO_ADAPTER=node astro check && ASTRO_ADAPTER=node astro build",
-    "preview": "astro preview",
-    "preview:static": "pnpm build:static && npx serve dist"
-  }
+	"scripts": {
+		"dev": "astro dev",
+		"build": "pnpm test:run && astro check && astro build",
+		"build:static": "ASTRO_OUTPUT=static astro check && ASTRO_OUTPUT=static astro build",
+		"build:node": "ASTRO_ADAPTER=node astro check && ASTRO_ADAPTER=node astro build",
+		"preview": "astro preview",
+		"preview:static": "pnpm build:static && npx serve dist"
+	}
 }
 ```
 
@@ -613,17 +621,17 @@ jobs:
 
 ```typescript
 let ServerSettings = co.map({
-  // URL of the server providing AI chat and push notifications
-  serverUrl: z.string().optional(),
-  
-  // Whether AI chat is enabled (default: true if server configured)
-  enableAIChat: z.boolean().optional(),
-  
-  // Whether push notifications are enabled (default: true if server configured)
-  enablePushNotifications: z.boolean().optional(),
-  
-  // Optional user-provided API key for AI services
-  apiKey: z.string().optional(),
+	// URL of the server providing AI chat and push notifications
+	serverUrl: z.string().optional(),
+
+	// Whether AI chat is enabled (default: true if server configured)
+	enableAIChat: z.boolean().optional(),
+
+	// Whether push notifications are enabled (default: true if server configured)
+	enablePushNotifications: z.boolean().optional(),
+
+	// Optional user-provided API key for AI services
+	apiKey: z.string().optional(),
 })
 ```
 
@@ -631,11 +639,11 @@ let ServerSettings = co.map({
 
 ```typescript
 let UserAccountRoot = co.map({
-  people: co.list(Person),
-  notificationSettings: NotificationSettings.optional(),
-  usageTracking: UsageTracking.optional(),
-  language: z.enum(["de", "en"]).optional(),
-  serverSettings: ServerSettings.optional(), // NEW
+	people: co.list(Person),
+	notificationSettings: NotificationSettings.optional(),
+	usageTracking: UsageTracking.optional(),
+	language: z.enum(["de", "en"]).optional(),
+	serverSettings: ServerSettings.optional(), // NEW
 })
 ```
 
@@ -648,7 +656,7 @@ let UserAccountRoot = co.map({
 function AssistantScreen() {
   let { me } = useAccount(UserAccount)
   let aiAvailable = hasAIChat(me)
-  
+
   if (!aiAvailable) {
     return (
       <div className="flex flex-col items-center justify-center h-full gap-4">
@@ -659,7 +667,7 @@ function AssistantScreen() {
       </div>
     )
   }
-  
+
   // ... normal chat UI ...
 }
 ```
@@ -669,19 +677,19 @@ function AssistantScreen() {
 ```typescript
 // In API client
 async function callChatAPI(messages: unknown[]) {
-  let client = createApiClient(me)
-  
-  if (!client.isConfigured) {
-    return { error: "Server not configured" }
-  }
-  
-  let result = await tryCatch(client.chat(messages))
-  
-  if (!result.ok) {
-    return { error: result.error.message }
-  }
-  
-  return { data: result.value }
+	let client = createApiClient(me)
+
+	if (!client.isConfigured) {
+		return { error: "Server not configured" }
+	}
+
+	let result = await tryCatch(client.chat(messages))
+
+	if (!result.ok) {
+		return { error: result.error.message }
+	}
+
+	return { data: result.value }
 }
 ```
 
@@ -734,6 +742,7 @@ async function callChatAPI(messages: unknown[]) {
 ### No Breaking Changes
 
 This refactoring is additive:
+
 - Existing server deployments continue to work unchanged
 - New static deployment option is opt-in
 - User settings are optional (defaults work)
@@ -781,9 +790,9 @@ This refactoring is additive:
 This design enables Tilly to work as a fully local-first app deployable to GitHub Pages while maintaining the option for users to configure server features. The architecture is additive and maintains full backward compatibility with existing server deployments.
 
 Key benefits:
+
 - Deploy anywhere (GitHub Pages, Vercel, self-hosted)
 - Works offline by default
 - Server features are opt-in
 - User controls their own server configuration
 - No breaking changes for existing users
-

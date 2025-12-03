@@ -174,7 +174,11 @@ export function PersonDetails({
 								{
 									addSuffix: true,
 									locale:
-										locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined,
+										locale === "de"
+											? dfnsDe
+											: locale === "ru"
+												? dfnsRu
+												: undefined,
 								},
 							),
 						})}
@@ -184,16 +188,20 @@ export function PersonDetails({
 							(
 								person.updatedAt || new Date(person.$jazz.lastUpdatedAt)
 							).getTime() !==
-							(
-								person.createdAt || new Date(person.$jazz.createdAt)
-							).getTime() &&
+								(
+									person.createdAt || new Date(person.$jazz.createdAt)
+								).getTime() &&
 							t("person.updated.suffix", {
 								ago: formatDistanceToNow(
 									person.updatedAt || new Date(person.$jazz.lastUpdatedAt),
 									{
 										addSuffix: true,
 										locale:
-											locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined,
+											locale === "de"
+												? dfnsDe
+												: locale === "ru"
+													? dfnsRu
+													: undefined,
 									},
 								),
 							})}

@@ -11,6 +11,7 @@ Unit tests are written using Vitest and React Testing Library. They test individ
 **Location**: `src/**/*.test.tsx`
 
 **Running tests**:
+
 ```bash
 # Run tests in watch mode
 pnpm test
@@ -20,6 +21,7 @@ pnpm test:run
 ```
 
 **Configuration**:
+
 - `vitest.config.ts` - Vitest configuration
 - `src/test-setup.ts` - Test setup file that imports jest-dom matchers
 - `tsconfig.vitest.json` - TypeScript configuration for tests
@@ -33,6 +35,7 @@ End-to-end tests are written using Playwright. They test the application from a 
 **Location**: `tests/e2e/**/*.spec.ts`
 
 **Running tests**:
+
 ```bash
 # Run E2E tests in headless mode
 pnpm test:e2e
@@ -42,11 +45,13 @@ pnpm test:e2e:ui
 ```
 
 **Configuration**:
+
 - `playwright.config.ts` - Playwright configuration
 - Tests run against the Node adapter build (`pnpm build:node`)
 - Preview server runs on `http://localhost:4321`
 
 **Example tests**:
+
 - `tests/e2e/home.spec.ts` - Basic navigation tests
 - `tests/e2e/passkey-auth.spec.ts` - Authentication flow tests
 
@@ -59,6 +64,7 @@ The project uses GitHub Actions for continuous integration.
 **Workflow**: `.github/workflows/playwright.yml`
 
 **What it does**:
+
 1. Checks out the code
 2. Sets up Node.js and pnpm
 3. Installs dependencies
@@ -68,6 +74,7 @@ The project uses GitHub Actions for continuous integration.
 7. Uploads test reports as artifacts
 
 **Triggers**:
+
 - Push to `main` branch
 - Pull requests (opened, synchronized, reopened)
 
@@ -95,22 +102,24 @@ describe("MyComponent", () => {
 import { test, expect } from "@playwright/test"
 
 test.describe("My Feature", () => {
-  test("should work correctly", async ({ page }) => {
-    await page.goto("/")
-    await expect(page.getByText("Welcome")).toBeVisible()
-  })
+	test("should work correctly", async ({ page }) => {
+		await page.goto("/")
+		await expect(page.getByText("Welcome")).toBeVisible()
+	})
 })
 ```
 
 ## Best Practices
 
 ### Unit Tests
+
 - Mock external dependencies (Jazz hooks, UI components)
 - Test component behavior, not implementation details
 - Use `data-testid` attributes sparingly, prefer semantic queries
 - Keep tests focused and isolated
 
 ### E2E Tests
+
 - Test user flows, not individual components
 - Use semantic selectors (role, label, text)
 - Wait for elements to be visible before interacting

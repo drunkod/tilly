@@ -8,7 +8,10 @@ import {
 	hasPushNotifications,
 	getFeatureStatus,
 } from "#app/lib/feature-detection"
-import { getServerUrl, createApiClient } from "#app/lib/api-client-with-fallback"
+import {
+	getServerUrl,
+	createApiClient,
+} from "#app/lib/api-client-with-fallback"
 
 // Inline locale detection function for testing (mirrors middleware implementation)
 // This avoids importing from middleware.ts which has Astro-specific dependencies

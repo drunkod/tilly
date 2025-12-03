@@ -19,18 +19,26 @@ let runtimeAdapter = isStatic
 		? node({ mode: "standalone" })
 		: vercel()
 
-// GitHub Pages configuration
-let githubPagesBase = process.env.GITHUB_PAGES_BASE
-let site = githubPagesBase ? `https://${githubPagesBase.split("/")[0]}` : undefined
-let base = githubPagesBase?.includes("/")
-	? `/${githubPagesBase.split("/").slice(1).join("/")}/`
-	: undefined
+// Universal base path configuration
+// Priority: ASTRO_BASE_PATH > GITHUB_PAGES_BASE > undefined
+let basePath = process.env.ASTRO_BASE_PATH
+if (!basePath && process.env.GITHUB_PAGES_BASE) {
+	let parts = process.env.GITHUB_PAGES_BASE.split("/")
+	basePath = parts.length > 1 ? `/${parts.slice(1).join("/")}` : ""
+}
+
+// Site URL configuration
+let site = process.env.PUBLIC_SITE_URL
+if (!site && process.env.GITHUB_PAGES_BASE) {
+	let domain = process.env.GITHUB_PAGES_BASE.split("/")[0]
+	site = `https://${domain}`
+}
 
 export default defineConfig({
 	output: isStatic ? "static" : "server",
 	adapter: runtimeAdapter,
-	site: site,
-	base: base,
+	site: site || "http://localhost:4321",
+	base: basePath || undefined,
 	devToolbar: { enabled: false },
 	i18n: {
 		locales: ["en", "de", "ru"],
@@ -41,6 +49,10 @@ export default defineConfig({
 	},
 	vite: {
 		server: { allowedHosts: [".ngrok-free.app"] },
+		define: {
+			// Make base path available to client code
+			"import.meta.env.BASE_PATH": JSON.stringify(basePath || ""),
+		},
 		plugins: [
 			tanstackRouter({
 				target: "react",
@@ -48,14 +60,14 @@ export default defineConfig({
 				generatedRouteTree: "./src/app/routeTree.gen.ts",
 			}),
 			tailwindcss(),
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		] as any,
 	},
 	integrations: [
 		react({ babel: { plugins: ["babel-plugin-react-compiler"] } }),
 		pwa({
 			registerType: "prompt",
-			scope: "/app/",
+			scope: basePath ? `${basePath}/app/` : "/app/",
+			base: basePath || "/",
 			strategies: "injectManifest",
 			injectRegister: false,
 			srcDir: "src/app",
@@ -147,7 +159,6 @@ export default defineConfig({
 				access: "public",
 				optional: true,
 			}),
-			// New: Public server URL for static builds to connect to optional server
 			PUBLIC_SERVER_URL: envField.string({
 				context: "client",
 				access: "public",

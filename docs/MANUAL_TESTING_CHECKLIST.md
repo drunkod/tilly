@@ -5,6 +5,7 @@ This document provides a comprehensive manual testing checklist for the Clerk to
 ## Pre-Testing Setup
 
 ### Environment Setup
+
 - [ ] Ensure you have a clean browser profile or incognito window
 - [ ] Clear all browser storage (localStorage, IndexedDB, cookies)
 - [ ] Verify the application is running locally: `pnpm dev`
@@ -12,7 +13,9 @@ This document provides a comprehensive manual testing checklist for the Clerk to
 - [ ] Open Network tab to monitor API requests
 
 ### Test Browsers
+
 Test in the following browsers to ensure cross-browser compatibility:
+
 - [ ] Chrome/Edge (Chromium) - Latest version
 - [ ] Firefox - Latest version
 - [ ] Safari - Latest version (macOS/iOS)
@@ -24,6 +27,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 ## 1. New User Signup with Passkey
 
 ### Test Steps
+
 1. [ ] Open the application in a fresh browser session
 2. [ ] Navigate to the home page
 3. [ ] Click "Sign Up" or trigger signup flow
@@ -34,6 +38,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 8. [ ] Verify successful signup
 
 ### Expected Results
+
 - [ ] PasskeyAuthDialog displays with username input field
 - [ ] Submit button is disabled when username is empty
 - [ ] Browser shows native WebAuthn credential creation UI
@@ -43,6 +48,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 - [ ] User's profile is created with the entered username
 
 ### Error Cases to Test
+
 - [ ] Cancel passkey creation → Shows user-friendly error message
 - [ ] Empty username → Submit button remains disabled
 - [ ] Browser doesn't support WebAuthn → Appropriate fallback or message
@@ -52,6 +58,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 ## 2. Returning User Login with Passkey
 
 ### Test Steps
+
 1. [ ] After signing up, log out of the application
 2. [ ] Click "Log In" button
 3. [ ] Browser shows passkey selection UI
@@ -60,6 +67,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 6. [ ] Verify successful login
 
 ### Expected Results
+
 - [ ] Login button triggers browser's passkey selection UI
 - [ ] Previously created passkey appears in the list
 - [ ] After authentication, user is logged in
@@ -68,6 +76,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 - [ ] Authentication status shows "logged in"
 
 ### Error Cases to Test
+
 - [ ] Cancel passkey selection → Shows user-friendly error message
 - [ ] Wrong passkey selected → Appropriate error handling
 - [ ] Passkey not found → Clear error message
@@ -77,6 +86,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 ## 3. Profile Visibility to Other Users
 
 ### Test Steps
+
 1. [ ] Create Account A in Browser 1
 2. [ ] Set profile name for Account A
 3. [ ] Create Account B in Browser 2 (incognito)
@@ -84,12 +94,14 @@ Test in the following browsers to ensure cross-browser compatibility:
 5. [ ] Verify Account B can see Account A's profile name
 
 ### Expected Results
+
 - [ ] Profile names are visible across accounts
 - [ ] Profile data is publicly readable
 - [ ] No permission errors when accessing profiles
 - [ ] Profile updates sync in real-time
 
 ### Notes
+
 - This test verifies Requirement 3.4: Profile is publicly readable
 - Use the chat or collaboration features to test cross-account visibility
 
@@ -98,6 +110,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 ## 4. Chat API with Jazz Auth Tokens
 
 ### Test Steps
+
 1. [ ] Log in to the application
 2. [ ] Navigate to the Assistant/Chat page
 3. [ ] Send a message to the AI assistant
@@ -106,6 +119,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 6. [ ] Verify the server responds successfully
 
 ### Expected Results
+
 - [ ] Request includes `Authorization: Jazz <token>` header
 - [ ] Token is a valid Jazz authentication token
 - [ ] Server successfully validates the token
@@ -114,6 +128,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 - [ ] Server logs show authenticated requests
 
 ### Error Cases to Test
+
 - [ ] Send request without authentication → 401 error
 - [ ] Send request with invalid token → 401 error
 - [ ] Token expiration handling (if applicable)
@@ -125,11 +140,13 @@ Test in the following browsers to ensure cross-browser compatibility:
 ### Test Steps
 
 #### When Unauthenticated
+
 1. [ ] Open application without logging in
 2. [ ] Navigate to Settings page
 3. [ ] Verify authentication section shows unauthenticated state
 
 #### When Authenticated
+
 1. [ ] Log in with passkey
 2. [ ] Navigate to Settings page
 3. [ ] Verify authentication section shows authenticated state
@@ -140,11 +157,13 @@ Test in the following browsers to ensure cross-browser compatibility:
 ### Expected Results
 
 #### Unauthenticated State
+
 - [ ] Shows "Not logged in" or similar message
 - [ ] Displays "Log In" and "Sign Up" buttons
 - [ ] No passkey indicator visible
 
 #### Authenticated State
+
 - [ ] Shows "Logged in" or similar message
 - [ ] Displays user's profile information
 - [ ] Shows passkey indicator/icon
@@ -156,6 +175,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 ## 6. Welcome Page Sign-In
 
 ### Test Steps
+
 1. [ ] Open application as a new user
 2. [ ] Verify welcome page is displayed
 3. [ ] Click "Sign In" button on welcome page
@@ -164,6 +184,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 6. [ ] Verify user is navigated to main application
 
 ### Expected Results
+
 - [ ] "Sign In" button is visible on welcome page
 - [ ] Clicking button triggers passkey login flow
 - [ ] After successful login, tour is marked as skipped
@@ -175,6 +196,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 ## 7. Offline Mode Disables Auth Actions
 
 ### Test Steps
+
 1. [ ] Open application and log in
 2. [ ] Open DevTools Network tab
 3. [ ] Set network to "Offline" mode
@@ -183,6 +205,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 6. [ ] Try to perform auth-related actions
 
 ### Expected Results
+
 - [ ] Login/Signup buttons are disabled when offline
 - [ ] Logout button is disabled when offline
 - [ ] Appropriate "offline" indicator is shown
@@ -190,6 +213,7 @@ Test in the following browsers to ensure cross-browser compatibility:
 - [ ] No network errors in console (graceful handling)
 
 ### Re-enable Network
+
 1. [ ] Set network back to "Online"
 2. [ ] Verify auth actions become enabled again
 3. [ ] Verify sync resumes automatically
@@ -199,39 +223,46 @@ Test in the following browsers to ensure cross-browser compatibility:
 ## 8. Browser Passkey UI Appears Correctly
 
 ### Test Steps
+
 Test in each supported browser:
 
 #### Chrome/Edge (Chromium)
+
 1. [ ] Trigger passkey signup
 2. [ ] Verify Windows Hello or security key prompt appears
 3. [ ] Complete authentication
 4. [ ] Verify passkey is saved
 
 #### Firefox
+
 1. [ ] Trigger passkey signup
 2. [ ] Verify Firefox's passkey UI appears
 3. [ ] Complete authentication
 4. [ ] Verify passkey is saved
 
 #### Safari (macOS)
+
 1. [ ] Trigger passkey signup
 2. [ ] Verify TouchID or FaceID prompt appears
 3. [ ] Complete authentication
 4. [ ] Verify passkey is saved
 
 #### Safari (iOS)
+
 1. [ ] Trigger passkey signup
 2. [ ] Verify FaceID or TouchID prompt appears
 3. [ ] Complete authentication
 4. [ ] Verify passkey is saved
 
 #### Chrome (Android)
+
 1. [ ] Trigger passkey signup
 2. [ ] Verify fingerprint or device unlock prompt appears
 3. [ ] Complete authentication
 4. [ ] Verify passkey is saved
 
 ### Expected Results
+
 - [ ] Native browser/OS passkey UI appears in all browsers
 - [ ] UI is appropriate for the device (biometric or security key)
 - [ ] Authentication completes successfully
@@ -245,6 +276,7 @@ Test in each supported browser:
 ### Test Scenarios
 
 #### Passkey Creation Errors
+
 1. [ ] Cancel passkey creation
    - Expected: "Passkey creation was cancelled. Please try again."
 2. [ ] Browser doesn't support WebAuthn
@@ -253,6 +285,7 @@ Test in each supported browser:
    - Expected: "Authentication failed. Please try again."
 
 #### Login Errors
+
 1. [ ] Cancel passkey selection
    - Expected: "Login was cancelled. Please try again."
 2. [ ] No passkey found
@@ -261,18 +294,21 @@ Test in each supported browser:
    - Expected: "Authentication failed. Please try again with the correct passkey."
 
 #### Network Errors
+
 1. [ ] Offline during signup
    - Expected: "You're offline. Please connect to the internet to sign up."
 2. [ ] Offline during login
    - Expected: "You're offline. Please connect to the internet to log in."
 
 #### Server Errors
+
 1. [ ] Server unavailable
    - Expected: "Unable to connect to server. Please try again later."
 2. [ ] Invalid token
    - Expected: "Your session has expired. Please log in again."
 
 ### Expected Results
+
 - [ ] All error messages are clear and actionable
 - [ ] No technical jargon or stack traces shown to users
 - [ ] Errors are displayed in a visible, non-intrusive way
@@ -283,6 +319,7 @@ Test in each supported browser:
 ## 10. Verify No Clerk References Remain
 
 ### Code Search
+
 1. [ ] Search codebase for "clerk" (case-insensitive)
    ```bash
    grep -ri "clerk" src/ --exclude-dir=node_modules
@@ -291,6 +328,7 @@ Test in each supported browser:
 3. [ ] No active Clerk imports or API calls
 
 ### Package Dependencies
+
 1. [ ] Check `package.json` for Clerk packages
    ```bash
    grep -i "clerk" package.json
@@ -298,6 +336,7 @@ Test in each supported browser:
 2. [ ] Verify no `@clerk/` packages are installed
 
 ### Environment Variables
+
 1. [ ] Check `.env` files for Clerk variables
    ```bash
    grep -i "clerk" .env .env.example .env.local
@@ -305,6 +344,7 @@ Test in each supported browser:
 2. [ ] Verify no `CLERK_` environment variables
 
 ### Build Verification
+
 1. [ ] Run TypeScript compilation
    ```bash
    pnpm check
@@ -317,6 +357,7 @@ Test in each supported browser:
 4. [ ] Verify build succeeds without Clerk dependencies
 
 ### Expected Results
+
 - [ ] No Clerk imports in active code
 - [ ] No Clerk packages in dependencies
 - [ ] No Clerk environment variables in use
@@ -328,6 +369,7 @@ Test in each supported browser:
 ## Additional Verification Tests
 
 ### Data Persistence
+
 1. [ ] Create data while logged in
 2. [ ] Refresh the page
 3. [ ] Verify data persists
@@ -335,6 +377,7 @@ Test in each supported browser:
 5. [ ] Verify data is still accessible
 
 ### Cross-Device Sync
+
 1. [ ] Log in on Device A
 2. [ ] Create/modify data
 3. [ ] Log in on Device B with same passkey
@@ -343,6 +386,7 @@ Test in each supported browser:
 6. [ ] Verify changes sync back to Device A
 
 ### Session Management
+
 1. [ ] Log in to the application
 2. [ ] Close browser tab
 3. [ ] Reopen application
@@ -356,18 +400,21 @@ Test in each supported browser:
 ## Security Verification
 
 ### Token Security
+
 1. [ ] Inspect network requests in DevTools
 2. [ ] Verify tokens are not exposed in URLs
 3. [ ] Verify tokens are sent over HTTPS only
 4. [ ] Verify tokens are short-lived (check expiration)
 
 ### Local Storage Security
+
 1. [ ] Inspect browser localStorage
 2. [ ] Verify passkey credentials are stored securely
 3. [ ] Verify no sensitive data is stored in plain text
 4. [ ] Clear storage and verify logout
 
 ### XSS Protection
+
 1. [ ] Test user input fields for XSS vulnerabilities
 2. [ ] Verify all user input is sanitized
 3. [ ] Check Content Security Policy headers
@@ -377,11 +424,13 @@ Test in each supported browser:
 ## Performance Testing
 
 ### Authentication Speed
+
 1. [ ] Measure time to complete signup
 2. [ ] Measure time to complete login
 3. [ ] Verify authentication is faster than previous Clerk implementation
 
 ### Sync Performance
+
 1. [ ] Create large dataset
 2. [ ] Measure sync time across devices
 3. [ ] Verify acceptable performance
@@ -391,34 +440,37 @@ Test in each supported browser:
 ## Test Results Summary
 
 ### Overall Status
+
 - [ ] All critical tests passed
 - [ ] All error cases handled gracefully
 - [ ] No Clerk references remain
 - [ ] Application is ready for deployment
 
 ### Issues Found
+
 Document any issues found during testing:
 
-1. Issue: _______________
+1. Issue: ******\_\_\_******
    - Severity: Critical / High / Medium / Low
-   - Steps to reproduce: _______________
-   - Expected: _______________
-   - Actual: _______________
+   - Steps to reproduce: ******\_\_\_******
+   - Expected: ******\_\_\_******
+   - Actual: ******\_\_\_******
 
-2. Issue: _______________
+2. Issue: ******\_\_\_******
    - Severity: Critical / High / Medium / Low
-   - Steps to reproduce: _______________
-   - Expected: _______________
-   - Actual: _______________
+   - Steps to reproduce: ******\_\_\_******
+   - Expected: ******\_\_\_******
+   - Actual: ******\_\_\_******
 
 ### Sign-Off
+
 - [ ] All tests completed
 - [ ] All critical issues resolved
 - [ ] Application approved for deployment
 
-**Tester Name:** _______________
-**Date:** _______________
-**Signature:** _______________
+**Tester Name:** ******\_\_\_******
+**Date:** ******\_\_\_******
+**Signature:** ******\_\_\_******
 
 ---
 

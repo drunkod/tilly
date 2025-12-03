@@ -55,8 +55,13 @@ function Reminders() {
 
 	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-        select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
-    });
+		select: subscribedMe =>
+			subscribedMe.$isLoaded
+				? subscribedMe
+				: subscribedMe.$jazz.loadingState === "loading"
+					? undefined
+					: null,
+	})
 
 	let currentMe = subscribedMe ?? data
 

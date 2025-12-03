@@ -82,8 +82,8 @@ async function listPeopleExecute(
 
 	let allPeople = me.root.people
 		.filter((person): person is co.loaded<typeof Person> => person != null)
-		.filter((person) => !isPermanentlyDeleted(person))
-		.filter((person) => input.includeDeleted || !isDeleted(person))
+		.filter(person => !isPermanentlyDeleted(person))
+		.filter(person => input.includeDeleted || !isDeleted(person))
 
 	let people
 	if (input.search) {

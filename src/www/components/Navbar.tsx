@@ -39,13 +39,11 @@ function Navbar({ logo, navigation, cta, locale, languages }: NavbarProps) {
 
 	// Cast messages to the same type as messagesEn for IntlProvider compatibility
 	// The check() function from @ccssmnn/intl returns a compatible but differently-typed object
-	let messages = locale === "de" ? messagesDe : locale === "ru" ? messagesRu : messagesEn
+	let messages =
+		locale === "de" ? messagesDe : locale === "ru" ? messagesRu : messagesEn
 
 	return (
-		<IntlProvider
-			messages={messages as typeof messagesEn}
-			locale={locale}
-		>
+		<IntlProvider messages={messages as typeof messagesEn} locale={locale}>
 			<header className="bg-background border-border sticky inset-x-0 top-0 z-50 border-b">
 				<nav className="container mx-auto flex items-center justify-between px-3 py-4">
 					<a href={logo.href} className="flex items-center gap-3">

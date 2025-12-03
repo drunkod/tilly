@@ -178,8 +178,12 @@ function useAssistantAccess() {
 	let isSignedIn = useIsAuthenticated()
 	let me = useAccount(UserAccount, {
 		resolve: serverSettingsQuery,
-		select: (me) =>
-			me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null,
+		select: me =>
+			me.$isLoaded
+				? me
+				: me.$jazz.loadingState === "loading"
+					? undefined
+					: null,
 	})
 
 	// Still loading account data
@@ -202,15 +206,20 @@ function AuthenticatedChat() {
 	let data = Route.useLoaderData()
 	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-		select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
-	});
+		select: subscribedMe =>
+			subscribedMe.$isLoaded
+				? subscribedMe
+				: subscribedMe.$jazz.loadingState === "loading"
+					? undefined
+					: null,
+	})
 	let currentMe = subscribedMe ?? data.me
 	let t = useIntl()
 
 	// Get server URL from settings or env var for chat API
 	let meWithSettings = useAccount(UserAccount, {
 		resolve: serverSettingsQuery,
-		select: (me) => me.$isLoaded ? me : null,
+		select: me => (me.$isLoaded ? me : null),
 	})
 	let serverUrl = getServerUrl(meWithSettings)
 	let chatApiUrl = serverUrl ? `${serverUrl}/api/chat` : "/api/chat"
@@ -274,14 +283,15 @@ function AuthenticatedChat() {
 
 	function handleSubmit(prompt: string) {
 		let metadata = {
-			userName:
-				currentMe?.profile?.$isLoaded ? currentMe.profile.name : "Anonymous",
-			timezone:
-				currentMe?.root?.notificationSettings?.$isLoaded
-					? currentMe.root.notificationSettings.timezone || "UTC"
-					: "UTC",
-			locale:
-				currentMe?.root?.$isLoaded ? currentMe.root.language || "en" : "en",
+			userName: currentMe?.profile?.$isLoaded
+				? currentMe.profile.name
+				: "Anonymous",
+			timezone: currentMe?.root?.notificationSettings?.$isLoaded
+				? currentMe.root.notificationSettings.timezone || "UTC"
+				: "UTC",
+			locale: currentMe?.root?.$isLoaded
+				? currentMe.root.language || "en"
+				: "en",
 			timestamp: Date.now(),
 		}
 
@@ -538,8 +548,13 @@ function UserInput(props: {
 	let data = Route.useLoaderData()
 	let subscribedMe = useAccount(UserAccount, {
 		resolve: query,
-		select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
-	});
+		select: subscribedMe =>
+			subscribedMe.$isLoaded
+				? subscribedMe
+				: subscribedMe.$jazz.loadingState === "loading"
+					? undefined
+					: null,
+	})
 	let currentMe = subscribedMe ?? data.me
 	let locale = currentMe?.root?.language || "en"
 	let langCode = locale === "de" ? "de-DE" : locale === "ru" ? "ru-RU" : "en-US"
@@ -604,7 +619,7 @@ function UserInput(props: {
 				"bg-background/50 border-border absolute z-1 rounded-4xl border p-2 backdrop-blur-xl transition-all duration-300 max-md:inset-x-3 md:bottom-3 md:left-1/2 md:w-full md:max-w-xl md:-translate-x-1/2",
 				inputFocused && "bg-background bottom-1",
 				!inputFocused &&
-				"bottom-[calc(max(calc(var(--spacing)*3),calc(env(safe-area-inset-bottom)-var(--spacing)*4))+var(--spacing)*19)]",
+					"bottom-[calc(max(calc(var(--spacing)*3),calc(env(safe-area-inset-bottom)-var(--spacing)*4))+var(--spacing)*19)]",
 				active && "border-destructive",
 			)}
 		>

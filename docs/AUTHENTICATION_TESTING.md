@@ -15,6 +15,7 @@ Unit tests verify the PasskeyAuthDialog component behavior in isolation:
 - ✅ Loading states disable interactions
 
 **Running unit tests:**
+
 ```bash
 pnpm test
 ```
@@ -30,11 +31,13 @@ Integration tests verify authentication flows using Jazz's testing utilities:
 - ✅ User is redirected after signup
 
 **Running integration tests:**
+
 ```bash
 pnpm vitest run tests/integration/auth-flows.test.ts
 ```
 
 **Known Limitations:**
+
 - Cross-account profile reading tests fail due to Jazz testing utility limitations
 - These scenarios are better tested in E2E tests with real browser environments
 
@@ -43,6 +46,7 @@ pnpm vitest run tests/integration/auth-flows.test.ts
 E2E tests verify the complete user experience in a real browser:
 
 **UI Tests:**
+
 - ✅ Authentication dialog displays correctly for signup
 - ✅ Authentication dialog displays correctly for login
 - ✅ Switch between signup and login modes
@@ -52,12 +56,14 @@ E2E tests verify the complete user experience in a real browser:
 - ✅ Allow entering username with keyboard
 
 **Integration Tests:**
+
 - ✅ Complete signup flow shows authentication UI
 - ✅ Login flow shows correct UI elements
 - ✅ Authentication status displays correctly when unauthenticated
 - ✅ Failed login attempt shows error
 
 **Running E2E tests:**
+
 ```bash
 pnpm test:e2e
 ```
@@ -67,21 +73,21 @@ The E2E tests include setup for Playwright's Virtual Authenticator API using Chr
 
 ```typescript
 async function setupVirtualAuthenticator(page: Page) {
-  let client = await page.context().newCDPSession(page)
-  await client.send("WebAuthn.enable")
-  let { authenticatorId } = await client.send(
-    "WebAuthn.addVirtualAuthenticator",
-    {
-      options: {
-        protocol: "ctap2",
-        transport: "internal",
-        hasResidentKey: true,
-        hasUserVerification: true,
-        isUserVerified: true,
-      },
-    },
-  )
-  return { client, authenticatorId }
+	let client = await page.context().newCDPSession(page)
+	await client.send("WebAuthn.enable")
+	let { authenticatorId } = await client.send(
+		"WebAuthn.addVirtualAuthenticator",
+		{
+			options: {
+				protocol: "ctap2",
+				transport: "internal",
+				hasResidentKey: true,
+				hasUserVerification: true,
+				isUserVerified: true,
+			},
+		},
+	)
+	return { client, authenticatorId }
 }
 ```
 
@@ -98,17 +104,20 @@ The tests verify the following requirements from the migration spec:
 ## Testing Strategy
 
 ### Unit Tests
+
 - Mock Jazz hooks and UI components
 - Test component behavior in isolation
 - Fast execution, run on every commit
 
 ### Integration Tests
+
 - Use Jazz's testing utilities
 - Test authentication logic without browser
 - Verify account creation, persistence, and login flows
 - Limited by Jazz testing environment capabilities
 
 ### E2E Tests
+
 - Test complete user flows in real browser
 - Verify UI behavior and user experience
 - Include virtual authenticator setup for future WebAuthn testing

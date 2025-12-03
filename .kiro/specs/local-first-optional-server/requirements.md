@@ -157,4 +157,3 @@ This specification defines the requirements for refactoring the Tilly applicatio
 3. WHEN self-hosting with server features, THE Tilly Application SHALL have configuration guide
 4. WHEN configuring server URL in app, THE Tilly Application SHALL have user documentation
 5. WHERE issues occur, THE Tilly Application SHALL have troubleshooting guidance
-
