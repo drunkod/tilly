@@ -1,28 +1,5 @@
 import { test, expect, type Page } from "@playwright/test"
 
-async function setupVirtualAuthenticator(page: Page) {
-	try {
-		let client = await page.context().newCDPSession(page)
-		await client.send("WebAuthn.enable")
-		let { authenticatorId } = await client.send(
-			"WebAuthn.addVirtualAuthenticator",
-			{
-				options: {
-					protocol: "ctap2",
-					transport: "internal",
-					hasResidentKey: true,
-					hasUserVerification: true,
-					isUserVerified: true,
-				},
-			},
-		)
-		return { client, authenticatorId, supported: true }
-	} catch (error) {
-		// WebAuthn not supported in this browser
-		return { client: null, authenticatorId: null, supported: false }
-	}
-}
-
 async function checkWebAuthnSupport(page: Page): Promise<boolean> {
 	return await page.evaluate(() => {
 		return (
@@ -49,9 +26,7 @@ test.describe("Cross-Browser Passkey Support", () => {
 		// Note: This may fail in older browser versions
 		if (isSupported) {
 			// Verify authentication UI is available
-			await expect(
-				page.getByRole("button", { name: /sign up/i }),
-			).toBeVisible()
+			await expect(page.getByRole("button", { name: /sign up/i })).toBeVisible()
 			await expect(page.getByRole("button", { name: /log in/i })).toBeVisible()
 		}
 	})
@@ -136,7 +111,7 @@ test.describe("Cross-Browser Passkey Support", () => {
 		await expect(page.getByRole("dialog")).toBeVisible()
 
 		// Test backdrop click
-		await page.locator('[data-radix-dialog-overlay]').click({ force: true })
+		await page.locator("[data-radix-dialog-overlay]").click({ force: true })
 		await expect(page.getByRole("dialog")).not.toBeVisible()
 	})
 })

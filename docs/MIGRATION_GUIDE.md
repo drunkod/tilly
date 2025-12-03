@@ -63,6 +63,7 @@ If using tilly.social, the update will be automatic.
 ### Step 5: Verify Your Data
 
 Check that all your:
+
 - People and their information
 - Notes and memories
 - Reminders and notifications
@@ -75,6 +76,7 @@ Check that all your:
 ### What is a Passkey?
 
 A passkey is a secure, passwordless authentication method that uses:
+
 - Your device's biometric sensors (FaceID, TouchID, fingerprint)
 - Or a security key (YubiKey, etc.)
 - Or your device's PIN/password as a fallback
@@ -88,6 +90,7 @@ A passkey is a secure, passwordless authentication method that uses:
 ### Browser Support
 
 Passkeys work in:
+
 - Chrome/Edge (Windows, macOS, Android)
 - Safari (iOS, macOS)
 - Firefox (Windows, macOS, Linux)
@@ -95,11 +98,13 @@ Passkeys work in:
 ### Multi-Device Access
 
 Your passkey automatically syncs across devices that share the same:
+
 - **Apple devices**: iCloud Keychain
 - **Android/Chrome**: Google Password Manager
 - **Windows**: Microsoft Account
 
 To use Tilly on a device without your passkey:
+
 1. Use your phone to scan a QR code (cross-device authentication)
 2. Or create a new passkey on that device
 
@@ -115,6 +120,7 @@ To use Tilly on a device without your passkey:
 ### "Sign out not working"
 
 If clicking "Log out" doesn't work:
+
 - Ensure you have an internet connection (logout requires online access)
 - Try clearing your browser's local storage manually:
   1. Open browser DevTools (F12)
@@ -132,6 +138,7 @@ If clicking "Log out" doesn't work:
 ### "Lost access to my passkey"
 
 If you lose access to your passkey:
+
 - Check if it's synced to other devices (iCloud, Google, Microsoft)
 - If not, you'll need to create a new account and re-import your data
 - **Important**: Always keep a recent data export as backup
@@ -141,18 +148,21 @@ If you lose access to your passkey:
 If you need to rollback to Clerk authentication:
 
 1. Checkout the previous version:
+
 ```bash
 git checkout <previous-commit-hash>
 pnpm install
 ```
 
 2. Restore your Clerk environment variables in `.env`:
+
 ```
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_...
 CLERK_SECRET_KEY=sk_...
 ```
 
 3. Rebuild and restart:
+
 ```bash
 pnpm build
 pnpm dev

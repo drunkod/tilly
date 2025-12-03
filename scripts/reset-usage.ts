@@ -88,7 +88,9 @@ async function resetAllUsage() {
 
 	try {
 		// TODO: Replace with Jazz-based user enumeration in task 9
-		console.log("⚠️  This script is temporarily disabled - Clerk user enumeration removed")
+		console.log(
+			"⚠️  This script is temporarily disabled - Clerk user enumeration removed",
+		)
 		console.log("Will be re-implemented with Jazz Global Directory in task 9")
 		return
 

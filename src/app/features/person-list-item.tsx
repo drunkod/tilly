@@ -148,8 +148,8 @@ function PersonItemHeader({
 				<p className="text-muted-foreground text-xs text-nowrap">
 					{formatDistanceToNow(
 						person.updatedAt ||
-						person.createdAt ||
-						new Date(person.$jazz.lastUpdatedAt || person.$jazz.createdAt),
+							person.createdAt ||
+							new Date(person.$jazz.lastUpdatedAt || person.$jazz.createdAt),
 						{
 							addSuffix: true,
 							locale: dfnsLocale,
@@ -250,11 +250,11 @@ function RestorePersonDialog({
 									params={{
 										timeAgo: formatDistanceToNow(
 											person.deletedAt ||
-											person.updatedAt ||
-											person.createdAt ||
-											new Date(
-												person.$jazz.lastUpdatedAt || person.$jazz.createdAt,
-											),
+												person.updatedAt ||
+												person.createdAt ||
+												new Date(
+													person.$jazz.lastUpdatedAt || person.$jazz.createdAt,
+												),
 											{
 												addSuffix: true,
 												locale: dfnsLocale,

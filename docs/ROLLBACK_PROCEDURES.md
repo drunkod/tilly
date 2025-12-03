@@ -218,12 +218,12 @@ Update `vercel.json` to re-enable push notification cron:
 
 ```json
 {
-  "crons": [
-    {
-      "path": "/api/cron/push-notifications",
-      "schedule": "0 * * * *"
-    }
-  ]
+	"crons": [
+		{
+			"path": "/api/cron/push-notifications",
+			"schedule": "0 * * * *"
+		}
+	]
 }
 ```
 
@@ -234,11 +234,11 @@ Update `vercel.json` to re-enable push notification cron:
 ```
 Subject: Temporary Rollback to Previous Authentication
 
-We've temporarily rolled back to our previous authentication system 
+We've temporarily rolled back to our previous authentication system
 to address [brief issue description].
 
 What this means for you:
-- If you created a Passkey account, you'll need to sign in with 
+- If you created a Passkey account, you'll need to sign in with
   your original Clerk account
 - Your data is safe and will be accessible after signing in
 - We're working to resolve the issues and will migrate again soon
@@ -265,32 +265,40 @@ Create a post-mortem document:
 # Rollback Post-Mortem
 
 ## Date
+
 [Date of rollback]
 
 ## Issue Summary
+
 [Brief description of what went wrong]
 
 ## Timeline
+
 - [Time]: Migration deployed
 - [Time]: Issue first detected
 - [Time]: Rollback initiated
 - [Time]: Service restored
 
 ## Root Cause
+
 [Detailed explanation of what caused the issue]
 
 ## Impact
+
 - Users affected: [number/percentage]
 - Duration: [time]
 - Data loss: [yes/no, details]
 
 ## Resolution
+
 [How the rollback was performed]
 
 ## Lessons Learned
+
 [What we learned from this incident]
 
 ## Action Items
+
 - [ ] Fix root cause
 - [ ] Add tests to prevent recurrence
 - [ ] Update migration procedure
@@ -312,16 +320,16 @@ Provide a data migration tool:
 ```typescript
 // scripts/migrate-passkey-to-clerk.ts
 async function migratePasskeyDataToClerk(
-  passkeyExport: string,
-  clerkUserId: string
+	passkeyExport: string,
+	clerkUserId: string,
 ) {
-  // Load exported data
-  const data = JSON.parse(passkeyExport);
-  
-  // Import to Clerk account
-  await importUserData(clerkUserId, data);
-  
-  console.log('Migration complete');
+	// Load exported data
+	const data = JSON.parse(passkeyExport)
+
+	// Import to Clerk account
+	await importUserData(clerkUserId, data)
+
+	console.log("Migration complete")
 }
 ```
 
@@ -393,12 +401,12 @@ For next migration attempt:
 
 ```typescript
 // Feature flag for gradual rollout
-const PASSKEY_ROLLOUT_PERCENTAGE = 10; // Start with 10%
+const PASSKEY_ROLLOUT_PERCENTAGE = 10 // Start with 10%
 
 function shouldUsePasskeyAuth(userId: string): boolean {
-  // Hash user ID to get consistent assignment
-  const hash = hashUserId(userId);
-  return (hash % 100) < PASSKEY_ROLLOUT_PERCENTAGE;
+	// Hash user ID to get consistent assignment
+	const hash = hashUserId(userId)
+	return hash % 100 < PASSKEY_ROLLOUT_PERCENTAGE
 }
 ```
 
@@ -407,16 +415,16 @@ function shouldUsePasskeyAuth(userId: string): boolean {
 ```typescript
 // Monitor key metrics and auto-rollback if thresholds exceeded
 async function monitorAndRollback() {
-  const metrics = await getMetrics();
-  
-  if (
-    metrics.authFailureRate > 0.1 || // 10% failure rate
-    metrics.errorRate > 0.05 ||      // 5% error rate
-    metrics.activeUsers < 0.7        // 30% drop in users
-  ) {
-    console.error('Metrics exceeded thresholds, initiating rollback');
-    await initiateAutomatedRollback();
-  }
+	const metrics = await getMetrics()
+
+	if (
+		metrics.authFailureRate > 0.1 || // 10% failure rate
+		metrics.errorRate > 0.05 || // 5% error rate
+		metrics.activeUsers < 0.7 // 30% drop in users
+	) {
+		console.error("Metrics exceeded thresholds, initiating rollback")
+		await initiateAutomatedRollback()
+	}
 }
 ```
 
@@ -469,6 +477,7 @@ For rollback assistance:
 **Symptom**: "Invalid API key" errors after rollback
 
 **Solution**:
+
 1. Verify credentials in Clerk Dashboard
 2. Regenerate keys if needed
 3. Update `.env` file
@@ -479,6 +488,7 @@ For rollback assistance:
 **Symptom**: Database errors after rollback
 
 **Solution**:
+
 1. Check for schema migrations that ran during Passkey period
 2. Rollback database migrations if needed
 3. Verify data structure matches Clerk version
@@ -488,6 +498,7 @@ For rollback assistance:
 **Symptom**: Users see empty state after rollback
 
 **Solution**:
+
 1. Verify user ID mapping between Clerk and Jazz
 2. Check data ownership and permissions
 3. Run data integrity checks
@@ -498,6 +509,7 @@ For rollback assistance:
 **Symptom**: Push notifications not being sent
 
 **Solution**:
+
 1. Verify `vercel.json` cron configuration
 2. Check cron secret is set correctly
 3. Test cron endpoint manually

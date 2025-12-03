@@ -43,20 +43,25 @@ This security review evaluates the passkey authentication implementation followi
 ### ⚠️ Vulnerabilities
 
 **CRITICAL: No Passkey Fallback Method**
+
 - **Risk:** Users who lose their passkey have no recovery mechanism
 - **Impact:** Permanent account lockout
 - **Recommendation:** Implement passphrase recovery as documented in Jazz docs
 - **Location:** `src/app/components/passkey-auth.tsx`
 
 **HIGH: No Browser Compatibility Check**
+
 - **Risk:** Application may fail silently on unsupported browsers
 - **Impact:** Poor user experience, potential authentication failures
 - **Recommendation:** Add WebAuthn feature detection and show appropriate messaging
 - **Code Example:**
+
 ```typescript
 function isPasskeySupported(): boolean {
-  return window.PublicKeyCredential !== undefined &&
-         typeof window.PublicKeyCredential === 'function'
+	return (
+		window.PublicKeyCredential !== undefined &&
+		typeof window.PublicKeyCredential === "function"
+	)
 }
 ```
 
@@ -86,12 +91,14 @@ function isPasskeySupported(): boolean {
 ### ⚠️ Vulnerabilities
 
 **MEDIUM: Token Replay Window**
+
 - **Risk:** Tokens valid for 60 seconds can be replayed within that window
 - **Impact:** Potential unauthorized access if token is intercepted
 - **Recommendation:** Consider shorter expiration for sensitive operations
 - **Mitigation:** Already using HTTPS which prevents most MITM attacks
 
 **LOW: No Rate Limiting on Token Generation**
+
 - **Risk:** Potential for token generation abuse
 - **Impact:** Resource exhaustion
 - **Recommendation:** Implement rate limiting on API endpoints
@@ -111,21 +118,23 @@ function isPasskeySupported(): boolean {
 ### ⚠️ Vulnerabilities
 
 **CRITICAL: Credentials in localStorage**
+
 - **Risk:** Authentication secrets stored in localStorage are vulnerable to XSS
 - **Impact:** Complete account compromise if XSS vulnerability exists
-- **Current State:** 
+- **Current State:**
   - Secrets stored at key: `jazz-logged-in-secret`
   - Contains: accountID, secretSeed, accountSecret, provider
-- **Recommendation:** 
+- **Recommendation:**
   1. Implement strict CSP headers (see section 5)
   2. Consider encrypted IndexedDB for sensitive data
   3. Add XSS protection measures (see section 4)
 - **Note:** This is a known limitation of serverless passkey auth documented in Jazz
 
 **HIGH: No Storage Encryption**
+
 - **Risk:** Secrets stored in plain text in browser storage
 - **Impact:** Accessible to any script with localStorage access
-- **Recommendation:** 
+- **Recommendation:**
   - Implement encryption layer for stored credentials
   - Use Web Crypto API for encryption keys
   - Consider using Jazz's `ExpoSecureStoreAdapter` pattern for web
@@ -149,6 +158,7 @@ function isPasskeySupported(): boolean {
 ### ⚠️ Vulnerabilities
 
 **HIGH: No Explicit Input Sanitization**
+
 - **Risk:** Relies solely on React's default escaping
 - **Impact:** Potential XSS if React's protection is bypassed
 - **Locations:**
@@ -156,24 +166,26 @@ function isPasskeySupported(): boolean {
   - `src/app/features/data-upload-button.tsx` - file upload
   - `src/app/features/new-note.tsx` - note content
   - `src/app/features/new-reminder.tsx` - reminder text
-- **Recommendation:** 
+- **Recommendation:**
   1. Install DOMPurify: `npm install dompurify @types/dompurify`
   2. Sanitize user-generated content before storage
   3. Sanitize on render for rich text content
 
 **Example Implementation:**
+
 ```typescript
-import DOMPurify from 'dompurify'
+import DOMPurify from "dompurify"
 
 function sanitizeInput(input: string): string {
-  return DOMPurify.sanitize(input, {
-    ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a'],
-    ALLOWED_ATTR: ['href']
-  })
+	return DOMPurify.sanitize(input, {
+		ALLOWED_TAGS: ["b", "i", "em", "strong", "a"],
+		ALLOWED_ATTR: ["href"],
+	})
 }
 ```
 
 **MEDIUM: File Upload Validation**
+
 - **Risk:** Insufficient validation of uploaded files
 - **Impact:** Potential malicious file upload
 - **Location:** `src/app/features/data-upload-button.tsx`
@@ -191,6 +203,7 @@ function sanitizeInput(input: string): string {
 ### ⚠️ Vulnerabilities
 
 **CRITICAL: No CSP Headers Implemented**
+
 - **Risk:** Application vulnerable to XSS, clickjacking, and code injection
 - **Impact:** Complete compromise of user session and data
 - **Current State:** No CSP headers found in:
@@ -225,15 +238,15 @@ export let onRequest = defineMiddleware(async (context, next) => {
 			"frame-ancestors 'none'",
 			"base-uri 'self'",
 			"form-action 'self'",
-		].join("; ")
+		].join("; "),
 	)
-	
+
 	response.headers.set("X-Frame-Options", "DENY")
 	response.headers.set("X-Content-Type-Options", "nosniff")
 	response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
 	response.headers.set(
 		"Permissions-Policy",
-		"camera=(), microphone=(), geolocation=()"
+		"camera=(), microphone=(), geolocation=()",
 	)
 
 	// ... existing 404 logic ...
@@ -243,6 +256,7 @@ export let onRequest = defineMiddleware(async (context, next) => {
 ```
 
 **Note on 'unsafe-inline' and 'unsafe-eval':**
+
 - Currently required for React and Vite in development
 - Should be removed in production with nonce-based CSP
 - Consider using `vite-plugin-csp` for production builds
@@ -265,6 +279,7 @@ export let onRequest = defineMiddleware(async (context, next) => {
 ### ⚠️ Vulnerabilities
 
 **HIGH: No Sanitization Layer**
+
 - **Risk:** User input passed directly to Jazz without sanitization
 - **Impact:** Potential stored XSS vulnerabilities
 - **Locations:**
@@ -280,33 +295,37 @@ export let onRequest = defineMiddleware(async (context, next) => {
 
 ```typescript
 // src/shared/lib/sanitize.ts
-import DOMPurify from 'dompurify'
+import DOMPurify from "dompurify"
 
 export function sanitizeText(input: string): string {
-  return DOMPurify.sanitize(input, {
-    ALLOWED_TAGS: [],
-    ALLOWED_ATTR: []
-  })
+	return DOMPurify.sanitize(input, {
+		ALLOWED_TAGS: [],
+		ALLOWED_ATTR: [],
+	})
 }
 
 export function sanitizeMarkdown(input: string): string {
-  return DOMPurify.sanitize(input, {
-    ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a', 'p', 'br', 'ul', 'ol', 'li'],
-    ALLOWED_ATTR: ['href', 'title']
-  })
+	return DOMPurify.sanitize(input, {
+		ALLOWED_TAGS: ["b", "i", "em", "strong", "a", "p", "br", "ul", "ol", "li"],
+		ALLOWED_ATTR: ["href", "title"],
+	})
 }
 
 export function sanitizeUsername(input: string): string {
-  // Remove any non-alphanumeric characters except spaces, hyphens, underscores
-  return input.replace(/[^a-zA-Z0-9\s\-_]/g, '').trim().slice(0, 50)
+	// Remove any non-alphanumeric characters except spaces, hyphens, underscores
+	return input
+		.replace(/[^a-zA-Z0-9\s\-_]/g, "")
+		.trim()
+		.slice(0, 50)
 }
 ```
 
 **MEDIUM: File Upload Validation Gaps**
+
 - **Risk:** Insufficient validation of uploaded JSON data
 - **Impact:** Malicious data injection
 - **Location:** `src/app/features/data-upload-button.tsx`
-- **Current State:** 
+- **Current State:**
   - Validates JSON structure with Zod
   - No size limits enforced
   - No sanitization of string fields
@@ -323,11 +342,13 @@ export function sanitizeUsername(input: string): string {
 ### Authentication State Management
 
 **✅ Secure:**
+
 - Proper authentication state checks
 - `useIsAuthenticated()` hook for access control
 - Protected routes require authentication
 
 **⚠️ Improvements Needed:**
+
 - Add session timeout mechanism
 - Implement automatic logout on suspicious activity
 - Add device fingerprinting for anomaly detection
@@ -335,11 +356,13 @@ export function sanitizeUsername(input: string): string {
 ### API Security
 
 **✅ Secure:**
+
 - All API requests require authentication
 - Proper error handling without information leakage
 - Usage limits implemented
 
 **⚠️ Improvements Needed:**
+
 - Add rate limiting per user/IP
 - Implement request size limits
 - Add API request logging for security monitoring
@@ -347,11 +370,13 @@ export function sanitizeUsername(input: string): string {
 ### Service Worker Security
 
 **✅ Secure:**
+
 - Service worker properly scoped to `/app/`
 - No sensitive data cached
 - Proper cache invalidation
 
 **⚠️ Improvements Needed:**
+
 - Add integrity checks for cached resources
 - Implement cache versioning strategy
 
@@ -360,26 +385,31 @@ export function sanitizeUsername(input: string): string {
 ## 8. Compliance with Requirements
 
 ### Requirement 2.5: Passkey Authentication Security
+
 - ✅ WebAuthn implementation
 - ⚠️ Missing browser compatibility check
 - ⚠️ No recovery mechanism
 
 ### Requirement 7.1: Client-Side Token Generation
+
 - ✅ Proper token generation
 - ✅ Secure transport
 - ⚠️ No rate limiting
 
 ### Requirement 7.2: Server-Side Token Validation
+
 - ✅ Proper validation
 - ✅ Error handling
 - ✅ Account loading verification
 
 ### Requirement 7.3: Token Failure Handling
+
 - ✅ Returns 401 on failure
 - ✅ Proper error messages
 - ⚠️ No retry mechanism
 
 ### Requirement 7.4: Authenticated Context
+
 - ✅ Uses authenticated account
 - ✅ Proper context management
 - ✅ Type-safe account access

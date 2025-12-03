@@ -20,7 +20,9 @@ function usePersonNotes<Q extends ResolveQuery<typeof Person>>(
 				let searchLower = searchQuery.toLowerCase()
 				return note.content.toLowerCase().includes(searchLower)
 			})
-		: person.notes.filter(note => note?.$isLoaded && !isPermanentlyDeleted(note))
+		: person.notes.filter(
+				note => note?.$isLoaded && !isPermanentlyDeleted(note),
+			)
 
 	let active: Array<{
 		type: "note"

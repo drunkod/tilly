@@ -206,7 +206,7 @@ describe("API Authentication Integration Tests", () => {
 				},
 			})
 
-			let { account, error } = await authenticateRequest(request)
+			let { account } = await authenticateRequest(request)
 
 			expect(account).toBeUndefined()
 			// Some malformed headers may not produce an error, just no account

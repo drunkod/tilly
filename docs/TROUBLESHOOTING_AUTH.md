@@ -7,11 +7,13 @@ This guide helps you troubleshoot common authentication issues with Jazz Passkey
 ### Problem: "Log Out" button doesn't work
 
 **Symptoms:**
+
 - Clicking "Log out" does nothing
 - User remains logged in after clicking logout
 - Page doesn't refresh or redirect
 
 **Causes:**
+
 1. No internet connection (logout requires online access)
 2. Browser local storage issues
 3. Service worker cache issues
@@ -40,16 +42,19 @@ If logout still doesn't work:
 7. Refresh the page
 
 **Chrome/Edge:**
+
 ```
 DevTools → Application → Local Storage → [your-domain] → Delete jazz-* keys
 ```
 
 **Firefox:**
+
 ```
 DevTools → Storage → Local Storage → [your-domain] → Delete jazz-* keys
 ```
 
 **Safari:**
+
 ```
 DevTools → Storage → Local Storage → [your-domain] → Delete jazz-* keys
 ```
@@ -71,17 +76,20 @@ Service workers can cache authentication state:
 If the above doesn't work, clear all site data:
 
 **Chrome/Edge:**
+
 1. Click the lock icon in the address bar
 2. Click "Site settings"
 3. Scroll down and click "Clear data"
 4. Confirm and refresh
 
 **Firefox:**
+
 1. Click the lock icon in the address bar
 2. Click "Clear cookies and site data"
 3. Confirm and refresh
 
 **Safari:**
+
 1. Safari → Settings → Privacy
 2. Click "Manage Website Data"
 3. Find and remove Tilly
@@ -94,17 +102,18 @@ As a last resort, force logout via browser console:
 1. Open DevTools (F12)
 2. Go to **Console** tab
 3. Paste and run:
+
 ```javascript
 // Clear Jazz authentication
-localStorage.removeItem('jazz-logged-in-secret');
+localStorage.removeItem("jazz-logged-in-secret")
 // Clear all Jazz-related storage
 Object.keys(localStorage).forEach(key => {
-  if (key.startsWith('jazz-')) {
-    localStorage.removeItem(key);
-  }
-});
+	if (key.startsWith("jazz-")) {
+		localStorage.removeItem(key)
+	}
+})
 // Reload page
-window.location.reload();
+window.location.reload()
 ```
 
 ## Sign In Issues
@@ -112,6 +121,7 @@ window.location.reload();
 ### Problem: Cannot sign in with passkey
 
 **Symptoms:**
+
 - Passkey prompt doesn't appear
 - "Authentication failed" error
 - Passkey not recognized
@@ -121,6 +131,7 @@ window.location.reload();
 #### Solution 1: Check Browser Support
 
 Ensure your browser supports WebAuthn:
+
 - Chrome/Edge 67+
 - Firefox 60+
 - Safari 13+
@@ -130,6 +141,7 @@ Check support at: https://caniuse.com/webauthn
 #### Solution 2: Check Device Support
 
 Verify your device has biometric authentication:
+
 - **iOS/macOS**: FaceID or TouchID enabled
 - **Windows**: Windows Hello configured
 - **Android**: Fingerprint or face unlock enabled
@@ -137,6 +149,7 @@ Verify your device has biometric authentication:
 #### Solution 3: Try Different Authentication Method
 
 If biometric doesn't work:
+
 1. Try using a security key (YubiKey, etc.)
 2. Try using device PIN/password as fallback
 3. Try on a different device
@@ -146,18 +159,21 @@ If biometric doesn't work:
 If your passkey is corrupted:
 
 **Chrome/Edge:**
+
 1. Settings → Privacy and security → Security
 2. Click "Manage passkeys"
 3. Find and delete Tilly passkey
 4. Return to Tilly and sign up again
 
 **Safari:**
+
 1. System Settings → Passwords
 2. Find Tilly passkey
 3. Delete it
 4. Return to Tilly and sign up again
 
 **Windows:**
+
 1. Settings → Accounts → Sign-in options
 2. Click "Passkeys"
 3. Find and remove Tilly passkey
@@ -166,6 +182,7 @@ If your passkey is corrupted:
 ### Problem: "Passkey creation failed"
 
 **Symptoms:**
+
 - Error during sign-up
 - Passkey prompt appears but fails
 - "User verification failed" error
@@ -175,6 +192,7 @@ If your passkey is corrupted:
 #### Solution 1: Verify Biometric Setup
 
 Ensure biometric authentication is properly configured:
+
 - Test FaceID/TouchID in another app
 - Re-enroll biometric if needed
 - Check device settings for biometric authentication
@@ -182,6 +200,7 @@ Ensure biometric authentication is properly configured:
 #### Solution 2: Check Browser Permissions
 
 Ensure browser has permission to access biometric:
+
 1. Check site permissions in browser settings
 2. Allow "Use your device's authentication" if prompted
 3. Try in a different browser
@@ -189,6 +208,7 @@ Ensure browser has permission to access biometric:
 #### Solution 3: Use HTTPS
 
 Passkeys require a secure context:
+
 - Ensure you're using HTTPS (not HTTP)
 - `localhost` is allowed for development
 - Self-signed certificates may cause issues
@@ -196,6 +216,7 @@ Passkeys require a secure context:
 #### Solution 4: Disable Browser Extensions
 
 Some extensions interfere with WebAuthn:
+
 1. Disable all extensions
 2. Try passkey creation again
 3. Re-enable extensions one by one to find culprit
@@ -205,6 +226,7 @@ Some extensions interfere with WebAuthn:
 ### Problem: Cannot access data after login
 
 **Symptoms:**
+
 - Logged in but see empty state
 - "Loading..." never completes
 - Data appears then disappears
@@ -214,6 +236,7 @@ Some extensions interfere with WebAuthn:
 #### Solution 1: Check Sync Connection
 
 Verify Jazz sync is working:
+
 1. Open DevTools → Network tab
 2. Filter by "WS" (WebSocket)
 3. Look for connection to `cloud.jazz.tools`
@@ -222,6 +245,7 @@ Verify Jazz sync is working:
 #### Solution 2: Wait for Sync
 
 Initial sync can take time:
+
 1. Wait 30-60 seconds for data to sync
 2. Check network connection
 3. Try refreshing the page
@@ -229,6 +253,7 @@ Initial sync can take time:
 #### Solution 3: Verify Account
 
 Ensure you're logged into the correct account:
+
 1. Go to Settings
 2. Check authentication status
 3. Verify account name/email
@@ -237,6 +262,7 @@ Ensure you're logged into the correct account:
 #### Solution 4: Check Data Ownership
 
 If you migrated from Clerk:
+
 1. Verify you imported your data export
 2. Check that import completed successfully
 3. Try importing again if needed
@@ -246,6 +272,7 @@ If you migrated from Clerk:
 ### Problem: Cannot access account on new device
 
 **Symptoms:**
+
 - Passkey not available on new device
 - "No passkeys found" error
 - Cannot log in on second device
@@ -257,16 +284,19 @@ If you migrated from Clerk:
 Verify passkeys are syncing:
 
 **Apple devices:**
+
 - Ensure iCloud Keychain is enabled
 - Settings → [Your Name] → iCloud → Passwords and Keychain
 - Both devices must be signed into same iCloud account
 
 **Android/Chrome:**
+
 - Ensure Google Password Manager is enabled
 - Settings → Google → Autofill → Password Manager
 - Both devices must be signed into same Google account
 
 **Windows:**
+
 - Ensure Microsoft Account sync is enabled
 - Settings → Accounts → Windows backup
 - Both devices must use same Microsoft account
@@ -274,6 +304,7 @@ Verify passkeys are syncing:
 #### Solution 2: Use Cross-Device Authentication
 
 If passkey isn't synced:
+
 1. On new device, click "Log in"
 2. Select "Use a phone, tablet, or security key"
 3. Scan QR code with device that has passkey
@@ -282,6 +313,7 @@ If passkey isn't synced:
 #### Solution 3: Create New Passkey
 
 If cross-device doesn't work:
+
 1. Export your data from original device
 2. Create new passkey on new device
 3. Import your data
@@ -292,6 +324,7 @@ If cross-device doesn't work:
 ### Problem: Slow authentication
 
 **Symptoms:**
+
 - Passkey prompt takes long to appear
 - Login process is slow
 - App freezes during authentication
@@ -301,6 +334,7 @@ If cross-device doesn't work:
 #### Solution 1: Check Network Speed
 
 Slow network affects authentication:
+
 1. Test internet speed
 2. Try on faster connection
 3. Wait for better connectivity
@@ -308,6 +342,7 @@ Slow network affects authentication:
 #### Solution 2: Clear Browser Cache
 
 Cached data can slow things down:
+
 1. Clear browser cache
 2. Clear service worker cache
 3. Refresh and try again
@@ -315,6 +350,7 @@ Cached data can slow things down:
 #### Solution 3: Restart Browser
 
 Sometimes browser needs restart:
+
 1. Close all browser windows
 2. Reopen browser
 3. Try authentication again
@@ -324,6 +360,7 @@ Sometimes browser needs restart:
 ### Problem: "Authentication failed" or "Invalid credentials"
 
 **Symptoms:**
+
 - Passkey prompt succeeds but login fails
 - "Invalid credentials" error
 - "Authentication failed" message
@@ -333,6 +370,7 @@ Sometimes browser needs restart:
 #### Solution 1: Verify Passkey
 
 Ensure passkey is valid:
+
 1. Check passkey exists in device settings
 2. Verify it's for correct domain
 3. Try deleting and recreating passkey
@@ -340,6 +378,7 @@ Ensure passkey is valid:
 #### Solution 2: Check Time Sync
 
 Authentication requires accurate time:
+
 1. Verify device time is correct
 2. Enable automatic time sync
 3. Restart device if time was wrong
@@ -347,6 +386,7 @@ Authentication requires accurate time:
 #### Solution 3: Clear Corrupted State
 
 If authentication state is corrupted:
+
 1. Clear local storage (see above)
 2. Clear service worker cache
 3. Refresh page

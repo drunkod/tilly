@@ -50,9 +50,7 @@ describe("api-client-with-fallback", () => {
 			let account = createMockAccount({
 				serverUrl: "https://settings-server.com",
 			})
-			expect(getServerUrl(account as never)).toBe(
-				"https://settings-server.com",
-			)
+			expect(getServerUrl(account as never)).toBe("https://settings-server.com")
 		})
 
 		test("returns PUBLIC_SERVER_URL env var when settings not set", () => {
@@ -66,9 +64,7 @@ describe("api-client-with-fallback", () => {
 			let account = createMockAccount({
 				serverUrl: "https://settings-server.com",
 			})
-			expect(getServerUrl(account as never)).toBe(
-				"https://settings-server.com",
-			)
+			expect(getServerUrl(account as never)).toBe("https://settings-server.com")
 		})
 
 		test("returns env var when settings serverUrl is empty string", () => {

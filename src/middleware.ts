@@ -41,7 +41,11 @@ export let onRequest = defineMiddleware(async (context, next) => {
 			return response
 		}
 
-		let locale = pathname.startsWith("/de") ? "de" : pathname.startsWith("/ru") ? "ru" : "en"
+		let locale = pathname.startsWith("/de")
+			? "de"
+			: pathname.startsWith("/ru")
+				? "ru"
+				: "en"
 		let notFoundPage = `/${locale}/404`
 		console.log("404 rewrite:", { pathname, locale, notFoundPage })
 		return context.rewrite(notFoundPage)

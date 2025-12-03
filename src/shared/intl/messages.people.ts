@@ -146,7 +146,8 @@ const ruPeopleMessages = translate(basePeopleMessages, {
 	"people.empty.addButton": "Добавить особенного человека",
 	"people.noActive.message": "Начните добавлять людей, которые вам важны.",
 	"people.noActive.addButton": "Добавить особенного человека",
-	"people.search.noResults.message": 'Никто не найден, соответствующий "{$query}"',
+	"people.search.noResults.message":
+		'Никто не найден, соответствующий "{$query}"',
 	"people.search.noResults.suggestion":
 		"Попробуйте изменить поисковый запрос или добавьте нового человека",
 	"people.deleted.count":
