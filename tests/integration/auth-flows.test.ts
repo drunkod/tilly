@@ -7,7 +7,6 @@ import {
 } from "jazz-tools/testing"
 import { UserAccount, UserProfile } from "#shared/schema/user"
 
-
 describe("Authentication Flows Integration Tests", () => {
 	beforeEach(async () => {
 		await setupJazzTestSync()
@@ -205,7 +204,7 @@ describe("Authentication Flows Integration Tests", () => {
 			resolve: { profile: true },
 		})
 		profile1Initial.$jazz.set("name", "Account One")
-		
+
 		// Wait for sync
 		await profile1Initial.$jazz.waitForSync()
 
@@ -224,7 +223,7 @@ describe("Authentication Flows Integration Tests", () => {
 			resolve: { profile: true },
 		})
 		profile2Initial.$jazz.set("name", "Account Two")
-		
+
 		// Wait for sync
 		await profile2Initial.$jazz.waitForSync()
 

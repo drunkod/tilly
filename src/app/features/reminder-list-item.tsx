@@ -285,8 +285,8 @@ function ReminderItemHeader({
 			<div className="text-muted-foreground text-xs">
 				{formatDistanceToNow(
 					reminder.updatedAt ||
-					reminder.createdAt ||
-					new Date(reminder.$jazz.lastUpdatedAt || reminder.$jazz.createdAt),
+						reminder.createdAt ||
+						new Date(reminder.$jazz.lastUpdatedAt || reminder.$jazz.createdAt),
 					{
 						addSuffix: true,
 						locale: dfnsLocale,
@@ -533,6 +533,7 @@ function RestoreReminderDialog({
 	onRestore: () => Promise<boolean>
 	onPermanentDelete: () => Promise<boolean>
 }) {
+	let locale = useLocale()
 	let [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false)
 
 	let deletionInfo = (() => {
@@ -575,18 +576,18 @@ function RestoreReminderDialog({
 									params={{
 										timeAgo: formatDistanceToNow(
 											reminder.deletedAt ||
-											reminder.updatedAt ||
-											reminder.createdAt ||
-											new Date(
-												reminder.$jazz.lastUpdatedAt ||
-												reminder.$jazz.createdAt,
-											),
+												reminder.updatedAt ||
+												reminder.createdAt ||
+												new Date(
+													reminder.$jazz.lastUpdatedAt ||
+														reminder.$jazz.createdAt,
+												),
 											{
 												addSuffix: true,
 												locale:
-													useLocale() === "de"
+													locale === "de"
 														? dfnsDe
-														: useLocale() === "ru"
+														: locale === "ru"
 															? dfnsRu
 															: undefined,
 											},
@@ -711,11 +712,11 @@ type ReminderUpdateInput = {
 	text: string
 	dueAtDate: string
 	repeat?:
-	| {
-		interval: number
-		unit: "day" | "week" | "month" | "year"
-	}
-	| undefined
+		| {
+				interval: number
+				unit: "day" | "week" | "month" | "year"
+		  }
+		| undefined
 }
 
 type NoteFormInput = {

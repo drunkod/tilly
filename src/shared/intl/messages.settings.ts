@@ -323,14 +323,12 @@ const baseSettingsMessages = messages({
 	"notifications.browserNotSupported.recommendation.generic":
 		"Please try using Chrome, Edge, or Safari for the full Tilly experience.",
 	// Server not configured messages for push notifications
-	"notifications.serverNotConfigured.title":
-		"Server configuration required",
+	"notifications.serverNotConfigured.title": "Server configuration required",
 	"notifications.serverNotConfigured.description":
 		"Push notifications require a server connection. Configure a server URL in the Server Features section to enable push notifications.",
 	"notifications.serverNotConfigured.alternative":
 		"Without a server, you can still use Tilly's core features. Your data is stored locally and synced via Jazz.",
-	"notifications.serverNotConfigured.configureButton":
-		"Configure Server",
+	"notifications.serverNotConfigured.configureButton": "Configure Server",
 	// Status messages
 	"status.offline.title": "You're offline",
 	"status.update.title": "Update available",
@@ -402,7 +400,8 @@ const deSettingsMessages = translate(baseSettingsMessages, {
 	"settings.auth.status.authenticated": "Mit Passkey authentifiziert",
 	"settings.auth.status.unauthenticated": "Nicht authentifiziert",
 	"settings.auth.logout": "Abmelden",
-	"settings.auth.logout.error": "Abmeldung fehlgeschlagen. Bitte versuche es erneut.",
+	"settings.auth.logout.error":
+		"Abmeldung fehlgeschlagen. Bitte versuche es erneut.",
 	"settings.auth.login": "Anmelden",
 	"settings.auth.signup": "Registrieren",
 	"settings.profile.title": "Über dich",
@@ -710,8 +709,7 @@ const deSettingsMessages = translate(baseSettingsMessages, {
 		"Push-Benachrichtigungen erfordern eine Server-Verbindung. Konfiguriere eine Server-URL im Bereich Server-Funktionen, um Push-Benachrichtigungen zu aktivieren.",
 	"notifications.serverNotConfigured.alternative":
 		"Ohne Server kannst du weiterhin die Kernfunktionen von Tilly nutzen. Deine Daten werden lokal gespeichert und über Jazz synchronisiert.",
-	"notifications.serverNotConfigured.configureButton":
-		"Server konfigurieren",
+	"notifications.serverNotConfigured.configureButton": "Server konfigurieren",
 
 	// Status messages
 	"status.offline.title": "Du bist offline",
@@ -837,7 +835,8 @@ const ruSettingsMessages = translate(baseSettingsMessages, {
 	"settings.data.delete.dialog.title": "Удалить все данные",
 	"settings.data.delete.dialog.description":
 		"Это действие окончательно удалит все ваши данные: людей, заметки и напоминания. Это нельзя отменить. Мы рекомендуем сначала экспортировать данные, чтобы вы могли импортировать их позже.",
-	"settings.data.delete.confirm.label": 'Введите "delete all my data" для подтверждения:',
+	"settings.data.delete.confirm.label":
+		'Введите "delete all my data" для подтверждения:',
 	"settings.data.delete.confirm.placeholder": "delete all my data",
 	"settings.data.delete.confirm.error":
 		'Вы должны ввести точно "delete all my data"',
@@ -916,21 +915,21 @@ const ruSettingsMessages = translate(baseSettingsMessages, {
 		'Выберите "Добавить на главный экран" или "Установить приложение"',
 	"pwa.install.android.step2":
 		'Нажмите "Добавить" или "Установить" для подтверждения',
-	"pwa.install.ios.title":
-		"Чтобы установить Тилли как PWA на iPhone или iPad:",
-	"pwa.install.ios.step1": 'Прокрутите вниз и нажмите "Добавить на главный экран"',
+	"pwa.install.ios.title": "Чтобы установить Тилли как PWA на iPhone или iPad:",
+	"pwa.install.ios.step1":
+		'Прокрутите вниз и нажмите "Добавить на главный экран"',
 	"pwa.install.ios.step2": 'Нажмите "Добавить" для подтверждения',
 	"pwa.install.ios.note":
 		"Примечание: На iOS установка доступна только через браузер Safari.",
 	"pwa.install.desktop.browser.title":
 		"Установите Тилли прямо из браузера для более чистого опыта.",
-	"pwa.install.desktop.title":
-		"Чтобы установить Тилли как PWA на десктопе:",
+	"pwa.install.desktop.title": "Чтобы установить Тилли как PWA на десктопе:",
 	"pwa.install.desktop.chrome": "Chrome/Edge:",
 	"pwa.install.desktop.chrome.instruction":
 		"Найдите кнопку установки в адресной строке",
 	"pwa.install.desktop.safari": "Safari (Mac):",
-	"pwa.install.desktop.safari.instruction": "Нажмите ... Поделиться → Добавить в Dock",
+	"pwa.install.desktop.safari.instruction":
+		"Нажмите ... Поделиться → Добавить в Dock",
 	"pwa.install.desktop.firefox": "Firefox:",
 	"pwa.install.desktop.firefox.instruction": "Поддержка установки варьируется",
 	"pwa.install.generic.title": "Чтобы установить Тилли как PWA:",
@@ -1016,8 +1015,7 @@ const ruSettingsMessages = translate(baseSettingsMessages, {
 	"notifications.enable.heading": "Включить уведомления",
 	"notifications.enable.description":
 		"Чтобы получать напоминания как push-уведомления, включите уведомления для вашего аккаунта.",
-	"notifications.enable.step1":
-		"Предоставьте разрешение при запросе браузера.",
+	"notifications.enable.step1": "Предоставьте разрешение при запросе браузера.",
 	"notifications.enable.step2":
 		"Оставьте это устройство зарегистрированным для уведомлений.",
 	"notifications.enable.button": "Включить Push-уведомления",
@@ -1037,15 +1035,18 @@ const ruSettingsMessages = translate(baseSettingsMessages, {
 	"notifications.unregister.description":
 		"Прекратить получение уведомлений на это устройство.",
 	"notifications.unregister.button": "Отменить регистрацию",
-	"notifications.unregister.success": "Регистрация устройства успешно отменена!",
-	"notifications.unregister.error": "Не удалось отменить регистрацию устройства.",
+	"notifications.unregister.success":
+		"Регистрация устройства успешно отменена!",
+	"notifications.unregister.error":
+		"Не удалось отменить регистрацию устройства.",
 	"notifications.devices.permissionError":
 		"Не удалось запросить разрешение на уведомления",
 	"notifications.toast.unsubscribeFailed":
 		"Не удалось отписаться от уведомлений",
 	"notifications.toast.subscribeFailed":
 		"Не удалось подписаться на push-уведомления",
-	"notifications.toast.testSendFailed": "Не удалось отправить тестовое уведомление",
+	"notifications.toast.testSendFailed":
+		"Не удалось отправить тестовое уведомление",
 	"notifications.toast.testSendSuccess": "Тестовое уведомление отправлено",
 	"notifications.toast.deviceRemoved": "Устройство успешно удалено",
 	"notifications.toast.deviceAdded": "Устройство успешно добавлено!",
@@ -1083,21 +1084,20 @@ const ruSettingsMessages = translate(baseSettingsMessages, {
 	"notifications.browserNotSupported.recommendation.generic":
 		"Пожалуйста попробуйте использовать Chrome, Edge или Safari для полного опыта Tilly.",
 	// Server not configured messages for push notifications
-	"notifications.serverNotConfigured.title":
-		"Требуется настройка сервера",
+	"notifications.serverNotConfigured.title": "Требуется настройка сервера",
 	"notifications.serverNotConfigured.description":
 		"Push-уведомления требуют подключения к серверу. Настройте URL сервера в разделе Серверные функции, чтобы включить push-уведомления.",
 	"notifications.serverNotConfigured.alternative":
 		"Без сервера вы все еще можете использовать основные функции Tilly. Ваши данные хранятся локально и синхронизируются через Jazz.",
-	"notifications.serverNotConfigured.configureButton":
-		"Настроить сервер",
+	"notifications.serverNotConfigured.configureButton": "Настроить сервер",
 	// Status messages
 	"status.offline.title": "Вы оффлайн",
 	"status.update.title": "Доступно обновление",
 	"status.offline.tooltip": "Вы оффлайн",
 	"status.offline.dialog.title": "Режим оффлайн",
 	"status.offline.description": "Большая часть Tilly работает оффлайн.",
-	"status.offline.feature.core": "Просмотр и редактирование людей, заметок и напоминаний",
+	"status.offline.feature.core":
+		"Просмотр и редактирование людей, заметок и напоминаний",
 	"status.offline.feature.requiresInternet":
 		"Синхронизация, push-уведомления и Ассистент Tilly требуют интернет",
 	"status.update.tooltip": "Доступно обновление",

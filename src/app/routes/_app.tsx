@@ -14,9 +14,15 @@ export const Route = createFileRoute("/_app")({
 })
 
 function AppComponent() {
-	let me = useAccount(UserAccount, { resolve: query,
-        select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null
-    });
+	let me = useAccount(UserAccount, {
+		resolve: query,
+		select: me =>
+			me.$isLoaded
+				? me
+				: me.$jazz.loadingState === "loading"
+					? undefined
+					: null,
+	})
 
 	let people = me?.root?.people ?? []
 	let dueReminderCount = people

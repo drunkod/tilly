@@ -66,8 +66,13 @@ function PersonScreen() {
 	let data = Route.useLoaderData()
 	let subscribedPerson = useCoState(Person, personID, {
 		resolve: query,
-        select: (subscribedPerson) => subscribedPerson.$isLoaded ? subscribedPerson : subscribedPerson.$jazz.loadingState === "loading" ? undefined : null
-    })
+		select: subscribedPerson =>
+			subscribedPerson.$isLoaded
+				? subscribedPerson
+				: subscribedPerson.$jazz.loadingState === "loading"
+					? undefined
+					: null,
+	})
 	let person = subscribedPerson ?? data.person
 	let { tab } = Route.useSearch()
 	let isMobile = useIsMobile()

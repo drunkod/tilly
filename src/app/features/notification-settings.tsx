@@ -552,9 +552,9 @@ function LastDeliveredSection({
 					value={
 						notifications?.lastDeliveredAt
 							? formatDistanceToNow(new Date(notifications.lastDeliveredAt), {
-								addSuffix: true,
-								locale: dfnsLocale,
-							})
+									addSuffix: true,
+									locale: dfnsLocale,
+								})
 							: ""
 					}
 					readOnly
@@ -750,7 +750,7 @@ function DeviceListItem({ device, me }: DeviceListItemProps) {
 			className={cn(
 				"flex items-start justify-between py-4 transition-all",
 				(actionsDialogOpen || editDialogOpen) &&
-				"bg-accent -mx-1 rounded-md px-1",
+					"bg-accent -mx-1 rounded-md px-1",
 			)}
 		>
 			<div
@@ -917,11 +917,11 @@ function AddDeviceDialog({ me, disabled }: AddDeviceDialogProps) {
 				notifications.pushDevices.map(d =>
 					d.endpoint === deviceData.endpoint
 						? {
-							isEnabled: true,
-							deviceName: deviceData.deviceName,
-							endpoint: deviceData.endpoint,
-							keys: deviceData.keys,
-						}
+								isEnabled: true,
+								deviceName: deviceData.deviceName,
+								endpoint: deviceData.endpoint,
+								keys: deviceData.keys,
+							}
 						: d,
 				),
 			)

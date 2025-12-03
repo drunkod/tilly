@@ -1,8 +1,5 @@
 import { describe, test, expect, beforeEach } from "vitest"
-import {
-	createJazzTestAccount,
-	setupJazzTestSync,
-} from "jazz-tools/testing"
+import { createJazzTestAccount, setupJazzTestSync } from "jazz-tools/testing"
 import { UserAccount } from "./user"
 
 describe("UserAccount migration", () => {

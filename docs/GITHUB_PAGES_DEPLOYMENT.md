@@ -32,16 +32,16 @@ You need to set up repository variables for the build process:
 
 ### Required Variables
 
-| Variable Name | Description | Example Value |
-|--------------|-------------|---------------|
+| Variable Name             | Description              | Example Value                              |
+| ------------------------- | ------------------------ | ------------------------------------------ |
 | `PUBLIC_JAZZ_SYNC_SERVER` | Jazz Cloud WebSocket URL | `wss://cloud.jazz.tools/?key=YOUR_API_KEY` |
 
 ### Optional Variables
 
-| Variable Name | Description | Example Value |
-|--------------|-------------|---------------|
+| Variable Name       | Description                        | Example Value                     |
+| ------------------- | ---------------------------------- | --------------------------------- |
 | `PUBLIC_SERVER_URL` | Backend server URL for AI features | `https://your-backend.vercel.app` |
-| `GITHUB_PAGES_BASE` | Custom domain or repo path | `username.github.io/tilly` |
+| `GITHUB_PAGES_BASE` | Custom domain or repo path         | `username.github.io/tilly`        |
 
 ### Setting Variables
 
@@ -59,10 +59,12 @@ Click **New repository variable** for each variable:
 If you're deploying to a project page (e.g., `username.github.io/tilly` instead of `username.github.io`), you need to set the `GITHUB_PAGES_BASE` variable.
 
 ### For User/Organization Pages
+
 - URL: `https://username.github.io`
 - `GITHUB_PAGES_BASE`: Leave empty or set to `username.github.io`
 
 ### For Project Pages
+
 - URL: `https://username.github.io/tilly`
 - `GITHUB_PAGES_BASE`: `username.github.io/tilly`
 
@@ -187,15 +189,18 @@ To use a custom domain with GitHub Pages:
 ### Build Fails
 
 **Error**: `Dependencies installation failed`
+
 - **Solution**: Ensure `pnpm-lock.yaml` is committed to your repository
 
 **Error**: `Build command failed`
+
 - **Solution**: Check that all required variables are set in repository settings
 - **Solution**: Review the build logs in the Actions tab for specific errors
 
 ### App Loads But Data Doesn't Sync
 
 **Problem**: App works but data isn't saving
+
 - **Solution**: Verify `PUBLIC_JAZZ_SYNC_SERVER` is set correctly
 - **Solution**: Check browser console for WebSocket connection errors
 - **Solution**: Ensure your Jazz Cloud API key is valid
@@ -203,6 +208,7 @@ To use a custom domain with GitHub Pages:
 ### Authentication Not Working
 
 **Problem**: Can't create passkeys or sign in
+
 - **Solution**: Ensure HTTPS is enabled (GitHub Pages does this automatically)
 - **Solution**: Test on a device that supports WebAuthn (most modern browsers)
 - **Solution**: Check browser console for WebAuthn errors
@@ -210,6 +216,7 @@ To use a custom domain with GitHub Pages:
 ### 404 Errors on Page Refresh
 
 **Problem**: Direct navigation to routes shows 404
+
 - **Solution**: This is expected with client-side routing on GitHub Pages
 - **Solution**: The app uses hash-based routing in static mode to avoid this issue
 - **Solution**: If using custom domain, you may need to add a 404.html redirect
@@ -217,6 +224,7 @@ To use a custom domain with GitHub Pages:
 ### Assets Not Loading
 
 **Problem**: CSS, JS, or images return 404
+
 - **Solution**: Verify `GITHUB_PAGES_BASE` is set correctly for project pages
 - **Solution**: Check that the base path matches your repository name
 - **Solution**: Clear browser cache and hard refresh (Ctrl+Shift+R)

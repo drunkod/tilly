@@ -111,9 +111,7 @@ describe("PasskeyAuthDialog", () => {
 		mockLogIn = vi.fn()
 		mockOnOpenChange = vi.fn()
 
-		let { usePasskeyAuth } = vi.mocked(
-			await import("jazz-tools/react"),
-		)
+		let { usePasskeyAuth } = vi.mocked(await import("jazz-tools/react"))
 		usePasskeyAuth.mockReturnValue({
 			signUp: mockSignUp,
 			logIn: mockLogIn,

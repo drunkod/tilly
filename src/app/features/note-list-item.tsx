@@ -447,6 +447,7 @@ function RestoreNoteDialog({
 	onOpenChange: (open: boolean) => void
 }) {
 	let t = useIntl()
+	let locale = useLocale()
 	let [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false)
 
 	let deletionInfo = null
@@ -507,17 +508,17 @@ function RestoreNoteDialog({
 									params={{
 										timeAgo: formatDistanceToNow(
 											note.deletedAt ||
-											note.updatedAt ||
-											note.createdAt ||
-											new Date(
-												note.$jazz.lastUpdatedAt || note.$jazz.createdAt,
-											),
+												note.updatedAt ||
+												note.createdAt ||
+												new Date(
+													note.$jazz.lastUpdatedAt || note.$jazz.createdAt,
+												),
 											{
 												addSuffix: true,
 												locale:
-													useLocale() === "de"
+													locale === "de"
 														? dfnsDe
-														: useLocale() === "ru"
+														: locale === "ru"
 															? dfnsRu
 															: undefined,
 											},

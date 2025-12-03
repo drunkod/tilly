@@ -25,22 +25,24 @@ Create a Global Directory CoMap that acts as a registry where users can opt-in t
 ```typescript
 // Global directory for user registry
 export const GlobalUserDirectory = co.map({
-  users: co.list(UserAccount),
-  lastUpdated: z.date(),
-});
+	users: co.list(UserAccount),
+	lastUpdated: z.date(),
+})
 
 // Extend UserAccount to track directory membership
-export const UserAccount = co.account({
-  profile: UserProfile,
-  root: UserAccountRoot,
-}).withMigration(async (account) => {
-  // Existing migration code...
-  
-  // Opt-in to global directory
-  if (account.root.notificationSettings?.enabled) {
-    await addToGlobalDirectory(account);
-  }
-});
+export const UserAccount = co
+	.account({
+		profile: UserProfile,
+		root: UserAccountRoot,
+	})
+	.withMigration(async account => {
+		// Existing migration code...
+
+		// Opt-in to global directory
+		if (account.root.notificationSettings?.enabled) {
+			await addToGlobalDirectory(account)
+		}
+	})
 ```
 
 #### 2. Directory Management
@@ -48,35 +50,33 @@ export const UserAccount = co.account({
 ```typescript
 // Add user to directory
 async function addToGlobalDirectory(account: UserAccount) {
-  const directory = await GlobalUserDirectory.load(DIRECTORY_ID);
-  
-  if (!directory.$isLoaded) return;
-  
-  // Check if user already in directory
-  const exists = directory.users.some(
-    user => user.$jazz.id === account.$jazz.id
-  );
-  
-  if (!exists) {
-    directory.users.$jazz.push(account);
-    directory.$jazz.set('lastUpdated', new Date());
-  }
+	const directory = await GlobalUserDirectory.load(DIRECTORY_ID)
+
+	if (!directory.$isLoaded) return
+
+	// Check if user already in directory
+	const exists = directory.users.some(
+		user => user.$jazz.id === account.$jazz.id,
+	)
+
+	if (!exists) {
+		directory.users.$jazz.push(account)
+		directory.$jazz.set("lastUpdated", new Date())
+	}
 }
 
 // Remove user from directory
 async function removeFromGlobalDirectory(accountId: string) {
-  const directory = await GlobalUserDirectory.load(DIRECTORY_ID);
-  
-  if (!directory.$isLoaded) return;
-  
-  const index = directory.users.findIndex(
-    user => user.$jazz.id === accountId
-  );
-  
-  if (index !== -1) {
-    directory.users.$jazz.splice(index, 1);
-    directory.$jazz.set('lastUpdated', new Date());
-  }
+	const directory = await GlobalUserDirectory.load(DIRECTORY_ID)
+
+	if (!directory.$isLoaded) return
+
+	const index = directory.users.findIndex(user => user.$jazz.id === accountId)
+
+	if (index !== -1) {
+		directory.users.$jazz.splice(index, 1)
+		directory.$jazz.set("lastUpdated", new Date())
+	}
 }
 ```
 
@@ -85,38 +85,38 @@ async function removeFromGlobalDirectory(accountId: string) {
 ```typescript
 // Push notification cron job
 export async function sendPushNotifications() {
-  const directory = await GlobalUserDirectory.load(DIRECTORY_ID, {
-    loadAs: serverWorker,
-    resolve: {
-      users: {
-        $each: {
-          root: {
-            notificationSettings: true,
-            people: {
-              $each: {
-                reminders: {
-                  $each: true
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  });
-  
-  if (!directory.$isLoaded) {
-    console.error('Failed to load global directory');
-    return;
-  }
-  
-  // Iterate over all users
-  for (const user of directory.users) {
-    if (!user.$isLoaded) continue;
-    
-    // Process reminders for this user
-    await processUserReminders(user);
-  }
+	const directory = await GlobalUserDirectory.load(DIRECTORY_ID, {
+		loadAs: serverWorker,
+		resolve: {
+			users: {
+				$each: {
+					root: {
+						notificationSettings: true,
+						people: {
+							$each: {
+								reminders: {
+									$each: true,
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
+
+	if (!directory.$isLoaded) {
+		console.error("Failed to load global directory")
+		return
+	}
+
+	// Iterate over all users
+	for (const user of directory.users) {
+		if (!user.$isLoaded) continue
+
+		// Process reminders for this user
+		await processUserReminders(user)
+	}
 }
 ```
 
@@ -126,18 +126,21 @@ export async function sendPushNotifications() {
 
 ```typescript
 // Create directory owned by server worker
-const directoryGroup = Group.create(serverWorker);
+const directoryGroup = Group.create(serverWorker)
 
 // Server worker is admin
-directoryGroup.addMember(serverWorker, 'admin');
+directoryGroup.addMember(serverWorker, "admin")
 
 // All users can write (to add themselves)
-directoryGroup.addMember('everyone', 'writer');
+directoryGroup.addMember("everyone", "writer")
 
-const directory = GlobalUserDirectory.create({
-  users: [],
-  lastUpdated: new Date()
-}, directoryGroup);
+const directory = GlobalUserDirectory.create(
+	{
+		users: [],
+		lastUpdated: new Date(),
+	},
+	directoryGroup,
+)
 ```
 
 #### User Privacy
@@ -197,15 +200,16 @@ const directory = GlobalUserDirectory.create({
 - **Pagination**: Consider paginating user list for large directories
 
 **Mitigation**:
+
 ```typescript
 // Load directory in batches
 async function* loadUsersInBatches(batchSize = 100) {
-  const directory = await GlobalUserDirectory.load(DIRECTORY_ID);
-  
-  for (let i = 0; i < directory.users.length; i += batchSize) {
-    const batch = directory.users.slice(i, i + batchSize);
-    yield batch;
-  }
+	const directory = await GlobalUserDirectory.load(DIRECTORY_ID)
+
+	for (let i = 0; i < directory.users.length; i += batchSize) {
+		const batch = directory.users.slice(i, i + batchSize)
+		yield batch
+	}
 }
 ```
 
@@ -216,6 +220,7 @@ async function* loadUsersInBatches(batchSize = 100) {
 - **Consent**: Clear opt-in/opt-out mechanism needed
 
 **Mitigation**:
+
 - Clear privacy policy explaining directory
 - Prominent opt-in/opt-out controls
 - Audit logging of directory access
@@ -227,19 +232,20 @@ async function* loadUsersInBatches(batchSize = 100) {
 - **Stale data**: Users who deleted accounts remain in directory
 
 **Mitigation**:
+
 ```typescript
 // Periodic cleanup of stale users
 async function cleanupDirectory() {
-  const directory = await GlobalUserDirectory.load(DIRECTORY_ID);
-  
-  for (const user of directory.users) {
-    try {
-      await user.$jazz.ensureLoaded({ resolve: { profile: true } });
-    } catch (error) {
-      // User account no longer accessible, remove from directory
-      await removeFromGlobalDirectory(user.$jazz.id);
-    }
-  }
+	const directory = await GlobalUserDirectory.load(DIRECTORY_ID)
+
+	for (const user of directory.users) {
+		try {
+			await user.$jazz.ensureLoaded({ resolve: { profile: true } })
+		} catch (error) {
+			// User account no longer accessible, remove from directory
+			await removeFromGlobalDirectory(user.$jazz.id)
+		}
+	}
 }
 ```
 
@@ -250,11 +256,13 @@ async function cleanupDirectory() {
 Instead of global directory, each user gets their own cron job.
 
 **Pros**:
+
 - No global directory needed
 - Better isolation
 - Easier to scale
 
 **Cons**:
+
 - Complex to manage many cron jobs
 - Higher infrastructure costs
 - Harder to implement
@@ -264,11 +272,13 @@ Instead of global directory, each user gets their own cron job.
 Use service workers to schedule notifications client-side.
 
 **Pros**:
+
 - No server-side enumeration needed
 - Works offline
 - Lower server costs
 
 **Cons**:
+
 - Requires device to be online
 - Battery drain concerns
 - Less reliable than server-side
@@ -278,11 +288,13 @@ Use service workers to schedule notifications client-side.
 Users register webhooks that server calls.
 
 **Pros**:
+
 - No directory needed
 - Flexible integration
 - User-controlled
 
 **Cons**:
+
 - Requires user to run webhook server
 - Complex for average users
 - Not suitable for consumer app
@@ -314,44 +326,44 @@ Users register webhooks that server calls.
 ### Unit Tests
 
 ```typescript
-describe('Global Directory', () => {
-  it('should add user to directory', async () => {
-    const user = await createTestUser();
-    await addToGlobalDirectory(user);
-    
-    const directory = await GlobalUserDirectory.load(DIRECTORY_ID);
-    expect(directory.users).toContain(user);
-  });
-  
-  it('should remove user from directory', async () => {
-    const user = await createTestUser();
-    await addToGlobalDirectory(user);
-    await removeFromGlobalDirectory(user.$jazz.id);
-    
-    const directory = await GlobalUserDirectory.load(DIRECTORY_ID);
-    expect(directory.users).not.toContain(user);
-  });
-});
+describe("Global Directory", () => {
+	it("should add user to directory", async () => {
+		const user = await createTestUser()
+		await addToGlobalDirectory(user)
+
+		const directory = await GlobalUserDirectory.load(DIRECTORY_ID)
+		expect(directory.users).toContain(user)
+	})
+
+	it("should remove user from directory", async () => {
+		const user = await createTestUser()
+		await addToGlobalDirectory(user)
+		await removeFromGlobalDirectory(user.$jazz.id)
+
+		const directory = await GlobalUserDirectory.load(DIRECTORY_ID)
+		expect(directory.users).not.toContain(user)
+	})
+})
 ```
 
 ### Integration Tests
 
 ```typescript
-describe('Push Notification Cron', () => {
-  it('should process all users in directory', async () => {
-    const users = await createTestUsers(10);
-    for (const user of users) {
-      await addToGlobalDirectory(user);
-    }
-    
-    await sendPushNotifications();
-    
-    // Verify all users were processed
-    for (const user of users) {
-      expect(user.lastNotificationCheck).toBeDefined();
-    }
-  });
-});
+describe("Push Notification Cron", () => {
+	it("should process all users in directory", async () => {
+		const users = await createTestUsers(10)
+		for (const user of users) {
+			await addToGlobalDirectory(user)
+		}
+
+		await sendPushNotifications()
+
+		// Verify all users were processed
+		for (const user of users) {
+			expect(user.lastNotificationCheck).toBeDefined()
+		}
+	})
+})
 ```
 
 ### Load Tests
@@ -374,15 +386,15 @@ describe('Push Notification Cron', () => {
 ```typescript
 // Log directory access
 async function auditDirectoryAccess(
-  action: 'read' | 'write' | 'delete',
-  userId: string
+	action: "read" | "write" | "delete",
+	userId: string,
 ) {
-  await AuditLog.create({
-    timestamp: new Date(),
-    action,
-    userId,
-    resource: 'global-directory'
-  });
+	await AuditLog.create({
+		timestamp: new Date(),
+		action,
+		userId,
+		resource: "global-directory",
+	})
 }
 ```
 
@@ -390,16 +402,16 @@ async function auditDirectoryAccess(
 
 ```typescript
 // Prevent directory spam
-const rateLimiter = new Map<string, number>();
+const rateLimiter = new Map<string, number>()
 
 async function addToGlobalDirectory(account: UserAccount) {
-  const lastAdd = rateLimiter.get(account.$jazz.id);
-  if (lastAdd && Date.now() - lastAdd < 60000) {
-    throw new Error('Rate limit exceeded');
-  }
-  
-  rateLimiter.set(account.$jazz.id, Date.now());
-  // ... rest of implementation
+	const lastAdd = rateLimiter.get(account.$jazz.id)
+	if (lastAdd && Date.now() - lastAdd < 60000) {
+		throw new Error("Rate limit exceeded")
+	}
+
+	rateLimiter.set(account.$jazz.id, Date.now())
+	// ... rest of implementation
 }
 ```
 
@@ -423,6 +435,7 @@ When implementing this feature:
 ## Questions and Feedback
 
 For questions or suggestions about this enhancement:
+
 - File an issue on GitHub
 - Discuss on Discord
 - Email: assmann@hey.com

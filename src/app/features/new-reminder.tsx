@@ -37,23 +37,29 @@ function NewReminder({
 				},
 			},
 		},
-        select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefined : null
-    })
+		select: me =>
+			me.$isLoaded
+				? me
+				: me.$jazz.loadingState === "loading"
+					? undefined
+					: null,
+	})
 	let t = useIntl()
 	let [selectedPersonId, setSelectedPersonId] = useState(initialPersonId ?? "")
 	let [dialogOpen, setDialogOpen] = useState(false)
 
 	let people = (me?.$isLoaded ? me.root.people : []).filter(
-		(person): person is co.loaded<typeof Person> => person != null && !isDeleted(person),
+		(person): person is co.loaded<typeof Person> =>
+			person != null && !isDeleted(person),
 	)
 
-	let peopleOptions = people.map((person) => ({
+	let peopleOptions = people.map(person => ({
 		value: person.$jazz.id,
 		label: person.name,
 	}))
 
 	let selectedPersonLabel =
-		peopleOptions.find((personOption) => personOption.value === selectedPersonId)
+		peopleOptions.find(personOption => personOption.value === selectedPersonId)
 			?.label ?? ""
 
 	function handlePersonSelected(personId: string) {

@@ -457,11 +457,13 @@ const ruAssistantMessages = translate(baseAssistantMessages, {
 		"Вы достигли лимита использования. Проверьте настройки, чтобы узнать, когда лимиты обновятся.",
 	"assistant.usageLimit.viewSettings": "Посмотреть настройки",
 	"assistant.clearChat": "Очистить чат",
-	"assistant.clearChatHint.title": "Экономьте использование с новыми разговорами",
+	"assistant.clearChatHint.title":
+		"Экономьте использование с новыми разговорами",
 	"assistant.clearChatHint.description":
 		"Начало нового разговора помогает сэкономить ваш бюджет. Очистите чат, чтобы начать заново.",
 	"assistant.clearChatHint.dismiss": "Понятно",
-	"assistant.placeholder.disabled": "Для чата требуется подключение к интернету",
+	"assistant.placeholder.disabled":
+		"Для чата требуется подключение к интернету",
 	"assistant.placeholder.initial": "Чат с Тилли",
 	"assistant.placeholder.reply": "Ответить Тилли...",
 	"assistant.speak": "Говорить",
@@ -476,7 +478,8 @@ const ruAssistantMessages = translate(baseAssistantMessages, {
 		"Доступ к микрофону запрещен. Пожалуйста, разрешите доступ к микрофону.",
 	"assistant.speech.error.network":
 		"Ошибка сети. Пожалуйста, проверьте ваше подключение.",
-	"assistant.speech.error.noSpeech": "Речь не обнаружена. Пожалуйста, попробуйте снова.",
+	"assistant.speech.error.noSpeech":
+		"Речь не обнаружена. Пожалуйста, попробуйте снова.",
 	"assistant.speech.error.audioCapture":
 		"Не удалось получить доступ к микрофону. Пожалуйста, проверьте настройки устройства.",
 	"assistant.speech.error.generic":
@@ -496,14 +499,13 @@ const ruAssistantMessages = translate(baseAssistantMessages, {
 	"tool.error.unknown": "Неизвестная ошибка",
 	"tool.error.failedToUndo": "❌ Не удалось отменить: {$error}",
 	"tool.person.createConfirm.title": "Создать новый контакт {$name}?",
-	"tool.person.createConfirm.description":
-		"Тилли хочет создать новый контакт.",
-	"tool.person.createCancel.reason": "Пользователь отказался создавать этот контакт",
+	"tool.person.createConfirm.description": "Тилли хочет создать новый контакт.",
+	"tool.person.createCancel.reason":
+		"Пользователь отказался создавать этот контакт",
 	"tool.person.created.message": "Создан контакт: {$name}",
 	"tool.person.created.undone": 'Создан контакт "{$name}" (отменено)',
 	"tool.person.created.dialog.title": "Контакт создан",
-	"tool.person.created.dialog.description":
-		"Детали созданного контакта.",
+	"tool.person.created.dialog.description": "Детали созданного контакта.",
 	"tool.person.created.dialog.section": "Контакт",
 	"tool.person.created.undo.success": '✅ Отмена: Удален контакт "{$name}"',
 	"tool.person.updated.message": "Обновлен контакт: {$name}",
@@ -520,7 +522,8 @@ const ruAssistantMessages = translate(baseAssistantMessages, {
 	"tool.person.deleted.dialog.title": "Контакт удален",
 	"tool.person.deleted.dialog.description": "Детали удаленного контакта.",
 	"tool.person.deleted.dialog.section": "Удаленный контакт",
-	"tool.person.deleted.undo.success": '✅ Отмена: Восстановлен контакт "{$name}"',
+	"tool.person.deleted.undo.success":
+		'✅ Отмена: Восстановлен контакт "{$name}"',
 	"tool.people.found.count":
 		".input {$count :number} .match $count one {{Найден {$count} человек}} * {{Найдено {$count} человек}}",
 	"tool.people.found.withQuery":
@@ -533,7 +536,8 @@ const ruAssistantMessages = translate(baseAssistantMessages, {
 	"tool.person.read.message":
 		"Прочитан контакт {$name} ({$notesCount :number} заметок) ({$remindersCount :number} напоминаний)",
 	"tool.person.read.dialog.title": "Детали контакта",
-	"tool.person.read.dialog.description": "Найденная информация об этом человеке.",
+	"tool.person.read.dialog.description":
+		"Найденная информация об этом человеке.",
 	"tool.person.read.dialog.section": "Контакт",
 	"tool.person.read.dialog.notesCount":
 		".input {$count :number} .match $count one {{{$count} заметка}} * {{{$count} заметок}}",
@@ -542,8 +546,7 @@ const ruAssistantMessages = translate(baseAssistantMessages, {
 	"tool.note.created.message": "Добавлена заметка: {$content}",
 	"tool.note.created.undone": "Добавлена заметка (отменено)",
 	"tool.note.created.dialog.title": "Заметка добавлена",
-	"tool.note.created.dialog.description":
-		"Детали созданной заметки.",
+	"tool.note.created.dialog.description": "Детали созданной заметки.",
 	"tool.note.created.dialog.section": "Заметка",
 	"tool.note.created.undo.success": "✅ Отмена: Заметка удалена",
 	"tool.note.pinned": "📌 Закреплено",
@@ -558,17 +561,16 @@ const ruAssistantMessages = translate(baseAssistantMessages, {
 	"tool.note.deleted.message": "Удалена заметка: {$content}",
 	"tool.note.deleted.undone": "Удалена заметка (отменено)",
 	"tool.note.deleted.dialog.title": "Заметка удалена",
-	"tool.note.deleted.dialog.description":
-		"Детали удаленной заметки.",
+	"tool.note.deleted.dialog.description": "Детали удаленной заметки.",
 	"tool.note.deleted.dialog.section": "Удаленная заметка",
 	"tool.note.deleted.undo.success": "✅ Отмена: Заметка восстановлена",
 	"tool.reminder.created.message": "Добавлено напоминание: {$text}",
 	"tool.reminder.created.undone": "Добавлено напоминание {$text} (отменено)",
 	"tool.reminder.created.dialog.title": "Напоминание добавлено",
-	"tool.reminder.created.dialog.description":
-		"Детали созданного напоминания.",
+	"tool.reminder.created.dialog.description": "Детали созданного напоминания.",
 	"tool.reminder.created.dialog.section": "Напоминание",
-	"tool.reminder.created.undo.success": '✅ Отмена: Удалено напоминание "{$text}"',
+	"tool.reminder.created.undo.success":
+		'✅ Отмена: Удалено напоминание "{$text}"',
 	"tool.reminder.noDate": "Без даты",
 	"tool.reminder.repeats": "Повторяется каждые {$interval :number} {$unit}",
 	"tool.reminder.done": "Выполнено",
@@ -584,8 +586,7 @@ const ruAssistantMessages = translate(baseAssistantMessages, {
 	"tool.reminder.deleted.message": "Удалено напоминание",
 	"tool.reminder.deleted.undone": "Удалено напоминание (отменено)",
 	"tool.reminder.deleted.dialog.title": "Напоминание удалено",
-	"tool.reminder.deleted.dialog.description":
-		"Детали удаленного напоминания.",
+	"tool.reminder.deleted.dialog.description": "Детали удаленного напоминания.",
 	"tool.reminder.deleted.dialog.section": "Удаленное напоминание",
 	"tool.reminder.deleted.undo.success": "✅ Отмена: Напоминание восстановлено",
 	"tool.reminder.list.message.none": "Напоминания не найдены",
@@ -594,9 +595,11 @@ const ruAssistantMessages = translate(baseAssistantMessages, {
 	"tool.reminder.list.dialog.title": "Напоминания",
 	"tool.reminder.list.dialog.description": "Ваши предстоящие напоминания.",
 	"tool.reminder.list.empty.noDue": "Сейчас нет напоминаний к выполнению.",
-	"tool.reminder.list.empty.noMatch": "Нет напоминаний, соответствующих вашему поиску.",
+	"tool.reminder.list.empty.noMatch":
+		"Нет напоминаний, соответствующих вашему поиску.",
 	"tool.reminder.list.empty.noActive": "Активные напоминания не найдены.",
-	"tool.reminder.list.showingFirst": "Показаны первые {$count :number} напоминаний",
+	"tool.reminder.list.showingFirst":
+		"Показаны первые {$count :number} напоминаний",
 	"tool.reminder.list.person": "Для: {$name}",
 	"tool.reminder.list.andMore":
 		".input {$count :number} .match $count one {{и ещё {$count} напоминание}} * {{и ещё {$count} напоминаний}}",
