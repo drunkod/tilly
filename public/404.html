@@ -1,24 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>Redirecting...</title>
-		<script>
-			// GitHub Pages SPA redirect handler
-			// Store the path in sessionStorage and redirect to index.html
-			sessionStorage.setItem(
-				"spa-redirect-path",
-				location.pathname + location.search + location.hash,
-			)
+<head>
+	<meta charset="utf-8">
+	<title>Redirecting...</title>
+	<script>
+		// GitHub Pages SPA redirect handler
+		// Store the path in sessionStorage and redirect to index.html
+		(function() {
+			var pathSegments = location.pathname.split('/').filter(function(segment) {
+				return segment.length > 0;
+			});
 
-			// Find the base path by looking for the segment before '/app'
-			const pathSegments = location.pathname.split('/').filter(Boolean);
-			const appIndex = pathSegments.indexOf('app');
-			const basePath = appIndex > 0 ? '/' + pathSegments.slice(0, appIndex).join('/') : '';
+			// For drunkod.github.io/tilly, pathSegments[0] = 'tilly'
+			// We want to preserve everything after /tilly/
+			var basePath = pathSegments.length > 0 ? '/' + pathSegments[0] : '';
+			var remainingPath = pathSegments.length > 1
+				? '/' + pathSegments.slice(1).join('/')
+				: '';
 
-			// Redirect to the base path's index.html
+			sessionStorage.setItem('spa-redirect-path', basePath + remainingPath + location.search + location.hash);
+
+			// Redirect to base path index
 			location.replace(location.origin + basePath + '/');
-		</script>
-	</head>
-	<body></body>
+		})();
+	</script>
+</head>
+<body></body>
 </html>

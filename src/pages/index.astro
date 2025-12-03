@@ -1,66 +1,72 @@
 ---
-// This page should never be shown - middleware redirects "/" based on browser language.
-// However, Vercel 404s without this file, so we keep it as a fallback.
-// If it does show up, at least it's beautiful and useful.
+import { getPreferredLocale } from "#middleware"
 
-import "#app/index.css"
+// Get base URL from Astro (includes base path)
+const baseUrl = import.meta.env.BASE_URL || "/"
 
-export let prerender = false
-
-let requestUrl = new URL(Astro.request.url)
-let siteBaseUrl = Astro.site ?? new URL(requestUrl.origin)
-let canonicalUrl = new URL(
-	requestUrl.pathname + requestUrl.search,
-	siteBaseUrl,
-).toString()
-let ogImageUrl = new URL("/og.png", siteBaseUrl).toString()
-let pageTitle = "Tilly - Personal Relation Helper"
-let metaDescription =
-	"remember what's important and stay in touch with your friends and loved ones."
+// Server-side locale detection for redirect
+if (Astro.request.headers) {
+  const acceptLanguage = Astro.request.headers.get("accept-language")
+  const locale = getPreferredLocale(acceptLanguage)
+  return Astro.redirect(`${baseUrl}${locale}/`, 301)
+}
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="overscroll-y-none bg-background">
-	<head>
-		<title>{pageTitle}</title>
-		<meta name="description" content={metaDescription} />
-		<meta charset="UTF-8" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="canonical" href={canonicalUrl} />
-		<meta
-			name="viewport"
-			content="initial-scale=1, viewport-fit=cover, width=device-width, user-scalable=no"
-		/>
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={metaDescription} />
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={canonicalUrl} />
-		<meta property="og:image" content={ogImageUrl} />
-		<meta property="og:image:width" content="1200" />
-		<meta property="og:image:height" content="630" />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={metaDescription} />
-		<meta name="twitter:image" content={ogImageUrl} />
-	</head>
-	<body class="bg-background text-foreground">
-		<div class="flex min-h-screen flex-col items-center justify-center gap-8">
-			<img src="/app/icons/icon-192x192.png" class="h-24 w-24 rounded-lg" />
-			<h1 class="text-3xl font-semibold">Tilly</h1>
-			<div class="flex flex-col gap-3">
-				<a
-					href="/en/"
-					class="rounded-lg bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
-				>
-					Continue in English 🇺🇸
-				</a>
-				<a
-					href="/de/"
-					class="rounded-lg bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
-				>
-					Weiter auf Deutsch 🇩🇪
-				</a>
-			</div>
-		</div>
-	</body>
+  <head>
+    <title>Tilly - Personal Relation Helper</title>
+    <meta
+      name="description"
+      content="remember what's important and stay in touch with your friends and loved ones."
+    />
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href={`${baseUrl}favicon.ico`} />
+    <link rel="canonical" href={Astro.site} />
+    <meta
+      name="viewport"
+      content="initial-scale=1, viewport-fit=cover, width=device-width, user-scalable=no"
+    />
+    <meta property="og:title" content="Tilly - Personal Relation Helper" />
+    <meta
+      property="og:description"
+      content="remember what's important and stay in touch with your friends and loved ones."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.site?.toString()} />
+    <meta property="og:image" content={`${Astro.site}og.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tilly - Personal Relation Helper" />
+    <meta
+      name="twitter:description"
+      content="remember what's important and stay in touch with your friends and loved ones."
+    />
+    <meta name="twitter:image" content={`${Astro.site}og.png`} />
+  </head>
+  <body class="bg-background text-foreground">
+    <div class="flex min-h-screen flex-col items-center justify-center gap-8">
+      <img
+        src={`${baseUrl}app/icons/icon-192x192.png`}
+        class="h-24 w-24 rounded-lg"
+        alt="Tilly icon"
+      />
+      <h1 class="text-3xl font-semibold">Tilly</h1>
+      <div class="flex flex-col gap-3">
+        <a
+          href={`${baseUrl}en/`}
+          class="rounded-lg bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Continue in English 🇺🇸
+        </a>
+        <a
+          href={`${baseUrl}de/`}
+          class="rounded-lg bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Weiter auf Deutsch 🇩🇪
+        </a>
+      </div>
+    </div>
+  </body>
 </html>

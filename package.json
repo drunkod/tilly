@@ -6,6 +6,7 @@
 		"dev": "astro dev",
 		"build": "pnpm test:run && astro check && astro build",
 		"build:static": "ASTRO_OUTPUT=static astro check && ASTRO_OUTPUT=static astro build",
+		"build:static:github": "ASTRO_OUTPUT=static GITHUB_PAGES_BASE=drunkod.github.io/tilly pnpm build:static",
 		"build:node": "ASTRO_ADAPTER=node astro check && ASTRO_ADAPTER=node astro build",
 		"preview": "astro preview",
 		"preview:static": "npx serve dist",

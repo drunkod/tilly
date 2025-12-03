@@ -8,7 +8,8 @@
 			"#app/*": ["./src/app/*"],
 			"#server/*": ["./src/server/*"],
 			"#shared/*": ["./src/shared/*"],
-			"#www/*": ["./src/www/*"]
+			"#www/*": ["./src/www/*"],
+			"#middleware": ["./src/middleware.ts"]
 		},
 		"plugins": [
 			{

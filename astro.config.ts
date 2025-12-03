@@ -60,6 +60,18 @@ export default defineConfig({
 				generatedRouteTree: "./src/app/routeTree.gen.ts",
 			}),
 			tailwindcss(),
+			// Plugin to inject BASE_PATH into service worker
+			{
+				name: "inject-sw-base-path",
+				transform(code: string, id: string) {
+					if (id.endsWith("sw.ts") || id.includes("sw.js")) {
+						return code.replace(
+							'const BASE_PATH = "%%BASE_PATH%%";',
+							`const BASE_PATH = "${basePath || ""}";`
+						);
+					}
+				},
+			},
 		] as any,
 	},
 	integrations: [

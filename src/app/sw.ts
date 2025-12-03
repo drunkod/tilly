@@ -8,8 +8,8 @@ declare let self: ServiceWorkerGlobalScope & {
 	__BASE_PATH__: string
 }
 
-// Injected at build time by Vite
-const BASE_PATH = self.__BASE_PATH__ || ""
+// Injected at build time by Vite plugin
+const BASE_PATH = "%%BASE_PATH%%";
 
 type MessageEventData =
 	| { type: "SKIP_WAITING" }
