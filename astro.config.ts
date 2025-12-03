@@ -24,8 +24,23 @@ let runtimeAdapter = isStatic
 let basePath = process.env.ASTRO_BASE_PATH
 if (!basePath && process.env.GITHUB_PAGES_BASE) {
 	let parts = process.env.GITHUB_PAGES_BASE.split("/")
-	basePath = parts.length > 1 ? `/${parts.slice(1).join("/")}` : ""
+	// Normalize: remove empty parts to handle optional trailing slashes
+	// e.g. "drunkod.github.io/tilly/" -> ["drunkod.github.io", "tilly", ""] -> ["tilly"]
+	let pathParts = parts.slice(1).filter(Boolean)
+	if (pathParts.length > 0) {
+		// Astro requires base to start and end with a slash
+		basePath = `/${pathParts.join("/")}/`
+	}
 }
+
+// Ensure strict Astro requirement for trailing slash if base is present
+if (basePath && !basePath.endsWith("/")) {
+	basePath += "/"
+}
+
+// Clean base path for client-side use (no trailing slash) to avoid double slashes in URLs
+// e.g. "/tilly" instead of "/tilly/"
+let cleanBasePath = basePath ? basePath.replace(/\/$/, "") : ""
 
 // Site URL configuration
 let site = process.env.PUBLIC_SITE_URL
@@ -50,8 +65,10 @@ export default defineConfig({
 	vite: {
 		server: { allowedHosts: [".ngrok-free.app"] },
 		define: {
-			// Make base path available to client code
-			"import.meta.env.BASE_PATH": JSON.stringify(basePath || ""),
+			// Make base path available to client code (clean version without trailing slash)
+			"import.meta.env.BASE_PATH": JSON.stringify(cleanBasePath),
+			// Make output mode available to middleware
+			"import.meta.env.ASTRO_OUTPUT": JSON.stringify(outputMode),
 		},
 		plugins: [
 			tanstackRouter({
@@ -67,7 +84,7 @@ export default defineConfig({
 					if (id.endsWith("sw.ts") || id.includes("sw.js")) {
 						return code.replace(
 							'const BASE_PATH = "%%BASE_PATH%%";',
-							`const BASE_PATH = "${basePath || ""}";`
+							`const BASE_PATH = "${cleanBasePath}";`
 						);
 					}
 				},
@@ -78,7 +95,7 @@ export default defineConfig({
 		react({ babel: { plugins: ["babel-plugin-react-compiler"] } }),
 		pwa({
 			registerType: "prompt",
-			scope: basePath ? `${basePath}/app/` : "/app/",
+			scope: basePath ? `${basePath}app/` : "/app/",
 			base: basePath || "/",
 			strategies: "injectManifest",
 			injectRegister: false,
