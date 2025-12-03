@@ -1,5 +1,5 @@
 name: Deploy to GitHub Pages
-#upd
+
 on:
   push:
     branches: [main, 'work/offline-github-pages']
