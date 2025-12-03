@@ -37,7 +37,7 @@ jobs:
         env:
           PUBLIC_JAZZ_SYNC_SERVER: ${{ vars.PUBLIC_JAZZ_SYNC_SERVER }}
           PUBLIC_SERVER_URL: ${{ vars.PUBLIC_SERVER_URL }}
-          GITHUB_PAGES_BASE: "drunkod.github.io/tilly"
+          GITHUB_PAGES_BASE: "drunkod.github.io/tilly/"
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
