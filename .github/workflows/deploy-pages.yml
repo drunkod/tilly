@@ -33,7 +33,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build static site
-        run: pnpm build:static
+        run: pnpm build:static:github
         env:
           PUBLIC_JAZZ_SYNC_SERVER: ${{ vars.PUBLIC_JAZZ_SYNC_SERVER }}
           PUBLIC_SERVER_URL: ${{ vars.PUBLIC_SERVER_URL }}
