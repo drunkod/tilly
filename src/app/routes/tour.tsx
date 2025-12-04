@@ -63,7 +63,7 @@ function TourComponent() {
 				<div className="items-top absolute inset-x-0 top-0 flex gap-4">
 					<Link to="/" className="inline-flex items-center gap-4">
 						<motion.img
-							src="/app/icons/icon-192x192.png"
+							src={`${import.meta.env.BASE_PATH}/app/icons/icon-192x192.png`}
 							className="size-16 rounded-md"
 							layoutId="logo"
 						/>
@@ -143,20 +143,20 @@ function useSteps() {
 	let showPWAInstallStep = (isAndroid || isIOS) && !isPWAInstalled
 	return showPWAInstallStep
 		? ([
-				"welcome",
-				"install-pwa",
-				"add-person",
-				"add-note",
-				"add-reminder",
-				"finish-setup",
-			] as const)
+			"welcome",
+			"install-pwa",
+			"add-person",
+			"add-note",
+			"add-reminder",
+			"finish-setup",
+		] as const)
 		: ([
-				"welcome",
-				"add-person",
-				"add-note",
-				"add-reminder",
-				"finish-setup",
-			] as const)
+			"welcome",
+			"add-person",
+			"add-note",
+			"add-reminder",
+			"finish-setup",
+		] as const)
 }
 
 function renderStep(

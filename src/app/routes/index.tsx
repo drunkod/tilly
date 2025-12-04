@@ -63,7 +63,7 @@ function WelcomeIndex() {
 					<div className="mx-auto flex w-full max-w-md flex-col items-center gap-6">
 						<div className="inline-flex items-center gap-4">
 							<motion.img
-								src="/app/icons/icon-192x192.png"
+								src={`${import.meta.env.BASE_PATH}/app/icons/icon-192x192.png`}
 								className="size-24 rounded-lg"
 								layoutId="logo"
 							/>

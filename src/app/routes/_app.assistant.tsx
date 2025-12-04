@@ -337,7 +337,7 @@ function AuthenticatedChat() {
 						<div className="text-muted-foreground flex items-center justify-center gap-3 py-2 text-sm">
 							<Avatar className="size-8 animate-pulse">
 								<AvatarImage
-									src="/app/icons/icon-192x192.png"
+									src={`${import.meta.env.BASE_PATH}/app/icons/icon-192x192.png`}
 									alt="Tilly logo"
 								/>
 								<AvatarFallback>T</AvatarFallback>
@@ -619,7 +619,7 @@ function UserInput(props: {
 				"bg-background/50 border-border absolute z-1 rounded-4xl border p-2 backdrop-blur-xl transition-all duration-300 max-md:inset-x-3 md:bottom-3 md:left-1/2 md:w-full md:max-w-xl md:-translate-x-1/2",
 				inputFocused && "bg-background bottom-1",
 				!inputFocused &&
-					"bottom-[calc(max(calc(var(--spacing)*3),calc(env(safe-area-inset-bottom)-var(--spacing)*4))+var(--spacing)*19)]",
+				"bottom-[calc(max(calc(var(--spacing)*3),calc(env(safe-area-inset-bottom)-var(--spacing)*4))+var(--spacing)*19)]",
 				active && "border-destructive",
 			)}
 		>
