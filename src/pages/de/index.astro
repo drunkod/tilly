@@ -19,6 +19,7 @@ import { Footer } from "#www/components/Footer"
 >
 	<Navbar
 		client:load
+		baseUrl={import.meta.env.BASE_URL}
 		logo={{
 			text: "Tilly",
 			href: "/de/",
@@ -32,7 +33,7 @@ import { Footer } from "#www/components/Footer"
 		]}
 		cta={{
 			text: "Zur App",
-			href: "/app",
+			href: `${import.meta.env.BASE_URL}app`,
 		}}
 		languages={[
 			{ name: "English", href: "/en/" },
@@ -52,7 +53,7 @@ import { Footer } from "#www/components/Footer"
 			description="Deine Freunde erzählen dir wichtige Dinge. Tilly hilft dir, dich zu erinnern und nachzufragen, wenn es darauf ankommt."
 			primaryCta={{
 				text: "Jetzt loslegen",
-				href: "/app",
+				href: `${import.meta.env.BASE_URL}app`,
 			}}
 			secondaryCta={{
 				text: "Mehr erfahren",
@@ -60,7 +61,7 @@ import { Footer } from "#www/components/Footer"
 			}}
 			media={{
 				kind: "image",
-				src: "/images/screenshots/de-people.webp",
+				src: `${import.meta.env.BASE_URL}images/screenshots/de-people.webp`,
 				alt: "Telefon mit der Tilly-Personenliste",
 				loading: "eager",
 				aspectRatio: "215 / 466",
@@ -76,7 +77,7 @@ import { Footer } from "#www/components/Footer"
 				author: {
 					name: "Carl Assmann",
 					title: "Der, der Tilly gebaut hat.",
-					avatar: "/images/avatars/carl.webp",
+					avatar: `${import.meta.env.BASE_URL}images/avatars/carl.webp`,
 				},
 			}}
 		>
@@ -137,7 +138,7 @@ import { Footer } from "#www/components/Footer"
 			]}
 			media={{
 				kind: "image",
-				src: "/images/screenshots/de-person.webp",
+				src: `${import.meta.env.BASE_URL}images/screenshots/de-person.webp`,
 				alt: "Telefon mit den Tilly-Notizen zu einer Person",
 				aspectRatio: "215 / 466",
 				fit: "contain",
@@ -240,7 +241,7 @@ import { Footer } from "#www/components/Footer"
 			closing="Der Bedienkomfort ist real. So einfach, dass du es wirklich nutzt."
 			media={{
 				kind: "image",
-				src: "/images/screenshots/de-chat.webp",
+				src: `${import.meta.env.BASE_URL}images/screenshots/de-chat.webp`,
 				alt: "Telefon mit dem Tilly-Agent-Chat",
 				aspectRatio: "215 / 466",
 				fit: "contain",
@@ -255,7 +256,7 @@ import { Footer } from "#www/components/Footer"
 				{
 					name: "Kostenlos",
 					id: "tier-free",
-					href: "/app",
+					href: `${import.meta.env.BASE_URL}app`,
 					priceMonthly: "Kostenlos",
 					priceSuffix: null,
 					description:
@@ -273,7 +274,7 @@ import { Footer } from "#www/components/Footer"
 				{
 					name: "Plus",
 					id: "tier-plus",
-					href: "/app",
+					href: `${import.meta.env.BASE_URL}app`,
 					priceMonthly: "$6",
 					priceSuffix: "/Monat",
 					description: "KI‑Agent für maximalen Komfort",
@@ -338,7 +339,7 @@ import { Footer } from "#www/components/Footer"
 		title="Bereit, dich an Wichtiges zu erinnern?"
 		primaryCta={{
 			text: "Kostenlos ausprobieren",
-			href: "/app",
+			href: `${import.meta.env.BASE_URL}app`,
 		}}
 	/>
 

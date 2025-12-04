@@ -20,6 +20,7 @@ interface NavigationItem {
 
 interface NavbarProps {
 	locale: "en" | "de" | "ru"
+	baseUrl?: string
 	logo: {
 		text: string
 		href: string
@@ -32,7 +33,7 @@ interface NavbarProps {
 	languages?: { name: string; href: string }[]
 }
 
-function Navbar({ logo, navigation, cta, locale, languages }: NavbarProps) {
+function Navbar({ logo, navigation, cta, locale, languages, baseUrl = "/" }: NavbarProps) {
 	let [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	let currentLanguageEmoji =
 		locale === "de" ? "🇩🇪" : locale === "ru" ? "🇷🇺" : "🇺🇸"
@@ -47,7 +48,7 @@ function Navbar({ logo, navigation, cta, locale, languages }: NavbarProps) {
 			<header className="bg-background border-border sticky inset-x-0 top-0 z-50 border-b">
 				<nav className="container mx-auto flex items-center justify-between px-3 py-4">
 					<a href={logo.href} className="flex items-center gap-3">
-						<img alt="" src="/favicon.ico" className="size-8 rounded" />
+						<img alt="" src={`${baseUrl}favicon.ico`} className="size-8 rounded" />
 						<span className="ml-2 hidden text-xl font-bold md:block">
 							{logo.text}
 						</span>
