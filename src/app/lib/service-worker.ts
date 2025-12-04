@@ -5,8 +5,9 @@ import { useEffect, useCallback } from "react"
 
 export { useServiceWorker, getServiceWorkerRegistration }
 
-let SERVICE_WORKER_URL = "/sw.js"
-let SERVICE_WORKER_SCOPE = "/app/"
+let BASE_URL = import.meta.env.BASE_URL ?? "/"
+let SERVICE_WORKER_URL = `${BASE_URL}sw.js`
+let SERVICE_WORKER_SCOPE = `${BASE_URL}app/`
 
 function useServiceWorker(options?: ServiceWorkerOptions) {
 	useRegisterServiceWorker()

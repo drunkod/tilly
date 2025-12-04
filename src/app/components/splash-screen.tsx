@@ -5,7 +5,7 @@ export function SplashScreen() {
 	return (
 		<div className="flex min-h-screen flex-col items-center justify-center gap-4">
 			<motion.img
-				src="/app/icons/icon-192x192.png"
+				src={`${import.meta.env.BASE_PATH}/app/icons/icon-192x192.png`}
 				className="size-24 rounded-lg"
 				layoutId="logo"
 			/>

@@ -83,8 +83,8 @@ export default defineConfig({
 				transform(code: string, id: string) {
 					if (id.endsWith("sw.ts") || id.includes("sw.js")) {
 						return code.replace(
-							'const BASE_PATH = "%%BASE_PATH%%";',
-							`const BASE_PATH = "${cleanBasePath}";`
+							/"%%BASE_PATH%%"/g,
+							`"${cleanBasePath}"`
 						);
 					}
 				},

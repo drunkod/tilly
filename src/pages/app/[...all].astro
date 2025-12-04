@@ -21,7 +21,8 @@ let canonicalUrl = new URL(
 	requestUrl.pathname + requestUrl.search,
 	siteBaseUrl,
 ).toString()
-let ogImageUrl = new URL("/og.png", siteBaseUrl).toString()
+let baseUrl = import.meta.env.BASE_URL
+let ogImageUrl = new URL(`${baseUrl}og.png`, siteBaseUrl).toString()
 let pageTitle = "Tilly - Personal Relation Helper"
 let metaDescription =
 	"remember what's important and stay in touch with your friends and loved ones."
@@ -33,20 +34,20 @@ let metaDescription =
 		<title>{pageTitle}</title>
 		<meta name="description" content={metaDescription} />
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="icon" type="image/x-icon" href={`${baseUrl}favicon.ico`} />
 		<link rel="canonical" href={canonicalUrl} />
 		<meta
 			name="viewport"
 			content="initial-scale=1, viewport-fit=cover, width=device-width, user-scalable=no"
 		/>
-		<link rel="manifest" href="/app/manifest.json" />
+		<link rel="manifest" href={`${baseUrl}app/manifest.json`} />
 		<meta name="mobile-web-app-capable" content="yes" />
 		<meta
 			name="apple-mobile-web-app-status-bar-style"
 			content="black-translucent"
 		/>
 		<meta name="apple-mobile-web-app-title" content="Tilly" />
-		<link rel="apple-touch-icon" href="/app/icons/icon-152x152.png" />
+		<link rel="apple-touch-icon" href={`${baseUrl}app/icons/icon-152x152.png`} />
 		<meta id="theme-color" name="theme-color" content="#FFFFFF" />
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={metaDescription} />
