@@ -30,6 +30,7 @@ let { Content } = await render(post)
 >
 	<Navbar
 		locale="en"
+		baseUrl={import.meta.env.BASE_URL}
 		client:load
 		logo={{
 			text: "Tilly",
@@ -43,7 +44,7 @@ let { Content } = await render(post)
 		]}
 		cta={{
 			text: "Go to App",
-			href: "/app",
+			href: `${import.meta.env.BASE_URL}app`,
 		}}
 		languages={[
 			{ name: "English", href: `/en/blog/${post.id.replace("/en", "")}` },
