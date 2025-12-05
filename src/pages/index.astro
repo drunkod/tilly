@@ -4,7 +4,7 @@ import { getPreferredLocale } from "#middleware"
 // Get base URL from Astro (includes base path)
 const baseUrl = import.meta.env.BASE_URL || "/"
 
-// Server-side locale detection for redirect
+// Server-side locale detection for redirect (works in SSR, ignored in static build)
 if (Astro.request.headers) {
   const acceptLanguage = Astro.request.headers.get("accept-language")
   const locale = getPreferredLocale(acceptLanguage)
@@ -44,6 +44,22 @@ if (Astro.request.headers) {
       content="remember what's important and stay in touch with your friends and loved ones."
     />
     <meta name="twitter:image" content={`${Astro.site}og.png`} />
+    <script define:vars={{ baseUrl }}>
+      // Client-side redirect for static hosting (GitHub Pages)
+      try {
+        const userLang = navigator.language || navigator.userLanguage;
+        if (userLang.startsWith('de')) {
+          window.location.replace(baseUrl + 'de/');
+        } else if (userLang.startsWith('ru')) {
+          window.location.replace(baseUrl + 'ru/');
+        } else {
+          window.location.replace(baseUrl + 'en/');
+        }
+      } catch (e) {
+        // Fallback to English if something goes wrong
+        window.location.replace(baseUrl + 'en/');
+      }
+    </script>
   </head>
   <body class="bg-background text-foreground">
     <div class="flex min-h-screen flex-col items-center justify-center gap-8">
@@ -65,6 +81,12 @@ if (Astro.request.headers) {
           class="rounded-lg bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
           Weiter auf Deutsch 🇩🇪
+        </a>
+        <a
+          href={`${baseUrl}ru/`}
+          class="rounded-lg bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Продолжить на русском 🇷🇺
         </a>
       </div>
     </div>
