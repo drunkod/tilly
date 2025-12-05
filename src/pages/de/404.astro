@@ -1,5 +1,7 @@
 ---
 import LegalPageLayout from "../../www/layouts/LegalPageLayout.astro"
+
+let baseUrl = import.meta.env.BASE_URL
 ---
 
 <LegalPageLayout
@@ -10,6 +12,6 @@ import LegalPageLayout from "../../www/layouts/LegalPageLayout.astro"
 	<h1>Seite nicht gefunden</h1>
 	<p>Die gesuchte Seite existiert nicht.</p>
 	<p>
-		<a href="/de/">Zur Startseite zurück</a> oder <a href="/app">App öffnen</a>.
+		<a href={`${baseUrl}de/`}>Zur Startseite zurück</a> oder <a href={`${baseUrl}app`}>App öffnen</a>.
 	</p>
 </LegalPageLayout>

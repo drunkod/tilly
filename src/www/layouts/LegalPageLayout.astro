@@ -10,6 +10,7 @@ export interface Props {
 }
 
 let { title, description, locale = "en" } = Astro.props
+let baseUrl = import.meta.env.BASE_URL
 let requestUrl = new URL(Astro.request.url)
 let siteBaseUrl = Astro.site ?? new URL(requestUrl.origin)
 let canonicalUrl = new URL(
@@ -23,13 +24,13 @@ let metaDescription = description ?? ""
 let localizedNav =
 	locale === "de"
 		? {
-				home: "/de/",
-				features: "/de/#features",
-				pricing: "/de/#pricing",
-				faq: "/de/#faq",
-				blog: "/de/blog",
-				imprint: "/de/imprint",
-				privacy: "/de/privacy",
+				home: `${baseUrl}de/`,
+				features: `${baseUrl}de/#features`,
+				pricing: `${baseUrl}de/#pricing`,
+				faq: `${baseUrl}de/#faq`,
+				blog: `${baseUrl}de/blog`,
+				imprint: `${baseUrl}de/imprint`,
+				privacy: `${baseUrl}de/privacy`,
 				labels: {
 					features: "Funktionen",
 					pricing: "Tarife",
@@ -42,13 +43,13 @@ let localizedNav =
 			}
 		: locale === "ru"
 			? {
-					home: "/ru/",
-					features: "/ru/#features",
-					pricing: "/ru/#pricing",
-					faq: "/ru/#faq",
-					blog: "/ru/blog",
-					imprint: "/ru/imprint",
-					privacy: "/ru/privacy",
+					home: `${baseUrl}ru/`,
+					features: `${baseUrl}ru/#features`,
+					pricing: `${baseUrl}ru/#pricing`,
+					faq: `${baseUrl}ru/#faq`,
+					blog: `${baseUrl}ru/blog`,
+					imprint: `${baseUrl}ru/imprint`,
+					privacy: `${baseUrl}ru/privacy`,
 					labels: {
 						features: "Возможности",
 						pricing: "Цены",
@@ -60,13 +61,13 @@ let localizedNav =
 					},
 				}
 			: {
-					home: "/en/",
-					features: "/en/#features",
-					pricing: "/en/#pricing",
-					faq: "/en/#faq",
-					blog: "/en/blog",
-					imprint: "/en/imprint",
-					privacy: "/en/privacy",
+					home: `${baseUrl}en/`,
+					features: `${baseUrl}en/#features`,
+					pricing: `${baseUrl}en/#pricing`,
+					faq: `${baseUrl}en/#faq`,
+					blog: `${baseUrl}en/blog`,
+					imprint: `${baseUrl}en/imprint`,
+					privacy: `${baseUrl}en/privacy`,
 					labels: {
 						features: "Features",
 						pricing: "Pricing",
@@ -120,9 +121,9 @@ let localizedNav =
 				href: `${import.meta.env.BASE_URL}app`,
 			}}
 			languages={[
-				{ name: "English", href: "/en/" },
-				{ name: "Deutsch", href: "/de/" },
-				{ name: "Русский", href: "/ru/" },
+				{ name: "English", href: `${baseUrl}en/` },
+				{ name: "Deutsch", href: `${baseUrl}de/` },
+				{ name: "Русский", href: `${baseUrl}ru/` },
 			]}
 		/>
 
@@ -146,9 +147,9 @@ let localizedNav =
 					{ name: "GitHub", href: "#", icon: "Github" },
 				],
 				languages: [
-					{ name: "English", href: "/en/" },
-					{ name: "Deutsch", href: "/de/" },
-					{ name: "Русский", href: "/ru/" },
+					{ name: "English", href: `${baseUrl}en/` },
+					{ name: "Deutsch", href: `${baseUrl}de/` },
+					{ name: "Русский", href: `${baseUrl}ru/` },
 				],
 			}}
 			company={{

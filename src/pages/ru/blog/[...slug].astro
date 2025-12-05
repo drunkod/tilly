@@ -8,10 +8,10 @@ export const prerender = true
 
 export async function getStaticPaths() {
 	let posts = await getCollection("blog")
-	let dePosts = posts.filter(post => post.id.endsWith("/de"))
+	let ruPosts = posts.filter(post => post.id.endsWith("/ru"))
 
-	return dePosts.map(post => ({
-		params: { slug: post.id.replace("/de", "") },
+	return ruPosts.map(post => ({
+		params: { slug: post.id.replace("/ru", "") },
 		props: { post },
 	}))
 }
@@ -25,32 +25,32 @@ let baseUrl = import.meta.env.BASE_URL
 ---
 
 <MinimalMarketingLayout
-	title={`${post.data.title} - Tilly Blog`}
+	title={`${post.data.title} - Tilly Блог`}
 	description={post.data.description}
 	ogImage={post.data.ogImage}
 >
 	<Navbar
-		locale="de"
+		locale="ru"
 		baseUrl={import.meta.env.BASE_URL}
 		client:load
 		logo={{
 			text: "Tilly",
-			href: `${baseUrl}de/`,
+			href: `${baseUrl}ru/`,
 		}}
 		navigation={[
-			{ name: "Funktionen", href: `${baseUrl}de/#features` },
-			{ name: "Tarife", href: `${baseUrl}de/#experience` },
-			{ name: "FAQ", href: `${baseUrl}de/#faq` },
-			{ name: "Blog", href: `${baseUrl}de/blog` },
+			{ name: "Возможности", href: `${baseUrl}ru/#features` },
+			{ name: "Опыт", href: `${baseUrl}ru/#experience` },
+			{ name: "FAQ", href: `${baseUrl}ru/#faq` },
+			{ name: "Блог", href: `${baseUrl}ru/blog` },
 		]}
 		cta={{
-			text: "Zur App",
+			text: "Перейти к приложению",
 			href: `${import.meta.env.BASE_URL}app`,
 		}}
 		languages={[
-			{ name: "English", href: `${baseUrl}en/blog/${post.id.replace("/de", "")}` },
-			{ name: "Deutsch", href: `${baseUrl}de/blog/${post.id.replace("/de", "")}` },
-			{ name: "Русский", href: `${baseUrl}ru/blog/${post.id.replace("/de", "")}` },
+			{ name: "English", href: `${baseUrl}en/blog/${post.id.replace("/ru", "")}` },
+			{ name: "Deutsch", href: `${baseUrl}de/blog/${post.id.replace("/ru", "")}` },
+			{ name: "Русский", href: `${baseUrl}ru/blog/${post.id.replace("/ru", "")}` },
 		]}
 	/>
 
@@ -58,10 +58,10 @@ let baseUrl = import.meta.env.BASE_URL
 		<article class="prose prose-lg dark:prose-invert mx-auto max-w-3xl">
 			<div class="not-prose mb-8">
 				<a
-					href={`${baseUrl}de/blog`}
+					href={`${baseUrl}ru/blog`}
 					class="text-muted-foreground hover:text-foreground mb-4 inline-block text-sm transition-colors"
 				>
-					← Zurück zum Blog
+					← Вернуться к блогу
 				</a>
 				<h1 class="text-4xl font-bold tracking-tight md:text-5xl">
 					{post.data.title}
@@ -105,12 +105,12 @@ let baseUrl = import.meta.env.BASE_URL
 	<Footer
 		navigation={{
 			main: [
-				{ name: "Funktionen", href: `${baseUrl}de/#features` },
-				{ name: "Tarife", href: `${baseUrl}de/#experience` },
-				{ name: "FAQ", href: `${baseUrl}de/#faq` },
-				{ name: "Blog", href: `${baseUrl}de/blog` },
-				{ name: "Impressum", href: `${baseUrl}de/imprint` },
-				{ name: "Datenschutz", href: `${baseUrl}de/privacy` },
+				{ name: "Возможности", href: `${baseUrl}ru/#features` },
+				{ name: "Опыт", href: `${baseUrl}ru/#experience` },
+				{ name: "FAQ", href: `${baseUrl}ru/#faq` },
+				{ name: "Блог", href: `${baseUrl}ru/blog` },
+				{ name: "Выходные данные", href: `${baseUrl}ru/imprint` },
+				{ name: "Конфиденциальность", href: `${baseUrl}ru/privacy` },
 			],
 			social: [
 				{
