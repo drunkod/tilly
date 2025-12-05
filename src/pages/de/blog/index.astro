@@ -10,6 +10,8 @@ let allPosts = await getCollection("blog")
 let posts = allPosts
 	.filter(post => post.id.endsWith("/de"))
 	.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
+
+let baseUrl = import.meta.env.BASE_URL
 ---
 
 <MinimalMarketingLayout
@@ -22,21 +24,21 @@ let posts = allPosts
 		client:load
 		logo={{
 			text: "Tilly",
-			href: "/de/",
+			href: `${baseUrl}de/`,
 		}}
 		navigation={[
-			{ name: "Funktionen", href: "/de/#features" },
-			{ name: "Tarife", href: "/de/#experience" },
-			{ name: "FAQ", href: "/de/#faq" },
-			{ name: "Blog", href: "/de/blog" },
+			{ name: "Funktionen", href: `${baseUrl}de/#features` },
+			{ name: "Tarife", href: `${baseUrl}de/#experience` },
+			{ name: "FAQ", href: `${baseUrl}de/#faq` },
+			{ name: "Blog", href: `${baseUrl}de/blog` },
 		]}
 		cta={{
 			text: "Zur App",
 			href: `${import.meta.env.BASE_URL}app`,
 		}}
 		languages={[
-			{ name: "English", href: "/en/blog" },
-			{ name: "Deutsch", href: "/de/blog" },
+			{ name: "English", href: `${baseUrl}en/blog` },
+			{ name: "Deutsch", href: `${baseUrl}de/blog` },
 		]}
 	/>
 
@@ -52,7 +54,7 @@ let posts = allPosts
 					let slug = post.id.replace("/de", "")
 					return (
 						<article class="border-border border-b pb-8">
-							<a href={`/de/blog/${slug}`} class="group">
+							<a href={`${baseUrl}de/blog/${slug}`} class="group">
 								<h2 class="group-hover:text-primary text-2xl font-bold transition-colors">
 									{post.data.title}
 								</h2>
@@ -73,7 +75,7 @@ let posts = allPosts
 								</div>
 								<div class="mt-4 flex items-center gap-3">
 									<img
-										src={post.data.author.avatar}
+										src={`${baseUrl}${post.data.author.avatar.replace(/^\//, "")}`}
 										alt={post.data.author.name}
 										class="h-10 w-10 rounded-full object-cover"
 									/>
@@ -97,12 +99,12 @@ let posts = allPosts
 	<Footer
 		navigation={{
 			main: [
-				{ name: "Funktionen", href: "/de/#features" },
-				{ name: "Tarife", href: "/de/#experience" },
-				{ name: "FAQ", href: "/de/#faq" },
-				{ name: "Blog", href: "/de/blog" },
-				{ name: "Impressum", href: "/de/imprint" },
-				{ name: "Datenschutz", href: "/de/privacy" },
+				{ name: "Funktionen", href: `${baseUrl}de/#features` },
+				{ name: "Tarife", href: `${baseUrl}de/#experience` },
+				{ name: "FAQ", href: `${baseUrl}de/#faq` },
+				{ name: "Blog", href: `${baseUrl}de/blog` },
+				{ name: "Impressum", href: `${baseUrl}de/imprint` },
+				{ name: "Datenschutz", href: `${baseUrl}de/privacy` },
 			],
 			social: [
 				{
@@ -122,8 +124,8 @@ let posts = allPosts
 				},
 			],
 			languages: [
-				{ name: "English", href: "/en/blog" },
-				{ name: "Deutsch", href: "/de/blog" },
+				{ name: "English", href: `${baseUrl}en/blog` },
+				{ name: "Deutsch", href: `${baseUrl}de/blog` },
 			],
 		}}
 		company={{

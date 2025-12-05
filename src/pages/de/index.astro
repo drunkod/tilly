@@ -11,6 +11,8 @@ import { Pricing } from "#www/components/Pricing"
 import { FAQ } from "#www/components/FAQ"
 import { CTA } from "#www/components/CTA"
 import { Footer } from "#www/components/Footer"
+
+let baseUrl = import.meta.env.BASE_URL
 ---
 
 <MinimalMarketingLayout
@@ -22,22 +24,22 @@ import { Footer } from "#www/components/Footer"
 		baseUrl={import.meta.env.BASE_URL}
 		logo={{
 			text: "Tilly",
-			href: "/de/",
+			href: `${baseUrl}de/`,
 		}}
 		locale="de"
 		navigation={[
 			{ name: "Funktionen", href: "#features" },
 			{ name: "Tarife", href: "#experience" },
 			{ name: "FAQ", href: "#faq" },
-			{ name: "Blog", href: "/de/blog" },
+			{ name: "Blog", href: `${baseUrl}de/blog` },
 		]}
 		cta={{
 			text: "Zur App",
 			href: `${import.meta.env.BASE_URL}app`,
 		}}
 		languages={[
-			{ name: "English", href: "/en/" },
-			{ name: "Deutsch", href: "/de/" },
+			{ name: "English", href: `${baseUrl}en/` },
+			{ name: "Deutsch", href: `${baseUrl}de/` },
 		]}
 	/>
 
@@ -349,9 +351,9 @@ import { Footer } from "#www/components/Footer"
 				{ name: "Funktionen", href: "#features" },
 				{ name: "Tarife", href: "#experience" },
 				{ name: "FAQ", href: "#faq" },
-				{ name: "Blog", href: "/de/blog" },
-				{ name: "Impressum", href: "/de/imprint" },
-				{ name: "Datenschutz", href: "/de/privacy" },
+				{ name: "Blog", href: `${baseUrl}de/blog` },
+				{ name: "Impressum", href: `${baseUrl}de/imprint` },
+				{ name: "Datenschutz", href: `${baseUrl}de/privacy` },
 			],
 			social: [
 				{
@@ -371,8 +373,8 @@ import { Footer } from "#www/components/Footer"
 				},
 			],
 			languages: [
-				{ name: "English", href: "/en/" },
-				{ name: "Deutsch", href: "/de/" },
+				{ name: "English", href: `${baseUrl}en/` },
+				{ name: "Deutsch", href: `${baseUrl}de/` },
 			],
 		}}
 		company={{

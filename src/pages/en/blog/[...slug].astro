@@ -21,6 +21,7 @@ if (!post) {
 	throw new Error(`Post not found in props. Slug: ${Astro.params.slug}`)
 }
 let { Content } = await render(post)
+let baseUrl = import.meta.env.BASE_URL
 ---
 
 <MinimalMarketingLayout
@@ -34,21 +35,21 @@ let { Content } = await render(post)
 		client:load
 		logo={{
 			text: "Tilly",
-			href: "/en/",
+			href: `${baseUrl}en/`,
 		}}
 		navigation={[
-			{ name: "Features", href: "/en/#features" },
-			{ name: "Experience", href: "/en/#experience" },
-			{ name: "FAQ", href: "/en/#faq" },
-			{ name: "Blog", href: "/en/blog" },
+			{ name: "Features", href: `${baseUrl}en/#features` },
+			{ name: "Experience", href: `${baseUrl}en/#experience` },
+			{ name: "FAQ", href: `${baseUrl}en/#faq` },
+			{ name: "Blog", href: `${baseUrl}en/blog` },
 		]}
 		cta={{
 			text: "Go to App",
 			href: `${import.meta.env.BASE_URL}app`,
 		}}
 		languages={[
-			{ name: "English", href: `/en/blog/${post.id.replace("/en", "")}` },
-			{ name: "Deutsch", href: `/de/blog/${post.id.replace("/en", "")}` },
+			{ name: "English", href: `${baseUrl}en/blog/${post.id.replace("/en", "")}` },
+			{ name: "Deutsch", href: `${baseUrl}de/blog/${post.id.replace("/en", "")}` },
 		]}
 	/>
 
@@ -56,7 +57,7 @@ let { Content } = await render(post)
 		<article class="prose prose-lg dark:prose-invert mx-auto max-w-3xl">
 			<div class="not-prose mb-8">
 				<a
-					href="/en/blog"
+					href={`${baseUrl}en/blog`}
 					class="text-muted-foreground hover:text-foreground mb-4 inline-block text-sm transition-colors"
 				>
 					← Back to blog
@@ -81,7 +82,7 @@ let { Content } = await render(post)
 				</div>
 				<div class="mt-6 flex items-center gap-3 border-t pt-6">
 					<img
-						src={post.data.author.avatar}
+						src={`${baseUrl}${post.data.author.avatar.replace(/^\//, "")}`}
 						alt={post.data.author.name}
 						class="h-12 w-12 rounded-full object-cover"
 					/>
@@ -103,12 +104,12 @@ let { Content } = await render(post)
 	<Footer
 		navigation={{
 			main: [
-				{ name: "Features", href: "/en/#features" },
-				{ name: "Experience", href: "/en/#experience" },
-				{ name: "FAQ", href: "/en/#faq" },
-				{ name: "Blog", href: "/en/blog" },
-				{ name: "Imprint", href: "/en/imprint" },
-				{ name: "Privacy", href: "/en/privacy" },
+				{ name: "Features", href: `${baseUrl}en/#features` },
+				{ name: "Experience", href: `${baseUrl}en/#experience` },
+				{ name: "FAQ", href: `${baseUrl}en/#faq` },
+				{ name: "Blog", href: `${baseUrl}en/blog` },
+				{ name: "Imprint", href: `${baseUrl}en/imprint` },
+				{ name: "Privacy", href: `${baseUrl}en/privacy` },
 			],
 			social: [
 				{
@@ -128,8 +129,8 @@ let { Content } = await render(post)
 				},
 			],
 			languages: [
-				{ name: "English", href: "/en/blog" },
-				{ name: "Deutsch", href: "/de/blog" },
+				{ name: "English", href: `${baseUrl}en/blog` },
+				{ name: "Deutsch", href: `${baseUrl}de/blog` },
 			],
 		}}
 		company={{
