@@ -8,32 +8,32 @@ export const prerender = true
 
 let allPosts = await getCollection("blog")
 let posts = allPosts
-	.filter(post => post.id.endsWith("/en"))
+	.filter(post => post.id.endsWith("/ru"))
 	.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
 
 let baseUrl = import.meta.env.BASE_URL
 ---
 
 <MinimalMarketingLayout
-	title="Blog - Tilly"
-	description="Tips and tricks on being a better friend with Tilly"
+	title="Блог - Tilly"
+	description="Советы и рекомендации, как быть лучшим другом с Tilly"
 >
 	<Navbar
-		locale="en"
+		locale="ru"
 		baseUrl={import.meta.env.BASE_URL}
 		client:load
 		logo={{
 			text: "Tilly",
-			href: `${baseUrl}en/`,
+			href: `${baseUrl}ru/`,
 		}}
 		navigation={[
-			{ name: "Features", href: `${baseUrl}en/#features` },
-			{ name: "Experience", href: `${baseUrl}en/#experience` },
-			{ name: "FAQ", href: `${baseUrl}en/#faq` },
-			{ name: "Blog", href: `${baseUrl}en/blog` },
+			{ name: "Возможности", href: `${baseUrl}ru/#features` },
+			{ name: "Опыт", href: `${baseUrl}ru/#experience` },
+			{ name: "FAQ", href: `${baseUrl}ru/#faq` },
+			{ name: "Блог", href: `${baseUrl}ru/blog` },
 		]}
 		cta={{
-			text: "Go to App",
+			text: "Перейти к приложению",
 			href: `${import.meta.env.BASE_URL}app`,
 		}}
 		languages={[
@@ -45,17 +45,17 @@ let baseUrl = import.meta.env.BASE_URL
 
 	<main class="container mx-auto px-6 py-12 md:px-8 md:py-24">
 		<div class="mx-auto max-w-3xl">
-			<h1 class="text-4xl font-bold tracking-tight md:text-5xl">Blog</h1>
+			<h1 class="text-4xl font-bold tracking-tight md:text-5xl">Блог</h1>
 			<p class="text-muted-foreground mt-4 text-lg">
-				Tips and tricks on being a better friend with Tilly
+				Советы и рекомендации, как быть лучшим другом с Tilly
 			</p>
 
 			<div class="mt-12 space-y-8">
 				{posts.map(post => {
-					let slug = post.id.replace("/en", "")
+					let slug = post.id.replace("/ru", "")
 					return (
 						<article class="border-border border-b pb-8">
-						<a href={`${baseUrl}en/blog/${slug}`} class="group">
+						<a href={`${baseUrl}ru/blog/${slug}`} class="group">
 								<h2 class="group-hover:text-primary text-2xl font-bold transition-colors">
 									{post.data.title}
 								</h2>
@@ -100,12 +100,12 @@ let baseUrl = import.meta.env.BASE_URL
 	<Footer
 		navigation={{
 			main: [
-				{ name: "Features", href: `${baseUrl}en/#features` },
-				{ name: "Experience", href: `${baseUrl}en/#experience` },
-				{ name: "FAQ", href: `${baseUrl}en/#faq` },
-				{ name: "Blog", href: `${baseUrl}en/blog` },
-				{ name: "Imprint", href: `${baseUrl}en/imprint` },
-				{ name: "Privacy", href: `${baseUrl}en/privacy` },
+				{ name: "Возможности", href: `${baseUrl}ru/#features` },
+				{ name: "Опыт", href: `${baseUrl}ru/#experience` },
+				{ name: "FAQ", href: `${baseUrl}ru/#faq` },
+				{ name: "Блог", href: `${baseUrl}ru/blog` },
+				{ name: "Выходные данные", href: `${baseUrl}ru/imprint` },
+				{ name: "Конфиденциальность", href: `${baseUrl}ru/privacy` },
 			],
 			social: [
 				{
