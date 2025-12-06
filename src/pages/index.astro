@@ -46,19 +46,16 @@ if (Astro.request.headers) {
     <meta name="twitter:image" content={`${Astro.site}og.png`} />
     <script define:vars={{ baseUrl }}>
       // Client-side redirect for static hosting (GitHub Pages)
+      let targetLang = 'en';
       try {
-        const userLang = navigator.language || navigator.userLanguage;
-        if (userLang.startsWith('de')) {
-          window.location.replace(baseUrl + 'de/');
-        } else if (userLang.startsWith('ru')) {
-          window.location.replace(baseUrl + 'ru/');
-        } else {
-          window.location.replace(baseUrl + 'en/');
+        const userLang = (navigator.language || navigator.userLanguage).slice(0, 2);
+        if (userLang === 'de' || userLang === 'ru') {
+          targetLang = userLang;
         }
       } catch (e) {
-        // Fallback to English if something goes wrong
-        window.location.replace(baseUrl + 'en/');
+        console.error('Language detection failed, falling back to English.', e);
       }
+      window.location.replace(`${baseUrl}${targetLang}/`);
     </script>
   </head>
   <body class="bg-background text-foreground">
