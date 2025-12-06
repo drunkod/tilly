@@ -1,0 +1,386 @@
+---
+import MinimalMarketingLayout from "#www/layouts/MinimalMarketingLayout.astro"
+import { Navbar } from "#www/components/Navbar"
+import { Hero } from "#www/components/Hero"
+import { ContentWithTestimonial } from "#www/components/ContentWithTestimonial"
+import { FeatureGridOffset } from "#www/components/FeatureGridOffset"
+import { FeaturesWithProductScreenshot } from "#www/components/FeaturesWithProductScreenshot"
+import { Testimonials } from "#www/components/Testimonials"
+import { FeatureGridCentered } from "#www/components/FeatureGridCentered"
+import { Pricing } from "#www/components/Pricing"
+import { FAQ } from "#www/components/FAQ"
+import { CTA } from "#www/components/CTA"
+import { Footer } from "#www/components/Footer"
+
+let baseUrl = import.meta.env.BASE_URL
+---
+
+<MinimalMarketingLayout
+	title="Tilly - Ваш личный помощник в отношениях"
+	description="Оставайтесь на связи с людьми, которые вам дороги."
+>
+	<Navbar
+		client:load
+		baseUrl={import.meta.env.BASE_URL}
+		logo={{
+			text: "Tilly",
+			href: `${baseUrl}ru/`,
+		}}
+		locale="ru"
+		navigation={[
+			{ name: "Возможности", href: "#features" },
+			{ name: "Тарифы", href: "#experience" },
+			{ name: "FAQ", href: "#faq" },
+			{ name: "Блог", href: `${baseUrl}ru/blog` },
+		]}
+		cta={{
+			text: "Перейти к приложению",
+			href: `${import.meta.env.BASE_URL}app`,
+		}}
+		languages={[
+			{ name: "English", href: `${baseUrl}en/` },
+			{ name: "Deutsch", href: `${baseUrl}de/` },
+			{ name: "Русский", href: `${baseUrl}ru/` },
+		]}
+	/>
+
+	<div class="pt-3 pb-12 md:pb-24">
+		<Hero
+			client:load
+			badge={{
+				text: "Tilly - это Open Source",
+				href: "https://github.com/ccssmnn/tilly",
+				description: "Посмотреть код",
+			}}
+			title="Никогда не забывайте выходить на связь"
+			description="Ваши друзья рассказывают вам важные вещи. Tilly помогает запомнить и спросить об этом, когда это важно."
+			primaryCta={{
+				text: "Начать сейчас",
+				href: `${import.meta.env.BASE_URL}app`,
+			}}
+			secondaryCta={{
+				text: "Узнать больше",
+				href: "#features",
+			}}
+			media={{
+				kind: "image",
+				src: `${import.meta.env.BASE_URL}images/screenshots/de-people.webp`,
+				alt: "Телефон со списком людей в Tilly",
+				loading: "eager",
+				aspectRatio: "215 / 466",
+				fit: "contain",
+			}}
+		/>
+	</div>
+	<div id="story" class="py-12 md:py-24">
+		<ContentWithTestimonial
+			title="Вот в чем проблема."
+			testimonial={{
+				quote: "Мне это было нужно. Поэтому я это создал.",
+				author: {
+					name: "Carl Assmann",
+					title: "Тот, кто создал Tilly.",
+					avatar: `${import.meta.env.BASE_URL}images/avatars/carl.webp`,
+				},
+			}}
+		>
+			<p>
+				Ваш друг рассказывает о собеседовании. Это важно для вас.
+				Но спустя недели вы понимаете: вы так и не спросили, как все прошло.
+			</p>
+			<p>
+				<b>С Tilly вы записываете это один раз и получаете напоминание спросить.</b>
+			</p>
+		</ContentWithTestimonial>
+	</div>
+	<div class="py-12 md:py-24">
+		<FeatureGridOffset
+			title="Ситуации, в которых Tilly помогает"
+			subtitle="Реальные проблемы, которые решает Tilly"
+			problems={[
+				{
+					name: "Забываете выйти на связь",
+					description: "Жизнь становится суматошной, и важные люди выпадают из поля зрения",
+				},
+				{
+					name: "Реальные разговоры нельзя проскроллить вверх",
+					description: "Настоящие разговоры не сохраняются в истории чата WhatsApp",
+				},
+				{
+					name: "Приложения для заметок и задач ощущаются как работа",
+					description: "Дружба не должна ощущаться как обязанность",
+				},
+				{
+					name: "Социальные сети полны неважных отвлечений",
+					description: "Друзья заслуживают своего собственного пространства, свободного от работы и отвлечений",
+				},
+			]}
+		/>
+	</div>
+
+	<div class="py-12 md:py-24">
+		<FeaturesWithProductScreenshot
+			badge="Как это работает"
+			title="Просто. Практично. Действительно работает."
+			features={[
+				{
+					name: "Записывайте, что рассказывают друзья",
+					description:
+						"Сохраняйте заметки для каждого человека. Держите важное в поле зрения – не только номер телефона.",
+				},
+				{
+					name: "Получайте напоминания спросить",
+					description:
+						"Устанавливайте напоминания, чтобы не пропускать важные моменты.",
+				},
+				{
+					name: "Стройте более крепкую дружбу",
+					description:
+						"Будьте рядом, когда это важно. Будьте другом, который помнит.",
+				},
+			]}
+			media={{
+				kind: "image",
+				src: `${import.meta.env.BASE_URL}images/screenshots/de-person.webp`,
+				alt: "Телефон с заметками о человеке в Tilly",
+				aspectRatio: "215 / 466",
+				fit: "contain",
+			}}
+		/>
+	</div>
+	<div class="py-24" id="features">
+		<FeatureGridCentered
+			title="Просто просто"
+			description="Все, что нужно, чтобы быть лучшим другом. И ничего лишнего."
+			features={[
+				{
+					name: "Люди и Заметки",
+					description:
+						"Запоминайте важное – дни рождения, интересы, жизненные события и значимые моменты",
+					icon: "PersonHearts",
+				},
+				{
+					name: "Напоминания",
+					description:
+						"Мягкие напоминания в нужное время – чтобы вы не пропустили важные моменты",
+					icon: "Bell",
+				},
+				{
+					name: "Push-уведомления",
+					description:
+						"Не пропускайте напоминания – своевременно на всех ваших устройствах",
+					icon: "PhoneFill",
+				},
+				{
+					name: "Tilly Агент (Тариф Plus)",
+					description:
+						"ИИ-агент, который упорядочивает разрозненные мысли и активно помогает оставаться на связи",
+					icon: "Chat",
+				},
+				{
+					name: "Данные под контролем",
+					description:
+						"Синхронизация с шифрованием на стороне клиента с управляемыми ключами для уведомлений и Tilly Агента. Экспортируйте свои данные в любое время. Никакой привязки.",
+					icon: "Download",
+				},
+				{
+					name: "Работает везде",
+					description:
+						"Мгновенная синхронизация на всех ваших устройствах. Полностью функционально – даже офлайн.",
+					icon: "CloudCheck",
+				},
+			]}
+		/>
+	</div>
+
+	<div class="py-12 md:py-24">
+		<Testimonials
+			client:load
+			title="Что говорят пользователи"
+			subtitle="Люди любят Tilly по разным причинам"
+			testimonials={[
+				{
+					quote:
+						"Сегодня я узнал любимый цвет моей коллеги-дизайнера. Думал, как бы запомнить... Tilly! Тут меня осенило - приложение действительно удобно для сбора маленьких, но важных деталей",
+				},
+				{
+					quote:
+						"Я не знал, что мне этого не хватало. Теперь я знаю, что мне это было нужно уже очень давно.",
+				},
+				{
+					quote:
+						"Делает именно то, что должно, и быстро. Чат работает на удивление хорошо.",
+				},
+				{ quote: "Это чит-код, чтобы быть лучшим другом!" },
+			]}
+		/>
+	</div>
+	<div class="py-12 md:py-24">
+		<FeaturesWithProductScreenshot
+			client:load
+			badge="Tilly Агент: Ваш помощник в дружбе"
+			title="Tilly Агент читает и пишет в вашу книгу друзей."
+			features={[
+				{
+					name: "Просто говорите:",
+					description:
+						"'У Сары новый проект, у Софи новый клиент, она выглядит более расслабленной.'",
+				},
+				{
+					name: "Tilly организует:",
+					description:
+						"Находит Сару и Софи, создает заметки, предлагает напоминания.",
+				},
+				{
+					name: "Перед встречей:",
+					description:
+						"'Введи меня в курс дела по Саре' – И вы знаете, о чем спросить.",
+				},
+				{
+					name: "При контакте:",
+					description: "'Помоги мне написать Софи' – получите предложения.",
+				},
+			]}
+			closing="Удобство реально. Настолько просто, что вы действительно будете этим пользоваться."
+			media={{
+				kind: "image",
+				src: `${import.meta.env.BASE_URL}images/screenshots/de-chat.webp`,
+				alt: "Телефон с чатом Tilly Агента",
+				aspectRatio: "215 / 466",
+				fit: "contain",
+			}}
+		/>
+	</div>
+	<div id="experience" class="py-24">
+		<Pricing
+			title="Выберите, как использовать Tilly"
+			subtitle="Бесплатно или Plus - простые цены для всех."
+			tiers={[
+				{
+					name: "Бесплатно",
+					id: "tier-free",
+					href: `${import.meta.env.BASE_URL}app`,
+					priceMonthly: "Бесплатно",
+					priceSuffix: null,
+					description:
+						"Бесплатно требует регистрации для синхронизации и push-уведомлений",
+					features: [
+						"Неограниченное количество людей, заметок и напоминаний",
+						"Push-уведомления",
+						"Синхронизация с облаком",
+						"Синхронизация между устройствами",
+						"Импорт и экспорт данных",
+					],
+					featured: false,
+					ctaText: "Зарегистрироваться бесплатно",
+				},
+				{
+					name: "Plus",
+					id: "tier-plus",
+					href: `${import.meta.env.BASE_URL}app`,
+					priceMonthly: "$6",
+					priceSuffix: "/месяц",
+					description: "ИИ-агент для максимального комфорта",
+					features: [
+						"Все из Бесплатного",
+						"Tilly Агент",
+						"Управление на естественном языке",
+						"Предложения сообщений",
+						"Автоматическая организация заметок",
+						"Умные напоминания",
+						"Приятное чувство поддержки разработки Tilly",
+					],
+					featured: true,
+					ctaText: "Перейти на Plus",
+				},
+			]}
+		/>
+	</div>
+
+	<div id="faq" class="py-24">
+		<FAQ
+			client:load
+			title="Часто задаваемые вопросы"
+			faqs={[
+				{
+					question:
+						"Чем это отличается от приложения Контакты, задач или заметок?",
+					answer:
+						"Ваши контакты показывают номера телефонов. Ваши задачи и заметки теряются. Tilly дает друзьям их собственное пространство.",
+				},
+				{
+					question:
+						"Синхронизирует ли Tilly автоматически с моими контактами или соцсетями?",
+					answer:
+						"Нет. Tilly содержит только то, что вы сами добавляете. Никаких автоматических импортов – так в Tilly остается только то, что вам достаточно важно, чтобы внести это самостоятельно.",
+				},
+				{
+					question: "Что если я забуду этим пользоваться?",
+					answer:
+						"Откройте Tilly, когда вспомните. Добавьте то, что придет в голову. Привычка сформируется сама собой.",
+				},
+				{
+					question: "Мои данные приватны?",
+					answer:
+						"Tilly шифрует ваши данные в браузере перед синхронизацией с Jazz. Ключи находятся у провайдера аутентификации, чтобы сервер Tilly мог отправлять push-уведомления и запускать Tilly Агента. Если вы используете чат Tilly, контент, которым вы делитесь, передается ИИ-провайдеру. Tilly - это Open Source (AGPL), и вы можете экспортировать свои данные в любое время.",
+				},
+				{
+					question: "Не кажется ли это искусственным?",
+					answer:
+						"Не более искусственным, чем скроллить историю чата. Но Tilly работает и для телефонных звонков, и для личных встреч.",
+				},
+				{
+					question: "Зачем платить за ИИ, если есть бесплатные ИИ-приложения?",
+					answer:
+						"Бесплатные ИИ-приложения ничего не запоминают и не напоминают вам выйти на связь. Tilly - это место для ваших друзей. И Агент невероятно удобен. Tilly Агент знает историю ваших отношений. Кроме того, ИИ стоит денег – я хочу поддерживать Tilly устойчиво, чтобы продолжать над ним работать.",
+				},
+			]}
+		/>
+	</div>
+
+	<CTA
+		title="Готовы помнить о важном?"
+		primaryCta={{
+			text: "Попробовать бесплатно",
+			href: `${import.meta.env.BASE_URL}app`,
+		}}
+	/>
+
+	<Footer
+		navigation={{
+			main: [
+				{ name: "Возможности", href: "#features" },
+				{ name: "Тарифы", href: "#experience" },
+				{ name: "FAQ", href: "#faq" },
+				{ name: "Блог", href: `${baseUrl}ru/blog` },
+				{ name: "Выходные данные", href: `${baseUrl}ru/imprint` },
+				{ name: "Конфиденциальность", href: `${baseUrl}ru/privacy` },
+			],
+			social: [
+				{
+					name: "Twitter",
+					href: "https://twitter.com/tillydotsocial",
+					icon: "Twitter",
+				},
+				{
+					name: "Instagram",
+					href: "https://instagram.com/tilly.social",
+					icon: "Instagram",
+				},
+				{
+					name: "GitHub",
+					href: "https://github.com/ccssmnn/tilly",
+					icon: "Github",
+				},
+			],
+			languages: [
+				{ name: "English", href: `${baseUrl}en/` },
+				{ name: "Deutsch", href: `${baseUrl}de/` },
+				{ name: "Русский", href: `${baseUrl}ru/` },
+			],
+		}}
+		company={{
+			name: "Tilly",
+		}}
+	/>
+</MinimalMarketingLayout>

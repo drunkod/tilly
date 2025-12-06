@@ -1,0 +1,17 @@
+---
+import LegalPageLayout from "../../www/layouts/LegalPageLayout.astro"
+
+let baseUrl = import.meta.env.BASE_URL
+---
+
+<LegalPageLayout
+	title="Страница не найдена - Tilly"
+	description="Страница, которую вы ищете, не существует."
+	locale="ru"
+>
+	<h1>Страница не найдена</h1>
+	<p>Страница, которую вы ищете, не существует.</p>
+	<p>
+		<a href={`${baseUrl}ru/`}>Вернуться на главную</a> или <a href={`${baseUrl}app`}>открыть приложение</a>.
+	</p>
+</LegalPageLayout>
