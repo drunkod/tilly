@@ -28,19 +28,19 @@ Here is a step-by-step plan to organize your codebase by domain.
 #### Phase 2: Organise Client Features
 *Move from a flat list to domain folders in `src/app/features`.*
 
-- [ ] **Create Domain Directories**
+- [x] **Create Domain Directories**
     - `src/app/features/people/`
     - `src/app/features/notes/`
     - `src/app/features/reminders/`
     - `src/app/features/shared/` (for generic components like `data-file-schema.ts`)
-- [ ] **Refactor People Feature**
+- [x] **Refactor People Feature**
     - Move `person-*.tsx`, `person-*.ts`, `new-person.tsx` into `src/app/features/people/`.
     - Rename files to remove redundant prefixes (e.g., `features/people/list-item.tsx` instead of `person-list-item.tsx`).
     - *Action:* Update imports in `src/app/routes/_app.people.*`.
-- [ ] **Refactor Notes Feature**
+- [x] **Refactor Notes Feature**
     - Move `note-*.tsx`, `note-*.ts`, `new-note.tsx` into `src/app/features/notes/`.
     - *Action:* Update imports in `src/app/features/people/details.tsx` (formerly `person-details.tsx`).
-- [ ] **Refactor Reminders Feature**
+- [x] **Refactor Reminders Feature**
     - Move `reminder-*.tsx`, `reminder-*.ts`, `new-reminder.tsx` into `src/app/features/reminders/`.
     - *Action:* Update imports in `src/app/routes/_app.reminders.tsx`.
 

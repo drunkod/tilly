@@ -24,15 +24,15 @@
   - Run `pnpm check` to ensure no TypeScript errors
   - _Requirements: 13.1_
 
-- [ ] 2. Phase 2: Reorganize Feature Files
-- [ ] 2.1 Create feature domain directories
+- [x] 2. Phase 2: Reorganize Feature Files
+- [x] 2.1 Create feature domain directories
   - Create `src/app/features/people/`
   - Create `src/app/features/notes/`
   - Create `src/app/features/reminders/`
   - Create `src/app/features/shared/`
   - _Requirements: 4.1, 4.2, 4.3_
 
-- [ ] 2.2 Move People feature files
+- [x] 2.2 Move People feature files
   - Move `person-details.tsx` to `people/details.tsx`
   - Move `person-form.tsx` to `people/form.tsx`
   - Move `person-hooks.ts` to `people/hooks.ts`
@@ -41,7 +41,7 @@
   - Move `person-tour.tsx` to `people/tour.tsx`
   - _Requirements: 5.1_
 
-- [ ] 2.3 Move Notes feature files
+- [x] 2.3 Move Notes feature files
   - Move `note-form.tsx` to `notes/form.tsx`
   - Move `note-hooks.ts` to `notes/hooks.ts`
   - Move `note-list-item.tsx` to `notes/list-item.tsx`
@@ -49,7 +49,7 @@
   - Move `note-tour.tsx` to `notes/tour.tsx`
   - _Requirements: 6.1_
 
-- [ ] 2.4 Move Reminders feature files
+- [x] 2.4 Move Reminders feature files
   - Move `reminder-form.tsx` to `reminders/form.tsx`
   - Move `reminder-hooks.ts` to `reminders/hooks.ts`
   - Move `reminder-list-item.tsx` to `reminders/list-item.tsx`
@@ -57,34 +57,34 @@
   - Move `reminder-tour.tsx` to `reminders/tour.tsx`
   - _Requirements: 7.1_
 
-- [ ] 2.5 Move Shared feature files
+- [x] 2.5 Move Shared feature files
   - Move `data-file-schema.ts` to `shared/data-file-schema.ts`
   - Move `data-download-button.tsx` to `shared/data-download-button.tsx`
   - Move `data-upload-button.tsx` to `shared/data-upload-button.tsx`
   - Move `notification-settings.tsx` to `shared/notification-settings.tsx`
   - _Requirements: 4.3_
 
-- [ ] 2.6 Update imports in People domain files
+- [x] 2.6 Update imports in People domain files
   - Update `people/new.tsx` to import from `#app/features/people/form`
   - Update `people/tour.tsx` to import from `#app/features/people/new`
   - _Requirements: 5.2_
 
-- [ ] 2.7 Update imports in Notes domain files
+- [x] 2.7 Update imports in Notes domain files
   - Update `notes/new.tsx` to import from `#app/features/notes/form`
   - Update `notes/tour.tsx` to import from `#app/features/notes/new` and `#app/features/people/new`
   - _Requirements: 6.2_
 
-- [ ] 2.8 Update imports in Reminders domain files
+- [x] 2.8 Update imports in Reminders domain files
   - Update `reminders/new.tsx` to import from `#app/features/reminders/form`
   - Update `reminders/list-item.tsx` to import from `#app/features/notes/form`
   - Update `reminders/tour.tsx` to import from `#app/features/reminders/new` and `#app/features/people/new`
   - _Requirements: 7.2_
 
-- [ ] 2.9 Update imports in Shared domain files
+- [x] 2.9 Update imports in Shared domain files
   - Update `shared/data-download-button.tsx` to import from `#app/features/shared/data-file-schema`
   - _Requirements: 4.3_
 
-- [ ] 2.10 Update imports in route files
+- [x] 2.10 Update imports in route files
   - Update `_app.people.index.tsx` with new People imports
   - Update `_app.people.$personID.tsx` with new People, Notes, Reminders imports
   - Update `_app.reminders.tsx` with new Reminders imports
@@ -92,7 +92,7 @@
   - Update `tour.tsx` with new tour imports
   - _Requirements: 5.2, 6.2, 7.2_
 
-- [ ] 2.11 Verify Phase 2 completion
+- [x] 2.11 Verify Phase 2 completion
   - Run `pnpm check` to ensure no TypeScript errors
   - _Requirements: 5.3, 6.3, 7.3, 13.1_
 

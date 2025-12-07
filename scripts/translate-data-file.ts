@@ -8,7 +8,7 @@ import {
 	type FileNote,
 	type FilePerson,
 	type FileReminder,
-} from "../src/app/features/data-file-schema"
+} from "../src/app/features/shared/data-file-schema"
 
 export { translateDataFile }
 
@@ -198,22 +198,22 @@ function createEntryKey(entry: TranslatableEntry): string {
 
 type TranslatableEntry =
 	| {
-			type: "person-summary"
-			personIndex: number
-			text: string
-	  }
+		type: "person-summary"
+		personIndex: number
+		text: string
+	}
 	| {
-			type: "note-content"
-			personIndex: number
-			noteIndex: number
-			text: string
-	  }
+		type: "note-content"
+		personIndex: number
+		noteIndex: number
+		text: string
+	}
 	| {
-			type: "reminder-text"
-			personIndex: number
-			reminderIndex: number
-			text: string
-	  }
+		type: "reminder-text"
+		personIndex: number
+		reminderIndex: number
+		text: string
+	}
 
 if (import.meta.url === `file://${process.argv[1]}`) {
 	let [inputPath, outputPath, targetLanguage] = process.argv.slice(2)

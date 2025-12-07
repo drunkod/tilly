@@ -11,7 +11,7 @@ import {
 	DialogTrigger,
 } from "#shared/ui/dialog"
 import { Combobox } from "#shared/ui/combobox"
-import { ReminderForm } from "#app/features/reminder-form"
+import { ReminderForm } from "#app/features/reminders/form"
 import { createReminder } from "#shared/tools/reminder-create"
 import { tryCatch } from "#shared/lib/trycatch"
 import { toast } from "sonner"
@@ -105,11 +105,10 @@ function NewReminder({
 				titleSlot={
 					<div className="relative overflow-hidden">
 						<div
-							className={`transition-all duration-300 ease-out ${
-								!selectedPersonId
+							className={`transition-all duration-300 ease-out ${!selectedPersonId
 									? "translate-x-0 opacity-100"
 									: "absolute inset-0 -translate-x-full opacity-0"
-							}`}
+								}`}
 						>
 							<DialogHeader>
 								<DialogTitle>
@@ -122,11 +121,10 @@ function NewReminder({
 						</div>
 
 						<div
-							className={`transition-all duration-300 ease-out ${
-								selectedPersonId
+							className={`transition-all duration-300 ease-out ${selectedPersonId
 									? "translate-x-0 opacity-100"
 									: "absolute inset-0 translate-x-full opacity-0"
-							}`}
+								}`}
 						>
 							<DialogHeader>
 								<DialogTitle>
@@ -145,11 +143,10 @@ function NewReminder({
 			>
 				<div className="relative overflow-hidden">
 					<div
-						className={`transition-all duration-300 ease-out ${
-							!selectedPersonId
+						className={`transition-all duration-300 ease-out ${!selectedPersonId
 								? "translate-x-0 opacity-100"
 								: "absolute inset-0 -translate-x-full opacity-0"
-						}`}
+							}`}
 					>
 						<div className="space-y-4">
 							<Combobox
@@ -167,11 +164,10 @@ function NewReminder({
 					</div>
 
 					<div
-						className={`transition-all duration-300 ease-out ${
-							selectedPersonId
+						className={`transition-all duration-300 ease-out ${selectedPersonId
 								? "translate-x-0 opacity-100"
 								: "absolute inset-0 translate-x-full opacity-0"
-						}`}
+							}`}
 					>
 						<ReminderForm
 							defaultValues={{

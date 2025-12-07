@@ -22,7 +22,7 @@ function useOnlineStatus(): boolean {
 
 	async function checkConnectivity() {
 		try {
-			await fetch("/online-check", {
+			await fetch(`${import.meta.env.BASE_PATH}/online-check`, {
 				method: "GET",
 				cache: "no-cache",
 				signal: AbortSignal.timeout(2000),

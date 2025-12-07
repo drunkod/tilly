@@ -20,7 +20,7 @@ import { Note, Person } from "#shared/schema/user"
 import { co } from "jazz-tools"
 import { PencilSquare, Trash, PinFill } from "react-bootstrap-icons"
 import { useState, useRef, useEffect } from "react"
-import { NoteForm } from "./note-form"
+import { NoteForm } from "./form"
 import { formatDistanceToNow, differenceInDays } from "date-fns"
 import { cn, isTextSelectionOngoing } from "#app/lib/utils"
 import { toast } from "sonner"
@@ -508,11 +508,11 @@ function RestoreNoteDialog({
 									params={{
 										timeAgo: formatDistanceToNow(
 											note.deletedAt ||
-												note.updatedAt ||
-												note.createdAt ||
-												new Date(
-													note.$jazz.lastUpdatedAt || note.$jazz.createdAt,
-												),
+											note.updatedAt ||
+											note.createdAt ||
+											new Date(
+												note.$jazz.lastUpdatedAt || note.$jazz.createdAt,
+											),
 											{
 												addSuffix: true,
 												locale:

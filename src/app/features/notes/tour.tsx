@@ -1,15 +1,15 @@
 import { Button } from "#shared/ui/button"
-import { NewReminder } from "#app/features/new-reminder"
-import { NewPerson } from "#app/features/new-person"
+import { NewNote } from "#app/features/notes/new"
+import { NewPerson } from "#app/features/people/new"
 import { TypographyH2, TypographyLead } from "#shared/ui/typography"
-import { BellFill, PersonPlusFill } from "react-bootstrap-icons"
+import { Journal, PersonPlusFill } from "react-bootstrap-icons"
 import { useAccount } from "jazz-tools/react"
 import { UserAccount, isDeleted } from "#shared/schema/user"
 import { T } from "#shared/intl"
 
-export { ReminderTour }
+export { NoteTour }
 
-function ReminderTour({
+function NoteTour({
 	onSuccess,
 	personId,
 }: {
@@ -36,21 +36,21 @@ function ReminderTour({
 
 	return (
 		<div className="max-w-md space-y-3 text-left">
-			<BellFill className="text-muted-foreground size-16" />
+			<Journal className="text-muted-foreground size-16" />
 			<TypographyH2>
-				<T k="addReminder.title" />
+				<T k="addNote.title" />
 			</TypographyH2>
 			<TypographyLead>
-				<T k="addReminder.description" />
+				<T k="addNote.description" />
 			</TypographyLead>
 			{targetPerson !== undefined ? (
 				<div className="mt-8 flex justify-end">
-					<NewReminder onSuccess={onSuccess} personId={targetPerson.$jazz.id}>
+					<NewNote onSuccess={onSuccess} personId={targetPerson.$jazz.id}>
 						<Button>
-							<BellFill />
-							<T k="addReminder.button" params={{ name: targetPerson.name }} />
+							<Journal />
+							<T k="addNote.button" params={{ name: targetPerson.name }} />
 						</Button>
-					</NewReminder>
+					</NewNote>
 				</div>
 			) : (
 				<div className="mt-8 flex justify-end">

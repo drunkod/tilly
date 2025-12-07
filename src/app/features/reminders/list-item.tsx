@@ -30,7 +30,7 @@ import {
 	ArrowCounterclockwise,
 } from "react-bootstrap-icons"
 import { useState } from "react"
-import { ReminderForm } from "./reminder-form"
+import { ReminderForm } from "./form"
 import { Link } from "@tanstack/react-router"
 import { Image as JazzImage } from "jazz-tools/react"
 import {
@@ -45,7 +45,7 @@ import { useLocale, useIntl, T } from "#shared/intl/setup"
 import { cn, isTextSelectionOngoing } from "#app/lib/utils"
 import { updateReminder } from "#shared/tools/reminder-update"
 import { tryCatch } from "#shared/lib/trycatch"
-import { NoteForm } from "#app/features/note-form"
+import { NoteForm } from "#app/features/notes/form"
 import { createNote } from "#shared/tools/note-create"
 import { updateNote } from "#shared/tools/note-update"
 import { TextHighlight } from "#shared/ui/text-highlight"
@@ -285,8 +285,8 @@ function ReminderItemHeader({
 			<div className="text-muted-foreground text-xs">
 				{formatDistanceToNow(
 					reminder.updatedAt ||
-						reminder.createdAt ||
-						new Date(reminder.$jazz.lastUpdatedAt || reminder.$jazz.createdAt),
+					reminder.createdAt ||
+					new Date(reminder.$jazz.lastUpdatedAt || reminder.$jazz.createdAt),
 					{
 						addSuffix: true,
 						locale: dfnsLocale,
@@ -576,12 +576,12 @@ function RestoreReminderDialog({
 									params={{
 										timeAgo: formatDistanceToNow(
 											reminder.deletedAt ||
-												reminder.updatedAt ||
-												reminder.createdAt ||
-												new Date(
-													reminder.$jazz.lastUpdatedAt ||
-														reminder.$jazz.createdAt,
-												),
+											reminder.updatedAt ||
+											reminder.createdAt ||
+											new Date(
+												reminder.$jazz.lastUpdatedAt ||
+												reminder.$jazz.createdAt,
+											),
 											{
 												addSuffix: true,
 												locale:
@@ -712,11 +712,11 @@ type ReminderUpdateInput = {
 	text: string
 	dueAtDate: string
 	repeat?:
-		| {
-				interval: number
-				unit: "day" | "week" | "month" | "year"
-		  }
-		| undefined
+	| {
+		interval: number
+		unit: "day" | "week" | "month" | "year"
+	}
+	| undefined
 }
 
 type NoteFormInput = {
