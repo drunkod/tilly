@@ -24,7 +24,7 @@ import { NoteForm } from "./form"
 import { formatDistanceToNow, differenceInDays } from "date-fns"
 import { cn, isTextSelectionOngoing } from "#app/lib/utils"
 import { toast } from "sonner"
-import { updateNote } from "#shared/tools/note-update"
+import { updateNote } from "#shared/tools/notes/update"
 import { tryCatch } from "#shared/lib/trycatch"
 import { Badge } from "#shared/ui/badge"
 import { T, useIntl, useLocale } from "#shared/intl/setup"
@@ -508,11 +508,11 @@ function RestoreNoteDialog({
 									params={{
 										timeAgo: formatDistanceToNow(
 											note.deletedAt ||
-											note.updatedAt ||
-											note.createdAt ||
-											new Date(
-												note.$jazz.lastUpdatedAt || note.$jazz.createdAt,
-											),
+												note.updatedAt ||
+												note.createdAt ||
+												new Date(
+													note.$jazz.lastUpdatedAt || note.$jazz.createdAt,
+												),
 											{
 												addSuffix: true,
 												locale:

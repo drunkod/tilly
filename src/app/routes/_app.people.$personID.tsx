@@ -23,8 +23,8 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "#shared/ui/dialog"
-import { createReminder } from "#shared/tools/reminder-create"
-import { createNote } from "#shared/tools/note-create"
+import { createReminder } from "#shared/tools/reminders/create"
+import { createNote } from "#shared/tools/notes/create"
 import { tryCatch } from "#shared/lib/trycatch"
 import { toast } from "sonner"
 import { cn } from "#app/lib/utils"
@@ -227,7 +227,7 @@ function NotesList({
 
 	if (notes.active.length === 0 && notes.deleted.length === 0) {
 		if (!searchQuery) {
-			return <NoteTour onSuccess={() => { }} personId={person.$jazz.id} />
+			return <NoteTour onSuccess={() => {}} personId={person.$jazz.id} />
 		}
 
 		return (
@@ -330,7 +330,7 @@ function RemindersList({
 		reminders.deleted.length === 0
 	) {
 		if (!searchQuery) {
-			return <ReminderTour onSuccess={() => { }} personId={person.$jazz.id} />
+			return <ReminderTour onSuccess={() => {}} personId={person.$jazz.id} />
 		}
 
 		return (

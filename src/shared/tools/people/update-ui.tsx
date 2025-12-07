@@ -18,7 +18,7 @@ import {
 	updatePersonTool,
 	deletePersonTool,
 	updatePerson,
-} from "#shared/tools/person-update"
+} from "#shared/tools/people/update"
 import { cn } from "#app/lib/utils"
 
 type _UpdatePersonTool = InferUITool<typeof updatePersonTool>

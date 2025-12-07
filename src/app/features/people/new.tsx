@@ -10,7 +10,7 @@ import {
 	DialogTrigger,
 } from "#shared/ui/dialog"
 import { PersonForm } from "#app/features/people/form"
-import { createPerson } from "#shared/tools/person-create"
+import { createPerson } from "#shared/tools/people/create"
 import { tryCatch } from "#shared/lib/trycatch"
 import { toast } from "sonner"
 import { T, useIntl } from "#shared/intl/setup"

@@ -143,20 +143,20 @@ function useSteps() {
 	let showPWAInstallStep = (isAndroid || isIOS) && !isPWAInstalled
 	return showPWAInstallStep
 		? ([
-			"welcome",
-			"install-pwa",
-			"add-person",
-			"add-note",
-			"add-reminder",
-			"finish-setup",
-		] as const)
+				"welcome",
+				"install-pwa",
+				"add-person",
+				"add-note",
+				"add-reminder",
+				"finish-setup",
+			] as const)
 		: ([
-			"welcome",
-			"add-person",
-			"add-note",
-			"add-reminder",
-			"finish-setup",
-		] as const)
+				"welcome",
+				"add-person",
+				"add-note",
+				"add-reminder",
+				"finish-setup",
+			] as const)
 }
 
 function renderStep(

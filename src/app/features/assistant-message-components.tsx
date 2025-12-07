@@ -1,7 +1,7 @@
 import { Markdown } from "#shared/ui/markdown"
 import { ToolResultRenderer } from "#shared/tools/ui"
-import { CreatePersonConfirmation } from "#shared/tools/person-create-ui"
-import { UserQuestionConfirmation } from "#shared/tools/user-question-ui"
+import { CreatePersonConfirmation } from "#shared/tools/people/create-ui"
+import { UserQuestionConfirmation } from "#shared/tools/system/user-question-ui"
 import type { AddToolResultFunction, TillyUIMessage } from "#shared/tools/tools"
 
 export function UserMessage({ message }: { message: TillyUIMessage }) {

@@ -123,20 +123,24 @@ src/shared/tools/
 #### auth-utils.ts Cleanup
 
 **Current State:**
+
 - Contains commented-out Clerk imports and functions
 - Has stub functions `getSignInUrl` and `getSignUpUrl` that return `/app`
 - TODO comment at top
 
 **Target State:**
+
 - Remove the file entirely if stubs are not needed
 - OR keep only the stub functions without comments if they're still referenced
 
 **Call Sites to Check:**
+
 - `src/app/components/status-indicator.tsx` - uses `getSignInUrl`
 
 #### status-indicator.tsx Cleanup
 
 **Current State:**
+
 ```typescript
 // TODO: Replace with Jazz auth in task 2
 // import { useAuth } from "#shared/clerk/client"
@@ -145,6 +149,7 @@ let isSignedIn = true // Temporary - will be replaced with passkey auth
 ```
 
 **Target State:**
+
 - Remove TODO comments
 - Either implement Jazz auth check OR document the hardcoded values as intentional
 - The `NotSignedInIndicator` component may need to be removed or updated
@@ -152,11 +157,13 @@ let isSignedIn = true // Temporary - will be replaced with passkey auth
 #### push-cron.ts Cleanup
 
 **Current State:**
+
 - Large commented-out code blocks for `getUsersWithJazz` iteration
 - Multiple `eslint-disable` comments for unused variables
 - Disabled `loadNotificationSettings` function in comments
 
 **Target State:**
+
 - Move to `src/server/features/_archived/push-cron.ts` if feature is disabled
 - OR remove all commented code and keep only active logic with clear documentation
 
@@ -164,32 +171,33 @@ let isSignedIn = true // Temporary - will be replaced with passkey auth
 
 #### Import Path Mapping
 
-| Old Path | New Path |
-|----------|----------|
-| `#app/features/person-details` | `#app/features/people/details` |
-| `#app/features/person-form` | `#app/features/people/form` |
-| `#app/features/person-hooks` | `#app/features/people/hooks` |
-| `#app/features/person-list-item` | `#app/features/people/list-item` |
-| `#app/features/new-person` | `#app/features/people/new` |
-| `#app/features/person-tour` | `#app/features/people/tour` |
-| `#app/features/note-form` | `#app/features/notes/form` |
-| `#app/features/note-hooks` | `#app/features/notes/hooks` |
-| `#app/features/note-list-item` | `#app/features/notes/list-item` |
-| `#app/features/new-note` | `#app/features/notes/new` |
-| `#app/features/note-tour` | `#app/features/notes/tour` |
-| `#app/features/reminder-form` | `#app/features/reminders/form` |
-| `#app/features/reminder-hooks` | `#app/features/reminders/hooks` |
-| `#app/features/reminder-list-item` | `#app/features/reminders/list-item` |
-| `#app/features/new-reminder` | `#app/features/reminders/new` |
-| `#app/features/reminder-tour` | `#app/features/reminders/tour` |
-| `#app/features/data-file-schema` | `#app/features/shared/data-file-schema` |
-| `#app/features/data-download-button` | `#app/features/shared/data-download-button` |
-| `#app/features/data-upload-button` | `#app/features/shared/data-upload-button` |
+| Old Path                              | New Path                                     |
+| ------------------------------------- | -------------------------------------------- |
+| `#app/features/person-details`        | `#app/features/people/details`               |
+| `#app/features/person-form`           | `#app/features/people/form`                  |
+| `#app/features/person-hooks`          | `#app/features/people/hooks`                 |
+| `#app/features/person-list-item`      | `#app/features/people/list-item`             |
+| `#app/features/new-person`            | `#app/features/people/new`                   |
+| `#app/features/person-tour`           | `#app/features/people/tour`                  |
+| `#app/features/note-form`             | `#app/features/notes/form`                   |
+| `#app/features/note-hooks`            | `#app/features/notes/hooks`                  |
+| `#app/features/note-list-item`        | `#app/features/notes/list-item`              |
+| `#app/features/new-note`              | `#app/features/notes/new`                    |
+| `#app/features/note-tour`             | `#app/features/notes/tour`                   |
+| `#app/features/reminder-form`         | `#app/features/reminders/form`               |
+| `#app/features/reminder-hooks`        | `#app/features/reminders/hooks`              |
+| `#app/features/reminder-list-item`    | `#app/features/reminders/list-item`          |
+| `#app/features/new-reminder`          | `#app/features/reminders/new`                |
+| `#app/features/reminder-tour`         | `#app/features/reminders/tour`               |
+| `#app/features/data-file-schema`      | `#app/features/shared/data-file-schema`      |
+| `#app/features/data-download-button`  | `#app/features/shared/data-download-button`  |
+| `#app/features/data-upload-button`    | `#app/features/shared/data-upload-button`    |
 | `#app/features/notification-settings` | `#app/features/shared/notification-settings` |
 
 #### Files Requiring Import Updates
 
 **Route Files:**
+
 - `src/app/routes/_app.people.index.tsx` - People imports
 - `src/app/routes/_app.people.$personID.tsx` - People, Notes, Reminders imports
 - `src/app/routes/_app.reminders.tsx` - Reminders imports
@@ -198,6 +206,7 @@ let isSignedIn = true // Temporary - will be replaced with passkey auth
 - `src/app/routes/tour.tsx` - Tour imports
 
 **Feature Files (internal cross-references):**
+
 - `src/app/features/new-note.tsx` → `notes/new.tsx` - imports `note-form`
 - `src/app/features/new-person.tsx` → `people/new.tsx` - imports `person-form`
 - `src/app/features/new-reminder.tsx` → `reminders/new.tsx` - imports `reminder-form`
@@ -211,31 +220,31 @@ let isSignedIn = true // Temporary - will be replaced with passkey auth
 
 #### Import Path Mapping for tools.ts
 
-| Old Import | New Import |
-|------------|------------|
-| `./person-read` | `./people/read` |
-| `./person-create` | `./people/create` |
-| `./person-update` | `./people/update` |
-| `./note-create` | `./notes/create` |
-| `./note-update` | `./notes/update` |
-| `./reminder-read` | `./reminders/read` |
-| `./reminder-create` | `./reminders/create` |
-| `./reminder-update` | `./reminders/update` |
-| `./user-question` | `./system/user-question` |
+| Old Import          | New Import               |
+| ------------------- | ------------------------ |
+| `./person-read`     | `./people/read`          |
+| `./person-create`   | `./people/create`        |
+| `./person-update`   | `./people/update`        |
+| `./note-create`     | `./notes/create`         |
+| `./note-update`     | `./notes/update`         |
+| `./reminder-read`   | `./reminders/read`       |
+| `./reminder-create` | `./reminders/create`     |
+| `./reminder-update` | `./reminders/update`     |
+| `./user-question`   | `./system/user-question` |
 
 #### Import Path Mapping for ui.tsx
 
-| Old Import | New Import |
-|------------|------------|
-| `./person-create-ui` | `./people/create-ui` |
-| `./person-update-ui` | `./people/update-ui` |
-| `./person-read-ui` | `./people/read-ui` |
-| `./note-create-ui` | `./notes/create-ui` |
-| `./note-update-ui` | `./notes/update-ui` |
-| `./reminder-create-ui` | `./reminders/create-ui` |
-| `./reminder-update-ui` | `./reminders/update-ui` |
-| `./reminder-read-ui` | `./reminders/read-ui` |
-| `./user-question-ui` | `./system/user-question-ui` |
+| Old Import             | New Import                  |
+| ---------------------- | --------------------------- |
+| `./person-create-ui`   | `./people/create-ui`        |
+| `./person-update-ui`   | `./people/update-ui`        |
+| `./person-read-ui`     | `./people/read-ui`          |
+| `./note-create-ui`     | `./notes/create-ui`         |
+| `./note-update-ui`     | `./notes/update-ui`         |
+| `./reminder-create-ui` | `./reminders/create-ui`     |
+| `./reminder-update-ui` | `./reminders/update-ui`     |
+| `./reminder-read-ui`   | `./reminders/read-ui`       |
+| `./user-question-ui`   | `./system/user-question-ui` |
 
 ## Data Models
 
@@ -246,6 +255,7 @@ No data model changes are required. This refactoring only affects file organizat
 ### Build Verification
 
 After each phase, run:
+
 1. `pnpm check` - TypeScript compilation
 2. `pnpm build` - Production build
 3. `pnpm test` - Unit tests
@@ -253,6 +263,7 @@ After each phase, run:
 ### Rollback Strategy
 
 If issues are discovered:
+
 1. Git revert the specific phase commit
 2. Re-run verification commands
 3. Address issues before re-attempting
@@ -276,6 +287,7 @@ If issues are discovered:
 ### Manual Smoke Testing
 
 After all phases complete:
+
 1. Start the app (`pnpm dev`)
 2. Navigate to People list - verify list renders
 3. Create a new Person - verify form works

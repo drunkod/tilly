@@ -157,9 +157,9 @@ async function shouldReceiveNotification<
 		let userTimezone = notificationSettings.timezone || "UTC"
 		let lastDelivered = notificationSettings.lastDeliveredAt
 			? format(
-				toZonedTime(notificationSettings.lastDeliveredAt, userTimezone),
-				"yyyy-MM-dd HH:mm",
-			)
+					toZonedTime(notificationSettings.lastDeliveredAt, userTimezone),
+					"yyyy-MM-dd HH:mm",
+				)
 			: "never"
 		throw `Already delivered today (last delivered: ${lastDelivered})`
 	}

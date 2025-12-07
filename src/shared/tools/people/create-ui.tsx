@@ -21,10 +21,10 @@ import { useAppStore } from "#app/lib/store"
 import {
 	createPersonExecute,
 	createPersonTool,
-} from "#shared/tools/person-create"
+} from "#shared/tools/people/create"
 import type { AddToolResultFunction } from "#shared/tools/tools"
 import type { InferUITool } from "ai"
-import { updatePerson } from "#shared/tools/person-update"
+import { updatePerson } from "#shared/tools/people/update"
 import { cn } from "#app/lib/utils"
 import { T, useIntl } from "#shared/intl/setup"
 import {

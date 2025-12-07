@@ -82,10 +82,7 @@ export default defineConfig({
 				name: "inject-sw-base-path",
 				transform(code: string, id: string) {
 					if (id.endsWith("sw.ts") || id.includes("sw.js")) {
-						return code.replace(
-							/"%%BASE_PATH%%"/g,
-							`"${cleanBasePath}"`
-						);
+						return code.replace(/"%%BASE_PATH%%"/g, `"${cleanBasePath}"`)
 					}
 				},
 			},

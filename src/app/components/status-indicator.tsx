@@ -63,9 +63,9 @@ function OfflineIndicator() {
 					style={
 						isMobile
 							? {
-								top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
-								right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
-							}
+									top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
+									right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
+								}
 							: undefined
 					}
 				>
@@ -124,9 +124,9 @@ function UpdateIndicator() {
 					style={
 						isMobile
 							? {
-								top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
-								right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
-							}
+									top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
+									right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
+								}
 							: undefined
 					}
 				>
@@ -187,9 +187,9 @@ function NotSignedInIndicator() {
 					style={
 						isMobile
 							? {
-								top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
-								right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
-							}
+									top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
+									right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
+								}
 							: undefined
 					}
 				>

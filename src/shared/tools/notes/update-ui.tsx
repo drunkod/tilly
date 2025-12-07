@@ -18,7 +18,7 @@ import {
 	editNoteTool,
 	deleteNoteTool,
 	updateNote,
-} from "#shared/tools/note-update"
+} from "#shared/tools/notes/update"
 import { cn } from "#app/lib/utils"
 
 type _EditNoteTool = InferUITool<typeof editNoteTool>

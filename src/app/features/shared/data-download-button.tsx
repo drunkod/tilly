@@ -14,7 +14,10 @@ import {
 } from "#shared/ui/dialog"
 import { UserAccount } from "#shared/schema/user"
 import { cn } from "#app/lib/utils"
-import { type FileData, type FilePerson } from "#app/features/shared/data-file-schema"
+import {
+	type FileData,
+	type FilePerson,
+} from "#app/features/shared/data-file-schema"
 import { T, useIntl } from "#shared/intl/setup"
 
 let exportQuery = {
@@ -59,10 +62,10 @@ export function ExportButton(props: {
 						let blob = bestImage?.image.toBlob()
 						let dataURL = blob
 							? await new Promise<string>(resolve => {
-								let reader = new FileReader()
-								reader.onloadend = () => resolve(reader.result as string)
-								reader.readAsDataURL(blob)
-							})
+									let reader = new FileReader()
+									reader.onloadend = () => resolve(reader.result as string)
+									reader.readAsDataURL(blob)
+								})
 							: undefined
 						if (dataURL) {
 							avatar = { dataURL }
