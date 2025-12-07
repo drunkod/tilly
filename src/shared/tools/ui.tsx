@@ -1,15 +1,15 @@
-import { CreatePersonResult } from "./person-create-ui"
-import { UpdatePersonResult, DeletePersonResult } from "./person-update-ui"
-import { ListPeopleResult, GetPersonDetailsResult } from "./person-read-ui"
-import { AddNoteResult } from "./note-create-ui"
-import { EditNoteResult, DeleteNoteResult } from "./note-update-ui"
-import { AddReminderResult } from "./reminder-create-ui"
+import { CreatePersonResult } from "./people/create-ui"
+import { UpdatePersonResult, DeletePersonResult } from "./people/update-ui"
+import { ListPeopleResult, GetPersonDetailsResult } from "./people/read-ui"
+import { AddNoteResult } from "./notes/create-ui"
+import { EditNoteResult, DeleteNoteResult } from "./notes/update-ui"
+import { AddReminderResult } from "./reminders/create-ui"
 import {
 	UpdateReminderResult,
 	RemoveReminderResult,
-} from "./reminder-update-ui"
-import { ListRemindersResult } from "./reminder-read-ui"
-import { UserQuestionResult } from "./user-question-ui"
+} from "./reminders/update-ui"
+import { ListRemindersResult } from "./reminders/read-ui"
+import { UserQuestionResult } from "./system/user-question-ui"
 
 export { ToolResultRenderer }
 

@@ -3,30 +3,30 @@ import {
 	listPeopleExecute,
 	getPersonDetailsTool,
 	getPersonDetailsExecute,
-} from "./person-read"
-import { listRemindersTool, listRemindersExecute } from "./reminder-read"
-import { createPersonTool } from "./person-create"
+} from "./people/read"
+import { listRemindersTool, listRemindersExecute } from "./reminders/read"
+import { createPersonTool } from "./people/create"
 import {
 	updatePersonTool,
 	updatePersonExecute,
 	deletePersonTool,
 	deletePersonExecute,
-} from "./person-update"
-import { addNoteTool, addNoteExecute } from "./note-create"
+} from "./people/update"
+import { addNoteTool, addNoteExecute } from "./notes/create"
 import {
 	editNoteTool,
 	editNoteExecute,
 	deleteNoteTool,
 	deleteNoteExecute,
-} from "./note-update"
-import { addReminderTool, addReminderExecute } from "./reminder-create"
+} from "./notes/update"
+import { addReminderTool, addReminderExecute } from "./reminders/create"
 import {
 	updateReminderTool,
 	updateReminderExecute,
 	removeReminderTool,
 	removeReminderExecute,
-} from "./reminder-update"
-import { userQuestionTool } from "./user-question"
+} from "./reminders/update"
+import { userQuestionTool } from "./system/user-question"
 import type { InferUITools, UIMessage } from "ai"
 import { z } from "zod"
 export let tools = {

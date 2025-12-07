@@ -16,7 +16,7 @@ import { T, useIntl, useLocale } from "#shared/intl/setup"
 import {
 	listRemindersTool,
 	listRemindersExecute,
-} from "#shared/tools/reminder-read"
+} from "#shared/tools/reminders/read"
 
 export { listRemindersTool, listRemindersExecute, ListRemindersResult }
 

@@ -1,103 +1,103 @@
 import type { APIRoute } from "astro"
 
 export const GET: APIRoute = () => {
-    const baseUrl = import.meta.env.BASE_URL ?? "/"
+	const baseUrl = import.meta.env.BASE_URL ?? "/"
 
-    const manifest = {
-        name: "Tilly Remembers",
-        short_name: "Tilly",
-        description:
-            "Tilly helps you remember what matters and stay in touch with your loved ones. ",
-        start_url: `${baseUrl}app/`,
-        display: "standalone",
-        background_color: "#000202",
-        theme_color: "#009689",
-        orientation: "portrait",
-        scope: `${baseUrl}app/`,
-        lang: "en",
-        icons: [
-            {
-                src: `${baseUrl}app/icons/icon-48x48.png`,
-                sizes: "48x48",
-                type: "image/png",
-            },
-            {
-                purpose: "monochrome",
-                sizes: "96x96",
-                src: `${baseUrl}app/icons/monochrome-96x96.png`,
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-72x72.png`,
-                sizes: "72x72",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-96x96.png`,
-                sizes: "96x96",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-144x144.png`,
-                sizes: "144x144",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-192x192.png`,
-                sizes: "192x192",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-512x512.png`,
-                sizes: "512x512",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-180x180.png`,
-                sizes: "180x180",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-167x167.png`,
-                sizes: "167x167",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-152x152.png`,
-                sizes: "152x152",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-120x120.png`,
-                sizes: "120x120",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-76x76.png`,
-                sizes: "76x76",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-70x70.png`,
-                sizes: "70x70",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-150x150.png`,
-                sizes: "150x150",
-                type: "image/png",
-            },
-            {
-                src: `${baseUrl}app/icons/icon-310x310.png`,
-                sizes: "310x310",
-                type: "image/png",
-            },
-        ],
-    }
+	const manifest = {
+		name: "Tilly Remembers",
+		short_name: "Tilly",
+		description:
+			"Tilly helps you remember what matters and stay in touch with your loved ones. ",
+		start_url: `${baseUrl}app/`,
+		display: "standalone",
+		background_color: "#000202",
+		theme_color: "#009689",
+		orientation: "portrait",
+		scope: `${baseUrl}app/`,
+		lang: "en",
+		icons: [
+			{
+				src: `${baseUrl}app/icons/icon-48x48.png`,
+				sizes: "48x48",
+				type: "image/png",
+			},
+			{
+				purpose: "monochrome",
+				sizes: "96x96",
+				src: `${baseUrl}app/icons/monochrome-96x96.png`,
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-72x72.png`,
+				sizes: "72x72",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-96x96.png`,
+				sizes: "96x96",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-144x144.png`,
+				sizes: "144x144",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-192x192.png`,
+				sizes: "192x192",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-512x512.png`,
+				sizes: "512x512",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-180x180.png`,
+				sizes: "180x180",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-167x167.png`,
+				sizes: "167x167",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-152x152.png`,
+				sizes: "152x152",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-120x120.png`,
+				sizes: "120x120",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-76x76.png`,
+				sizes: "76x76",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-70x70.png`,
+				sizes: "70x70",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-150x150.png`,
+				sizes: "150x150",
+				type: "image/png",
+			},
+			{
+				src: `${baseUrl}app/icons/icon-310x310.png`,
+				sizes: "310x310",
+				type: "image/png",
+			},
+		],
+	}
 
-    return new Response(JSON.stringify(manifest), {
-        headers: {
-            "Content-Type": "application/manifest+json",
-        },
-    })
+	return new Response(JSON.stringify(manifest), {
+		headers: {
+			"Content-Type": "application/manifest+json",
+		},
+	})
 }

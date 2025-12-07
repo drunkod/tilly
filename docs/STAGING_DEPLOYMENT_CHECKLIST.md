@@ -298,10 +298,10 @@ Once all checks pass:
 - [ ] Stakeholders notified of staging deployment
 - [ ] Ready for production deployment
 
-**Tested By**: ******\_\_\_******
-**Date**: ******\_\_\_******
-**Staging URL**: ******\_\_\_******
-**Notes**: ******\_\_\_******
+**Tested By**: **\*\***\_\_\_**\*\***
+**Date**: **\*\***\_\_\_**\*\***
+**Staging URL**: **\*\***\_\_\_**\*\***
+**Notes**: **\*\***\_\_\_**\*\***
 
 ## Next Steps
 

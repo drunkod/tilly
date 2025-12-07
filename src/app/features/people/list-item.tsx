@@ -26,7 +26,7 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 } from "#shared/ui/alert-dialog"
-import { updatePerson } from "#shared/tools/person-update"
+import { updatePerson } from "#shared/tools/people/update"
 import { tryCatch } from "#shared/lib/trycatch"
 import { toast } from "sonner"
 import { useState, type ReactNode } from "react"

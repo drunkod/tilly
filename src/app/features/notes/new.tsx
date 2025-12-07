@@ -12,7 +12,7 @@ import {
 } from "#shared/ui/dialog"
 import { Combobox } from "#shared/ui/combobox"
 import { NoteForm } from "#app/features/notes/form"
-import { createNote } from "#shared/tools/note-create"
+import { createNote } from "#shared/tools/notes/create"
 import { tryCatch } from "#shared/lib/trycatch"
 import { toast } from "sonner"
 import { T, useIntl } from "#shared/intl/setup"
@@ -91,10 +91,11 @@ function NewNote({
 				titleSlot={
 					<div className="relative overflow-hidden">
 						<div
-							className={`transition-all duration-300 ease-out ${!selectedPersonId
+							className={`transition-all duration-300 ease-out ${
+								!selectedPersonId
 									? "translate-x-0 opacity-100"
 									: "absolute inset-0 -translate-x-full opacity-0"
-								}`}
+							}`}
 						>
 							<DialogHeader>
 								<DialogTitle>
@@ -107,10 +108,11 @@ function NewNote({
 						</div>
 
 						<div
-							className={`transition-all duration-300 ease-out ${selectedPersonId
+							className={`transition-all duration-300 ease-out ${
+								selectedPersonId
 									? "translate-x-0 opacity-100"
 									: "absolute inset-0 translate-x-full opacity-0"
-								}`}
+							}`}
 						>
 							<DialogHeader>
 								<DialogTitle>
@@ -126,10 +128,11 @@ function NewNote({
 			>
 				<div className="relative overflow-hidden">
 					<div
-						className={`transition-all duration-300 ease-out ${!selectedPersonId
+						className={`transition-all duration-300 ease-out ${
+							!selectedPersonId
 								? "translate-x-0 opacity-100"
 								: "absolute inset-0 -translate-x-full opacity-0"
-							}`}
+						}`}
 					>
 						<div className="space-y-4">
 							<Combobox
@@ -147,10 +150,11 @@ function NewNote({
 					</div>
 
 					<div
-						className={`transition-all duration-300 ease-out ${selectedPersonId
+						className={`transition-all duration-300 ease-out ${
+							selectedPersonId
 								? "translate-x-0 opacity-100"
 								: "absolute inset-0 translate-x-full opacity-0"
-							}`}
+						}`}
 					>
 						<NoteForm
 							defaultValues={{ content: "", pinned: false }}

@@ -450,17 +450,17 @@ Test in each supported browser:
 
 Document any issues found during testing:
 
-1. Issue: ******\_\_\_******
+1. Issue: **\*\***\_\_\_**\*\***
    - Severity: Critical / High / Medium / Low
-   - Steps to reproduce: ******\_\_\_******
-   - Expected: ******\_\_\_******
-   - Actual: ******\_\_\_******
+   - Steps to reproduce: **\*\***\_\_\_**\*\***
+   - Expected: **\*\***\_\_\_**\*\***
+   - Actual: **\*\***\_\_\_**\*\***
 
-2. Issue: ******\_\_\_******
+2. Issue: **\*\***\_\_\_**\*\***
    - Severity: Critical / High / Medium / Low
-   - Steps to reproduce: ******\_\_\_******
-   - Expected: ******\_\_\_******
-   - Actual: ******\_\_\_******
+   - Steps to reproduce: **\*\***\_\_\_**\*\***
+   - Expected: **\*\***\_\_\_**\*\***
+   - Actual: **\*\***\_\_\_**\*\***
 
 ### Sign-Off
 
@@ -468,9 +468,9 @@ Document any issues found during testing:
 - [ ] All critical issues resolved
 - [ ] Application approved for deployment
 
-**Tester Name:** ******\_\_\_******
-**Date:** ******\_\_\_******
-**Signature:** ******\_\_\_******
+**Tester Name:** **\*\***\_\_\_**\*\***
+**Date:** **\*\***\_\_\_**\*\***
+**Signature:** **\*\***\_\_\_**\*\***
 
 ---
 

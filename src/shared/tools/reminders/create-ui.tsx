@@ -25,8 +25,8 @@ import { T, useIntl, useLocale } from "#shared/intl/setup"
 import {
 	addReminderTool,
 	addReminderExecute,
-} from "#shared/tools/reminder-create"
-import { updateReminder } from "#shared/tools/reminder-update"
+} from "#shared/tools/reminders/create"
+import { updateReminder } from "#shared/tools/reminders/update"
 
 export {
 	addReminderTool,

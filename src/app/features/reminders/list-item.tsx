@@ -43,11 +43,11 @@ import { toast } from "sonner"
 import { de as dfnsDe, ru as dfnsRu } from "date-fns/locale"
 import { useLocale, useIntl, T } from "#shared/intl/setup"
 import { cn, isTextSelectionOngoing } from "#app/lib/utils"
-import { updateReminder } from "#shared/tools/reminder-update"
+import { updateReminder } from "#shared/tools/reminders/update"
 import { tryCatch } from "#shared/lib/trycatch"
 import { NoteForm } from "#app/features/notes/form"
-import { createNote } from "#shared/tools/note-create"
-import { updateNote } from "#shared/tools/note-update"
+import { createNote } from "#shared/tools/notes/create"
+import { updateNote } from "#shared/tools/notes/update"
 import { TextHighlight } from "#shared/ui/text-highlight"
 
 export { ReminderListItem }
@@ -285,8 +285,8 @@ function ReminderItemHeader({
 			<div className="text-muted-foreground text-xs">
 				{formatDistanceToNow(
 					reminder.updatedAt ||
-					reminder.createdAt ||
-					new Date(reminder.$jazz.lastUpdatedAt || reminder.$jazz.createdAt),
+						reminder.createdAt ||
+						new Date(reminder.$jazz.lastUpdatedAt || reminder.$jazz.createdAt),
 					{
 						addSuffix: true,
 						locale: dfnsLocale,
@@ -576,12 +576,12 @@ function RestoreReminderDialog({
 									params={{
 										timeAgo: formatDistanceToNow(
 											reminder.deletedAt ||
-											reminder.updatedAt ||
-											reminder.createdAt ||
-											new Date(
-												reminder.$jazz.lastUpdatedAt ||
-												reminder.$jazz.createdAt,
-											),
+												reminder.updatedAt ||
+												reminder.createdAt ||
+												new Date(
+													reminder.$jazz.lastUpdatedAt ||
+														reminder.$jazz.createdAt,
+												),
 											{
 												addSuffix: true,
 												locale:
@@ -712,11 +712,11 @@ type ReminderUpdateInput = {
 	text: string
 	dueAtDate: string
 	repeat?:
-	| {
-		interval: number
-		unit: "day" | "week" | "month" | "year"
-	}
-	| undefined
+		| {
+				interval: number
+				unit: "day" | "week" | "month" | "year"
+		  }
+		| undefined
 }
 
 type NoteFormInput = {

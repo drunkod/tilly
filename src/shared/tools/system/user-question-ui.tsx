@@ -25,7 +25,7 @@ import { Form, FormControl, FormField, FormItem } from "#shared/ui/form"
 import {
 	userQuestionExecute,
 	userQuestionTool,
-} from "#shared/tools/user-question"
+} from "#shared/tools/system/user-question"
 import type { AddToolResultFunction } from "#shared/tools/tools"
 import type { InferUITool } from "ai"
 

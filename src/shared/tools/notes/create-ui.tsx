@@ -14,8 +14,8 @@ import { ArrowCounterclockwise, Pause, Journal } from "react-bootstrap-icons"
 import { Link } from "@tanstack/react-router"
 import { useAppStore } from "#app/lib/store"
 import { T, useIntl } from "#shared/intl/setup"
-import { addNoteTool } from "#shared/tools/note-create"
-import { updateNote } from "#shared/tools/note-update"
+import { addNoteTool } from "#shared/tools/notes/create"
+import { updateNote } from "#shared/tools/notes/update"
 import { cn } from "#app/lib/utils"
 
 type _AddNoteTool = InferUITool<typeof addNoteTool>

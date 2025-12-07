@@ -28,7 +28,7 @@ import { toast } from "sonner"
 import { formatDistanceToNow } from "date-fns"
 import { de as dfnsDe, ru as dfnsRu } from "date-fns/locale"
 import { isTextSelectionOngoing } from "#app/lib/utils"
-import { updatePerson } from "#shared/tools/person-update"
+import { updatePerson } from "#shared/tools/people/update"
 import { tryCatch } from "#shared/lib/trycatch"
 import { T, useLocale, useIntl } from "#shared/intl/setup"
 
@@ -188,9 +188,9 @@ export function PersonDetails({
 							(
 								person.updatedAt || new Date(person.$jazz.lastUpdatedAt)
 							).getTime() !==
-							(
-								person.createdAt || new Date(person.$jazz.createdAt)
-							).getTime() &&
+								(
+									person.createdAt || new Date(person.$jazz.createdAt)
+								).getTime() &&
 							t("person.updated.suffix", {
 								ago: formatDistanceToNow(
 									person.updatedAt || new Date(person.$jazz.lastUpdatedAt),

@@ -2809,17 +2809,17 @@ Test in each supported browser:
 
 Document any issues found during testing:
 
-1. Issue: ******\_\_\_******
+1. Issue: **\*\***\_\_\_**\*\***
    - Severity: Critical / High / Medium / Low
-   - Steps to reproduce: ******\_\_\_******
-   - Expected: ******\_\_\_******
-   - Actual: ******\_\_\_******
+   - Steps to reproduce: **\*\***\_\_\_**\*\***
+   - Expected: **\*\***\_\_\_**\*\***
+   - Actual: **\*\***\_\_\_**\*\***
 
-2. Issue: ******\_\_\_******
+2. Issue: **\*\***\_\_\_**\*\***
    - Severity: Critical / High / Medium / Low
-   - Steps to reproduce: ******\_\_\_******
-   - Expected: ******\_\_\_******
-   - Actual: ******\_\_\_******
+   - Steps to reproduce: **\*\***\_\_\_**\*\***
+   - Expected: **\*\***\_\_\_**\*\***
+   - Actual: **\*\***\_\_\_**\*\***
 
 ### Sign-Off
 
@@ -2827,9 +2827,9 @@ Document any issues found during testing:
 - [ ] All critical issues resolved
 - [ ] Application approved for deployment
 
-**Tester Name:** ******\_\_\_******
-**Date:** ******\_\_\_******
-**Signature:** ******\_\_\_******
+**Tester Name:** **\*\***\_\_\_**\*\***
+**Date:** **\*\***\_\_\_**\*\***
+**Signature:** **\*\***\_\_\_**\*\***
 
 ---
 
@@ -8725,21 +8725,21 @@ if (typeof value !== "string") return value
     let now = new Date()
 
     if (value === "TODAY") {
-	return now.toISOString()
+    return now.toISOString()
     }
 
     if (value.startsWith("DAYS_AGO:")) {
-	let daysAgo = parseInt(value.replace("DAYS_AGO:", ""))
-	let date = new Date(now)
-	date.setDate(date.getDate() + daysAgo)
-	return date.toISOString()
+    let daysAgo = parseInt(value.replace("DAYS_AGO:", ""))
+    let date = new Date(now)
+    date.setDate(date.getDate() + daysAgo)
+    return date.toISOString()
     }
 
     if (value.startsWith("DAYS_FROM_NOW:")) {
-	let daysFromNow = parseInt(value.replace("DAYS_FROM_NOW:", ""))
-	let date = new Date(now)
-	date.setDate(date.getDate() + daysFromNow)
-	return date.toISOString()
+    let daysFromNow = parseInt(value.replace("DAYS_FROM_NOW:", ""))
+    let date = new Date(now)
+    date.setDate(date.getDate() + daysFromNow)
+    return date.toISOString()
     }
 
     return value
@@ -8762,23 +8762,23 @@ return obj.map(processObject)
 }
 
     if (obj && typeof obj === "object") {
-	let processed = {}
+    let processed = {}
 
-	for (let [key, value] of Object.entries(obj)) {
-		if (
-			key === "avatar" &&
-			typeof value === "string" &&
-			(value.endsWith(".jpg") || value.endsWith(".png"))
-		) {
-			processed[key] = processAvatar(value)
-		} else if (key.endsWith("At") || key === "dueAtDate") {
-			processed[key] = processTimestamp(value)
-		} else {
-			processed[key] = processObject(value)
-		}
-	}
+    for (let [key, value] of Object.entries(obj)) {
+    	if (
+    		key === "avatar" &&
+    		typeof value === "string" &&
+    		(value.endsWith(".jpg") || value.endsWith(".png"))
+    	) {
+    		processed[key] = processAvatar(value)
+    	} else if (key.endsWith("At") || key === "dueAtDate") {
+    		processed[key] = processTimestamp(value)
+    	} else {
+    		processed[key] = processObject(value)
+    	}
+    }
 
-	return processed
+    return processed
     }
 
     return obj
@@ -8939,11 +8939,11 @@ if (jazzWorker?.$isLoaded) return jazzWorker
     console.log("🎵 Initializing Jazz worker...")
 
     let workerResult = await startWorker({
-	AccountSchema: ServerAccount,
-	syncServer: PUBLIC_JAZZ_SYNC_SERVER,
-	accountID: PUBLIC_JAZZ_WORKER_ACCOUNT,
-	accountSecret: JAZZ_WORKER_SECRET,
-	skipInboxLoad: true,
+    AccountSchema: ServerAccount,
+    syncServer: PUBLIC_JAZZ_SYNC_SERVER,
+    accountID: PUBLIC_JAZZ_WORKER_ACCOUNT,
+    accountSecret: JAZZ_WORKER_SECRET,
+    skipInboxLoad: true,
     })
 
     jazzWorker = workerResult.worker
@@ -8960,20 +8960,20 @@ console.warn(`  ⚠️  Usage tracking not found for user ${userId}`)
 return false
 }
 
-	let usagePercent = usageTracking.weeklyPercentUsed ?? 0
+    let usagePercent = usageTracking.weeklyPercentUsed ?? 0
 
-	console.log(`  📊 Current usage: ${usagePercent.toFixed(1)}% of budget`)
+    console.log(`  📊 Current usage: ${usagePercent.toFixed(1)}% of budget`)
 
-	usageTracking.$jazz.set("weeklyPercentUsed", 0)
+    usageTracking.$jazz.set("weeklyPercentUsed", 0)
 
-	console.log(`  ⏳ Waiting for sync...`)
-	await usageTracking.$jazz.waitForSync()
+    console.log(`  ⏳ Waiting for sync...`)
+    await usageTracking.$jazz.waitForSync()
 
-	console.log(`  ✅ Reset successfully`)
-	return true
+    console.log(`  ✅ Reset successfully`)
+    return true
     } catch (error) {
-	console.error(`  ❌ Failed to reset usage for user ${userId}:`, error)
-	return false
+    console.error(`  ❌ Failed to reset usage for user ${userId}:`, error)
+    return false
     }
 
 }
@@ -8985,40 +8985,40 @@ console.log("🚀 Starting bulk usage reset...")
     await initJazzWorker()
 
     try {
-	// TODO: Replace with Jazz-based user enumeration in task 9
-	console.log("⚠️  This script is temporarily disabled - Clerk user enumeration removed")
-	console.log("Will be re-implemented with Jazz Global Directory in task 9")
-	return
+    // TODO: Replace with Jazz-based user enumeration in task 9
+    console.log("⚠️  This script is temporarily disabled - Clerk user enumeration removed")
+    console.log("Will be re-implemented with Jazz Global Directory in task 9")
+    return
 
-	// console.log("📋 Fetching users from Clerk...")
-	// let users = []
-	// for await (let user of getAllUsers()) {
-	// 	users.push(user)
-	// }
-	// console.log(`📊 Found ${users.length} users`)
-	// let resetCount = 0
-	// let skipCount = 0
-	// for (let [index, user] of users.entries()) {
-	// 	console.log(`\n[${index + 1}/${users.length}] Processing user ${user.id}`)
-	// 	// Get usage tracking ID from user metadata
-	// 	let usageTrackingId = user.unsafeMetadata?.usageTrackingId as
-	// 		| string
-	// 		| undefined
-	// 	if (!usageTrackingId) {
-	// 		console.log(`  ⏭️  No usage tracking found, skipping`)
-	// 		skipCount++
-	// 		continue
-	// 	}
-	// 	let success = await resetUsageForUser(usageTrackingId, user.id)
-	// 	if (success) {
-	// 		resetCount++
-	// 	}
-	// }
-	// console.log(`\n🎉 Reset completed!`)
-	// console.log(`✅ Successfully reset: ${resetCount} users`)
-	// console.log(`⏭️  Skipped (no usage tracking): ${skipCount} users`)
+    // console.log("📋 Fetching users from Clerk...")
+    // let users = []
+    // for await (let user of getAllUsers()) {
+    // 	users.push(user)
+    // }
+    // console.log(`📊 Found ${users.length} users`)
+    // let resetCount = 0
+    // let skipCount = 0
+    // for (let [index, user] of users.entries()) {
+    // 	console.log(`\n[${index + 1}/${users.length}] Processing user ${user.id}`)
+    // 	// Get usage tracking ID from user metadata
+    // 	let usageTrackingId = user.unsafeMetadata?.usageTrackingId as
+    // 		| string
+    // 		| undefined
+    // 	if (!usageTrackingId) {
+    // 		console.log(`  ⏭️  No usage tracking found, skipping`)
+    // 		skipCount++
+    // 		continue
+    // 	}
+    // 	let success = await resetUsageForUser(usageTrackingId, user.id)
+    // 	if (success) {
+    // 		resetCount++
+    // 	}
+    // }
+    // console.log(`\n🎉 Reset completed!`)
+    // console.log(`✅ Successfully reset: ${resetCount} users`)
+    // console.log(`⏭️  Skipped (no usage tracking): ${skipCount} users`)
     } catch (error) {
-	console.error("❌ Failed to fetch users or reset usage:", error)
+    console.error("❌ Failed to fetch users or reset usage:", error)
     }
 
 }
@@ -9650,98 +9650,98 @@ onCopyError,
 let [copied, setCopied] = useState(false)
 
     function handleCopyError() {
-	if (!error) return
+    if (!error) return
 
-	let errorText = `Error Message:\n${error.message}\n\nStack Trace:\n${error.stack || "No stack trace available"}`
+    let errorText = `Error Message:\n${error.message}\n\nStack Trace:\n${error.stack || "No stack trace available"}`
 
-	if (componentStack) {
-		errorText += `\n\nComponent Stack:\n${componentStack}`
-	}
+    if (componentStack) {
+    	errorText += `\n\nComponent Stack:\n${componentStack}`
+    }
 
-	navigator.clipboard.writeText(errorText).then(
-		() => {
-			setCopied(true)
-			setTimeout(() => setCopied(false), 2000)
-			onCopySuccess?.()
-		},
-		() => {
-			onCopyError?.()
-		},
-	)
+    navigator.clipboard.writeText(errorText).then(
+    	() => {
+    		setCopied(true)
+    		setTimeout(() => setCopied(false), 2000)
+    		onCopySuccess?.()
+    	},
+    	() => {
+    		onCopyError?.()
+    	},
+    )
     }
 
     return (
-	<main className="container mx-auto max-w-6xl px-3 py-6 pb-20 md:pt-20 md:pb-0">
-		<Card className="mx-auto max-w-lg">
-			<CardHeader>
-				<div className="flex items-center gap-3">
-					<ExclamationTriangle className="text-destructive size-5" />
-					<h3 className="font-medium">{title}</h3>
-				</div>
-			</CardHeader>
-			<CardContent className="space-y-4">
-				<p className="text-muted-foreground text-sm">{description}</p>
-				{feedbackLink}
-				{error && (
-					<details className="group">
-						<summary className="text-muted-foreground hover:text-foreground cursor-pointer text-sm font-medium">
-							{showDetailsLabel}
-						</summary>
-						<div className="mt-3 space-y-3">
-							<div className="flex items-center justify-between">
-								<p className="text-xs font-medium">{detailsLabel}</p>
-								<Button
-									variant="ghost"
-									size="sm"
-									onClick={handleCopyError}
-									className="h-6 px-2 text-xs"
-								>
-									{copied ? (
-										<>
-											<Check className="size-3" />
-											{copiedLabel}
-										</>
-									) : (
-										<>
-											<Clipboard className="size-3" />
-											{copyLabel}
-										</>
-									)}
-								</Button>
-							</div>
-							<div>
-								<p className="mb-1 text-xs font-medium">{messageLabel}</p>
-								<pre className="bg-muted overflow-auto rounded p-3 text-xs select-text">
-									{error.message}
-								</pre>
-							</div>
-							{error.stack && (
-								<details>
-									<summary className="text-muted-foreground hover:text-foreground cursor-pointer text-xs font-medium">
-										{stackTraceLabel}
-									</summary>
-									<pre className="bg-muted mt-2 max-h-40 overflow-auto rounded p-3 text-xs select-text">
-										{error.stack}
-									</pre>
-								</details>
-							)}
-							{componentStack && (
-								<details>
-									<summary className="text-muted-foreground hover:text-foreground cursor-pointer text-xs font-medium">
-										{componentStackLabel}
-									</summary>
-									<pre className="bg-muted mt-2 max-h-40 overflow-auto rounded p-3 text-xs select-text">
-										{componentStack}
-									</pre>
-								</details>
-							)}
-						</div>
-					</details>
-				)}
-			</CardContent>
-			<CardFooter className="flex gap-2">{actions}</CardFooter>
-		</Card>
-	</main>
+    <main className="container mx-auto max-w-6xl px-3 py-6 pb-20 md:pt-20 md:pb-0">
+    	<Card className="mx-auto max-w-lg">
+    		<CardHeader>
+    			<div className="flex items-center gap-3">
+    				<ExclamationTriangle className="text-destructive size-5" />
+    				<h3 className="font-medium">{title}</h3>
+    			</div>
+    		</CardHeader>
+    		<CardContent className="space-y-4">
+    			<p className="text-muted-foreground text-sm">{description}</p>
+    			{feedbackLink}
+    			{error && (
+    				<details className="group">
+    					<summary className="text-muted-foreground hover:text-foreground cursor-pointer text-sm font-medium">
+    						{showDetailsLabel}
+    					</summary>
+    					<div className="mt-3 space-y-3">
+    						<div className="flex items-center justify-between">
+    							<p className="text-xs font-medium">{detailsLabel}</p>
+    							<Button
+    								variant="ghost"
+    								size="sm"
+    								onClick={handleCopyError}
+    								className="h-6 px-2 text-xs"
+    							>
+    								{copied ? (
+    									<>
+    										<Check className="size-3" />
+    										{copiedLabel}
+    									</>
+    								) : (
+    									<>
+    										<Clipboard className="size-3" />
+    										{copyLabel}
+    									</>
+    								)}
+    							</Button>
+    						</div>
+    						<div>
+    							<p className="mb-1 text-xs font-medium">{messageLabel}</p>
+    							<pre className="bg-muted overflow-auto rounded p-3 text-xs select-text">
+    								{error.message}
+    							</pre>
+    						</div>
+    						{error.stack && (
+    							<details>
+    								<summary className="text-muted-foreground hover:text-foreground cursor-pointer text-xs font-medium">
+    									{stackTraceLabel}
+    								</summary>
+    								<pre className="bg-muted mt-2 max-h-40 overflow-auto rounded p-3 text-xs select-text">
+    									{error.stack}
+    								</pre>
+    							</details>
+    						)}
+    						{componentStack && (
+    							<details>
+    								<summary className="text-muted-foreground hover:text-foreground cursor-pointer text-xs font-medium">
+    									{componentStackLabel}
+    								</summary>
+    								<pre className="bg-muted mt-2 max-h-40 overflow-auto rounded p-3 text-xs select-text">
+    									{componentStack}
+    								</pre>
+    							</details>
+    						)}
+    					</div>
+    				</details>
+    			)}
+    		</CardContent>
+    		<CardFooter className="flex gap-2">{actions}</CardFooter>
+    	</Card>
+    </main>
     )
 
 }
@@ -9915,215 +9915,215 @@ let isPWAInstalled = useIsPWAInstalled()
 let isMobileDevice = useIsMobileDevice()
 
     let pwaInstallHintDismissed = useAppStore(
-	state => state.pwaInstallHintDismissed,
+    state => state.pwaInstallHintDismissed,
     )
     let setPWAInstallHintDismissed = useAppStore(
-	state => state.setPWAInstallHintDismissed,
+    state => state.setPWAInstallHintDismissed,
     )
     let hideInstallNavItem = useAppStore(state => state.hideInstallNavItem)
     let setHideInstallNavItem = useAppStore(state => state.setHideInstallNavItem)
 
     let shouldShowPWAButton =
-	isMobileDevice && !isPWAInstalled && !hideInstallNavItem
+    isMobileDevice && !isPWAInstalled && !hideInstallNavItem
     let shouldPulse = shouldShowPWAButton && !pwaInstallHintDismissed
 
     function handleNavClick(iconKey: string, routePath: string) {
-	triggerAnimation(iconKey)
-	if (location.pathname.endsWith(routePath)) {
-		window.scrollTo({ top: 0, behavior: "smooth" })
-	}
+    triggerAnimation(iconKey)
+    if (location.pathname.endsWith(routePath)) {
+    	window.scrollTo({ top: 0, behavior: "smooth" })
+    }
     }
 
     function handlePWAInstallClick() {
-	setShowPWADialog(true)
-	triggerAnimation("pwa-install")
+    setShowPWADialog(true)
+    triggerAnimation("pwa-install")
     }
 
     function handlePWAInstallComplete() {
-	setShowPWADialog(false)
-	setPWAInstallHintDismissed(true)
+    setShowPWADialog(false)
+    setPWAInstallHintDismissed(true)
     }
 
     function handlePWADialogClose(open: boolean) {
-	setShowPWADialog(open)
+    setShowPWADialog(open)
     }
     let activeProps = { className: "text-foreground" }
     let inactiveProps = {
-	className:
-		"text-muted-foreground hover:text-foreground/80 md:hover:bg-muted/50 transition-color",
+    className:
+    	"text-muted-foreground hover:text-foreground/80 md:hover:bg-muted/50 transition-color",
     }
     let linkClassName = cn(
-	"transition-colors flex h-full flex-1 flex-col items-center justify-center text-xs",
-	"md:rounded-md md:flex-row md:gap-2 md:px-3 md:py-2 md:text-sm md:flex-none",
+    "transition-colors flex h-full flex-1 flex-col items-center justify-center text-xs",
+    "md:rounded-md md:flex-row md:gap-2 md:px-3 md:py-2 md:text-sm md:flex-none",
     )
     return (
-	<>
-		<nav
-			className={cn(
-				"bg-background/50 border-border absolute inset-x-3 z-1 transform rounded-4xl border shadow-lg backdrop-blur-xl duration-300",
-				"md:top-4 md:bottom-auto md:left-1/2 md:w-fit md:-translate-x-1/2",
-				isInputFocused
-					? "bottom-0 max-md:translate-y-[100%] max-md:opacity-0"
-					: "bottom-[max(calc(var(--spacing)*3),calc(env(safe-area-inset-bottom)-var(--spacing)*4))]",
-			)}
-		>
-			<div
-				className={cn(
-					"flex items-center",
-					"h-16 justify-around md:justify-center",
-					"md:h-12 md:gap-1 md:p-1",
-				)}
-			>
-				<Link
-					key="/people"
-					to="/people"
-					activeProps={activeProps}
-					inactiveProps={inactiveProps}
-					className={linkClassName}
-					onClick={() => handleNavClick("people", "/people")}
-				>
-					{({ isActive }) => (
-						<>
-							{isActive ? (
-								<PeopleFill
-									className={cn(
-										"mb-1 size-6 md:mb-0",
-										animatingIcon === "people" && "animate-pulse-scale",
-									)}
-								/>
-							) : (
-								<People className="mb-1 size-6 md:mb-0" />
-							)}
-							<span>
-								<T k="nav.people" />
-							</span>
-						</>
-					)}
-				</Link>
-				<Link
-					key="/reminders"
-					to="/reminders"
-					activeProps={activeProps}
-					inactiveProps={inactiveProps}
-					className={linkClassName}
-					onClick={() => handleNavClick("reminders", "/reminders")}
-				>
-					{({ isActive }) => (
-						<>
-							<div className="relative">
-								{isActive ? (
-									<BellFill
-										className={cn(
-											"mb-1 size-6 md:mb-0",
-											animatingIcon === "reminders" && "animate-pulse-scale",
-										)}
-									/>
-								) : (
-									<Bell className="mb-1 size-6 md:mb-0" />
-								)}
-								{dueReminderCount > 0 ? (
-									<span
-										className={cn(
-											"bg-primary text-primary-foreground absolute -top-1.5 -right-1.5 min-w-[20px] rounded-full px-1 py-0.5 text-center text-xs font-bold",
-										)}
-									>
-										{dueReminderCount > 9 ? (
-											<T k="nav.notifications.count.max" />
-										) : (
-											dueReminderCount
-										)}
-									</span>
-								) : null}
-							</div>
-							<span>
-								<T k="nav.reminders" />
-							</span>
-						</>
-					)}
-				</Link>
-				<Link
-					key="/assistant"
-					to="/assistant"
-					activeProps={activeProps}
-					inactiveProps={inactiveProps}
-					className={linkClassName}
-					onClick={() => handleNavClick("assistant", "/assistant")}
-				>
-					{({ isActive }) => (
-						<>
-							{isActive ? (
-								<ChatFill
-									className={cn(
-										"mb-1 size-6 md:mb-0",
-										animatingIcon === "assistant" && "animate-pulse-scale",
-									)}
-								/>
-							) : (
-								<Chat className="mb-1 size-6 md:mb-0" />
-							)}
-							<span>
-								<T k="nav.assistant" />
-							</span>
-						</>
-					)}
-				</Link>
-				<Link
-					key="/settings"
-					to="/settings"
-					activeProps={activeProps}
-					inactiveProps={inactiveProps}
-					className={linkClassName}
-					onClick={() => handleNavClick("settings", "/settings")}
-				>
-					{({ isActive }) => (
-						<>
-							{isActive ? (
-								<GearFill
-									className={cn(
-										"mb-1 size-6 md:mb-0",
-										animatingIcon === "settings" && "animate-pulse-scale",
-									)}
-								/>
-							) : (
-								<Gear className="mb-1 size-6 md:mb-0" />
-							)}
-							<span>
-								<T k="nav.settings" />
-							</span>
-						</>
-					)}
-				</Link>
-				{shouldShowPWAButton && (
-					<button
-						className={cn(
-							linkClassName,
-							shouldPulse
-								? "text-primary hover:text-primary/80 md:hover:bg-primary/10 transition-color"
-								: "text-muted-foreground hover:text-foreground/80 md:hover:bg-muted/50 transition-color",
-						)}
-						onClick={handlePWAInstallClick}
-					>
-						<AppIndicator
-							className={cn(
-								"mb-1 size-6 md:mb-0",
-								shouldPulse && "animate-pulse",
-								animatingIcon === "pwa-install" && "animate-pulse-scale",
-							)}
-						/>
-						<span>
-							<T k="nav.install" />
-						</span>
-					</button>
-				)}
-			</div>
-		</nav>
-		<PWAInstallDialog
-			open={showPWADialog}
-			onOpenChange={handlePWADialogClose}
-			onInstallComplete={handlePWAInstallComplete}
-			onDismiss={() => setHideInstallNavItem(true)}
-		/>
-	</>
+    <>
+    	<nav
+    		className={cn(
+    			"bg-background/50 border-border absolute inset-x-3 z-1 transform rounded-4xl border shadow-lg backdrop-blur-xl duration-300",
+    			"md:top-4 md:bottom-auto md:left-1/2 md:w-fit md:-translate-x-1/2",
+    			isInputFocused
+    				? "bottom-0 max-md:translate-y-[100%] max-md:opacity-0"
+    				: "bottom-[max(calc(var(--spacing)*3),calc(env(safe-area-inset-bottom)-var(--spacing)*4))]",
+    		)}
+    	>
+    		<div
+    			className={cn(
+    				"flex items-center",
+    				"h-16 justify-around md:justify-center",
+    				"md:h-12 md:gap-1 md:p-1",
+    			)}
+    		>
+    			<Link
+    				key="/people"
+    				to="/people"
+    				activeProps={activeProps}
+    				inactiveProps={inactiveProps}
+    				className={linkClassName}
+    				onClick={() => handleNavClick("people", "/people")}
+    			>
+    				{({ isActive }) => (
+    					<>
+    						{isActive ? (
+    							<PeopleFill
+    								className={cn(
+    									"mb-1 size-6 md:mb-0",
+    									animatingIcon === "people" && "animate-pulse-scale",
+    								)}
+    							/>
+    						) : (
+    							<People className="mb-1 size-6 md:mb-0" />
+    						)}
+    						<span>
+    							<T k="nav.people" />
+    						</span>
+    					</>
+    				)}
+    			</Link>
+    			<Link
+    				key="/reminders"
+    				to="/reminders"
+    				activeProps={activeProps}
+    				inactiveProps={inactiveProps}
+    				className={linkClassName}
+    				onClick={() => handleNavClick("reminders", "/reminders")}
+    			>
+    				{({ isActive }) => (
+    					<>
+    						<div className="relative">
+    							{isActive ? (
+    								<BellFill
+    									className={cn(
+    										"mb-1 size-6 md:mb-0",
+    										animatingIcon === "reminders" && "animate-pulse-scale",
+    									)}
+    								/>
+    							) : (
+    								<Bell className="mb-1 size-6 md:mb-0" />
+    							)}
+    							{dueReminderCount > 0 ? (
+    								<span
+    									className={cn(
+    										"bg-primary text-primary-foreground absolute -top-1.5 -right-1.5 min-w-[20px] rounded-full px-1 py-0.5 text-center text-xs font-bold",
+    									)}
+    								>
+    									{dueReminderCount > 9 ? (
+    										<T k="nav.notifications.count.max" />
+    									) : (
+    										dueReminderCount
+    									)}
+    								</span>
+    							) : null}
+    						</div>
+    						<span>
+    							<T k="nav.reminders" />
+    						</span>
+    					</>
+    				)}
+    			</Link>
+    			<Link
+    				key="/assistant"
+    				to="/assistant"
+    				activeProps={activeProps}
+    				inactiveProps={inactiveProps}
+    				className={linkClassName}
+    				onClick={() => handleNavClick("assistant", "/assistant")}
+    			>
+    				{({ isActive }) => (
+    					<>
+    						{isActive ? (
+    							<ChatFill
+    								className={cn(
+    									"mb-1 size-6 md:mb-0",
+    									animatingIcon === "assistant" && "animate-pulse-scale",
+    								)}
+    							/>
+    						) : (
+    							<Chat className="mb-1 size-6 md:mb-0" />
+    						)}
+    						<span>
+    							<T k="nav.assistant" />
+    						</span>
+    					</>
+    				)}
+    			</Link>
+    			<Link
+    				key="/settings"
+    				to="/settings"
+    				activeProps={activeProps}
+    				inactiveProps={inactiveProps}
+    				className={linkClassName}
+    				onClick={() => handleNavClick("settings", "/settings")}
+    			>
+    				{({ isActive }) => (
+    					<>
+    						{isActive ? (
+    							<GearFill
+    								className={cn(
+    									"mb-1 size-6 md:mb-0",
+    									animatingIcon === "settings" && "animate-pulse-scale",
+    								)}
+    							/>
+    						) : (
+    							<Gear className="mb-1 size-6 md:mb-0" />
+    						)}
+    						<span>
+    							<T k="nav.settings" />
+    						</span>
+    					</>
+    				)}
+    			</Link>
+    			{shouldShowPWAButton && (
+    				<button
+    					className={cn(
+    						linkClassName,
+    						shouldPulse
+    							? "text-primary hover:text-primary/80 md:hover:bg-primary/10 transition-color"
+    							: "text-muted-foreground hover:text-foreground/80 md:hover:bg-muted/50 transition-color",
+    					)}
+    					onClick={handlePWAInstallClick}
+    				>
+    					<AppIndicator
+    						className={cn(
+    							"mb-1 size-6 md:mb-0",
+    							shouldPulse && "animate-pulse",
+    							animatingIcon === "pwa-install" && "animate-pulse-scale",
+    						)}
+    					/>
+    					<span>
+    						<T k="nav.install" />
+    					</span>
+    				</button>
+    			)}
+    		</div>
+    	</nav>
+    	<PWAInstallDialog
+    		open={showPWADialog}
+    		onOpenChange={handlePWADialogClose}
+    		onInstallComplete={handlePWAInstallComplete}
+    		onDismiss={() => setHideInstallNavItem(true)}
+    	/>
+    </>
     )
 
 }
@@ -10133,21 +10133,21 @@ let [animatingIcon, setAnimatingIcon] = useState<string | null>(null)
 let timeoutRef = useRef<number | null>(null)
 
     function triggerAnimation(key: string) {
-	if (timeoutRef.current !== null) {
-		window.clearTimeout(timeoutRef.current)
-		timeoutRef.current = null
-	}
-	setAnimatingIcon(key)
-	timeoutRef.current = window.setTimeout(() => {
-		setAnimatingIcon(null)
-		timeoutRef.current = null
-	}, 500)
+    if (timeoutRef.current !== null) {
+    	window.clearTimeout(timeoutRef.current)
+    	timeoutRef.current = null
+    }
+    setAnimatingIcon(key)
+    timeoutRef.current = window.setTimeout(() => {
+    	setAnimatingIcon(null)
+    	timeoutRef.current = null
+    }, 500)
     }
 
     useEffect(() => {
-	return () => {
-		if (timeoutRef.current !== null) window.clearTimeout(timeoutRef.current)
-	}
+    return () => {
+    	if (timeoutRef.current !== null) window.clearTimeout(timeoutRef.current)
+    }
     }, [])
 
     return { animatingIcon, triggerAnimation }
@@ -10466,122 +10466,122 @@ let [currentMode, setCurrentMode] = useState(mode)
     let auth = usePasskeyAuth({ appName: APP_NAME })
 
     async function handleSignUp() {
-	if (!username.trim()) {
-		setError("Please enter a username")
-		return
-	}
+    if (!username.trim()) {
+    	setError("Please enter a username")
+    	return
+    }
 
-	setIsLoading(true)
-	setError(null)
+    setIsLoading(true)
+    setError(null)
 
-	try {
-		await auth.signUp(username)
-		onOpenChange(false)
-	} catch (err) {
-		setError(
-			err instanceof Error
-				? err.message
-				: "Failed to sign up. Please try again.",
-		)
-	} finally {
-		setIsLoading(false)
-	}
+    try {
+    	await auth.signUp(username)
+    	onOpenChange(false)
+    } catch (err) {
+    	setError(
+    		err instanceof Error
+    			? err.message
+    			: "Failed to sign up. Please try again.",
+    	)
+    } finally {
+    	setIsLoading(false)
+    }
     }
 
     async function handleLogIn() {
-	setIsLoading(true)
-	setError(null)
+    setIsLoading(true)
+    setError(null)
 
-	try {
-		await auth.logIn()
-		onOpenChange(false)
-	} catch (err) {
-		setError(
-			err instanceof Error
-				? err.message
-				: "Failed to log in. Please try again.",
-		)
-	} finally {
-		setIsLoading(false)
-	}
+    try {
+    	await auth.logIn()
+    	onOpenChange(false)
+    } catch (err) {
+    	setError(
+    		err instanceof Error
+    			? err.message
+    			: "Failed to log in. Please try again.",
+    	)
+    } finally {
+    	setIsLoading(false)
+    }
     }
 
     function handleModeSwitch() {
-	setCurrentMode(currentMode === "login" ? "signup" : "login")
-	setError(null)
-	setUsername("")
+    setCurrentMode(currentMode === "login" ? "signup" : "login")
+    setError(null)
+    setUsername("")
     }
 
     return (
-	<Dialog open={open} onOpenChange={onOpenChange}>
-		<DialogContent
-			titleSlot={
-				<DialogHeader>
-					<DialogTitle>
-						{currentMode === "signup" ? "Sign Up" : "Log In"}
-					</DialogTitle>
-					<DialogDescription>
-						{currentMode === "signup"
-							? "Create a new account to sync your data across devices"
-							: "Log in to access your account from any device"}
-					</DialogDescription>
-				</DialogHeader>
-			}
-		>
-			<div className="flex flex-col gap-4">
-				{currentMode === "signup" && (
-					<div className="flex flex-col gap-2">
-						<Label htmlFor="username">Username</Label>
-						<Input
-							id="username"
-							type="text"
-							value={username}
-							onChange={e => setUsername(e.target.value)}
-							placeholder="Enter your username"
-							disabled={isLoading}
-							aria-invalid={!!error}
-							onKeyDown={e => {
-								if (e.key === "Enter" && !isLoading) {
-									handleSignUp()
-								}
-							}}
-						/>
-					</div>
-				)}
+    <Dialog open={open} onOpenChange={onOpenChange}>
+    	<DialogContent
+    		titleSlot={
+    			<DialogHeader>
+    				<DialogTitle>
+    					{currentMode === "signup" ? "Sign Up" : "Log In"}
+    				</DialogTitle>
+    				<DialogDescription>
+    					{currentMode === "signup"
+    						? "Create a new account to sync your data across devices"
+    						: "Log in to access your account from any device"}
+    				</DialogDescription>
+    			</DialogHeader>
+    		}
+    	>
+    		<div className="flex flex-col gap-4">
+    			{currentMode === "signup" && (
+    				<div className="flex flex-col gap-2">
+    					<Label htmlFor="username">Username</Label>
+    					<Input
+    						id="username"
+    						type="text"
+    						value={username}
+    						onChange={e => setUsername(e.target.value)}
+    						placeholder="Enter your username"
+    						disabled={isLoading}
+    						aria-invalid={!!error}
+    						onKeyDown={e => {
+    							if (e.key === "Enter" && !isLoading) {
+    								handleSignUp()
+    							}
+    						}}
+    					/>
+    				</div>
+    			)}
 
-				{error && (
-					<div className="text-destructive text-sm" role="alert">
-						{error}
-					</div>
-				)}
+    			{error && (
+    				<div className="text-destructive text-sm" role="alert">
+    					{error}
+    				</div>
+    			)}
 
-				<div className="flex flex-col gap-2">
-					<Button
-						onClick={currentMode === "signup" ? handleSignUp : handleLogIn}
-						disabled={
-							isLoading || (currentMode === "signup" && !username.trim())
-						}
-					>
-						{isLoading
-							? "Please wait..."
-							: currentMode === "signup"
-								? "Sign Up"
-								: "Log In"}
-					</Button>
+    			<div className="flex flex-col gap-2">
+    				<Button
+    					onClick={currentMode === "signup" ? handleSignUp : handleLogIn}
+    					disabled={
+    						isLoading || (currentMode === "signup" && !username.trim())
+    					}
+    				>
+    					{isLoading
+    						? "Please wait..."
+    						: currentMode === "signup"
+    							? "Sign Up"
+    							: "Log In"}
+    				</Button>
 
-					<Button
-						variant="ghost"
-						onClick={handleModeSwitch}
-						disabled={isLoading}
-					>
-						{currentMode === "signup"
-							? "Already have an account? Log in"
-							: "Don't have an account? Sign up"}
-					</Button>
-				</div>
-			</div>
-		</DialogContent>
-	</Dialog>
+    				<Button
+    					variant="ghost"
+    					onClick={handleModeSwitch}
+    					disabled={isLoading}
+    				>
+    					{currentMode === "signup"
+    						? "Already have an account? Log in"
+    						: "Don't have an account? Sign up"}
+    				</Button>
+    			</div>
+    		</div>
+    	</DialogContent>
+    </Dialog>
     )
 
 }
@@ -10912,7 +10912,7 @@ function ScrollIntoView(props: { trigger: unknown }) {
 let scrollTargetRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-	scrollTargetRef.current?.scrollIntoView({ behavior: "smooth" })
+    scrollTargetRef.current?.scrollIntoView({ behavior: "smooth" })
     }, [props.trigger])
 
     return <div ref={scrollTargetRef} />
@@ -10966,6 +10966,7 @@ description,
 children,
 }: SettingsSectionProps) {
 return (
+
 <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-3 py-8 md:grid-cols-3">
 <div>
 <h2 className="text-xl/7 font-semibold">{title}</h2>
@@ -11042,15 +11043,15 @@ let isLoaded = true
 let isSignedIn = true // Temporary - will be replaced with passkey auth
 
     if (!isOnline) {
-	return <OfflineIndicator />
+    return <OfflineIndicator />
     }
 
     if (updateAvailable) {
-	return <UpdateIndicator />
+    return <UpdateIndicator />
     }
 
     if (isLoaded && !isSignedIn) {
-	return <NotSignedInIndicator />
+    return <NotSignedInIndicator />
     }
 
     return null
@@ -11062,53 +11063,53 @@ let t = useIntl()
 let isMobile = useIsMobile()
 
     return (
-	<Dialog>
-		<DialogTrigger asChild>
-			<Button
-				title={t("status.offline.tooltip")}
-				variant="secondary"
-				className="absolute top-3 right-3 md:gap-2"
-				style={
-					isMobile
-						? {
-								top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
-								right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
-							}
-						: undefined
-				}
-			>
-				<CloudSlash />
-				<span className="hidden md:inline">
-					<T k="status.offline.tooltip" />
-				</span>
-			</Button>
-		</DialogTrigger>
-		<DialogContent
-			titleSlot={
-				<DialogTitle>
-					<T k="status.offline.dialog.title" />
-				</DialogTitle>
-			}
-		>
-			<div className="space-y-3">
-				<TypographyP className="leading-none">
-					<T k="status.offline.description" />
-				</TypographyP>
-				<Alert>
-					<Check />
-					<AlertTitle>
-						<T k="status.offline.feature.core" />
-					</AlertTitle>
-				</Alert>
-				<Alert>
-					<ExclamationTriangleFill />
-					<AlertTitle>
-						<T k="status.offline.feature.requiresInternet" />
-					</AlertTitle>
-				</Alert>
-			</div>
-		</DialogContent>
-	</Dialog>
+    <Dialog>
+    	<DialogTrigger asChild>
+    		<Button
+    			title={t("status.offline.tooltip")}
+    			variant="secondary"
+    			className="absolute top-3 right-3 md:gap-2"
+    			style={
+    				isMobile
+    					? {
+    							top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
+    							right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
+    						}
+    					: undefined
+    			}
+    		>
+    			<CloudSlash />
+    			<span className="hidden md:inline">
+    				<T k="status.offline.tooltip" />
+    			</span>
+    		</Button>
+    	</DialogTrigger>
+    	<DialogContent
+    		titleSlot={
+    			<DialogTitle>
+    				<T k="status.offline.dialog.title" />
+    			</DialogTitle>
+    		}
+    	>
+    		<div className="space-y-3">
+    			<TypographyP className="leading-none">
+    				<T k="status.offline.description" />
+    			</TypographyP>
+    			<Alert>
+    				<Check />
+    				<AlertTitle>
+    					<T k="status.offline.feature.core" />
+    				</AlertTitle>
+    			</Alert>
+    			<Alert>
+    				<ExclamationTriangleFill />
+    				<AlertTitle>
+    					<T k="status.offline.feature.requiresInternet" />
+    				</AlertTitle>
+    			</Alert>
+    		</div>
+    	</DialogContent>
+    </Dialog>
     )
 
 }
@@ -11120,61 +11121,61 @@ let { applyUpdate } = useServiceWorkerUpdate()
 let [isApplyingUpdate, setIsApplyingUpdate] = useState(false)
 
     let handleApplyUpdate = async () => {
-	setIsApplyingUpdate(true)
-	await applyUpdate()
+    setIsApplyingUpdate(true)
+    await applyUpdate()
     }
 
     return (
-	<Dialog>
-		<DialogTrigger asChild>
-			<Button
-				title={t("status.update.tooltip")}
-				className="absolute top-3 right-3 md:gap-2"
-				style={
-					isMobile
-						? {
-								top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
-								right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
-							}
-						: undefined
-				}
-			>
-				<ArrowClockwise />
-				<span className="hidden md:inline">
-					<T k="status.update.tooltip" />
-				</span>
-			</Button>
-		</DialogTrigger>
-		<DialogContent
-			titleSlot={
-				<DialogTitle>
-					<T k="status.update.dialog.title" />
-				</DialogTitle>
-			}
-		>
-			<div className="space-y-4">
-				<TypographyMuted>
-					<T k="status.update.description" />
-				</TypographyMuted>
-				<div className="flex gap-2">
-					<Button
-						onClick={handleApplyUpdate}
-						disabled={isApplyingUpdate}
-						className="flex-1"
-					>
-						{isApplyingUpdate
-							? t("status.update.updating")
-							: t("status.update.updateNow")}
-					</Button>
-					<Button variant="outline" className="flex-1" asChild>
-						<DialogClose>
-							<T k="status.update.later" />
-						</DialogClose>
-					</Button>
-				</div>
-			</div>
-		</DialogContent>
-	</Dialog>
+    <Dialog>
+    	<DialogTrigger asChild>
+    		<Button
+    			title={t("status.update.tooltip")}
+    			className="absolute top-3 right-3 md:gap-2"
+    			style={
+    				isMobile
+    					? {
+    							top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
+    							right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
+    						}
+    					: undefined
+    			}
+    		>
+    			<ArrowClockwise />
+    			<span className="hidden md:inline">
+    				<T k="status.update.tooltip" />
+    			</span>
+    		</Button>
+    	</DialogTrigger>
+    	<DialogContent
+    		titleSlot={
+    			<DialogTitle>
+    				<T k="status.update.dialog.title" />
+    			</DialogTitle>
+    		}
+    	>
+    		<div className="space-y-4">
+    			<TypographyMuted>
+    				<T k="status.update.description" />
+    			</TypographyMuted>
+    			<div className="flex gap-2">
+    				<Button
+    					onClick={handleApplyUpdate}
+    					disabled={isApplyingUpdate}
+    					className="flex-1"
+    				>
+    					{isApplyingUpdate
+    						? t("status.update.updating")
+    						: t("status.update.updateNow")}
+    				</Button>
+    				<Button variant="outline" className="flex-1" asChild>
+    					<DialogClose>
+    						<T k="status.update.later" />
+    					</DialogClose>
+    				</Button>
+    			</div>
+    		</div>
+    	</DialogContent>
+    </Dialog>
     )
 
 }
@@ -11184,55 +11185,55 @@ let t = useIntl()
 let isMobile = useIsMobile()
 
     function handleSignIn() {
-	window.location.href = getSignInUrl(window.location.pathname)
+    window.location.href = getSignInUrl(window.location.pathname)
     }
 
     return (
-	<Dialog>
-		<DialogTrigger asChild>
-			<Button
-				title={t("status.notSignedIn.tooltip")}
-				variant="warning"
-				className="absolute top-3 right-3 md:gap-2"
-				style={
-					isMobile
-						? {
-								top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
-								right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
-							}
-						: undefined
-				}
-			>
-				<PersonX />
-				<span className="hidden md:inline">
-					<T k="status.notSignedIn.tooltip" />
-				</span>
-			</Button>
-		</DialogTrigger>
-		<DialogContent
-			titleSlot={
-				<DialogHeader>
-					<DialogTitle>
-						<T k="status.notSignedIn.dialog.title" />
-					</DialogTitle>
-				</DialogHeader>
-			}
-		>
-			<div className="space-y-3">
-				<TypographyP className="leading-none">
-					<T k="status.notSignedIn.browserOnly" />
-				</TypographyP>
-				<TypographyP className="leading-none">
-					<T k="status.notSignedIn.benefits" />
-				</TypographyP>
-				<DialogClose asChild>
-					<Button onClick={handleSignIn} className="h-12 w-full">
-						<T k="status.notSignedIn.signIn" />
-					</Button>
-				</DialogClose>
-			</div>
-		</DialogContent>
-	</Dialog>
+    <Dialog>
+    	<DialogTrigger asChild>
+    		<Button
+    			title={t("status.notSignedIn.tooltip")}
+    			variant="warning"
+    			className="absolute top-3 right-3 md:gap-2"
+    			style={
+    				isMobile
+    					? {
+    							top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
+    							right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
+    						}
+    					: undefined
+    			}
+    		>
+    			<PersonX />
+    			<span className="hidden md:inline">
+    				<T k="status.notSignedIn.tooltip" />
+    			</span>
+    		</Button>
+    	</DialogTrigger>
+    	<DialogContent
+    		titleSlot={
+    			<DialogHeader>
+    				<DialogTitle>
+    					<T k="status.notSignedIn.dialog.title" />
+    				</DialogTitle>
+    			</DialogHeader>
+    		}
+    	>
+    		<div className="space-y-3">
+    			<TypographyP className="leading-none">
+    				<T k="status.notSignedIn.browserOnly" />
+    			</TypographyP>
+    			<TypographyP className="leading-none">
+    				<T k="status.notSignedIn.benefits" />
+    			</TypographyP>
+    			<DialogClose asChild>
+    				<Button onClick={handleSignIn} className="h-12 w-full">
+    					<T k="status.notSignedIn.signIn" />
+    				</Button>
+    			</DialogClose>
+    		</div>
+    	</DialogContent>
+    </Dialog>
     )
 
 }
@@ -11465,29 +11466,29 @@ let isAuthenticated = useIsAuthenticated()
 
     if (isAuthenticated) return null
     return (
-	<Card className="mx-auto max-w-sm">
-		<CardHeader>
-			<div className="flex items-center gap-3">
-				<Cloud className="text-primary size-5" />
-				<h3 className="font-medium">
-					<T k="auth.signIn.title" />
-				</h3>
-			</div>
-		</CardHeader>
-		<CardContent className="space-y-4">
-			<TypographyMuted>
-				<T k="auth.signIn.description" />
-			</TypographyMuted>
-		</CardContent>
-		<CardFooter className="flex-col gap-2">
-			<Link to="/settings">
-				<Button variant="outline" className="w-full">
-					<Gear className="mr-2 size-4" />
-					<T k="nav.settings" />
-				</Button>
-			</Link>
-		</CardFooter>
-	</Card>
+    <Card className="mx-auto max-w-sm">
+    	<CardHeader>
+    		<div className="flex items-center gap-3">
+    			<Cloud className="text-primary size-5" />
+    			<h3 className="font-medium">
+    				<T k="auth.signIn.title" />
+    			</h3>
+    		</div>
+    	</CardHeader>
+    	<CardContent className="space-y-4">
+    		<TypographyMuted>
+    			<T k="auth.signIn.description" />
+    		</TypographyMuted>
+    	</CardContent>
+    	<CardFooter className="flex-col gap-2">
+    		<Link to="/settings">
+    			<Button variant="outline" className="w-full">
+    				<Gear className="mr-2 size-4" />
+    				<T k="nav.settings" />
+    			</Button>
+    		</Link>
+    	</CardFooter>
+    </Card>
     )
 
 }
@@ -12327,124 +12328,124 @@ let [selectedPersonId, setSelectedPersonId] = useState(initialPersonId ?? "")
 let [dialogOpen, setDialogOpen] = useState(false)
 
     let people = (me?.$isLoaded ? me.root.people : []).filter(
-	(person): person is co.loaded<typeof Person> => person != null && !isDeleted(person),
+    (person): person is co.loaded<typeof Person> => person != null && !isDeleted(person),
     )
 
     let peopleOptions = people.map((person) => ({
-	value: person.$jazz.id,
-	label: person.name,
+    value: person.$jazz.id,
+    label: person.name,
     }))
 
     function handlePersonSelected(personId: string) {
-	setSelectedPersonId(personId)
+    setSelectedPersonId(personId)
     }
 
     async function handleSave(values: { content: string; pinned: boolean }) {
-	if (!me?.$isLoaded || !selectedPersonId) return
+    if (!me?.$isLoaded || !selectedPersonId) return
 
-	let result = await tryCatch(
-		createNote(selectedPersonId, {
-			title: "",
-			content: values.content,
-			pinned: values.pinned,
-		}),
-	)
-	if (!result.ok) {
-		toast.error(
-			typeof result.error === "string" ? result.error : result.error.message,
-		)
-		return
-	}
+    let result = await tryCatch(
+    	createNote(selectedPersonId, {
+    		title: "",
+    		content: values.content,
+    		pinned: values.pinned,
+    	}),
+    )
+    if (!result.ok) {
+    	toast.error(
+    		typeof result.error === "string" ? result.error : result.error.message,
+    	)
+    	return
+    }
 
-	onSuccess?.(result.data.noteID)
-	toast.success(t("notes.created.success"))
-	setDialogOpen(false)
+    onSuccess?.(result.data.noteID)
+    toast.success(t("notes.created.success"))
+    setDialogOpen(false)
     }
 
     return (
-	<Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-		<DialogTrigger asChild>{children}</DialogTrigger>
-		<DialogContent
-			titleSlot={
-				<div className="relative overflow-hidden">
-					<div
-						className={`transition-all duration-300 ease-out ${
-							!selectedPersonId
-								? "translate-x-0 opacity-100"
-								: "absolute inset-0 -translate-x-full opacity-0"
-						}`}
-					>
-						<DialogHeader>
-							<DialogTitle>
-								<T k="reminder.select.title" />
-							</DialogTitle>
-							<DialogDescription>
-								<T k="reminder.select.description" />
-							</DialogDescription>
-						</DialogHeader>
-					</div>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+    	<DialogTrigger asChild>{children}</DialogTrigger>
+    	<DialogContent
+    		titleSlot={
+    			<div className="relative overflow-hidden">
+    				<div
+    					className={`transition-all duration-300 ease-out ${
+    						!selectedPersonId
+    							? "translate-x-0 opacity-100"
+    							: "absolute inset-0 -translate-x-full opacity-0"
+    					}`}
+    				>
+    					<DialogHeader>
+    						<DialogTitle>
+    							<T k="reminder.select.title" />
+    						</DialogTitle>
+    						<DialogDescription>
+    							<T k="reminder.select.description" />
+    						</DialogDescription>
+    					</DialogHeader>
+    				</div>
 
-					<div
-						className={`transition-all duration-300 ease-out ${
-							selectedPersonId
-								? "translate-x-0 opacity-100"
-								: "absolute inset-0 translate-x-full opacity-0"
-						}`}
-					>
-						<DialogHeader>
-							<DialogTitle>
-								<T k="note.add.title" />
-							</DialogTitle>
-							<DialogDescription>
-								<T k="note.add.description" />
-							</DialogDescription>
-						</DialogHeader>
-					</div>
-				</div>
-			}
-		>
-			<div className="relative overflow-hidden">
-				<div
-					className={`transition-all duration-300 ease-out ${
-						!selectedPersonId
-							? "translate-x-0 opacity-100"
-							: "absolute inset-0 -translate-x-full opacity-0"
-					}`}
-				>
-					<div className="space-y-4">
-						<Combobox
-							items={peopleOptions}
-							value={selectedPersonId}
-							onValueChange={handlePersonSelected}
-							placeholder={t("reminder.select.placeholder")}
-							emptyText={t("reminder.select.empty")}
-							searchPlaceholder={t("reminder.select.search")}
-						/>
-						<div className="flex justify-end gap-2">
-							{/* No cancel button needed on first step */}
-						</div>
-					</div>
-				</div>
+    				<div
+    					className={`transition-all duration-300 ease-out ${
+    						selectedPersonId
+    							? "translate-x-0 opacity-100"
+    							: "absolute inset-0 translate-x-full opacity-0"
+    					}`}
+    				>
+    					<DialogHeader>
+    						<DialogTitle>
+    							<T k="note.add.title" />
+    						</DialogTitle>
+    						<DialogDescription>
+    							<T k="note.add.description" />
+    						</DialogDescription>
+    					</DialogHeader>
+    				</div>
+    			</div>
+    		}
+    	>
+    		<div className="relative overflow-hidden">
+    			<div
+    				className={`transition-all duration-300 ease-out ${
+    					!selectedPersonId
+    						? "translate-x-0 opacity-100"
+    						: "absolute inset-0 -translate-x-full opacity-0"
+    				}`}
+    			>
+    				<div className="space-y-4">
+    					<Combobox
+    						items={peopleOptions}
+    						value={selectedPersonId}
+    						onValueChange={handlePersonSelected}
+    						placeholder={t("reminder.select.placeholder")}
+    						emptyText={t("reminder.select.empty")}
+    						searchPlaceholder={t("reminder.select.search")}
+    					/>
+    					<div className="flex justify-end gap-2">
+    						{/* No cancel button needed on first step */}
+    					</div>
+    				</div>
+    			</div>
 
-				<div
-					className={`transition-all duration-300 ease-out ${
-						selectedPersonId
-							? "translate-x-0 opacity-100"
-							: "absolute inset-0 translate-x-full opacity-0"
-					}`}
-				>
-					<NoteForm
-						defaultValues={{ content: "", pinned: false }}
-						onSubmit={handleSave}
-						onCancel={() => {
-							setSelectedPersonId(initialPersonId ?? "")
-							setDialogOpen(false)
-						}}
-					/>
-				</div>
-			</div>
-		</DialogContent>
-	</Dialog>
+    			<div
+    				className={`transition-all duration-300 ease-out ${
+    					selectedPersonId
+    						? "translate-x-0 opacity-100"
+    						: "absolute inset-0 translate-x-full opacity-0"
+    				}`}
+    			>
+    				<NoteForm
+    					defaultValues={{ content: "", pinned: false }}
+    					onSubmit={handleSave}
+    					onCancel={() => {
+    						setSelectedPersonId(initialPersonId ?? "")
+    						setDialogOpen(false)
+    					}}
+    				/>
+    			</div>
+    		</div>
+    	</DialogContent>
+    </Dialog>
     )
 
 }
@@ -12584,144 +12585,144 @@ let [selectedPersonId, setSelectedPersonId] = useState(initialPersonId ?? "")
 let [dialogOpen, setDialogOpen] = useState(false)
 
     let people = (me?.$isLoaded ? me.root.people : []).filter(
-	(person): person is co.loaded<typeof Person> => person != null && !isDeleted(person),
+    (person): person is co.loaded<typeof Person> => person != null && !isDeleted(person),
     )
 
     let peopleOptions = people.map((person) => ({
-	value: person.$jazz.id,
-	label: person.name,
+    value: person.$jazz.id,
+    label: person.name,
     }))
 
     let selectedPersonLabel =
-	peopleOptions.find((personOption) => personOption.value === selectedPersonId)
-		?.label ?? ""
+    peopleOptions.find((personOption) => personOption.value === selectedPersonId)
+    	?.label ?? ""
 
     function handlePersonSelected(personId: string) {
-	setSelectedPersonId(personId)
+    setSelectedPersonId(personId)
     }
 
     async function handleSave(values: {
-	text: string
-	dueAtDate: string
-	repeat?: { interval: number; unit: "day" | "week" | "month" | "year" }
+    text: string
+    dueAtDate: string
+    repeat?: { interval: number; unit: "day" | "week" | "month" | "year" }
     }) {
-	if (!me?.$isLoaded || !selectedPersonId) return
+    if (!me?.$isLoaded || !selectedPersonId) return
 
-	let result = await tryCatch(
-		createReminder(
-			{
-				text: values.text,
-				dueAtDate: values.dueAtDate,
-				repeat: values.repeat,
-			},
-			{
-				personId: selectedPersonId,
-				userId: me.$jazz.id,
-			},
-		),
-	)
-	if (!result.ok) {
-		toast.error(
-			typeof result.error === "string" ? result.error : result.error.message,
-		)
-		return
-	}
+    let result = await tryCatch(
+    	createReminder(
+    		{
+    			text: values.text,
+    			dueAtDate: values.dueAtDate,
+    			repeat: values.repeat,
+    		},
+    		{
+    			personId: selectedPersonId,
+    			userId: me.$jazz.id,
+    		},
+    	),
+    )
+    if (!result.ok) {
+    	toast.error(
+    		typeof result.error === "string" ? result.error : result.error.message,
+    	)
+    	return
+    }
 
-	onSuccess?.(result.data.reminderID)
-	toast.success(t("reminders.created.success"))
-	setDialogOpen(false)
+    onSuccess?.(result.data.reminderID)
+    toast.success(t("reminders.created.success"))
+    setDialogOpen(false)
     }
 
     return (
-	<Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-		<DialogTrigger asChild>{children}</DialogTrigger>
-		<DialogContent
-			titleSlot={
-				<div className="relative overflow-hidden">
-					<div
-						className={`transition-all duration-300 ease-out ${
-							!selectedPersonId
-								? "translate-x-0 opacity-100"
-								: "absolute inset-0 -translate-x-full opacity-0"
-						}`}
-					>
-						<DialogHeader>
-							<DialogTitle>
-								<T k="reminder.select.title" />
-							</DialogTitle>
-							<DialogDescription>
-								<T k="reminder.select.description" />
-							</DialogDescription>
-						</DialogHeader>
-					</div>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+    	<DialogTrigger asChild>{children}</DialogTrigger>
+    	<DialogContent
+    		titleSlot={
+    			<div className="relative overflow-hidden">
+    				<div
+    					className={`transition-all duration-300 ease-out ${
+    						!selectedPersonId
+    							? "translate-x-0 opacity-100"
+    							: "absolute inset-0 -translate-x-full opacity-0"
+    					}`}
+    				>
+    					<DialogHeader>
+    						<DialogTitle>
+    							<T k="reminder.select.title" />
+    						</DialogTitle>
+    						<DialogDescription>
+    							<T k="reminder.select.description" />
+    						</DialogDescription>
+    					</DialogHeader>
+    				</div>
 
-					<div
-						className={`transition-all duration-300 ease-out ${
-							selectedPersonId
-								? "translate-x-0 opacity-100"
-								: "absolute inset-0 translate-x-full opacity-0"
-						}`}
-					>
-						<DialogHeader>
-							<DialogTitle>
-								<T k="reminder.add.title" />
-							</DialogTitle>
-							<DialogDescription>
-								<T
-									k="reminder.add.description"
-									params={{ person: selectedPersonLabel }}
-								/>
-							</DialogDescription>
-						</DialogHeader>
-					</div>
-				</div>
-			}
-		>
-			<div className="relative overflow-hidden">
-				<div
-					className={`transition-all duration-300 ease-out ${
-						!selectedPersonId
-							? "translate-x-0 opacity-100"
-							: "absolute inset-0 -translate-x-full opacity-0"
-					}`}
-				>
-					<div className="space-y-4">
-						<Combobox
-							items={peopleOptions}
-							value={selectedPersonId}
-							onValueChange={handlePersonSelected}
-							placeholder={t("reminder.select.placeholder")}
-							emptyText={t("reminder.select.empty")}
-							searchPlaceholder={t("reminder.select.search")}
-						/>
-						<div className="flex justify-end gap-2">
-							{/* No cancel button needed on first step */}
-						</div>
-					</div>
-				</div>
+    				<div
+    					className={`transition-all duration-300 ease-out ${
+    						selectedPersonId
+    							? "translate-x-0 opacity-100"
+    							: "absolute inset-0 translate-x-full opacity-0"
+    					}`}
+    				>
+    					<DialogHeader>
+    						<DialogTitle>
+    							<T k="reminder.add.title" />
+    						</DialogTitle>
+    						<DialogDescription>
+    							<T
+    								k="reminder.add.description"
+    								params={{ person: selectedPersonLabel }}
+    							/>
+    						</DialogDescription>
+    					</DialogHeader>
+    				</div>
+    			</div>
+    		}
+    	>
+    		<div className="relative overflow-hidden">
+    			<div
+    				className={`transition-all duration-300 ease-out ${
+    					!selectedPersonId
+    						? "translate-x-0 opacity-100"
+    						: "absolute inset-0 -translate-x-full opacity-0"
+    				}`}
+    			>
+    				<div className="space-y-4">
+    					<Combobox
+    						items={peopleOptions}
+    						value={selectedPersonId}
+    						onValueChange={handlePersonSelected}
+    						placeholder={t("reminder.select.placeholder")}
+    						emptyText={t("reminder.select.empty")}
+    						searchPlaceholder={t("reminder.select.search")}
+    					/>
+    					<div className="flex justify-end gap-2">
+    						{/* No cancel button needed on first step */}
+    					</div>
+    				</div>
+    			</div>
 
-				<div
-					className={`transition-all duration-300 ease-out ${
-						selectedPersonId
-							? "translate-x-0 opacity-100"
-							: "absolute inset-0 translate-x-full opacity-0"
-					}`}
-				>
-					<ReminderForm
-						defaultValues={{
-							text: "",
-							dueAtDate: new Date().toISOString().substring(0, 10),
-						}}
-						onSubmit={handleSave}
-						onCancel={() => {
-							setSelectedPersonId(initialPersonId ?? "")
-							setDialogOpen(false)
-						}}
-					/>
-				</div>
-			</div>
-		</DialogContent>
-	</Dialog>
+    			<div
+    				className={`transition-all duration-300 ease-out ${
+    					selectedPersonId
+    						? "translate-x-0 opacity-100"
+    						: "absolute inset-0 translate-x-full opacity-0"
+    				}`}
+    			>
+    				<ReminderForm
+    					defaultValues={{
+    						text: "",
+    						dueAtDate: new Date().toISOString().substring(0, 10),
+    					}}
+    					onSubmit={handleSave}
+    					onCancel={() => {
+    						setSelectedPersonId(initialPersonId ?? "")
+    						setDialogOpen(false)
+    					}}
+    				/>
+    			</div>
+    		</div>
+    	</DialogContent>
+    </Dialog>
     )
 
 }
@@ -12873,49 +12874,49 @@ searchQuery: string,
 if (!person.notes.$isLoaded) return { active: [], deleted: [] }
 
     let filteredNotes = searchQuery
-	? person.notes.filter(note => {
-			if (!note.$isLoaded || isPermanentlyDeleted(note)) return false
-			let searchLower = searchQuery.toLowerCase()
-			return note.content.toLowerCase().includes(searchLower)
-		})
-	: person.notes.filter(note => note?.$isLoaded && !isPermanentlyDeleted(note))
+    ? person.notes.filter(note => {
+    		if (!note.$isLoaded || isPermanentlyDeleted(note)) return false
+    		let searchLower = searchQuery.toLowerCase()
+    		return note.content.toLowerCase().includes(searchLower)
+    	})
+    : person.notes.filter(note => note?.$isLoaded && !isPermanentlyDeleted(note))
 
     let active: Array<{
-	type: "note"
-	item: co.loaded<typeof Note>
-	timestamp: Date
-	priority: "high" | "normal"
+    type: "note"
+    item: co.loaded<typeof Note>
+    timestamp: Date
+    priority: "high" | "normal"
     }> = []
 
     let deleted: Array<{
-	type: "note"
-	item: co.loaded<typeof Note>
-	timestamp: Date
-	priority: "high" | "normal"
+    type: "note"
+    item: co.loaded<typeof Note>
+    timestamp: Date
+    priority: "high" | "normal"
     }> = []
 
     filteredNotes.forEach(note => {
-	if (!note.$isLoaded) return
+    if (!note.$isLoaded) return
 
-	let item = {
-		type: "note" as const,
-		item: note,
-		timestamp: note.createdAt || new Date(note.$jazz.createdAt),
-		priority: note.pinned ? ("high" as const) : ("normal" as const),
-	}
+    let item = {
+    	type: "note" as const,
+    	item: note,
+    	timestamp: note.createdAt || new Date(note.$jazz.createdAt),
+    	priority: note.pinned ? ("high" as const) : ("normal" as const),
+    }
 
-	if (isDeleted(note) && !isPermanentlyDeleted(note)) {
-		deleted.push(item)
-	} else if (!isDeleted(note)) {
-		active.push(item)
-	}
+    if (isDeleted(note) && !isPermanentlyDeleted(note)) {
+    	deleted.push(item)
+    } else if (!isDeleted(note)) {
+    	active.push(item)
+    }
     })
 
     sortByPriorityAndDate(active)
     deleted.sort((a, b) => {
-	let aTime = a.item.deletedAt?.getTime() ?? a.timestamp.getTime()
-	let bTime = b.item.deletedAt?.getTime() ?? b.timestamp.getTime()
-	return bTime - aTime
+    let aTime = a.item.deletedAt?.getTime() ?? a.timestamp.getTime()
+    let bTime = b.item.deletedAt?.getTime() ?? b.timestamp.getTime()
+    return bTime - aTime
     })
 
     return { active, deleted }
@@ -13554,42 +13555,42 @@ resolve: { root: { people: { $each: true } } },
 });
 
     let people = (me?.root?.people ?? []).filter(
-	person => person && !isDeleted(person),
+    person => person && !isDeleted(person),
     )
 
     let targetPerson = personId
-	? people.find(p => p.$jazz.id === personId)
-	: people.at(0)
+    ? people.find(p => p.$jazz.id === personId)
+    : people.at(0)
 
     return (
-	<div className="max-w-md space-y-3 text-left">
-		<Journal className="text-muted-foreground size-16" />
-		<TypographyH2>
-			<T k="addNote.title" />
-		</TypographyH2>
-		<TypographyLead>
-			<T k="addNote.description" />
-		</TypographyLead>
-		{targetPerson !== undefined ? (
-			<div className="mt-8 flex justify-end">
-				<NewNote onSuccess={onSuccess} personId={targetPerson.$jazz.id}>
-					<Button>
-						<Journal />
-						<T k="addNote.button" params={{ name: targetPerson.name }} />
-					</Button>
-				</NewNote>
-			</div>
-		) : (
-			<div className="mt-8 flex justify-end">
-				<NewPerson>
-					<Button>
-						<PersonPlusFill />
-						<T k="addPerson.button" />
-					</Button>
-				</NewPerson>
-			</div>
-		)}
-	</div>
+    <div className="max-w-md space-y-3 text-left">
+    	<Journal className="text-muted-foreground size-16" />
+    	<TypographyH2>
+    		<T k="addNote.title" />
+    	</TypographyH2>
+    	<TypographyLead>
+    		<T k="addNote.description" />
+    	</TypographyLead>
+    	{targetPerson !== undefined ? (
+    		<div className="mt-8 flex justify-end">
+    			<NewNote onSuccess={onSuccess} personId={targetPerson.$jazz.id}>
+    				<Button>
+    					<Journal />
+    					<T k="addNote.button" params={{ name: targetPerson.name }} />
+    				</Button>
+    			</NewNote>
+    		</div>
+    	) : (
+    		<div className="mt-8 flex justify-end">
+    			<NewPerson>
+    				<Button>
+    					<PersonPlusFill />
+    					<T k="addPerson.button" />
+    				</Button>
+    			</NewPerson>
+    		</div>
+    	)}
+    </div>
     )
 
 }
@@ -14865,231 +14866,231 @@ let [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 let [actionsDialogOpen, setActionsDialogOpen] = useState(false)
 
     async function handleFormSave(values: {
-	name: string
-	summary?: string
-	avatar?: File | null
+    name: string
+    summary?: string
+    avatar?: File | null
     }) {
-	let result = await tryCatch(
-		updatePerson(person.$jazz.id, {
-			name: values.name,
-			summary: values.summary,
-			avatarFile: values.avatar,
-		}),
-	)
-	if (!result.ok) {
-		toast.error(
-			typeof result.error === "string" ? result.error : result.error.message,
-		)
-		return
-	}
+    let result = await tryCatch(
+    	updatePerson(person.$jazz.id, {
+    		name: values.name,
+    		summary: values.summary,
+    		avatarFile: values.avatar,
+    	}),
+    )
+    if (!result.ok) {
+    	toast.error(
+    		typeof result.error === "string" ? result.error : result.error.message,
+    	)
+    	return
+    }
 
-	setIsEditDialogOpen(false)
-	toast.success(t("toast.personUpdated"), {
-		action: {
-			label: t("common.undo"),
-			onClick: async () => {
-				let undoResult = await tryCatch(
-					updatePerson(person.$jazz.id, result.data.previous),
-				)
-				if (undoResult.ok) {
-					toast.success(t("toast.personUpdateUndone"))
-				} else {
-					toast.error(
-						typeof undoResult.error === "string"
-							? undoResult.error
-							: undoResult.error.message,
-					)
-				}
-			},
-		},
-	})
+    setIsEditDialogOpen(false)
+    toast.success(t("toast.personUpdated"), {
+    	action: {
+    		label: t("common.undo"),
+    		onClick: async () => {
+    			let undoResult = await tryCatch(
+    				updatePerson(person.$jazz.id, result.data.previous),
+    			)
+    			if (undoResult.ok) {
+    				toast.success(t("toast.personUpdateUndone"))
+    			} else {
+    				toast.error(
+    					typeof undoResult.error === "string"
+    						? undoResult.error
+    						: undoResult.error.message,
+    				)
+    			}
+    		},
+    	},
+    })
     }
 
     async function handleDeletePerson() {
-	let result = await tryCatch(
-		updatePerson(person.$jazz.id, { deletedAt: new Date() }),
-	)
-	if (!result.ok) {
-		toast.error(
-			typeof result.error === "string" ? result.error : result.error.message,
-		)
-		return
-	}
+    let result = await tryCatch(
+    	updatePerson(person.$jazz.id, { deletedAt: new Date() }),
+    )
+    if (!result.ok) {
+    	toast.error(
+    		typeof result.error === "string" ? result.error : result.error.message,
+    	)
+    	return
+    }
 
-	setIsDeleteDialogOpen(false)
-	navigate({ to: "/people" })
-	toast.success(t("toast.personDeletedScheduled"), {
-		duration: 10000,
-		action: {
-			label: t("common.undo"),
-			onClick: async () => {
-				let undoResult = await tryCatch(
-					updatePerson(person.$jazz.id, { deletedAt: undefined }),
-				)
-				if (undoResult.ok) {
-					toast.success(t("toast.personRestored"))
-				} else {
-					toast.error(
-						typeof undoResult.error === "string"
-							? undoResult.error
-							: undoResult.error.message,
-					)
-				}
-			},
-		},
-	})
+    setIsDeleteDialogOpen(false)
+    navigate({ to: "/people" })
+    toast.success(t("toast.personDeletedScheduled"), {
+    	duration: 10000,
+    	action: {
+    		label: t("common.undo"),
+    		onClick: async () => {
+    			let undoResult = await tryCatch(
+    				updatePerson(person.$jazz.id, { deletedAt: undefined }),
+    			)
+    			if (undoResult.ok) {
+    				toast.success(t("toast.personRestored"))
+    			} else {
+    				toast.error(
+    					typeof undoResult.error === "string"
+    						? undoResult.error
+    						: undoResult.error.message,
+    				)
+    			}
+    		},
+    	},
+    })
     }
 
     return (
-	<>
-		<div className="flex flex-col items-center gap-6 md:flex-row">
-			<Avatar
-				className="size-48 cursor-pointer"
-				onClick={() => {
-					if (isTextSelectionOngoing()) return
-					setActionsDialogOpen(true)
-				}}
-			>
-				{person.avatar ? (
-					<JazzImage
-						imageId={person.avatar.$jazz.id}
-						alt={person.name}
-						width={192}
-						data-slot="avatar-image"
-						className="aspect-square size-full object-cover shadow-inner"
-					/>
-				) : (
-					<AvatarFallback>{person.name.slice(0, 1)}</AvatarFallback>
-				)}
-			</Avatar>
-			<div className="w-full flex-1 md:w-auto">
-				<div className="flex items-center justify-between gap-3">
-					<h1 className="text-3xl font-bold select-text">{person.name}</h1>
-					<Button
-						variant="secondary"
-						size="sm"
-						onClick={() => setActionsDialogOpen(true)}
-					>
-						<T k="person.actions.title" />
-					</Button>
-				</div>
+    <>
+    	<div className="flex flex-col items-center gap-6 md:flex-row">
+    		<Avatar
+    			className="size-48 cursor-pointer"
+    			onClick={() => {
+    				if (isTextSelectionOngoing()) return
+    				setActionsDialogOpen(true)
+    			}}
+    		>
+    			{person.avatar ? (
+    				<JazzImage
+    					imageId={person.avatar.$jazz.id}
+    					alt={person.name}
+    					width={192}
+    					data-slot="avatar-image"
+    					className="aspect-square size-full object-cover shadow-inner"
+    				/>
+    			) : (
+    				<AvatarFallback>{person.name.slice(0, 1)}</AvatarFallback>
+    			)}
+    		</Avatar>
+    		<div className="w-full flex-1 md:w-auto">
+    			<div className="flex items-center justify-between gap-3">
+    				<h1 className="text-3xl font-bold select-text">{person.name}</h1>
+    				<Button
+    					variant="secondary"
+    					size="sm"
+    					onClick={() => setActionsDialogOpen(true)}
+    				>
+    					<T k="person.actions.title" />
+    				</Button>
+    			</div>
 
-				{person.summary && (
-					<p className="text-muted-foreground my-3 select-text">
-						{person.summary}
-					</p>
-				)}
+    			{person.summary && (
+    				<p className="text-muted-foreground my-3 select-text">
+    					{person.summary}
+    				</p>
+    			)}
 
-				<p className="text-muted-foreground space-y-1 text-sm select-text">
-					{t("person.added.suffix", {
-						ago: formatDistanceToNow(
-							person.createdAt || new Date(person.$jazz.createdAt),
-							{
-								addSuffix: true,
-								locale:
-									locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined,
-							},
-						),
-					})}
-					{(person.updatedAt ||
-						(person.$jazz.lastUpdatedAt &&
-							new Date(person.$jazz.lastUpdatedAt))) &&
-						(
-							person.updatedAt || new Date(person.$jazz.lastUpdatedAt)
-						).getTime() !==
-						(
-							person.createdAt || new Date(person.$jazz.createdAt)
-						).getTime() &&
-						t("person.updated.suffix", {
-							ago: formatDistanceToNow(
-								person.updatedAt || new Date(person.$jazz.lastUpdatedAt),
-								{
-									addSuffix: true,
-									locale:
-										locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined,
-								},
-							),
-						})}
-				</p>
-			</div>
-		</div>
-		<Dialog open={actionsDialogOpen} onOpenChange={setActionsDialogOpen}>
-			<DialogContent
-				titleSlot={
-					<DialogHeader>
-						<DialogTitle>
-							<T k="person.actions.title" />
-						</DialogTitle>
-						<DialogDescription>
-							<T k="person.actions.description" />
-						</DialogDescription>
-					</DialogHeader>
-				}
-			>
-				<div className="flex flex-col items-center gap-3">
-					<Button
-						variant="secondary"
-						className="h-12 w-full"
-						onClick={() => {
-							setActionsDialogOpen(false)
-							setIsEditDialogOpen(true)
-						}}
-					>
-						<PencilSquare />
-						<T k="person.edit.title" />
-					</Button>
-					<Button
-						variant="destructive"
-						className="h-12 w-full"
-						onClick={() => {
-							setActionsDialogOpen(false)
-							setIsDeleteDialogOpen(true)
-						}}
-					>
-						<Trash />
-						<T k="person.delete.title" />
-					</Button>
-				</div>
-			</DialogContent>
-		</Dialog>
-		<Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-			<DialogContent
-				titleSlot={
-					<DialogHeader>
-						<DialogTitle>
-							<T k="person.edit.title" />
-						</DialogTitle>
-					</DialogHeader>
-				}
-			>
-				<PersonForm person={person} onSave={handleFormSave} />
-			</DialogContent>
-		</Dialog>
-		<AlertDialog
-			open={isDeleteDialogOpen}
-			onOpenChange={setIsDeleteDialogOpen}
-		>
-			<AlertDialogContent>
-				<AlertDialogHeader>
-					<AlertDialogTitle>
-						<T k="person.delete.title" />
-					</AlertDialogTitle>
-					<AlertDialogDescription>
-						Are you sure you want to delete {person.name}? This will
-						permanently remove all their notes and reminders.
-					</AlertDialogDescription>
-				</AlertDialogHeader>
-				<AlertDialogFooter>
-					<AlertDialogCancel>
-						<T k="common.cancel" />
-					</AlertDialogCancel>
-					<AlertDialogAction onClick={handleDeletePerson}>
-						<T k="person.delete.title" />
-					</AlertDialogAction>
-				</AlertDialogFooter>
-			</AlertDialogContent>
-		</AlertDialog>
-	</>
+    			<p className="text-muted-foreground space-y-1 text-sm select-text">
+    				{t("person.added.suffix", {
+    					ago: formatDistanceToNow(
+    						person.createdAt || new Date(person.$jazz.createdAt),
+    						{
+    							addSuffix: true,
+    							locale:
+    								locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined,
+    						},
+    					),
+    				})}
+    				{(person.updatedAt ||
+    					(person.$jazz.lastUpdatedAt &&
+    						new Date(person.$jazz.lastUpdatedAt))) &&
+    					(
+    						person.updatedAt || new Date(person.$jazz.lastUpdatedAt)
+    					).getTime() !==
+    					(
+    						person.createdAt || new Date(person.$jazz.createdAt)
+    					).getTime() &&
+    					t("person.updated.suffix", {
+    						ago: formatDistanceToNow(
+    							person.updatedAt || new Date(person.$jazz.lastUpdatedAt),
+    							{
+    								addSuffix: true,
+    								locale:
+    									locale === "de" ? dfnsDe : locale === "ru" ? dfnsRu : undefined,
+    							},
+    						),
+    					})}
+    			</p>
+    		</div>
+    	</div>
+    	<Dialog open={actionsDialogOpen} onOpenChange={setActionsDialogOpen}>
+    		<DialogContent
+    			titleSlot={
+    				<DialogHeader>
+    					<DialogTitle>
+    						<T k="person.actions.title" />
+    					</DialogTitle>
+    					<DialogDescription>
+    						<T k="person.actions.description" />
+    					</DialogDescription>
+    				</DialogHeader>
+    			}
+    		>
+    			<div className="flex flex-col items-center gap-3">
+    				<Button
+    					variant="secondary"
+    					className="h-12 w-full"
+    					onClick={() => {
+    						setActionsDialogOpen(false)
+    						setIsEditDialogOpen(true)
+    					}}
+    				>
+    					<PencilSquare />
+    					<T k="person.edit.title" />
+    				</Button>
+    				<Button
+    					variant="destructive"
+    					className="h-12 w-full"
+    					onClick={() => {
+    						setActionsDialogOpen(false)
+    						setIsDeleteDialogOpen(true)
+    					}}
+    				>
+    					<Trash />
+    					<T k="person.delete.title" />
+    				</Button>
+    			</div>
+    		</DialogContent>
+    	</Dialog>
+    	<Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+    		<DialogContent
+    			titleSlot={
+    				<DialogHeader>
+    					<DialogTitle>
+    						<T k="person.edit.title" />
+    					</DialogTitle>
+    				</DialogHeader>
+    			}
+    		>
+    			<PersonForm person={person} onSave={handleFormSave} />
+    		</DialogContent>
+    	</Dialog>
+    	<AlertDialog
+    		open={isDeleteDialogOpen}
+    		onOpenChange={setIsDeleteDialogOpen}
+    	>
+    		<AlertDialogContent>
+    			<AlertDialogHeader>
+    				<AlertDialogTitle>
+    					<T k="person.delete.title" />
+    				</AlertDialogTitle>
+    				<AlertDialogDescription>
+    					Are you sure you want to delete {person.name}? This will
+    					permanently remove all their notes and reminders.
+    				</AlertDialogDescription>
+    			</AlertDialogHeader>
+    			<AlertDialogFooter>
+    				<AlertDialogCancel>
+    					<T k="common.cancel" />
+    				</AlertDialogCancel>
+    				<AlertDialogAction onClick={handleDeletePerson}>
+    					<T k="person.delete.title" />
+    				</AlertDialogAction>
+    			</AlertDialogFooter>
+    		</AlertDialogContent>
+    	</AlertDialog>
+    </>
     )
 
 }
@@ -15505,16 +15506,16 @@ let searchLower = searchQuery.toLowerCase().trim()
 let visiblePeople = allPeople.filter(person => !isPermanentlyDeleted(person))
 
     let filteredPeople = searchQuery
-	? visiblePeople.filter(
-			person =>
-				person.name.toLowerCase().includes(searchLower) ||
-				person.summary?.toLowerCase().includes(searchLower),
-		)
-	: visiblePeople
+    ? visiblePeople.filter(
+    		person =>
+    			person.name.toLowerCase().includes(searchLower) ||
+    			person.summary?.toLowerCase().includes(searchLower),
+    	)
+    : visiblePeople
 
     let active = filteredPeople.filter(person => !isDeleted(person))
     let deleted = filteredPeople.filter(
-	person => isDeleted(person) && !isPermanentlyDeleted(person),
+    person => isDeleted(person) && !isPermanentlyDeleted(person),
     )
 
     sortByUpdatedAt(active)
@@ -15869,6 +15870,7 @@ export { PersonTour }
 
 function PersonTour({ onSuccess }: { onSuccess?: (personId: string) => void }) {
 return (
+
 <div className="max-w-md space-y-3 text-left">
 <PeopleFill className="text-muted-foreground size-16" />
 <TypographyH2>
@@ -16153,67 +16155,67 @@ person: co.loaded<typeof Person>
 }> = []
 
     for (let person of people) {
-	if (isPermanentlyDeleted(person) || isDeleted(person)) continue
-	if (!person.reminders.$isLoaded) continue
+    if (isPermanentlyDeleted(person) || isDeleted(person)) continue
+    if (!person.reminders.$isLoaded) continue
 
-	for (let reminder of Array.from(person.reminders)) {
-		if (!reminder?.$isLoaded || isPermanentlyDeleted(reminder)) continue
-		allReminderPairs.push({ reminder, person })
-	}
+    for (let reminder of Array.from(person.reminders)) {
+    	if (!reminder?.$isLoaded || isPermanentlyDeleted(reminder)) continue
+    	allReminderPairs.push({ reminder, person })
+    }
     }
 
     let filteredPairs = searchQuery
-	? allReminderPairs.filter(({ reminder, person }) => {
-			let searchLower = searchQuery.toLowerCase()
-			return (
-				reminder.text.toLowerCase().includes(searchLower) ||
-				person.name.toLowerCase().includes(searchLower)
-			)
-		})
-	: allReminderPairs
+    ? allReminderPairs.filter(({ reminder, person }) => {
+    		let searchLower = searchQuery.toLowerCase()
+    		return (
+    			reminder.text.toLowerCase().includes(searchLower) ||
+    			person.name.toLowerCase().includes(searchLower)
+    		)
+    	})
+    : allReminderPairs
 
     let open: typeof allReminderPairs = []
     let done: typeof allReminderPairs = []
     let deleted: typeof allReminderPairs = []
 
     for (let { reminder, person } of filteredPairs) {
-	if (isDeleted(reminder) && !isPermanentlyDeleted(reminder)) {
-		deleted.push({ reminder, person })
-	} else if (reminder.done) {
-		done.push({ reminder, person })
-	} else {
-		open.push({ reminder, person })
-	}
+    if (isDeleted(reminder) && !isPermanentlyDeleted(reminder)) {
+    	deleted.push({ reminder, person })
+    } else if (reminder.done) {
+    	done.push({ reminder, person })
+    } else {
+    	open.push({ reminder, person })
+    }
     }
 
     open.sort(
-	(a, b) =>
-		new Date(a.reminder.dueAtDate).getTime() -
-		new Date(b.reminder.dueAtDate).getTime(),
+    (a, b) =>
+    	new Date(a.reminder.dueAtDate).getTime() -
+    	new Date(b.reminder.dueAtDate).getTime(),
     )
 
     done.sort((a, b) => {
-	let aTime = (a.reminder.updatedAt || a.reminder.createdAt).getTime()
-	let bTime = (b.reminder.updatedAt || b.reminder.createdAt).getTime()
-	return bTime - aTime
+    let aTime = (a.reminder.updatedAt || a.reminder.createdAt).getTime()
+    let bTime = (b.reminder.updatedAt || b.reminder.createdAt).getTime()
+    return bTime - aTime
     })
 
     deleted.sort((a, b) => {
-	let aTime =
-		a.reminder.deletedAt?.getTime() ??
-		(
-			a.reminder.updatedAt ||
-			a.reminder.createdAt ||
-			new Date(a.reminder.$jazz.lastUpdatedAt || a.reminder.$jazz.createdAt)
-		).getTime()
-	let bTime =
-		b.reminder.deletedAt?.getTime() ??
-		(
-			b.reminder.updatedAt ||
-			b.reminder.createdAt ||
-			new Date(b.reminder.$jazz.lastUpdatedAt || b.reminder.$jazz.createdAt)
-		).getTime()
-	return bTime - aTime
+    let aTime =
+    	a.reminder.deletedAt?.getTime() ??
+    	(
+    		a.reminder.updatedAt ||
+    		a.reminder.createdAt ||
+    		new Date(a.reminder.$jazz.lastUpdatedAt || a.reminder.$jazz.createdAt)
+    	).getTime()
+    let bTime =
+    	b.reminder.deletedAt?.getTime() ??
+    	(
+    		b.reminder.updatedAt ||
+    		b.reminder.createdAt ||
+    		new Date(b.reminder.$jazz.lastUpdatedAt || b.reminder.$jazz.createdAt)
+    	).getTime()
+    return bTime - aTime
     })
 
     return { open, done, deleted, total: allReminderPairs.length }
@@ -16227,23 +16229,23 @@ searchQuery: string,
 if (!person.reminders.$isLoaded) return { open: [], done: [], deleted: [] }
 
     let filteredReminders = searchQuery
-	? person.reminders.filter(reminder => {
-			if (!reminder.$isLoaded || isPermanentlyDeleted(reminder)) return false
-			let searchLower = searchQuery.toLowerCase()
-			return reminder.text.toLowerCase().includes(searchLower)
-		})
-	: person.reminders.filter(
-			reminder => reminder && !isPermanentlyDeleted(reminder),
-		)
+    ? person.reminders.filter(reminder => {
+    		if (!reminder.$isLoaded || isPermanentlyDeleted(reminder)) return false
+    		let searchLower = searchQuery.toLowerCase()
+    		return reminder.text.toLowerCase().includes(searchLower)
+    	})
+    : person.reminders.filter(
+    		reminder => reminder && !isPermanentlyDeleted(reminder),
+    	)
 
     let open = filteredReminders.filter(
-	r => r?.$isLoaded && !isDeleted(r) && !r.done,
+    r => r?.$isLoaded && !isDeleted(r) && !r.done,
     ) as Array<co.loaded<typeof Reminder>>
     let done = filteredReminders.filter(
-	r => r?.$isLoaded && !isDeleted(r) && r.done,
+    r => r?.$isLoaded && !isDeleted(r) && r.done,
     ) as Array<co.loaded<typeof Reminder>>
     let deleted = filteredReminders.filter(
-	r => r?.$isLoaded && isDeleted(r) && !isPermanentlyDeleted(r),
+    r => r?.$isLoaded && isDeleted(r) && !isPermanentlyDeleted(r),
     ) as Array<co.loaded<typeof Reminder>>
 
     sortByDueAt(open)
@@ -17310,42 +17312,42 @@ resolve: { root: { people: { $each: true } } },
 });
 
     let people = (me?.root?.people ?? []).filter(
-	person => person && !isDeleted(person),
+    person => person && !isDeleted(person),
     )
 
     let targetPerson = personId
-	? people.find(p => p.$jazz.id === personId)
-	: people.at(0)
+    ? people.find(p => p.$jazz.id === personId)
+    : people.at(0)
 
     return (
-	<div className="max-w-md space-y-3 text-left">
-		<BellFill className="text-muted-foreground size-16" />
-		<TypographyH2>
-			<T k="addReminder.title" />
-		</TypographyH2>
-		<TypographyLead>
-			<T k="addReminder.description" />
-		</TypographyLead>
-		{targetPerson !== undefined ? (
-			<div className="mt-8 flex justify-end">
-				<NewReminder onSuccess={onSuccess} personId={targetPerson.$jazz.id}>
-					<Button>
-						<BellFill />
-						<T k="addReminder.button" params={{ name: targetPerson.name }} />
-					</Button>
-				</NewReminder>
-			</div>
-		) : (
-			<div className="mt-8 flex justify-end">
-				<NewPerson>
-					<Button>
-						<PersonPlusFill />
-						<T k="addPerson.button" />
-					</Button>
-				</NewPerson>
-			</div>
-		)}
-	</div>
+    <div className="max-w-md space-y-3 text-left">
+    	<BellFill className="text-muted-foreground size-16" />
+    	<TypographyH2>
+    		<T k="addReminder.title" />
+    	</TypographyH2>
+    	<TypographyLead>
+    		<T k="addReminder.description" />
+    	</TypographyLead>
+    	{targetPerson !== undefined ? (
+    		<div className="mt-8 flex justify-end">
+    			<NewReminder onSuccess={onSuccess} personId={targetPerson.$jazz.id}>
+    				<Button>
+    					<BellFill />
+    					<T k="addReminder.button" params={{ name: targetPerson.name }} />
+    				</Button>
+    			</NewReminder>
+    		</div>
+    	) : (
+    		<div className="mt-8 flex justify-end">
+    			<NewPerson>
+    				<Button>
+    					<PersonPlusFill />
+    					<T k="addPerson.button" />
+    				</Button>
+    			</NewPerson>
+    		</div>
+    	)}
+    </div>
     )
 
 }
@@ -17398,27 +17400,27 @@ export function useInputFocusState() {
 let [isInputFocused, setIsInputFocused] = useState(false)
 
     useEffect(() => {
-	function handleFocusIn(e: FocusEvent) {
-		let target = e.target as HTMLElement
-		if (target.matches("input, textarea, select")) {
-			setIsInputFocused(true)
-		}
-	}
+    function handleFocusIn(e: FocusEvent) {
+    	let target = e.target as HTMLElement
+    	if (target.matches("input, textarea, select")) {
+    		setIsInputFocused(true)
+    	}
+    }
 
-	function handleFocusOut(e: FocusEvent) {
-		let target = e.target as HTMLElement
-		if (target.matches("input, textarea, select")) {
-			setIsInputFocused(false)
-		}
-	}
+    function handleFocusOut(e: FocusEvent) {
+    	let target = e.target as HTMLElement
+    	if (target.matches("input, textarea, select")) {
+    		setIsInputFocused(false)
+    	}
+    }
 
-	document.addEventListener("focusin", handleFocusIn)
-	document.addEventListener("focusout", handleFocusOut)
+    document.addEventListener("focusin", handleFocusIn)
+    document.addEventListener("focusout", handleFocusOut)
 
-	return () => {
-		document.removeEventListener("focusin", handleFocusIn)
-		document.removeEventListener("focusout", handleFocusOut)
-	}
+    return () => {
+    	document.removeEventListener("focusin", handleFocusIn)
+    	document.removeEventListener("focusout", handleFocusOut)
+    }
     }, [])
 
     return isInputFocused
@@ -17463,40 +17465,40 @@ let [isOnline, setIsOnline] = useState(navigator.onLine)
 let [hasCheckedConnectivity, setHasCheckedConnectivity] = useState(false)
 
     useEffect(() => {
-	if (navigator.onLine && !hasCheckedConnectivity) {
-		checkConnectivity()
-	}
+    if (navigator.onLine && !hasCheckedConnectivity) {
+    	checkConnectivity()
+    }
 
-	window.addEventListener("online", handleOnline)
-	window.addEventListener("offline", handleOffline)
+    window.addEventListener("online", handleOnline)
+    window.addEventListener("offline", handleOffline)
 
-	return () => {
-		window.removeEventListener("online", handleOnline)
-		window.removeEventListener("offline", handleOffline)
-	}
+    return () => {
+    	window.removeEventListener("online", handleOnline)
+    	window.removeEventListener("offline", handleOffline)
+    }
     }, [hasCheckedConnectivity])
 
     async function checkConnectivity() {
-	try {
-		await fetch("/online-check", {
-			method: "GET",
-			cache: "no-cache",
-			signal: AbortSignal.timeout(2000),
-		})
-		setIsOnline(true)
-	} catch {
-		setIsOnline(false)
-	} finally {
-		setHasCheckedConnectivity(true)
-	}
+    try {
+    	await fetch("/online-check", {
+    		method: "GET",
+    		cache: "no-cache",
+    		signal: AbortSignal.timeout(2000),
+    	})
+    	setIsOnline(true)
+    } catch {
+    	setIsOnline(false)
+    } finally {
+    	setHasCheckedConnectivity(true)
+    }
     }
 
     function handleOnline() {
-	setIsOnline(true)
+    setIsOnline(true)
     }
 
     function handleOffline() {
-	setIsOnline(false)
+    setIsOnline(false)
     }
 
     return isOnline
@@ -17648,122 +17650,122 @@ let [updateAvailable, setUpdateAvailable] = useState(false)
 let [waitingWorker, setWaitingWorker] = useState<ServiceWorker | null>(null)
 
     useEffect(() => {
-	if (!("serviceWorker" in navigator)) {
-		return
-	}
+    if (!("serviceWorker" in navigator)) {
+    	return
+    }
 
-	let stopped = false
+    let stopped = false
 
-	async function trackRegistration() {
-		try {
-			let found = await navigator.serviceWorker.getRegistration("/app/")
-			if (!found || stopped) return
+    async function trackRegistration() {
+    	try {
+    		let found = await navigator.serviceWorker.getRegistration("/app/")
+    		if (!found || stopped) return
 
-			if (found.waiting && navigator.serviceWorker.controller) {
-				setUpdateAvailable(true)
-				setWaitingWorker(found.waiting)
-			}
+    		if (found.waiting && navigator.serviceWorker.controller) {
+    			setUpdateAvailable(true)
+    			setWaitingWorker(found.waiting)
+    		}
 
-			let handleUpdateFound = () => {
-				let installing = found.installing
-				if (!installing) return
-				installing.addEventListener("statechange", () => {
-					if (
-						installing.state === "installed" &&
-						navigator.serviceWorker.controller
-					) {
-						let waiting = found.waiting ?? installing
-						if (isServiceWorker(waiting)) {
-							setUpdateAvailable(true)
-							setWaitingWorker(waiting)
-						}
-					}
-				})
-			}
+    		let handleUpdateFound = () => {
+    			let installing = found.installing
+    			if (!installing) return
+    			installing.addEventListener("statechange", () => {
+    				if (
+    					installing.state === "installed" &&
+    					navigator.serviceWorker.controller
+    				) {
+    					let waiting = found.waiting ?? installing
+    					if (isServiceWorker(waiting)) {
+    						setUpdateAvailable(true)
+    						setWaitingWorker(waiting)
+    					}
+    				}
+    			})
+    		}
 
-			found.addEventListener("updatefound", handleUpdateFound)
+    		found.addEventListener("updatefound", handleUpdateFound)
 
-			return () => {
-				found.removeEventListener("updatefound", handleUpdateFound)
-			}
-		} catch (error) {
-			console.error("[SW Update] Error checking for updates:", error)
-		}
-	}
+    		return () => {
+    			found.removeEventListener("updatefound", handleUpdateFound)
+    		}
+    	} catch (error) {
+    		console.error("[SW Update] Error checking for updates:", error)
+    	}
+    }
 
-	let removeUpdateFoundListener: (() => void) | undefined
+    let removeUpdateFoundListener: (() => void) | undefined
 
-	function handleUpdateEvent(event: Event) {
-		let detail = getUpdateAvailableDetail(event)
-		if (!detail) return
-		setUpdateAvailable(true)
-		if (detail.waitingWorker) {
-			setWaitingWorker(detail.waitingWorker)
-		}
-	}
+    function handleUpdateEvent(event: Event) {
+    	let detail = getUpdateAvailableDetail(event)
+    	if (!detail) return
+    	setUpdateAvailable(true)
+    	if (detail.waitingWorker) {
+    		setWaitingWorker(detail.waitingWorker)
+    	}
+    }
 
-	window.addEventListener("sw-update-available", handleUpdateEvent)
-	trackRegistration().then(dispose => {
-		removeUpdateFoundListener = dispose
-		if (stopped && dispose) {
-			dispose()
-			removeUpdateFoundListener = undefined
-		}
-	})
+    window.addEventListener("sw-update-available", handleUpdateEvent)
+    trackRegistration().then(dispose => {
+    	removeUpdateFoundListener = dispose
+    	if (stopped && dispose) {
+    		dispose()
+    		removeUpdateFoundListener = undefined
+    	}
+    })
 
-	return () => {
-		stopped = true
-		if (removeUpdateFoundListener) {
-			removeUpdateFoundListener()
-			removeUpdateFoundListener = undefined
-		}
-		window.removeEventListener("sw-update-available", handleUpdateEvent)
-	}
+    return () => {
+    	stopped = true
+    	if (removeUpdateFoundListener) {
+    		removeUpdateFoundListener()
+    		removeUpdateFoundListener = undefined
+    	}
+    	window.removeEventListener("sw-update-available", handleUpdateEvent)
+    }
     }, [])
 
     let applyUpdate = async (): Promise<boolean> => {
-	try {
-		if (!waitingWorker) {
-			return false
-		}
+    try {
+    	if (!waitingWorker) {
+    		return false
+    	}
 
-		waitingWorker.postMessage({ type: "SKIP_WAITING" })
-		await new Promise<void>(resolve => {
-			let finished = false
+    	waitingWorker.postMessage({ type: "SKIP_WAITING" })
+    	await new Promise<void>(resolve => {
+    		let finished = false
 
-			function cleanup() {
-				if (finished) return
-				finished = true
-				navigator.serviceWorker?.removeEventListener(
-					"controllerchange",
-					handleControllerChange,
-				)
-				resolve()
-			}
+    		function cleanup() {
+    			if (finished) return
+    			finished = true
+    			navigator.serviceWorker?.removeEventListener(
+    				"controllerchange",
+    				handleControllerChange,
+    			)
+    			resolve()
+    		}
 
-			function handleControllerChange() {
-				cleanup()
-			}
+    		function handleControllerChange() {
+    			cleanup()
+    		}
 
-			navigator.serviceWorker?.addEventListener(
-				"controllerchange",
-				handleControllerChange,
-			)
+    		navigator.serviceWorker?.addEventListener(
+    			"controllerchange",
+    			handleControllerChange,
+    		)
 
-			setTimeout(cleanup, 1000)
-		})
+    		setTimeout(cleanup, 1000)
+    	})
 
-		window.location.reload()
-		return true
-	} catch (error) {
-		console.error("[SW Update] Error applying update:", error)
-		return false
-	}
+    	window.location.reload()
+    	return true
+    } catch (error) {
+    	console.error("[SW Update] Error applying update:", error)
+    	return false
+    }
     }
 
     return {
-	updateAvailable,
-	applyUpdate,
+    updateAvailable,
+    applyUpdate,
     }
 
 }
@@ -17984,45 +17986,45 @@ console.log("Service workers not supported")
 return null
 }
 
-		let result = await tryCatch(
-			navigator.serviceWorker.register(SERVICE_WORKER_URL, {
-				scope: SERVICE_WORKER_SCOPE,
-				updateViaCache: "none",
-			}),
-		)
+    	let result = await tryCatch(
+    		navigator.serviceWorker.register(SERVICE_WORKER_URL, {
+    			scope: SERVICE_WORKER_SCOPE,
+    			updateViaCache: "none",
+    		}),
+    	)
 
-		if (!result.ok) {
-			console.error("[SW] Service worker registration failed:", result.error)
-			return null
-		}
+    	if (!result.ok) {
+    		console.error("[SW] Service worker registration failed:", result.error)
+    		return null
+    	}
 
-		let registration = result.data
-		console.log("[SW] Service worker registered successfully:", registration)
-		notifyWaitingWorker(registration.waiting)
+    	let registration = result.data
+    	console.log("[SW] Service worker registered successfully:", registration)
+    	notifyWaitingWorker(registration.waiting)
 
-		registration.addEventListener("updatefound", () => {
-			let installing = registration.installing
-			if (!installing) return
+    	registration.addEventListener("updatefound", () => {
+    		let installing = registration.installing
+    		if (!installing) return
 
-			installing.addEventListener("statechange", () => {
-				if (
-					installing.state === "installed" &&
-					navigator.serviceWorker.controller
-				) {
-					notifyWaitingWorker(registration.waiting ?? installing)
-				}
-			})
-		})
+    		installing.addEventListener("statechange", () => {
+    			if (
+    				installing.state === "installed" &&
+    				navigator.serviceWorker.controller
+    			) {
+    				notifyWaitingWorker(registration.waiting ?? installing)
+    			}
+    		})
+    	})
 
-		navigator.serviceWorker.addEventListener("controllerchange", () => {
-			console.log("[SW] Controller changed, will re-sync user ID")
-			window.dispatchEvent(new CustomEvent("sw-controller-changed"))
-		})
+    	navigator.serviceWorker.addEventListener("controllerchange", () => {
+    		console.log("[SW] Controller changed, will re-sync user ID")
+    		window.dispatchEvent(new CustomEvent("sw-controller-changed"))
+    	})
 
-		return registration
-	}
+    	return registration
+    }
 
-	register()
+    register()
     }, [])
 
 }
@@ -18031,33 +18033,33 @@ function useServiceWorkerUpdateChecks(options?: { intervalMs?: number }) {
 useEffect(() => {
 if (!("serviceWorker" in navigator)) return
 
-	let intervalMs = options?.intervalMs ?? 2 * 60 * 60 * 1000
-	let timer: number | null = null
-	let abort = false
+    let intervalMs = options?.intervalMs ?? 2 * 60 * 60 * 1000
+    let timer: number | null = null
+    let abort = false
 
-	async function doUpdateCheck() {
-		if (abort) return
-		let regResult = await tryCatch(
-			navigator.serviceWorker.getRegistration("/app/"),
-		)
-		if (!regResult.ok) return
-		let registration = regResult.data
-		if (!registration) return
-		await tryCatch(registration.update())
-	}
+    async function doUpdateCheck() {
+    	if (abort) return
+    	let regResult = await tryCatch(
+    		navigator.serviceWorker.getRegistration("/app/"),
+    	)
+    	if (!regResult.ok) return
+    	let registration = regResult.data
+    	if (!registration) return
+    	await tryCatch(registration.update())
+    }
 
-	function handleVisibilityChange() {
-		if (document.visibilityState === "visible") doUpdateCheck()
-	}
+    function handleVisibilityChange() {
+    	if (document.visibilityState === "visible") doUpdateCheck()
+    }
 
-	document.addEventListener("visibilitychange", handleVisibilityChange)
-	timer = window.setInterval(doUpdateCheck, intervalMs)
+    document.addEventListener("visibilitychange", handleVisibilityChange)
+    timer = window.setInterval(doUpdateCheck, intervalMs)
 
-	return () => {
-		abort = true
-		document.removeEventListener("visibilitychange", handleVisibilityChange)
-		if (timer) window.clearInterval(timer)
-	}
+    return () => {
+    	abort = true
+    	document.removeEventListener("visibilitychange", handleVisibilityChange)
+    	if (timer) window.clearInterval(timer)
+    }
     }, [options?.intervalMs])
 
 }
@@ -18082,11 +18084,11 @@ return null
 
     let result = await tryCatch(navigator.serviceWorker.getRegistration("/app/"))
     if (!result.ok) {
-	console.error(
-		"[SW] Failed to get service worker registration:",
-		result.error,
-	)
-	return null
+    console.error(
+    	"[SW] Failed to get service worker registration:",
+    	result.error,
+    )
+    return null
     }
 
     return result.data
@@ -18122,32 +18124,32 @@ function useSyncUserIdToServiceWorker() {
 // let { user, isLoaded } = useUser()
 
     let syncUserId = useCallback(() => {
-	// TODO: Implement with Jazz account
-	// if (!isLoaded) return
-	// if (user?.id) {
-	// 	setUserIdInServiceWorker(user.id)
-	// } else {
-	// 	clearUserIdInServiceWorker()
-	// }
+    // TODO: Implement with Jazz account
+    // if (!isLoaded) return
+    // if (user?.id) {
+    // 	setUserIdInServiceWorker(user.id)
+    // } else {
+    // 	clearUserIdInServiceWorker()
+    // }
     }, [])
 
     useEffect(() => {
-	syncUserId()
+    syncUserId()
     }, [syncUserId])
 
     useEffect(() => {
-	function handleControllerChange() {
-		console.log("[App] Service worker controller changed, re-syncing user ID")
-		// Small delay to ensure new service worker is ready
-		setTimeout(syncUserId, 100)
-	}
+    function handleControllerChange() {
+    	console.log("[App] Service worker controller changed, re-syncing user ID")
+    	// Small delay to ensure new service worker is ready
+    	setTimeout(syncUserId, 100)
+    }
 
-	window.addEventListener("sw-controller-changed", handleControllerChange)
-	return () =>
-		window.removeEventListener(
-			"sw-controller-changed",
-			handleControllerChange,
-		)
+    window.addEventListener("sw-controller-changed", handleControllerChange)
+    return () =>
+    	window.removeEventListener(
+    		"sw-controller-changed",
+    		handleControllerChange,
+    	)
     }, [syncUserId])
 
 }
@@ -18550,6 +18552,7 @@ notFoundComponent: NotFoundComponent,
 function RootComponent() {
 return (
 <>
+
 <main
 id="scroll-area"
 className="max-h-[100%] overflow-y-scroll"
@@ -18573,41 +18576,42 @@ let t = useIntl()
 let locale = useLocale()
 
     return (
-	<ErrorUI
-		error={error}
-		title={<T k="error.title" />}
-		description={<T k="error.description" />}
-		feedbackLink={
-			<a
-				href={`/${locale}/feedback`}
-				target="_blank"
-				rel="noopener noreferrer"
-				className="text-primary text-sm hover:underline"
-			>
-				<T k="error.feedback" />
-			</a>
-		}
-		actions={
-			<Button asChild variant="outline" className="w-full">
-				<Link to="/">
-					<T k="error.goBack" />
-				</Link>
-			</Button>
-		}
-		showDetailsLabel={<T k="error.showDetails" />}
-		detailsLabel={<T k="error.details" />}
-		messageLabel={<T k="error.message" />}
-		stackTraceLabel={<T k="error.stackTrace" />}
-		copyLabel={<T k="error.copy" />}
-		onCopySuccess={() => toast.success(t("error.copySuccess"))}
-		onCopyError={() => toast.error(t("error.copyFailure"))}
-	/>
+    <ErrorUI
+    	error={error}
+    	title={<T k="error.title" />}
+    	description={<T k="error.description" />}
+    	feedbackLink={
+    		<a
+    			href={`/${locale}/feedback`}
+    			target="_blank"
+    			rel="noopener noreferrer"
+    			className="text-primary text-sm hover:underline"
+    		>
+    			<T k="error.feedback" />
+    		</a>
+    	}
+    	actions={
+    		<Button asChild variant="outline" className="w-full">
+    			<Link to="/">
+    				<T k="error.goBack" />
+    			</Link>
+    		</Button>
+    	}
+    	showDetailsLabel={<T k="error.showDetails" />}
+    	detailsLabel={<T k="error.details" />}
+    	messageLabel={<T k="error.message" />}
+    	stackTraceLabel={<T k="error.stackTrace" />}
+    	copyLabel={<T k="error.copy" />}
+    	onCopySuccess={() => toast.success(t("error.copySuccess"))}
+    	onCopyError={() => toast.error(t("error.copyFailure"))}
+    />
     )
 
 }
 
 function NotFoundComponent() {
 return (
+
 <main className="container mx-auto max-w-6xl px-3 py-6 pb-20 md:pt-20 md:pb-0">
 <Card className="mx-auto max-w-lg">
 <CardHeader>
@@ -19475,117 +19479,117 @@ let notes = usePersonNotes(person, deferredSearchQuery)
     let hasDueReminders = reminders.open.some(reminder => isDueToday(reminder))
 
     if (!me) {
-	return (
-		<div className="relative space-y-8 pb-20 md:mt-12 md:pb-4">
-			<title>{t("person.detail.pageTitle", { name: person.name })}</title>
-			<div className="text-center">
-				<p>Please sign in to view person details.</p>
-			</div>
-		</div>
-	)
+    return (
+    	<div className="relative space-y-8 pb-20 md:mt-12 md:pb-4">
+    		<title>{t("person.detail.pageTitle", { name: person.name })}</title>
+    		<div className="text-center">
+    			<p>Please sign in to view person details.</p>
+    		</div>
+    	</div>
+    )
     }
 
     return (
-	<div className="relative space-y-8 pb-20 md:mt-12 md:pb-4">
-		<title>{t("person.detail.pageTitle", { name: person.name })}</title>
-		<PersonDetails person={person} me={me} />
+    <div className="relative space-y-8 pb-20 md:mt-12 md:pb-4">
+    	<title>{t("person.detail.pageTitle", { name: person.name })}</title>
+    	<PersonDetails person={person} me={me} />
 
-		<div className="space-y-6">
-			<div className="flex flex-1 items-center gap-2">
-				<div className="relative flex-1">
-					<Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2 transform" />
-					<Input
-						ref={r => {
-							autoFocusRef.current = r
-						}}
-						type="text"
-						placeholder={t("person.detail.search.placeholder")}
-						value={searchQuery}
-						onChange={e => setSearchQuery(e.target.value)}
-						className="flex-1 pl-10"
-					/>
-				</div>
-				{searchQuery !== "" ? (
-					<Button variant="outline" onClick={() => setSearchQuery("")}>
-						<X />
-						<span className="sr-only md:not-sr-only">
-							<T k="common.clear" />
-						</span>
-					</Button>
-				) : null}
-			</div>
-			<Tabs value={tab}>
-				<div className="mb-6 flex items-center justify-between gap-3">
-					<TabsList className="flex-1">
-						<TabsTrigger value="notes" asChild>
-							<Link
-								to={Route.fullPath}
-								params={{ personID: person.$jazz.id }}
-								search={{ tab: "notes" }}
-								className="flex items-center gap-1"
-								replace
-								resetScroll={false}
-							>
-								<Journal />
-								<span className={cn(isMobile && tab !== "notes" && "hidden")}>
-									<T
-										k="person.detail.notes.tab"
-										params={{ count: notes.active.length }}
-									/>
-								</span>
-							</Link>
-						</TabsTrigger>
-						<TabsTrigger value="reminders" asChild>
-							<Link
-								to={Route.fullPath}
-								params={{ personID: person.$jazz.id }}
-								search={{ tab: "reminders" }}
-								className="flex items-center gap-1"
-								replace
-								resetScroll={false}
-							>
-								<div className="relative">
-									<Bell />
-									{hasDueReminders && (
-										<div className="bg-primary absolute top-0 right-0 size-2 rounded-full" />
-									)}
-								</div>
-								<span
-									className={cn(isMobile && tab !== "reminders" && "hidden")}
-								>
-									<T
-										k="person.detail.reminders.tab"
-										params={{ count: reminders.open.length }}
-									/>
-								</span>
-							</Link>
-						</TabsTrigger>
-					</TabsList>
-					<AddItemButton
-						person={person}
-						activeTab={tab}
-						userId={me?.$jazz.id ?? ""}
-						onItemCreated={() => setSearchQuery("")}
-					/>
-				</div>
-				<TabsContent value="notes">
-					<NotesList
-						notes={notes}
-						person={person}
-						searchQuery={deferredSearchQuery}
-					/>
-				</TabsContent>
-				<TabsContent value="reminders">
-					<RemindersList
-						reminders={reminders}
-						person={person}
-						userId={me?.$jazz.id ?? ""}
-						searchQuery={deferredSearchQuery}
-					/>
-				</TabsContent>
-			</Tabs>
-		</div>
-	</div>
+    	<div className="space-y-6">
+    		<div className="flex flex-1 items-center gap-2">
+    			<div className="relative flex-1">
+    				<Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2 transform" />
+    				<Input
+    					ref={r => {
+    						autoFocusRef.current = r
+    					}}
+    					type="text"
+    					placeholder={t("person.detail.search.placeholder")}
+    					value={searchQuery}
+    					onChange={e => setSearchQuery(e.target.value)}
+    					className="flex-1 pl-10"
+    				/>
+    			</div>
+    			{searchQuery !== "" ? (
+    				<Button variant="outline" onClick={() => setSearchQuery("")}>
+    					<X />
+    					<span className="sr-only md:not-sr-only">
+    						<T k="common.clear" />
+    					</span>
+    				</Button>
+    			) : null}
+    		</div>
+    		<Tabs value={tab}>
+    			<div className="mb-6 flex items-center justify-between gap-3">
+    				<TabsList className="flex-1">
+    					<TabsTrigger value="notes" asChild>
+    						<Link
+    							to={Route.fullPath}
+    							params={{ personID: person.$jazz.id }}
+    							search={{ tab: "notes" }}
+    							className="flex items-center gap-1"
+    							replace
+    							resetScroll={false}
+    						>
+    							<Journal />
+    							<span className={cn(isMobile && tab !== "notes" && "hidden")}>
+    								<T
+    									k="person.detail.notes.tab"
+    									params={{ count: notes.active.length }}
+    								/>
+    							</span>
+    						</Link>
+    					</TabsTrigger>
+    					<TabsTrigger value="reminders" asChild>
+    						<Link
+    							to={Route.fullPath}
+    							params={{ personID: person.$jazz.id }}
+    							search={{ tab: "reminders" }}
+    							className="flex items-center gap-1"
+    							replace
+    							resetScroll={false}
+    						>
+    							<div className="relative">
+    								<Bell />
+    								{hasDueReminders && (
+    									<div className="bg-primary absolute top-0 right-0 size-2 rounded-full" />
+    								)}
+    							</div>
+    							<span
+    								className={cn(isMobile && tab !== "reminders" && "hidden")}
+    							>
+    								<T
+    									k="person.detail.reminders.tab"
+    									params={{ count: reminders.open.length }}
+    								/>
+    							</span>
+    						</Link>
+    					</TabsTrigger>
+    				</TabsList>
+    				<AddItemButton
+    					person={person}
+    					activeTab={tab}
+    					userId={me?.$jazz.id ?? ""}
+    					onItemCreated={() => setSearchQuery("")}
+    				/>
+    			</div>
+    			<TabsContent value="notes">
+    				<NotesList
+    					notes={notes}
+    					person={person}
+    					searchQuery={deferredSearchQuery}
+    				/>
+    			</TabsContent>
+    			<TabsContent value="reminders">
+    				<RemindersList
+    					reminders={reminders}
+    					person={person}
+    					userId={me?.$jazz.id ?? ""}
+    					searchQuery={deferredSearchQuery}
+    				/>
+    			</TabsContent>
+    		</Tabs>
+    	</div>
+    </div>
     )
 
 }
@@ -19616,82 +19620,82 @@ let didSearch = !!searchQuery
 let hasMoreNotes = notes.deleted.length > 0
 
     if (notes.active.length === 0 && notes.deleted.length === 0) {
-	if (!searchQuery) {
-		return <NoteTour onSuccess={() => {}} personId={person.$jazz.id} />
-	}
-
-	return (
-		<div className="flex flex-col items-center justify-center py-12 text-center">
-			<Journal className="text-muted-foreground size-8" />
-			<p className="text-muted-foreground mt-4 text-lg">
-				<T k="notes.empty.withSearch" params={{ query: searchQuery }} />
-			</p>
-			<p className="text-muted-foreground text-sm">
-				<T k="notes.empty.suggestion.withSearch" />
-			</p>
-		</div>
-	)
+    if (!searchQuery) {
+    	return <NoteTour onSuccess={() => {}} personId={person.$jazz.id} />
     }
 
     return (
-	<>
-		{notes.active.map(entry => (
-			<NoteListItem
-				key={entry.item.$jazz.id}
-				note={entry.item}
-				person={person}
-				searchQuery={searchQuery}
-			/>
-		))}
+    	<div className="flex flex-col items-center justify-center py-12 text-center">
+    		<Journal className="text-muted-foreground size-8" />
+    		<p className="text-muted-foreground mt-4 text-lg">
+    			<T k="notes.empty.withSearch" params={{ query: searchQuery }} />
+    		</p>
+    		<p className="text-muted-foreground text-sm">
+    			<T k="notes.empty.suggestion.withSearch" />
+    		</p>
+    	</div>
+    )
+    }
 
-		{hasMoreNotes && !didSearch && (
-			<Accordion type="single" collapsible className="w-full">
-				{notes.deleted.length > 0 && (
-					<AccordionItem value="deleted">
-						<AccordionTrigger>
-							<T
-								k="notes.deleted.count"
-								params={{ count: notes.deleted.length }}
-							/>
-						</AccordionTrigger>
-						<AccordionContent>
-							{notes.deleted.map(entry => (
-								<NoteListItem
-									key={entry.item.$jazz.id}
-									note={entry.item}
-									person={person}
-									searchQuery={searchQuery}
-								/>
-							))}
-						</AccordionContent>
-					</AccordionItem>
-				)}
-			</Accordion>
-		)}
+    return (
+    <>
+    	{notes.active.map(entry => (
+    		<NoteListItem
+    			key={entry.item.$jazz.id}
+    			note={entry.item}
+    			person={person}
+    			searchQuery={searchQuery}
+    		/>
+    	))}
 
-		{didSearch && hasMoreNotes && (
-			<>
-				{notes.deleted.length > 0 && (
-					<>
-						<h3 className="text-muted-foreground mt-8 text-sm font-medium">
-							<T
-								k="notes.deleted.heading"
-								params={{ count: notes.deleted.length }}
-							/>
-						</h3>
-						{notes.deleted.map(entry => (
-							<NoteListItem
-								key={entry.item.$jazz.id}
-								note={entry.item}
-								person={person}
-								searchQuery={searchQuery}
-							/>
-						))}
-					</>
-				)}
-			</>
-		)}
-	</>
+    	{hasMoreNotes && !didSearch && (
+    		<Accordion type="single" collapsible className="w-full">
+    			{notes.deleted.length > 0 && (
+    				<AccordionItem value="deleted">
+    					<AccordionTrigger>
+    						<T
+    							k="notes.deleted.count"
+    							params={{ count: notes.deleted.length }}
+    						/>
+    					</AccordionTrigger>
+    					<AccordionContent>
+    						{notes.deleted.map(entry => (
+    							<NoteListItem
+    								key={entry.item.$jazz.id}
+    								note={entry.item}
+    								person={person}
+    								searchQuery={searchQuery}
+    							/>
+    						))}
+    					</AccordionContent>
+    				</AccordionItem>
+    			)}
+    		</Accordion>
+    	)}
+
+    	{didSearch && hasMoreNotes && (
+    		<>
+    			{notes.deleted.length > 0 && (
+    				<>
+    					<h3 className="text-muted-foreground mt-8 text-sm font-medium">
+    						<T
+    							k="notes.deleted.heading"
+    							params={{ count: notes.deleted.length }}
+    						/>
+    					</h3>
+    					{notes.deleted.map(entry => (
+    						<NoteListItem
+    							key={entry.item.$jazz.id}
+    							note={entry.item}
+    							person={person}
+    							searchQuery={searchQuery}
+    						/>
+    					))}
+    				</>
+    			)}
+    		</>
+    	)}
+    </>
     )
 
 }
@@ -19716,134 +19720,134 @@ let hasMoreReminders =
 reminders.done.length > 0 || reminders.deleted.length > 0
 
     if (
-	reminders.open.length === 0 &&
-	reminders.done.length === 0 &&
-	reminders.deleted.length === 0
+    reminders.open.length === 0 &&
+    reminders.done.length === 0 &&
+    reminders.deleted.length === 0
     ) {
-	if (!searchQuery) {
-		return <ReminderTour onSuccess={() => {}} personId={person.$jazz.id} />
-	}
-
-	return (
-		<div className="flex flex-col items-center justify-center py-12 text-center">
-			<Bell className="text-muted-foreground size-8" />
-			<p className="text-muted-foreground mt-4 text-lg">
-				<T k="reminders.empty.withSearch" params={{ query: searchQuery }} />
-			</p>
-			<p className="text-muted-foreground text-sm">
-				<T k="reminders.empty.suggestion.withSearch" />
-			</p>
-		</div>
-	)
+    if (!searchQuery) {
+    	return <ReminderTour onSuccess={() => {}} personId={person.$jazz.id} />
     }
 
     return (
-	<>
-		{reminders.open.map(reminder => (
-			<ReminderListItem
-				key={reminder.$jazz.id}
-				reminder={reminder}
-				person={person}
-				userId={userId}
-				showPerson={false}
-				searchQuery={searchQuery}
-			/>
-		))}
+    	<div className="flex flex-col items-center justify-center py-12 text-center">
+    		<Bell className="text-muted-foreground size-8" />
+    		<p className="text-muted-foreground mt-4 text-lg">
+    			<T k="reminders.empty.withSearch" params={{ query: searchQuery }} />
+    		</p>
+    		<p className="text-muted-foreground text-sm">
+    			<T k="reminders.empty.suggestion.withSearch" />
+    		</p>
+    	</div>
+    )
+    }
 
-		{hasMoreReminders && !didSearch && (
-			<Accordion type="single" collapsible className="w-full">
-				{reminders.done.length > 0 && (
-					<AccordionItem value="done">
-						<AccordionTrigger>
-							<T
-								k="reminders.done.count"
-								params={{ count: reminders.done.length }}
-							/>
-						</AccordionTrigger>
-						<AccordionContent>
-							{reminders.done.map(reminder => (
-								<ReminderListItem
-									key={reminder.$jazz.id}
-									reminder={reminder}
-									person={person}
-									userId={userId}
-									showPerson={false}
-									searchQuery={searchQuery}
-								/>
-							))}
-						</AccordionContent>
-					</AccordionItem>
-				)}
-				{reminders.deleted.length > 0 && (
-					<AccordionItem value="deleted">
-						<AccordionTrigger>
-							<T
-								k="reminders.deleted.count"
-								params={{ count: reminders.deleted.length }}
-							/>
-						</AccordionTrigger>
-						<AccordionContent>
-							{reminders.deleted.map(reminder => (
-								<ReminderListItem
-									key={reminder.$jazz.id}
-									reminder={reminder}
-									person={person}
-									userId={userId}
-									showPerson={false}
-									searchQuery={searchQuery}
-								/>
-							))}
-						</AccordionContent>
-					</AccordionItem>
-				)}
-			</Accordion>
-		)}
+    return (
+    <>
+    	{reminders.open.map(reminder => (
+    		<ReminderListItem
+    			key={reminder.$jazz.id}
+    			reminder={reminder}
+    			person={person}
+    			userId={userId}
+    			showPerson={false}
+    			searchQuery={searchQuery}
+    		/>
+    	))}
 
-		{didSearch && hasMoreReminders && (
-			<>
-				{reminders.done.length > 0 && (
-					<>
-						<h3 className="text-muted-foreground mt-8 text-sm font-medium">
-							<T
-								k="reminders.done.heading"
-								params={{ count: reminders.done.length }}
-							/>
-						</h3>
-						{reminders.done.map(reminder => (
-							<ReminderListItem
-								key={reminder.$jazz.id}
-								reminder={reminder}
-								person={person}
-								userId={userId}
-								showPerson={false}
-								searchQuery={searchQuery}
-							/>
-						))}
-					</>
-				)}
-				{reminders.deleted.length > 0 && (
-					<>
-						<h3 className="text-muted-foreground mt-8 text-sm font-medium">
-							<T
-								k="reminders.deleted.heading"
-								params={{ count: reminders.deleted.length }}
-							/>
-						</h3>
-						{reminders.deleted.map(reminder => (
-							<ReminderListItem
-								key={reminder.$jazz.id}
-								reminder={reminder}
-								person={person}
-								userId={userId}
-								showPerson={false}
-								searchQuery={searchQuery}
-							/>
-						))}
-					</>
-				)}
-			</>
-		)}
-	</>
+    	{hasMoreReminders && !didSearch && (
+    		<Accordion type="single" collapsible className="w-full">
+    			{reminders.done.length > 0 && (
+    				<AccordionItem value="done">
+    					<AccordionTrigger>
+    						<T
+    							k="reminders.done.count"
+    							params={{ count: reminders.done.length }}
+    						/>
+    					</AccordionTrigger>
+    					<AccordionContent>
+    						{reminders.done.map(reminder => (
+    							<ReminderListItem
+    								key={reminder.$jazz.id}
+    								reminder={reminder}
+    								person={person}
+    								userId={userId}
+    								showPerson={false}
+    								searchQuery={searchQuery}
+    							/>
+    						))}
+    					</AccordionContent>
+    				</AccordionItem>
+    			)}
+    			{reminders.deleted.length > 0 && (
+    				<AccordionItem value="deleted">
+    					<AccordionTrigger>
+    						<T
+    							k="reminders.deleted.count"
+    							params={{ count: reminders.deleted.length }}
+    						/>
+    					</AccordionTrigger>
+    					<AccordionContent>
+    						{reminders.deleted.map(reminder => (
+    							<ReminderListItem
+    								key={reminder.$jazz.id}
+    								reminder={reminder}
+    								person={person}
+    								userId={userId}
+    								showPerson={false}
+    								searchQuery={searchQuery}
+    							/>
+    						))}
+    					</AccordionContent>
+    				</AccordionItem>
+    			)}
+    		</Accordion>
+    	)}
+
+    	{didSearch && hasMoreReminders && (
+    		<>
+    			{reminders.done.length > 0 && (
+    				<>
+    					<h3 className="text-muted-foreground mt-8 text-sm font-medium">
+    						<T
+    							k="reminders.done.heading"
+    							params={{ count: reminders.done.length }}
+    						/>
+    					</h3>
+    					{reminders.done.map(reminder => (
+    						<ReminderListItem
+    							key={reminder.$jazz.id}
+    							reminder={reminder}
+    							person={person}
+    							userId={userId}
+    							showPerson={false}
+    							searchQuery={searchQuery}
+    						/>
+    					))}
+    				</>
+    			)}
+    			{reminders.deleted.length > 0 && (
+    				<>
+    					<h3 className="text-muted-foreground mt-8 text-sm font-medium">
+    						<T
+    							k="reminders.deleted.heading"
+    							params={{ count: reminders.deleted.length }}
+    						/>
+    					</h3>
+    					{reminders.deleted.map(reminder => (
+    						<ReminderListItem
+    							key={reminder.$jazz.id}
+    							reminder={reminder}
+    							person={person}
+    							userId={userId}
+    							showPerson={false}
+    							searchQuery={searchQuery}
+    						/>
+    					))}
+    				</>
+    			)}
+    		</>
+    	)}
+    </>
     )
 
 }
@@ -19860,122 +19864,122 @@ let [reminderOpen, setReminderOpen] = useState(false)
 let t = useIntl()
 
     async function handleAddNote(data: { content: string; pinned: boolean }) {
-	let result = await tryCatch(createNote(props.person.$jazz.id, data))
-	if (!result.ok) {
-		toast.error(
-			typeof result.error === "string" ? result.error : result.error.message,
-		)
-		return
-	}
+    let result = await tryCatch(createNote(props.person.$jazz.id, data))
+    if (!result.ok) {
+    	toast.error(
+    		typeof result.error === "string" ? result.error : result.error.message,
+    	)
+    	return
+    }
 
-	navigate({ search: prev => ({ ...prev, tab: "notes" }) })
-	setNoteOpen(false)
-	props.onItemCreated()
-	toast.success(t("notes.created.success"))
+    navigate({ search: prev => ({ ...prev, tab: "notes" }) })
+    setNoteOpen(false)
+    props.onItemCreated()
+    toast.success(t("notes.created.success"))
     }
 
     async function handleAddReminder(data: {
-	text: string
-	dueAtDate: string
-	repeat?: { interval: number; unit: "day" | "week" | "month" | "year" }
+    text: string
+    dueAtDate: string
+    repeat?: { interval: number; unit: "day" | "week" | "month" | "year" }
     }) {
-	let reminderData = {
-		text: data.text,
-		dueAtDate: data.dueAtDate,
-		repeat: data.repeat,
-	}
+    let reminderData = {
+    	text: data.text,
+    	dueAtDate: data.dueAtDate,
+    	repeat: data.repeat,
+    }
 
-	let result = await tryCatch(
-		createReminder(reminderData, {
-			personId: props.person.$jazz.id,
-			userId: props.userId,
-		}),
-	)
-	if (!result.ok) {
-		toast.error(
-			typeof result.error === "string" ? result.error : result.error.message,
-		)
-		return
-	}
+    let result = await tryCatch(
+    	createReminder(reminderData, {
+    		personId: props.person.$jazz.id,
+    		userId: props.userId,
+    	}),
+    )
+    if (!result.ok) {
+    	toast.error(
+    		typeof result.error === "string" ? result.error : result.error.message,
+    	)
+    	return
+    }
 
-	navigate({ search: prev => ({ ...prev, tab: "reminders" }) })
-	setReminderOpen(false)
-	props.onItemCreated()
-	toast.success(t("reminders.created.success"))
+    navigate({ search: prev => ({ ...prev, tab: "reminders" }) })
+    setReminderOpen(false)
+    props.onItemCreated()
+    toast.success(t("reminders.created.success"))
     }
 
     function handleButtonClick() {
-	if (props.activeTab === "notes") {
-		setNoteOpen(true)
-	} else {
-		setReminderOpen(true)
-	}
+    if (props.activeTab === "notes") {
+    	setNoteOpen(true)
+    } else {
+    	setReminderOpen(true)
+    }
     }
 
     return (
-	<>
-		<Button
-			onClick={handleButtonClick}
-			data-testid={
-				props.activeTab === "notes"
-					? "add-note-button"
-					: "add-reminder-button"
-			}
-		>
-			<Plus />
-			<span className="hidden md:inline">
-				{props.activeTab === "notes" ? (
-					<T k="person.detail.addNote" />
-				) : (
-					<T k="person.detail.addReminder" />
-				)}
-			</span>
-		</Button>
+    <>
+    	<Button
+    		onClick={handleButtonClick}
+    		data-testid={
+    			props.activeTab === "notes"
+    				? "add-note-button"
+    				: "add-reminder-button"
+    		}
+    	>
+    		<Plus />
+    		<span className="hidden md:inline">
+    			{props.activeTab === "notes" ? (
+    				<T k="person.detail.addNote" />
+    			) : (
+    				<T k="person.detail.addReminder" />
+    			)}
+    		</span>
+    	</Button>
 
-		<Dialog open={noteOpen} onOpenChange={setNoteOpen}>
-			<DialogContent
-				titleSlot={
-					<DialogHeader>
-						<DialogTitle>
-							<T k="note.add.title" />
-						</DialogTitle>
-						<DialogDescription>
-							<T k="note.add.description" />
-						</DialogDescription>
-					</DialogHeader>
-				}
-			>
-				<NoteForm
-					onSubmit={handleAddNote}
-					onCancel={() => setNoteOpen(false)}
-				/>
-			</DialogContent>
-		</Dialog>
+    	<Dialog open={noteOpen} onOpenChange={setNoteOpen}>
+    		<DialogContent
+    			titleSlot={
+    				<DialogHeader>
+    					<DialogTitle>
+    						<T k="note.add.title" />
+    					</DialogTitle>
+    					<DialogDescription>
+    						<T k="note.add.description" />
+    					</DialogDescription>
+    				</DialogHeader>
+    			}
+    		>
+    			<NoteForm
+    				onSubmit={handleAddNote}
+    				onCancel={() => setNoteOpen(false)}
+    			/>
+    		</DialogContent>
+    	</Dialog>
 
-		<Dialog open={reminderOpen} onOpenChange={setReminderOpen}>
-			<DialogContent
-				titleSlot={
-					<DialogHeader>
-						<DialogTitle>
-							<T k="reminders.add.title" />
-						</DialogTitle>
-						<DialogDescription>
-							<T k="reminders.add.description" />
-						</DialogDescription>
-					</DialogHeader>
-				}
-			>
-				<ReminderForm
-					defaultValues={{
-						text: "",
-						dueAtDate: new Date().toISOString().substring(0, 10),
-					}}
-					onSubmit={handleAddReminder}
-					onCancel={() => setReminderOpen(false)}
-				/>
-			</DialogContent>
-		</Dialog>
-	</>
+    	<Dialog open={reminderOpen} onOpenChange={setReminderOpen}>
+    		<DialogContent
+    			titleSlot={
+    				<DialogHeader>
+    					<DialogTitle>
+    						<T k="reminders.add.title" />
+    					</DialogTitle>
+    					<DialogDescription>
+    						<T k="reminders.add.description" />
+    					</DialogDescription>
+    				</DialogHeader>
+    			}
+    		>
+    			<ReminderForm
+    				defaultValues={{
+    					text: "",
+    					dueAtDate: new Date().toISOString().substring(0, 10),
+    				}}
+    				onSubmit={handleAddReminder}
+    				onCancel={() => setReminderOpen(false)}
+    			/>
+    		</DialogContent>
+    	</Dialog>
+    </>
     )
 
 }
@@ -20343,7 +20347,7 @@ function Reminders() {
 let { me: data, eagerCount } = Route.useLoaderData()
 
     let subscribedMe = useAccount(UserAccount, {
-	resolve: query,
+    resolve: query,
         select: (subscribedMe) => subscribedMe.$isLoaded ? subscribedMe : subscribedMe.$jazz.loadingState === "loading" ? undefined : null
     });
 
@@ -20353,190 +20357,190 @@ let { me: data, eagerCount } = Route.useLoaderData()
     let deferredSearchQuery = useDeferredValue(remindersSearchQuery)
 
     let people = (currentMe?.root?.people ?? []).filter(
-	person => person && !isDeleted(person),
+    person => person && !isDeleted(person),
     )
 
     let reminders = useReminders(people, deferredSearchQuery)
 
     if (!currentMe) {
-	return (
-		<RemindersLayout>
-			<div className="text-center">
-				<p>Please sign in to view reminders.</p>
-			</div>
-		</RemindersLayout>
-	)
+    return (
+    	<RemindersLayout>
+    		<div className="text-center">
+    			<p>Please sign in to view reminders.</p>
+    		</div>
+    	</RemindersLayout>
+    )
     }
 
     // Early return for no people - no controls needed
     if (people.length === 0) {
-	return (
-		<RemindersLayout>
-			<NoPeopleState />
-		</RemindersLayout>
-	)
+    return (
+    	<RemindersLayout>
+    		<NoPeopleState />
+    	</RemindersLayout>
+    )
     }
 
     if (reminders.total === 0) {
-	return (
-		<RemindersLayout>
-			<NoRemindersState />
-		</RemindersLayout>
-	)
+    return (
+    	<RemindersLayout>
+    		<NoRemindersState />
+    	</RemindersLayout>
+    )
     }
 
     let didSearch = !!deferredSearchQuery
     let hasMatches =
-	reminders.open.length > 0 ||
-	reminders.done.length > 0 ||
-	reminders.deleted.length > 0
+    reminders.open.length > 0 ||
+    reminders.done.length > 0 ||
+    reminders.deleted.length > 0
     let hasMore = reminders.done.length > 0 || reminders.deleted.length > 0
 
     if (didSearch && !hasMatches) {
-	return (
-		<RemindersLayout>
-			<RemindersControls />
-			<NoSearchResultsState searchQuery={deferredSearchQuery} />
-		</RemindersLayout>
-	)
+    return (
+    	<RemindersLayout>
+    		<RemindersControls />
+    		<NoSearchResultsState searchQuery={deferredSearchQuery} />
+    	</RemindersLayout>
+    )
     }
 
     if (!didSearch && !hasMatches) {
-	return (
-		<RemindersLayout>
-			<RemindersControls />
-			<AllCaughtUpState />
-		</RemindersLayout>
-	)
+    return (
+    	<RemindersLayout>
+    		<RemindersControls />
+    		<AllCaughtUpState />
+    	</RemindersLayout>
+    )
     }
 
     return (
-	<RemindersLayout>
-		<RemindersControls />
-		{reminders.open.length > 0 ? (
-			<ul className="divide-border divide-y">
-				{reminders.open.map(({ reminder, person }, index) => (
-					<li key={reminder.$jazz.id}>
-						<ReminderListItem
-							reminder={reminder}
-							person={person}
-							userId={currentMe.$jazz.id}
-							searchQuery={deferredSearchQuery}
-							noLazy={index < eagerCount}
-						/>
-					</li>
-				))}
-			</ul>
-		) : (
-			<AllCaughtUpState />
-		)}
+    <RemindersLayout>
+    	<RemindersControls />
+    	{reminders.open.length > 0 ? (
+    		<ul className="divide-border divide-y">
+    			{reminders.open.map(({ reminder, person }, index) => (
+    				<li key={reminder.$jazz.id}>
+    					<ReminderListItem
+    						reminder={reminder}
+    						person={person}
+    						userId={currentMe.$jazz.id}
+    						searchQuery={deferredSearchQuery}
+    						noLazy={index < eagerCount}
+    					/>
+    				</li>
+    			))}
+    		</ul>
+    	) : (
+    		<AllCaughtUpState />
+    	)}
 
-		{hasMore && !didSearch && (
-			<Accordion type="single" collapsible className="w-full">
-				{reminders.done.length > 0 && (
-					<AccordionItem value="done">
-						<AccordionTrigger>
-							<T
-								k="reminders.done.count"
-								params={{ count: reminders.done.length }}
-							/>
-						</AccordionTrigger>
-						<AccordionContent>
-							<ul className="divide-border divide-y">
-								{reminders.done.map(({ reminder, person }, index) => (
-									<li key={reminder.$jazz.id}>
-										<ReminderListItem
-											reminder={reminder}
-											person={person}
-											userId={currentMe.$jazz.id}
-											searchQuery={deferredSearchQuery}
-											noLazy={index < eagerCount}
-										/>
-									</li>
-								))}
-							</ul>
-						</AccordionContent>
-					</AccordionItem>
-				)}
-				{reminders.deleted.length > 0 && (
-					<AccordionItem value="deleted">
-						<AccordionTrigger>
-							<T
-								k="reminders.deleted.count"
-								params={{ count: reminders.deleted.length }}
-							/>
-						</AccordionTrigger>
-						<AccordionContent>
-							<ul className="divide-border divide-y">
-								{reminders.deleted.map(({ reminder, person }, index) => (
-									<li key={reminder.$jazz.id}>
-										<ReminderListItem
-											reminder={reminder}
-											person={person}
-											userId={currentMe.$jazz.id}
-											searchQuery={deferredSearchQuery}
-											noLazy={index < eagerCount}
-										/>
-									</li>
-								))}
-							</ul>
-						</AccordionContent>
-					</AccordionItem>
-				)}
-			</Accordion>
-		)}
+    	{hasMore && !didSearch && (
+    		<Accordion type="single" collapsible className="w-full">
+    			{reminders.done.length > 0 && (
+    				<AccordionItem value="done">
+    					<AccordionTrigger>
+    						<T
+    							k="reminders.done.count"
+    							params={{ count: reminders.done.length }}
+    						/>
+    					</AccordionTrigger>
+    					<AccordionContent>
+    						<ul className="divide-border divide-y">
+    							{reminders.done.map(({ reminder, person }, index) => (
+    								<li key={reminder.$jazz.id}>
+    									<ReminderListItem
+    										reminder={reminder}
+    										person={person}
+    										userId={currentMe.$jazz.id}
+    										searchQuery={deferredSearchQuery}
+    										noLazy={index < eagerCount}
+    									/>
+    								</li>
+    							))}
+    						</ul>
+    					</AccordionContent>
+    				</AccordionItem>
+    			)}
+    			{reminders.deleted.length > 0 && (
+    				<AccordionItem value="deleted">
+    					<AccordionTrigger>
+    						<T
+    							k="reminders.deleted.count"
+    							params={{ count: reminders.deleted.length }}
+    						/>
+    					</AccordionTrigger>
+    					<AccordionContent>
+    						<ul className="divide-border divide-y">
+    							{reminders.deleted.map(({ reminder, person }, index) => (
+    								<li key={reminder.$jazz.id}>
+    									<ReminderListItem
+    										reminder={reminder}
+    										person={person}
+    										userId={currentMe.$jazz.id}
+    										searchQuery={deferredSearchQuery}
+    										noLazy={index < eagerCount}
+    									/>
+    								</li>
+    							))}
+    						</ul>
+    					</AccordionContent>
+    				</AccordionItem>
+    			)}
+    		</Accordion>
+    	)}
 
-		{didSearch && hasMore && (
-			<>
-				{reminders.done.length > 0 && (
-					<>
-						<h3 className="text-muted-foreground mt-8 text-sm font-medium">
-							<T
-								k="reminders.done.heading"
-								params={{ count: reminders.done.length }}
-							/>
-						</h3>
-						<ul className="divide-border divide-y">
-							{reminders.done.map(({ reminder, person }, index) => (
-								<li key={reminder.$jazz.id}>
-									<ReminderListItem
-										reminder={reminder}
-										person={person}
-										userId={currentMe.$jazz.id}
-										searchQuery={deferredSearchQuery}
-										noLazy={index < eagerCount}
-									/>
-								</li>
-							))}
-						</ul>
-					</>
-				)}
-				{reminders.deleted.length > 0 && (
-					<>
-						<h3 className="text-muted-foreground mt-8 text-sm font-medium">
-							<T
-								k="reminders.deleted.heading"
-								params={{ count: reminders.deleted.length }}
-							/>
-						</h3>
-						<ul className="divide-border divide-y">
-							{reminders.deleted.map(({ reminder, person }, index) => (
-								<li key={reminder.$jazz.id}>
-									<ReminderListItem
-										reminder={reminder}
-										person={person}
-										userId={currentMe.$jazz.id}
-										searchQuery={deferredSearchQuery}
-										noLazy={index < eagerCount}
-									/>
-								</li>
-							))}
-						</ul>
-					</>
-				)}
-			</>
-		)}
-	</RemindersLayout>
+    	{didSearch && hasMore && (
+    		<>
+    			{reminders.done.length > 0 && (
+    				<>
+    					<h3 className="text-muted-foreground mt-8 text-sm font-medium">
+    						<T
+    							k="reminders.done.heading"
+    							params={{ count: reminders.done.length }}
+    						/>
+    					</h3>
+    					<ul className="divide-border divide-y">
+    						{reminders.done.map(({ reminder, person }, index) => (
+    							<li key={reminder.$jazz.id}>
+    								<ReminderListItem
+    									reminder={reminder}
+    									person={person}
+    									userId={currentMe.$jazz.id}
+    									searchQuery={deferredSearchQuery}
+    									noLazy={index < eagerCount}
+    								/>
+    							</li>
+    						))}
+    					</ul>
+    				</>
+    			)}
+    			{reminders.deleted.length > 0 && (
+    				<>
+    					<h3 className="text-muted-foreground mt-8 text-sm font-medium">
+    						<T
+    							k="reminders.deleted.heading"
+    							params={{ count: reminders.deleted.length }}
+    						/>
+    					</h3>
+    					<ul className="divide-border divide-y">
+    						{reminders.deleted.map(({ reminder, person }, index) => (
+    							<li key={reminder.$jazz.id}>
+    								<ReminderListItem
+    									reminder={reminder}
+    									person={person}
+    									userId={currentMe.$jazz.id}
+    									searchQuery={deferredSearchQuery}
+    									noLazy={index < eagerCount}
+    								/>
+    							</li>
+    						))}
+    					</ul>
+    				</>
+    			)}
+    		</>
+    	)}
+    </RemindersLayout>
     )
 
 }
@@ -20544,6 +20548,7 @@ let { me: data, eagerCount } = Route.useLoaderData()
 function RemindersLayout({ children }: { children: ReactNode }) {
 let t = useIntl()
 return (
+
 <div className="space-y-6 md:mt-12">
 <title>{t("reminders.pageTitle")}</title>
 <TypographyH1>
@@ -20560,43 +20565,44 @@ let autoFocusRef = useAutoFocusInput()
 let t = useIntl()
 
     return (
-	<div className="flex items-center justify-end gap-3">
-		<div className="relative w-full">
-			<Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2 transform" />
-			<Input
-				ref={r => {
-					autoFocusRef.current = r
-				}}
-				type="text"
-				placeholder={t("reminders.search.placeholder")}
-				value={remindersSearchQuery}
-				onChange={e => setRemindersSearchQuery(e.target.value)}
-				className="w-full pl-10"
-			/>
-		</div>
-		{remindersSearchQuery !== "" ? (
-			<Button variant="outline" onClick={() => setRemindersSearchQuery("")}>
-				<X className="size-4" />
-				<span className="sr-only md:not-sr-only">
-					<T k="common.clear" />
-				</span>
-			</Button>
-		) : null}
-		<NewReminder>
-			<Button>
-				<Plus className="size-4" />
-				<span className="sr-only md:not-sr-only">
-					<T k="reminders.addButton" />
-				</span>
-			</Button>
-		</NewReminder>
-	</div>
+    <div className="flex items-center justify-end gap-3">
+    	<div className="relative w-full">
+    		<Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2 transform" />
+    		<Input
+    			ref={r => {
+    				autoFocusRef.current = r
+    			}}
+    			type="text"
+    			placeholder={t("reminders.search.placeholder")}
+    			value={remindersSearchQuery}
+    			onChange={e => setRemindersSearchQuery(e.target.value)}
+    			className="w-full pl-10"
+    		/>
+    	</div>
+    	{remindersSearchQuery !== "" ? (
+    		<Button variant="outline" onClick={() => setRemindersSearchQuery("")}>
+    			<X className="size-4" />
+    			<span className="sr-only md:not-sr-only">
+    				<T k="common.clear" />
+    			</span>
+    		</Button>
+    	) : null}
+    	<NewReminder>
+    		<Button>
+    			<Plus className="size-4" />
+    			<span className="sr-only md:not-sr-only">
+    				<T k="reminders.addButton" />
+    			</span>
+    		</Button>
+    	</NewReminder>
+    </div>
     )
 
 }
 
 function NoPeopleState() {
 return (
+
 <div className="flex min-h-[calc(100dvh-12rem-env(safe-area-inset-bottom))] flex-col items-center justify-center gap-8 text-center md:min-h-[calc(100dvh-6rem)]">
 <ReminderTour />
 </div>
@@ -20605,6 +20611,7 @@ return (
 
 function NoRemindersState() {
 return (
+
 <div className="flex min-h-[calc(100dvh-12rem-env(safe-area-inset-bottom))] flex-col items-center justify-center gap-8 text-center md:min-h-[calc(100dvh-6rem)]">
 <ReminderTour />
 </div>
@@ -20613,6 +20620,7 @@ return (
 
 function NoSearchResultsState({ searchQuery }: { searchQuery: string }) {
 return (
+
 <div className="flex flex-col items-center justify-center space-y-4 py-12 text-center">
 <Search className="text-muted-foreground size-8" />
 <div className="space-y-2">
@@ -20629,6 +20637,7 @@ return (
 
 function AllCaughtUpState() {
 return (
+
 <div className="flex flex-col items-center justify-center space-y-4 py-12 text-center">
 <Bell className="text-muted-foreground size-8" />
 <div className="space-y-2">
@@ -21496,33 +21505,33 @@ select: (me) => me.$isLoaded ? me : me.$jazz.loadingState === "loading" ? undefi
 
     let people = me?.root?.people ?? []
     let dueReminderCount = people
-	.filter(person => !isDeleted(person))
-	.flatMap(person => person.reminders)
-	.filter(reminder => reminder?.$isLoaded)
-	.filter(reminder => !reminder.done && !isDeleted(reminder))
-	.filter(reminder => isDueToday(reminder)).length
+    .filter(person => !isDeleted(person))
+    .flatMap(person => person.reminders)
+    .filter(reminder => reminder?.$isLoaded)
+    .filter(reminder => !reminder.done && !isDeleted(reminder))
+    .filter(reminder => isDueToday(reminder)).length
 
     useEffect(() => {
-	setAppBadge(dueReminderCount)
+    setAppBadge(dueReminderCount)
     }, [dueReminderCount])
 
     // For unauthenticated users who skipped tour, show empty state
     if (!me?.$isLoaded) {
-	return (
-		<>
-			<Outlet />
-			<StatusIndicator />
-			<Navigation dueReminderCount={0} />
-		</>
-	)
+    return (
+    	<>
+    		<Outlet />
+    		<StatusIndicator />
+    		<Navigation dueReminderCount={0} />
+    	</>
+    )
     }
 
     return (
-	<>
-		<Outlet />
-		<StatusIndicator />
-		<Navigation dueReminderCount={dueReminderCount} />
-	</>
+    <>
+    	<Outlet />
+    	<StatusIndicator />
+    	<Navigation dueReminderCount={dueReminderCount} />
+    </>
     )
 
 }
@@ -21545,13 +21554,13 @@ let isAppBadgeSupported =
 if (!isAppBadgeSupported) return
 
     try {
-	if (count > 0) {
-		await navigator.setAppBadge(count)
-	} else {
-		await navigator.clearAppBadge()
-	}
+    if (count > 0) {
+    	await navigator.setAppBadge(count)
+    } else {
+    	await navigator.clearAppBadge()
+    }
     } catch (error) {
-	console.warn("Failed to set app badge:", error)
+    console.warn("Failed to set app badge:", error)
     }
 
 }
@@ -21712,101 +21721,101 @@ let steps = useSteps()
 let [direction, setDirection] = useState<Direction>()
 
     function nextStep() {
-	setDirection("right")
-	// this timeout helps setting the diretion before we set the step
-	// so we can avoid the transition delay for the first "next" press
-	setTimeout(
-		() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1)),
-		10,
-	)
+    setDirection("right")
+    // this timeout helps setting the diretion before we set the step
+    // so we can avoid the transition delay for the first "next" press
+    setTimeout(
+    	() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1)),
+    	10,
+    )
     }
 
     function prevStep() {
-	setDirection("left")
-	setCurrentStep(Math.max(currentStep - 1, 0))
+    setDirection("left")
+    setCurrentStep(Math.max(currentStep - 1, 0))
     }
 
     return (
-	<div
-		className="absolute inset-0"
-		style={{
-			paddingTop: "max(1.5rem, env(safe-area-inset-top))",
-			paddingBottom: "max(1.5rem, env(safe-area-inset-bottom))",
-			paddingRight: "max(0.75rem, env(safe-area-inset-right))",
-			paddingLeft: "max(0.75rem, env(safe-area-inset-left))",
-		}}
-	>
-		<div className="relative h-full w-full">
-			<div className="items-top absolute inset-x-0 top-0 flex gap-4">
-				<Link to="/" className="inline-flex items-center gap-4">
-					<motion.img
-						src="/app/icons/icon-192x192.png"
-						className="size-16 rounded-md"
-						layoutId="logo"
-					/>
-					<motion.div layoutId="title">
-						<TypographyH1>
-							<T k="welcome.title" />
-						</TypographyH1>
-					</motion.div>
-				</Link>
-				<div className="flex-1" />
-				<motion.div layoutId="skip">
-					<Button variant="outline" asChild>
-						<Link to="/people" onClick={() => setTourSkipped(true)}>
-							<SkipForwardFill />
-							<T k="welcome.skip" />
-						</Link>
-					</Button>
-				</motion.div>
-			</div>
-			<div className="absolute inset-x-0 top-1/2 -translate-y-1/2">
-				<div className="mx-auto w-full max-w-md">
-					<AnimatePresence mode="wait" custom={direction}>
-						<motion.div
-							key={steps[currentStep]}
-							custom={direction}
-							initial="enter"
-							animate="center"
-							exit="exit"
-							variants={{
-								enter: (dir: Direction) => ({
-									opacity: 0,
-									x: { left: -12, right: 12, _: 0 }[dir ?? "_"],
-								}),
-								center: { opacity: 1, x: 0 },
-								exit: (dir: Direction) => ({
-									opacity: 0,
-									x: { left: 12, right: -12, _: 0 }[dir ?? "_"],
-								}),
-							}}
-							transition={{
-								duration: 0.075,
-								delay: direction === undefined ? 0.5 : 0,
-							}}
-						>
-							{renderStep(steps[currentStep], setCurrentStep)}
-						</motion.div>
-					</AnimatePresence>
-				</div>
-			</div>
-			<div className="absolute inset-x-0 bottom-0 flex justify-center">
-				{currentStep > 0 && (
-					<Button variant="outline" onClick={prevStep} className="h-12">
-						<ChevronLeft />
-						<T k="navigation.previous" />
-					</Button>
-				)}
-				<div className="flex-1" />
-				{currentStep !== steps.length - 1 && (
-					<Button onClick={nextStep} className="h-12">
-						<T k="navigation.next" />
-						<ChevronRight />
-					</Button>
-				)}
-			</div>
-		</div>
-	</div>
+    <div
+    	className="absolute inset-0"
+    	style={{
+    		paddingTop: "max(1.5rem, env(safe-area-inset-top))",
+    		paddingBottom: "max(1.5rem, env(safe-area-inset-bottom))",
+    		paddingRight: "max(0.75rem, env(safe-area-inset-right))",
+    		paddingLeft: "max(0.75rem, env(safe-area-inset-left))",
+    	}}
+    >
+    	<div className="relative h-full w-full">
+    		<div className="items-top absolute inset-x-0 top-0 flex gap-4">
+    			<Link to="/" className="inline-flex items-center gap-4">
+    				<motion.img
+    					src="/app/icons/icon-192x192.png"
+    					className="size-16 rounded-md"
+    					layoutId="logo"
+    				/>
+    				<motion.div layoutId="title">
+    					<TypographyH1>
+    						<T k="welcome.title" />
+    					</TypographyH1>
+    				</motion.div>
+    			</Link>
+    			<div className="flex-1" />
+    			<motion.div layoutId="skip">
+    				<Button variant="outline" asChild>
+    					<Link to="/people" onClick={() => setTourSkipped(true)}>
+    						<SkipForwardFill />
+    						<T k="welcome.skip" />
+    					</Link>
+    				</Button>
+    			</motion.div>
+    		</div>
+    		<div className="absolute inset-x-0 top-1/2 -translate-y-1/2">
+    			<div className="mx-auto w-full max-w-md">
+    				<AnimatePresence mode="wait" custom={direction}>
+    					<motion.div
+    						key={steps[currentStep]}
+    						custom={direction}
+    						initial="enter"
+    						animate="center"
+    						exit="exit"
+    						variants={{
+    							enter: (dir: Direction) => ({
+    								opacity: 0,
+    								x: { left: -12, right: 12, _: 0 }[dir ?? "_"],
+    							}),
+    							center: { opacity: 1, x: 0 },
+    							exit: (dir: Direction) => ({
+    								opacity: 0,
+    								x: { left: 12, right: -12, _: 0 }[dir ?? "_"],
+    							}),
+    						}}
+    						transition={{
+    							duration: 0.075,
+    							delay: direction === undefined ? 0.5 : 0,
+    						}}
+    					>
+    						{renderStep(steps[currentStep], setCurrentStep)}
+    					</motion.div>
+    				</AnimatePresence>
+    			</div>
+    		</div>
+    		<div className="absolute inset-x-0 bottom-0 flex justify-center">
+    			{currentStep > 0 && (
+    				<Button variant="outline" onClick={prevStep} className="h-12">
+    					<ChevronLeft />
+    					<T k="navigation.previous" />
+    				</Button>
+    			)}
+    			<div className="flex-1" />
+    			{currentStep !== steps.length - 1 && (
+    				<Button onClick={nextStep} className="h-12">
+    					<T k="navigation.next" />
+    					<ChevronRight />
+    				</Button>
+    			)}
+    		</div>
+    	</div>
+    </div>
     )
 
 }
@@ -21820,21 +21829,21 @@ let isPWAInstalled = useIsPWAInstalled()
 
     let showPWAInstallStep = (isAndroid || isIOS) && !isPWAInstalled
     return showPWAInstallStep
-	? ([
-			"welcome",
-			"install-pwa",
-			"add-person",
-			"add-note",
-			"add-reminder",
-			"finish-setup",
-		] as const)
-	: ([
-			"welcome",
-			"add-person",
-			"add-note",
-			"add-reminder",
-			"finish-setup",
-		] as const)
+    ? ([
+    		"welcome",
+    		"install-pwa",
+    		"add-person",
+    		"add-note",
+    		"add-reminder",
+    		"finish-setup",
+    	] as const)
+    : ([
+    		"welcome",
+    		"add-person",
+    		"add-note",
+    		"add-reminder",
+    		"finish-setup",
+    	] as const)
 
 }
 
@@ -21862,6 +21871,7 @@ return null
 
 function WelcomeStep() {
 return (
+
 <div className="space-y-3 text-left">
 <Stars className="text-muted-foreground size-16" />
 <TypographyH2>Welcome to Tilly</TypographyH2>
@@ -21874,6 +21884,7 @@ return (
 
 function InstallPWAStep(props: { onSuccess: () => void }) {
 return (
+
 <div className="text-muted-foreground space-y-3 text-left">
 <Phone className="text-muted-foreground size-16" />
 <TypographyH2>
@@ -21888,42 +21899,42 @@ function FinishSetupStep() {
 let setTourSkipped = useAppStore(s => s.setTourSkipped)
 
     return (
-	<div className="space-y-3 text-left">
-		<GearFill className="text-muted-foreground size-16" />
-		<TypographyH2>
-			<T k="finish.title" />
-		</TypographyH2>
-		<div className="space-y-3">
-			<div className="flex items-center gap-3">
-				<CheckCircleFill className="text-primary size-4" />
-				<p>
-					<T k="finish.backup" />
-				</p>
-			</div>
-			<div className="flex items-center gap-3">
-				<CheckCircleFill className="text-primary size-4" />
-				<p>
-					<T k="finish.notifications" />
-				</p>
-			</div>
-			<div className="flex items-center gap-3">
-				<CheckCircleFill className="text-primary size-4" />
-				<p>
-					<T k="finish.plus" />
-				</p>
-			</div>
-		</div>
-		<TypographyLead>
-			<T k="finish.description" />
-		</TypographyLead>
-		<div className="mt-8 flex justify-end">
-			<Button asChild>
-				<Link to="/settings" onClick={() => setTourSkipped(true)}>
-					<T k="finish.button" />
-				</Link>
-			</Button>
-		</div>
-	</div>
+    <div className="space-y-3 text-left">
+    	<GearFill className="text-muted-foreground size-16" />
+    	<TypographyH2>
+    		<T k="finish.title" />
+    	</TypographyH2>
+    	<div className="space-y-3">
+    		<div className="flex items-center gap-3">
+    			<CheckCircleFill className="text-primary size-4" />
+    			<p>
+    				<T k="finish.backup" />
+    			</p>
+    		</div>
+    		<div className="flex items-center gap-3">
+    			<CheckCircleFill className="text-primary size-4" />
+    			<p>
+    				<T k="finish.notifications" />
+    			</p>
+    		</div>
+    		<div className="flex items-center gap-3">
+    			<CheckCircleFill className="text-primary size-4" />
+    			<p>
+    				<T k="finish.plus" />
+    			</p>
+    		</div>
+    	</div>
+    	<TypographyLead>
+    		<T k="finish.description" />
+    	</TypographyLead>
+    	<div className="mt-8 flex justify-end">
+    		<Button asChild>
+    			<Link to="/settings" onClick={() => setTourSkipped(true)}>
+    				<T k="finish.button" />
+    			</Link>
+    		</Button>
+    	</div>
+    </div>
     )
 
 }
@@ -22191,25 +22202,25 @@ async ({ request, event }) => {
 let cache = await caches.open(APP_SHELL_CACHE)
 let appShellRequest = new Request("/app", { credentials: "same-origin" })
 
-	try {
-		let preloadPromise = Reflect.get(event, "preloadResponse")
-		let preload =
-			preloadPromise &&
-			typeof (preloadPromise as Promise<unknown>).then === "function"
-				? await (preloadPromise as Promise<Response | null>)
-				: null
-		let networkResponse = preload ?? (await fetch(request))
-		cache.put(appShellRequest, networkResponse.clone())
-		return networkResponse
-	} catch (error) {
-		console.log(
-			"[SW] Navigation request failed, serving cached shell:",
-			error,
-		)
-		let cachedResponse = await cache.match(appShellRequest)
-		if (cachedResponse) return cachedResponse
-		return new Response("Offline", { status: 503 })
-	}
+    try {
+    	let preloadPromise = Reflect.get(event, "preloadResponse")
+    	let preload =
+    		preloadPromise &&
+    		typeof (preloadPromise as Promise<unknown>).then === "function"
+    			? await (preloadPromise as Promise<Response | null>)
+    			: null
+    	let networkResponse = preload ?? (await fetch(request))
+    	cache.put(appShellRequest, networkResponse.clone())
+    	return networkResponse
+    } catch (error) {
+    	console.log(
+    		"[SW] Navigation request failed, serving cached shell:",
+    		error,
+    	)
+    	let cachedResponse = await cache.match(appShellRequest)
+    	if (cachedResponse) return cachedResponse
+    	return new Response("Offline", { status: 503 })
+    }
     },
 
 )
@@ -22227,17 +22238,17 @@ let data = parseMessageEventData(event.data)
 if (!data) return
 
     if (data.type === "SKIP_WAITING") {
-	sw.skipWaiting()
-	return
+    sw.skipWaiting()
+    return
     }
 
     if (data.type === "SET_USER_ID") {
-	event.waitUntil(setUserIdInCache(data.userId))
-	return
+    event.waitUntil(setUserIdInCache(data.userId))
+    return
     }
 
     if (data.type === "CLEAR_USER_ID") {
-	event.waitUntil(clearUserIdFromCache())
+    event.waitUntil(clearUserIdFromCache())
     }
 
 })
@@ -22254,7 +22265,7 @@ sw.addEventListener("notificationclick", event => {
 event.notification.close()
 
     if (event.action === "dismiss") {
-	return
+    return
     }
 
     let notificationData = toNotificationPayload(event.notification.data)
@@ -22270,26 +22281,26 @@ notificationData: NotificationPayload,
 let currentUserId = await getUserIdFromCache()
 
     if (!currentUserId) {
-	console.log("[SW] No user ID stored, suppressing notification")
-	return
+    console.log("[SW] No user ID stored, suppressing notification")
+    return
     }
 
     if (!notificationData.userId) {
-	console.log(
-		"[SW] No userId in payload but user is signed in, showing notification",
-	)
-	await showNotification(notificationData)
-	return
+    console.log(
+    	"[SW] No userId in payload but user is signed in, showing notification",
+    )
+    await showNotification(notificationData)
+    return
     }
 
     if (currentUserId === notificationData.userId) {
-	await showNotification(notificationData)
+    await showNotification(notificationData)
     } else {
-	console.log(
-		"[SW] User ID mismatch, suppressing notification",
-		currentUserId,
-		notificationData.userId,
-	)
+    console.log(
+    	"[SW] User ID mismatch, suppressing notification",
+    	currentUserId,
+    	notificationData.userId,
+    )
     }
 
 }
@@ -22307,14 +22318,14 @@ data: notificationData,
 })
 
     if (notificationData.count) {
-	let setAppBadge = Reflect.get(sw.registration, "setAppBadge")
-	if (typeof setAppBadge === "function") {
-		try {
-			await setAppBadge.call(sw.registration, notificationData.count)
-		} catch (error) {
-			console.log("[SW] Unable to set app badge:", error)
-		}
-	}
+    let setAppBadge = Reflect.get(sw.registration, "setAppBadge")
+    if (typeof setAppBadge === "function") {
+    	try {
+    		await setAppBadge.call(sw.registration, notificationData.count)
+    	} catch (error) {
+    		console.log("[SW] Unable to set app badge:", error)
+    	}
+    }
     }
 
 }
@@ -22326,27 +22337,27 @@ includeUncontrolled: true,
 })
 
     for (let client of clientList) {
-	if (isWindowClient(client) && client.url.includes("/app")) {
-		await client.focus()
-		if (typeof client.navigate === "function") {
-			await client.navigate(targetUrl)
-		}
-		return
-	}
+    if (isWindowClient(client) && client.url.includes("/app")) {
+    	await client.focus()
+    	if (typeof client.navigate === "function") {
+    		await client.navigate(targetUrl)
+    	}
+    	return
+    }
     }
 
     for (let client of clientList) {
-	if (isWindowClient(client) && client.url.startsWith(sw.location.origin)) {
-		await client.focus()
-		if (typeof client.navigate === "function") {
-			await client.navigate(targetUrl)
-		}
-		return
-	}
+    if (isWindowClient(client) && client.url.startsWith(sw.location.origin)) {
+    	await client.focus()
+    	if (typeof client.navigate === "function") {
+    		await client.navigate(targetUrl)
+    	}
+    	return
+    }
     }
 
     if (sw.clients.openWindow) {
-	await sw.clients.openWindow(targetUrl)
+    await sw.clients.openWindow(targetUrl)
     }
 
 }
@@ -22388,43 +22399,43 @@ if (!eventData) return result
 
     let parsed: unknown = null
     try {
-	parsed = eventData.json()
+    parsed = eventData.json()
     } catch (error) {
-	console.log("[SW] Error parsing push data:", error)
+    console.log("[SW] Error parsing push data:", error)
     }
 
     if (parsed && typeof parsed === "object") {
-	let keys: Array<keyof NotificationPayload> = [
-		"title",
-		"body",
-		"icon",
-		"badge",
-		"tag",
-		"userId",
-		"url",
-		"count",
-	]
-	for (let key of keys) {
-		let value = Reflect.get(parsed, key)
-		if (value === undefined || value === null) continue
-		if (key === "count") {
-			if (typeof value === "number") {
-				result.count = value
-			}
-			continue
-		}
-		if (typeof value === "string") {
-			result[key] = value
-		}
-	}
-	return result
+    let keys: Array<keyof NotificationPayload> = [
+    	"title",
+    	"body",
+    	"icon",
+    	"badge",
+    	"tag",
+    	"userId",
+    	"url",
+    	"count",
+    ]
+    for (let key of keys) {
+    	let value = Reflect.get(parsed, key)
+    	if (value === undefined || value === null) continue
+    	if (key === "count") {
+    		if (typeof value === "number") {
+    			result.count = value
+    		}
+    		continue
+    	}
+    	if (typeof value === "string") {
+    		result[key] = value
+    	}
+    }
+    return result
     }
 
     if (typeof eventData.text === "function") {
-	let fallback = eventData.text()
-	if (typeof fallback === "string" && fallback.length > 0) {
-		result.body = fallback
-	}
+    let fallback = eventData.text()
+    if (typeof fallback === "string" && fallback.length > 0) {
+    	result.body = fallback
+    }
     }
     return result
 
@@ -22968,17 +22979,17 @@ return context.redirect(`/${locale}/`, 301)
     let response = await next()
 
     if (response.status === 404) {
-	let pathname = context.url.pathname
+    let pathname = context.url.pathname
 
-	// Skip 404 rewrite for service worker files
-	if (pathname === "/sw.js" || pathname.startsWith("/workbox-")) {
-		return response
-	}
+    // Skip 404 rewrite for service worker files
+    if (pathname === "/sw.js" || pathname.startsWith("/workbox-")) {
+    	return response
+    }
 
-	let locale = pathname.startsWith("/de") ? "de" : "en"
-	let notFoundPage = `/${locale}/404`
-	console.log("404 rewrite:", { pathname, locale, notFoundPage })
-	return context.rewrite(notFoundPage)
+    let locale = pathname.startsWith("/de") ? "de" : "en"
+    let notFoundPage = `/${locale}/404`
+    console.log("404 rewrite:", { pathname, locale, notFoundPage })
+    return context.rewrite(notFoundPage)
     }
 
     return response
@@ -23080,18 +23091,18 @@ let metaDescription =
 				meta.setAttribute("content", bg)
 			}
 
-		updateThemeColor()
+    	updateThemeColor()
 
-		let observer = new MutationObserver(mutations => {
-			for (let m of mutations) {
-				if (m.type === "attributes" && m.attributeName === "class") {
-					updateThemeColor()
-				}
-			}
-		})
+    	let observer = new MutationObserver(mutations => {
+    		for (let m of mutations) {
+    			if (m.type === "attributes" && m.attributeName === "class") {
+    				updateThemeColor()
+    			}
+    		}
+    	})
 
-		observer.observe(document.documentElement, { attributes: true })
-	</script>
+    	observer.observe(document.documentElement, { attributes: true })
+    </script>
     </body>
 
 </html>
@@ -23114,7 +23125,7 @@ locale="de"
     <h1>Seite nicht gefunden</h1>
     <p>Die gesuchte Seite existiert nicht.</p>
     <p>
-	<a href="/de/">Zur Startseite zurück</a> oder <a href="/app">App öffnen</a>.
+    <a href="/de/">Zur Startseite zurück</a> oder <a href="/app">App öffnen</a>.
     </p>
 
 </LegalPageLayout>
@@ -23135,8 +23146,8 @@ let posts = await getCollection("blog")
 let dePosts = posts.filter(post => post.id.endsWith("/de"))
 
     return dePosts.map(post => ({
-	params: { slug: post.id.replace("/de", "") },
-	props: { post },
+    params: { slug: post.id.replace("/de", "") },
+    props: { post },
     }))
 
 }
@@ -23157,111 +23168,111 @@ ogImage={post.data.ogImage}
 >
 
     <Navbar
-	locale="de"
-	client:load
-	logo={{
-		text: "Tilly",
-		href: "/de/",
-	}}
-	navigation={[
-		{ name: "Funktionen", href: "/de/#features" },
-		{ name: "Tarife", href: "/de/#experience" },
-		{ name: "FAQ", href: "/de/#faq" },
-		{ name: "Blog", href: "/de/blog" },
-	]}
-	cta={{
-		text: "Zur App",
-		href: "/app",
-	}}
-	languages={[
-		{ name: "English", href: `/en/blog/${post.id.replace("/de", "")}` },
-		{ name: "Deutsch", href: `/de/blog/${post.id.replace("/de", "")}` },
-	]}
+    locale="de"
+    client:load
+    logo={{
+    	text: "Tilly",
+    	href: "/de/",
+    }}
+    navigation={[
+    	{ name: "Funktionen", href: "/de/#features" },
+    	{ name: "Tarife", href: "/de/#experience" },
+    	{ name: "FAQ", href: "/de/#faq" },
+    	{ name: "Blog", href: "/de/blog" },
+    ]}
+    cta={{
+    	text: "Zur App",
+    	href: "/app",
+    }}
+    languages={[
+    	{ name: "English", href: `/en/blog/${post.id.replace("/de", "")}` },
+    	{ name: "Deutsch", href: `/de/blog/${post.id.replace("/de", "")}` },
+    ]}
     />
 
     <main class="container mx-auto px-6 py-12 md:px-8 md:py-24">
-	<article class="prose prose-lg dark:prose-invert mx-auto max-w-3xl">
-		<div class="not-prose mb-8">
-			<a
-				href="/de/blog"
-				class="text-muted-foreground hover:text-foreground mb-4 inline-block text-sm transition-colors"
-			>
-				← Zurück zum Blog
-			</a>
-			<h1 class="text-4xl font-bold tracking-tight md:text-5xl">
-				{post.data.title}
-			</h1>
-			<p class="text-muted-foreground mt-4 text-lg">
-				{post.data.description}
-			</p>
-			<div class="mt-4 flex items-center gap-4 text-sm">
-				<time class="text-muted-foreground">
-					{post.data.pubDate}
-				</time>
-				<div class="flex gap-2">
-					{post.data.tags.map(tag => (
-						<span class="bg-muted text-muted-foreground rounded px-2 py-1 text-xs">
-							{tag}
-						</span>
-					))}
-				</div>
-			</div>
-			<div class="mt-6 flex items-center gap-3 border-t pt-6">
-				<img
-					src={post.data.author.avatar}
-					alt={post.data.author.name}
-					class="h-12 w-12 rounded-full object-cover"
-				/>
-				<div>
-					<p class="font-medium">
-						{post.data.author.name}
-					</p>
-					<p class="text-muted-foreground text-sm">
-						{post.data.author.role}
-					</p>
-				</div>
-			</div>
-		</div>
+    <article class="prose prose-lg dark:prose-invert mx-auto max-w-3xl">
+    	<div class="not-prose mb-8">
+    		<a
+    			href="/de/blog"
+    			class="text-muted-foreground hover:text-foreground mb-4 inline-block text-sm transition-colors"
+    		>
+    			← Zurück zum Blog
+    		</a>
+    		<h1 class="text-4xl font-bold tracking-tight md:text-5xl">
+    			{post.data.title}
+    		</h1>
+    		<p class="text-muted-foreground mt-4 text-lg">
+    			{post.data.description}
+    		</p>
+    		<div class="mt-4 flex items-center gap-4 text-sm">
+    			<time class="text-muted-foreground">
+    				{post.data.pubDate}
+    			</time>
+    			<div class="flex gap-2">
+    				{post.data.tags.map(tag => (
+    					<span class="bg-muted text-muted-foreground rounded px-2 py-1 text-xs">
+    						{tag}
+    					</span>
+    				))}
+    			</div>
+    		</div>
+    		<div class="mt-6 flex items-center gap-3 border-t pt-6">
+    			<img
+    				src={post.data.author.avatar}
+    				alt={post.data.author.name}
+    				class="h-12 w-12 rounded-full object-cover"
+    			/>
+    			<div>
+    				<p class="font-medium">
+    					{post.data.author.name}
+    				</p>
+    				<p class="text-muted-foreground text-sm">
+    					{post.data.author.role}
+    				</p>
+    			</div>
+    		</div>
+    	</div>
 
-		<Content />
-	</article>
+    	<Content />
+    </article>
     </main>
 
     <Footer
-	navigation={{
-		main: [
-			{ name: "Funktionen", href: "/de/#features" },
-			{ name: "Tarife", href: "/de/#experience" },
-			{ name: "FAQ", href: "/de/#faq" },
-			{ name: "Blog", href: "/de/blog" },
-			{ name: "Impressum", href: "/de/imprint" },
-			{ name: "Datenschutz", href: "/de/privacy" },
-		],
-		social: [
-			{
-				name: "Twitter",
-				href: "https://twitter.com/tillydotsocial",
-				icon: "Twitter",
-			},
-			{
-				name: "Instagram",
-				href: "https://instagram.com/tilly.social",
-				icon: "Instagram",
-			},
-			{
-				name: "GitHub",
-				href: "https://github.com/ccssmnn/tilly",
-				icon: "Github",
-			},
-		],
-		languages: [
-			{ name: "English", href: "/en/blog" },
-			{ name: "Deutsch", href: "/de/blog" },
-		],
-	}}
-	company={{
-		name: "Tilly",
-	}}
+    navigation={{
+    	main: [
+    		{ name: "Funktionen", href: "/de/#features" },
+    		{ name: "Tarife", href: "/de/#experience" },
+    		{ name: "FAQ", href: "/de/#faq" },
+    		{ name: "Blog", href: "/de/blog" },
+    		{ name: "Impressum", href: "/de/imprint" },
+    		{ name: "Datenschutz", href: "/de/privacy" },
+    	],
+    	social: [
+    		{
+    			name: "Twitter",
+    			href: "https://twitter.com/tillydotsocial",
+    			icon: "Twitter",
+    		},
+    		{
+    			name: "Instagram",
+    			href: "https://instagram.com/tilly.social",
+    			icon: "Instagram",
+    		},
+    		{
+    			name: "GitHub",
+    			href: "https://github.com/ccssmnn/tilly",
+    			icon: "Github",
+    		},
+    	],
+    	languages: [
+    		{ name: "English", href: "/en/blog" },
+    		{ name: "Deutsch", href: "/de/blog" },
+    	],
+    }}
+    company={{
+    	name: "Tilly",
+    }}
     />
 
 </MinimalMarketingLayout>
@@ -23293,117 +23304,117 @@ description="Tipps und Tricks, um mit Tilly ein besserer Freund zu sein"
 >
 
     <Navbar
-	locale="de"
-	client:load
-	logo={{
-		text: "Tilly",
-		href: "/de/",
-	}}
-	navigation={[
-		{ name: "Funktionen", href: "/de/#features" },
-		{ name: "Tarife", href: "/de/#experience" },
-		{ name: "FAQ", href: "/de/#faq" },
-		{ name: "Blog", href: "/de/blog" },
-	]}
-	cta={{
-		text: "Zur App",
-		href: "/app",
-	}}
-	languages={[
-		{ name: "English", href: "/en/blog" },
-		{ name: "Deutsch", href: "/de/blog" },
-	]}
+    locale="de"
+    client:load
+    logo={{
+    	text: "Tilly",
+    	href: "/de/",
+    }}
+    navigation={[
+    	{ name: "Funktionen", href: "/de/#features" },
+    	{ name: "Tarife", href: "/de/#experience" },
+    	{ name: "FAQ", href: "/de/#faq" },
+    	{ name: "Blog", href: "/de/blog" },
+    ]}
+    cta={{
+    	text: "Zur App",
+    	href: "/app",
+    }}
+    languages={[
+    	{ name: "English", href: "/en/blog" },
+    	{ name: "Deutsch", href: "/de/blog" },
+    ]}
     />
 
     <main class="container mx-auto px-6 py-12 md:px-8 md:py-24">
-	<div class="mx-auto max-w-3xl">
-		<h1 class="text-4xl font-bold tracking-tight md:text-5xl">Blog</h1>
-		<p class="text-muted-foreground mt-4 text-lg">
-			Tipps und Tricks, um mit Tilly ein besserer Freund zu sein
-		</p>
+    <div class="mx-auto max-w-3xl">
+    	<h1 class="text-4xl font-bold tracking-tight md:text-5xl">Blog</h1>
+    	<p class="text-muted-foreground mt-4 text-lg">
+    		Tipps und Tricks, um mit Tilly ein besserer Freund zu sein
+    	</p>
 
-		<div class="mt-12 space-y-8">
-			{posts.map(post => {
-				let slug = post.id.replace("/de", "")
-				return (
-					<article class="border-border border-b pb-8">
-						<a href={`/de/blog/${slug}`} class="group">
-							<h2 class="group-hover:text-primary text-2xl font-bold transition-colors">
-								{post.data.title}
-							</h2>
-							<p class="text-muted-foreground mt-2">
-								{post.data.description}
-							</p>
-							<div class="mt-3 flex items-center gap-4 text-sm">
-								<time class="text-muted-foreground">
-									{post.data.pubDate}
-								</time>
-								<div class="flex gap-2">
-									{post.data.tags.map(tag => (
-										<span class="bg-muted text-muted-foreground rounded px-2 py-1 text-xs">
-											{tag}
-										</span>
-									))}
-								</div>
-							</div>
-							<div class="mt-4 flex items-center gap-3">
-								<img
-									src={post.data.author.avatar}
-									alt={post.data.author.name}
-									class="h-10 w-10 rounded-full object-cover"
-								/>
-								<div>
-									<p class="font-medium">
-										{post.data.author.name}
-									</p>
-									<p class="text-muted-foreground text-xs">
-										{post.data.author.role}
-									</p>
-								</div>
-							</div>
-						</a>
-					</article>
-				)
-			})}
-		</div>
-	</div>
+    	<div class="mt-12 space-y-8">
+    		{posts.map(post => {
+    			let slug = post.id.replace("/de", "")
+    			return (
+    				<article class="border-border border-b pb-8">
+    					<a href={`/de/blog/${slug}`} class="group">
+    						<h2 class="group-hover:text-primary text-2xl font-bold transition-colors">
+    							{post.data.title}
+    						</h2>
+    						<p class="text-muted-foreground mt-2">
+    							{post.data.description}
+    						</p>
+    						<div class="mt-3 flex items-center gap-4 text-sm">
+    							<time class="text-muted-foreground">
+    								{post.data.pubDate}
+    							</time>
+    							<div class="flex gap-2">
+    								{post.data.tags.map(tag => (
+    									<span class="bg-muted text-muted-foreground rounded px-2 py-1 text-xs">
+    										{tag}
+    									</span>
+    								))}
+    							</div>
+    						</div>
+    						<div class="mt-4 flex items-center gap-3">
+    							<img
+    								src={post.data.author.avatar}
+    								alt={post.data.author.name}
+    								class="h-10 w-10 rounded-full object-cover"
+    							/>
+    							<div>
+    								<p class="font-medium">
+    									{post.data.author.name}
+    								</p>
+    								<p class="text-muted-foreground text-xs">
+    									{post.data.author.role}
+    								</p>
+    							</div>
+    						</div>
+    					</a>
+    				</article>
+    			)
+    		})}
+    	</div>
+    </div>
     </main>
 
     <Footer
-	navigation={{
-		main: [
-			{ name: "Funktionen", href: "/de/#features" },
-			{ name: "Tarife", href: "/de/#experience" },
-			{ name: "FAQ", href: "/de/#faq" },
-			{ name: "Blog", href: "/de/blog" },
-			{ name: "Impressum", href: "/de/imprint" },
-			{ name: "Datenschutz", href: "/de/privacy" },
-		],
-		social: [
-			{
-				name: "Twitter",
-				href: "https://twitter.com/tillydotsocial",
-				icon: "Twitter",
-			},
-			{
-				name: "Instagram",
-				href: "https://instagram.com/tilly.social",
-				icon: "Instagram",
-			},
-			{
-				name: "GitHub",
-				href: "https://github.com/ccssmnn/tilly",
-				icon: "Github",
-			},
-		],
-		languages: [
-			{ name: "English", href: "/en/blog" },
-			{ name: "Deutsch", href: "/de/blog" },
-		],
-	}}
-	company={{
-		name: "Tilly",
-	}}
+    navigation={{
+    	main: [
+    		{ name: "Funktionen", href: "/de/#features" },
+    		{ name: "Tarife", href: "/de/#experience" },
+    		{ name: "FAQ", href: "/de/#faq" },
+    		{ name: "Blog", href: "/de/blog" },
+    		{ name: "Impressum", href: "/de/imprint" },
+    		{ name: "Datenschutz", href: "/de/privacy" },
+    	],
+    	social: [
+    		{
+    			name: "Twitter",
+    			href: "https://twitter.com/tillydotsocial",
+    			icon: "Twitter",
+    		},
+    		{
+    			name: "Instagram",
+    			href: "https://instagram.com/tilly.social",
+    			icon: "Instagram",
+    		},
+    		{
+    			name: "GitHub",
+    			href: "https://github.com/ccssmnn/tilly",
+    			icon: "Github",
+    		},
+    	],
+    	languages: [
+    		{ name: "English", href: "/en/blog" },
+    		{ name: "Deutsch", href: "/de/blog" },
+    	],
+    }}
+    company={{
+    	name: "Tilly",
+    }}
     />
 
 </MinimalMarketingLayout>
@@ -23508,365 +23519,365 @@ description="Bleib in Verbindung mit den Menschen, die dir wichtig sind."
 >
 
     <Navbar
-	client:load
-	logo={{
-		text: "Tilly",
-		href: "/de/",
-	}}
-	locale="de"
-	navigation={[
-		{ name: "Funktionen", href: "#features" },
-		{ name: "Tarife", href: "#experience" },
-		{ name: "FAQ", href: "#faq" },
-		{ name: "Blog", href: "/de/blog" },
-	]}
-	cta={{
-		text: "Zur App",
-		href: "/app",
-	}}
-	languages={[
-		{ name: "English", href: "/en/" },
-		{ name: "Deutsch", href: "/de/" },
-	]}
+    client:load
+    logo={{
+    	text: "Tilly",
+    	href: "/de/",
+    }}
+    locale="de"
+    navigation={[
+    	{ name: "Funktionen", href: "#features" },
+    	{ name: "Tarife", href: "#experience" },
+    	{ name: "FAQ", href: "#faq" },
+    	{ name: "Blog", href: "/de/blog" },
+    ]}
+    cta={{
+    	text: "Zur App",
+    	href: "/app",
+    }}
+    languages={[
+    	{ name: "English", href: "/en/" },
+    	{ name: "Deutsch", href: "/de/" },
+    ]}
     />
 
     <div class="pt-3 pb-12 md:pb-24">
-	<Hero
-		client:load
-		badge={{
-			text: "Tilly ist Open Source",
-			href: "https://github.com/ccssmnn/tilly",
-			description: "Schau dir den Code an",
-		}}
-		title="Vergiss nie wieder, dich zu melden"
-		description="Deine Freunde erzählen dir wichtige Dinge. Tilly hilft dir, dich zu erinnern und nachzufragen, wenn es darauf ankommt."
-		primaryCta={{
-			text: "Jetzt loslegen",
-			href: "/app",
-		}}
-		secondaryCta={{
-			text: "Mehr erfahren",
-			href: "#features",
-		}}
-		media={{
-			kind: "image",
-			src: "/images/screenshots/de-people.webp",
-			alt: "Telefon mit der Tilly-Personenliste",
-			loading: "eager",
-			aspectRatio: "215 / 466",
-			fit: "contain",
-		}}
-	/>
+    <Hero
+    	client:load
+    	badge={{
+    		text: "Tilly ist Open Source",
+    		href: "https://github.com/ccssmnn/tilly",
+    		description: "Schau dir den Code an",
+    	}}
+    	title="Vergiss nie wieder, dich zu melden"
+    	description="Deine Freunde erzählen dir wichtige Dinge. Tilly hilft dir, dich zu erinnern und nachzufragen, wenn es darauf ankommt."
+    	primaryCta={{
+    		text: "Jetzt loslegen",
+    		href: "/app",
+    	}}
+    	secondaryCta={{
+    		text: "Mehr erfahren",
+    		href: "#features",
+    	}}
+    	media={{
+    		kind: "image",
+    		src: "/images/screenshots/de-people.webp",
+    		alt: "Telefon mit der Tilly-Personenliste",
+    		loading: "eager",
+    		aspectRatio: "215 / 466",
+    		fit: "contain",
+    	}}
+    />
     </div>
     <div id="story" class="py-12 md:py-24">
-	<ContentWithTestimonial
-		title="Hier ist das Problem."
-		testimonial={{
-			quote: "Ich brauchte das. Also hab ich's gebaut.",
-			author: {
-				name: "Carl Assmann",
-				title: "Der, der Tilly gebaut hat.",
-				avatar: "/images/avatars/carl.webp",
-			},
-		}}
-	>
-		<p>
-			Dein Freund erzählt von einem Vorstellungsgespräch. Es ist dir wichtig.
-			Doch Wochen später merkst du: Du hast nie nachgefragt.
-		</p>
-		<p>
-			<b>Mit Tilly notierst du es einmal und wirst daran erinnert nachzufragen.</b>
-		</p>
-	</ContentWithTestimonial>
+    <ContentWithTestimonial
+    	title="Hier ist das Problem."
+    	testimonial={{
+    		quote: "Ich brauchte das. Also hab ich's gebaut.",
+    		author: {
+    			name: "Carl Assmann",
+    			title: "Der, der Tilly gebaut hat.",
+    			avatar: "/images/avatars/carl.webp",
+    		},
+    	}}
+    >
+    	<p>
+    		Dein Freund erzählt von einem Vorstellungsgespräch. Es ist dir wichtig.
+    		Doch Wochen später merkst du: Du hast nie nachgefragt.
+    	</p>
+    	<p>
+    		<b>Mit Tilly notierst du es einmal und wirst daran erinnert nachzufragen.</b>
+    	</p>
+    </ContentWithTestimonial>
     </div>
     <div class="py-12 md:py-24">
-	<FeatureGridOffset
-		title="Situationen, in denen Tilly hilft"
-		subtitle="Echte Probleme, die Tilly löst"
-		problems={[
-			{
-				name: "Vergisst, dich zu melden",
-				description: "Das Leben wird hektisch und wichtige Menschen geraten aus dem Blick",
-			},
-			{
-				name: "Echte Gespräche kann man nicht hochscrollen",
-				description: "Echte Gespräche sind nicht in deinem WhatsApp-Chatverlauf",
-			},
-			{
-				name: "Notizen und Todo-Apps fühlen sich nach Arbeit an",
-				description: "Freundschaft sollte sich nicht wie eine Pflicht anfühlen",
-			},
-			{
-				name: "Social Media ist voller unwichtiger Ablenkungen",
-				description: "Freunde verdienen ihren eigenen Raum, frei von Arbeit und Ablenkung",
-			},
-		]}
-	/>
+    <FeatureGridOffset
+    	title="Situationen, in denen Tilly hilft"
+    	subtitle="Echte Probleme, die Tilly löst"
+    	problems={[
+    		{
+    			name: "Vergisst, dich zu melden",
+    			description: "Das Leben wird hektisch und wichtige Menschen geraten aus dem Blick",
+    		},
+    		{
+    			name: "Echte Gespräche kann man nicht hochscrollen",
+    			description: "Echte Gespräche sind nicht in deinem WhatsApp-Chatverlauf",
+    		},
+    		{
+    			name: "Notizen und Todo-Apps fühlen sich nach Arbeit an",
+    			description: "Freundschaft sollte sich nicht wie eine Pflicht anfühlen",
+    		},
+    		{
+    			name: "Social Media ist voller unwichtiger Ablenkungen",
+    			description: "Freunde verdienen ihren eigenen Raum, frei von Arbeit und Ablenkung",
+    		},
+    	]}
+    />
     </div>
 
     <div class="py-12 md:py-24">
-	<FeaturesWithProductScreenshot
-		badge="Wie es funktioniert"
-		title="Einfach. Praktisch. Funktioniert wirklich."
-		features={[
-			{
-				name: "Notiere, was Freunde dir erzählen",
-				description:
-					"Speichere Notizen für jede Person. Behalte Wichtiges im Blick – nicht nur die Telefonnummer.",
-			},
-			{
-				name: "Lass dich erinnern nachzufragen",
-				description:
-					"Setze Erinnerungen, damit du keine wichtigen Momente verpasst.",
-			},
-			{
-				name: "Stärkere Freundschaften aufbauen",
-				description:
-					"Sei da, wenn es darauf ankommt. Sei der Freund, der sich erinnert.",
-			},
-		]}
-		media={{
-			kind: "image",
-			src: "/images/screenshots/de-person.webp",
-			alt: "Telefon mit den Tilly-Notizen zu einer Person",
-			aspectRatio: "215 / 466",
-			fit: "contain",
-		}}
-	/>
+    <FeaturesWithProductScreenshot
+    	badge="Wie es funktioniert"
+    	title="Einfach. Praktisch. Funktioniert wirklich."
+    	features={[
+    		{
+    			name: "Notiere, was Freunde dir erzählen",
+    			description:
+    				"Speichere Notizen für jede Person. Behalte Wichtiges im Blick – nicht nur die Telefonnummer.",
+    		},
+    		{
+    			name: "Lass dich erinnern nachzufragen",
+    			description:
+    				"Setze Erinnerungen, damit du keine wichtigen Momente verpasst.",
+    		},
+    		{
+    			name: "Stärkere Freundschaften aufbauen",
+    			description:
+    				"Sei da, wenn es darauf ankommt. Sei der Freund, der sich erinnert.",
+    		},
+    	]}
+    	media={{
+    		kind: "image",
+    		src: "/images/screenshots/de-person.webp",
+    		alt: "Telefon mit den Tilly-Notizen zu einer Person",
+    		aspectRatio: "215 / 466",
+    		fit: "contain",
+    	}}
+    />
     </div>
     <div class="py-24" id="features">
-	<FeatureGridCentered
-		title="Einfach einfach"
-		description="Alles, was du brauchst, um ein besserer Freund zu sein. Sonst nichts."
-		features={[
-			{
-				name: "Personen & Notizen",
-				description:
-					"Merke dir was wichtig ist – Geburtstage, Interessen, Lebensereignisse und bedeutsame Momente",
-				icon: "PersonHearts",
-			},
-			{
-				name: "Erinnerungen",
-				description:
-					"Sanfte Anstupser zum richtigen Zeitpunkt – damit du keine wichtigen Momente verpasst",
-				icon: "Bell",
-			},
-			{
-				name: "Push-Benachrichtigungen",
-				description:
-					"Verpasse keine Erinnerung – rechtzeitig auf all deinen Geräten",
-				icon: "PhoneFill",
-			},
-			{
-				name: "Tilly Agent (Plus-Tarif)",
-				description:
-					"Ein KI‑Agent, der lose Gedanken ordnet und aktiv hilft, in Kontakt zu bleiben",
-				icon: "Chat",
-			},
-			{
-				name: "Daten unter Kontrolle",
-				description:
-					"Client-seitig verschlüsselte Synchronisation mit verwalteten Schlüsseln für Benachrichtigungen und den Tilly Agent. Exportiere deine Daten jederzeit. Kein Lock-in.",
-				icon: "Download",
-			},
-			{
-				name: "Funktioniert einfach überall",
-				description:
-					"Sofort synchron auf all deinen Geräten. Voll funktionsfähig – auch offline.",
-				icon: "CloudCheck",
-			},
-		]}
-	/>
+    <FeatureGridCentered
+    	title="Einfach einfach"
+    	description="Alles, was du brauchst, um ein besserer Freund zu sein. Sonst nichts."
+    	features={[
+    		{
+    			name: "Personen & Notizen",
+    			description:
+    				"Merke dir was wichtig ist – Geburtstage, Interessen, Lebensereignisse und bedeutsame Momente",
+    			icon: "PersonHearts",
+    		},
+    		{
+    			name: "Erinnerungen",
+    			description:
+    				"Sanfte Anstupser zum richtigen Zeitpunkt – damit du keine wichtigen Momente verpasst",
+    			icon: "Bell",
+    		},
+    		{
+    			name: "Push-Benachrichtigungen",
+    			description:
+    				"Verpasse keine Erinnerung – rechtzeitig auf all deinen Geräten",
+    			icon: "PhoneFill",
+    		},
+    		{
+    			name: "Tilly Agent (Plus-Tarif)",
+    			description:
+    				"Ein KI‑Agent, der lose Gedanken ordnet und aktiv hilft, in Kontakt zu bleiben",
+    			icon: "Chat",
+    		},
+    		{
+    			name: "Daten unter Kontrolle",
+    			description:
+    				"Client-seitig verschlüsselte Synchronisation mit verwalteten Schlüsseln für Benachrichtigungen und den Tilly Agent. Exportiere deine Daten jederzeit. Kein Lock-in.",
+    			icon: "Download",
+    		},
+    		{
+    			name: "Funktioniert einfach überall",
+    			description:
+    				"Sofort synchron auf all deinen Geräten. Voll funktionsfähig – auch offline.",
+    			icon: "CloudCheck",
+    		},
+    	]}
+    />
     </div>
 
     <div class="py-12 md:py-24">
-	<Testimonials
-		client:load
-		title="Was Nutzer sagen"
-		subtitle="Menschen lieben Tilly aus verschiedenen Gründen"
-		testimonials={[
-			{
-				quote:
-					"Heute habe ich die Lieblingsfarbe meiner Design-Kollegin erfahren. Dachte darüber nach, wie ich sie mir merken könnte... Tilly! Da hat's geklickt - die App ist wirklich praktisch für das Sammeln kleiner, aber wichtiger Details",
-			},
-			{
-				quote:
-					"Ich wusste nicht, dass mir so etwas fehlte. Jetzt weiß ich, dass ich genau das schon sehr lange hätte brauchen können.",
-			},
-			{
-				quote:
-					"Macht genau das, was es soll, und ist schnell. Der Chat funktioniert überraschend gut.",
-			},
-			{ quote: "Das ist ein Cheat-Code, um ein besserer Freund zu sein!" },
-		]}
-	/>
+    <Testimonials
+    	client:load
+    	title="Was Nutzer sagen"
+    	subtitle="Menschen lieben Tilly aus verschiedenen Gründen"
+    	testimonials={[
+    		{
+    			quote:
+    				"Heute habe ich die Lieblingsfarbe meiner Design-Kollegin erfahren. Dachte darüber nach, wie ich sie mir merken könnte... Tilly! Da hat's geklickt - die App ist wirklich praktisch für das Sammeln kleiner, aber wichtiger Details",
+    		},
+    		{
+    			quote:
+    				"Ich wusste nicht, dass mir so etwas fehlte. Jetzt weiß ich, dass ich genau das schon sehr lange hätte brauchen können.",
+    		},
+    		{
+    			quote:
+    				"Macht genau das, was es soll, und ist schnell. Der Chat funktioniert überraschend gut.",
+    		},
+    		{ quote: "Das ist ein Cheat-Code, um ein besserer Freund zu sein!" },
+    	]}
+    />
     </div>
     <div class="py-12 md:py-24">
-	<FeaturesWithProductScreenshot
-		client:load
-		badge="Tilly Agent: Dein Freundschaftsassistent"
-		title="Der Tilly Agent liest und schreibt in deinem Freundebuch."
-		features={[
-			{
-				name: "Einfach sprechen:",
-				description:
-					"'Sarah hat ein neues Projekt, Sophie hat einen neuen Kunden, sie wirkt entspannter.'",
-			},
-			{
-				name: "Tilly organisiert:",
-				description:
-					"Findet Sarah und Sophie, legt Notizen an, schlägt Erinnerungen vor.",
-			},
-			{
-				name: "Vor einem Treffen:",
-				description:
-					"'Bringe mich bei Sarah auf den neuesten Stand' – Dann weißt du, was du fragen kannst.",
-			},
-			{
-				name: "Beim Kontaktieren:",
-				description: "'Hilf mir, Sophie zu schreiben' – bekomme Vorschläge.",
-			},
-		]}
-		closing="Der Bedienkomfort ist real. So einfach, dass du es wirklich nutzt."
-		media={{
-			kind: "image",
-			src: "/images/screenshots/de-chat.webp",
-			alt: "Telefon mit dem Tilly-Agent-Chat",
-			aspectRatio: "215 / 466",
-			fit: "contain",
-		}}
-	/>
+    <FeaturesWithProductScreenshot
+    	client:load
+    	badge="Tilly Agent: Dein Freundschaftsassistent"
+    	title="Der Tilly Agent liest und schreibt in deinem Freundebuch."
+    	features={[
+    		{
+    			name: "Einfach sprechen:",
+    			description:
+    				"'Sarah hat ein neues Projekt, Sophie hat einen neuen Kunden, sie wirkt entspannter.'",
+    		},
+    		{
+    			name: "Tilly organisiert:",
+    			description:
+    				"Findet Sarah und Sophie, legt Notizen an, schlägt Erinnerungen vor.",
+    		},
+    		{
+    			name: "Vor einem Treffen:",
+    			description:
+    				"'Bringe mich bei Sarah auf den neuesten Stand' – Dann weißt du, was du fragen kannst.",
+    		},
+    		{
+    			name: "Beim Kontaktieren:",
+    			description: "'Hilf mir, Sophie zu schreiben' – bekomme Vorschläge.",
+    		},
+    	]}
+    	closing="Der Bedienkomfort ist real. So einfach, dass du es wirklich nutzt."
+    	media={{
+    		kind: "image",
+    		src: "/images/screenshots/de-chat.webp",
+    		alt: "Telefon mit dem Tilly-Agent-Chat",
+    		aspectRatio: "215 / 466",
+    		fit: "contain",
+    	}}
+    />
     </div>
     <div id="experience" class="py-24">
-	<Pricing
-		title="Wähle, wie du Tilly nutzt"
-		subtitle="Kostenlos oder Plus - einfache Preise für alle."
-		tiers={[
-			{
-				name: "Kostenlos",
-				id: "tier-free",
-				href: "/app",
-				priceMonthly: "Kostenlos",
-				priceSuffix: null,
-				description:
-					"Kostenlos erfordert eine Anmeldung für Sync und Push-Benachrichtigungen",
-				features: [
-					"Unbegrenzte Personen, Notizen und Erinnerungen",
-					"Push-Benachrichtigungen",
-					"Synchronisation mit der Cloud",
-					"Synchronisation zwischen Geräten",
-					"Daten importieren und exportieren",
-				],
-				featured: false,
-				ctaText: "Kostenlos registrieren",
-			},
-			{
-				name: "Plus",
-				id: "tier-plus",
-				href: "/app",
-				priceMonthly: "$6",
-				priceSuffix: "/Monat",
-				description: "KI‑Agent für maximalen Komfort",
-				features: [
-					"Alles aus Kostenlos",
-					"Tilly Agent",
-					"Bedienung in natürlicher Sprache",
-					"Nachrichtenvorschläge",
-					"Automatische Notizen-Organisation",
-					"Intelligente Nachfass-Erinnerungen",
-					"Das wohlige Gefühl, die Entwicklung von Tilly zu unterstützen",
-				],
-				featured: true,
-				ctaText: "Zu Plus wechseln",
-			},
-		]}
-	/>
+    <Pricing
+    	title="Wähle, wie du Tilly nutzt"
+    	subtitle="Kostenlos oder Plus - einfache Preise für alle."
+    	tiers={[
+    		{
+    			name: "Kostenlos",
+    			id: "tier-free",
+    			href: "/app",
+    			priceMonthly: "Kostenlos",
+    			priceSuffix: null,
+    			description:
+    				"Kostenlos erfordert eine Anmeldung für Sync und Push-Benachrichtigungen",
+    			features: [
+    				"Unbegrenzte Personen, Notizen und Erinnerungen",
+    				"Push-Benachrichtigungen",
+    				"Synchronisation mit der Cloud",
+    				"Synchronisation zwischen Geräten",
+    				"Daten importieren und exportieren",
+    			],
+    			featured: false,
+    			ctaText: "Kostenlos registrieren",
+    		},
+    		{
+    			name: "Plus",
+    			id: "tier-plus",
+    			href: "/app",
+    			priceMonthly: "$6",
+    			priceSuffix: "/Monat",
+    			description: "KI‑Agent für maximalen Komfort",
+    			features: [
+    				"Alles aus Kostenlos",
+    				"Tilly Agent",
+    				"Bedienung in natürlicher Sprache",
+    				"Nachrichtenvorschläge",
+    				"Automatische Notizen-Organisation",
+    				"Intelligente Nachfass-Erinnerungen",
+    				"Das wohlige Gefühl, die Entwicklung von Tilly zu unterstützen",
+    			],
+    			featured: true,
+    			ctaText: "Zu Plus wechseln",
+    		},
+    	]}
+    />
     </div>
 
     <div id="faq" class="py-24">
-	<FAQ
-		client:load
-		title="Häufig gestellte Fragen"
-		faqs={[
-			{
-				question:
-					"Wie unterscheidet sich das von meiner Kontakte-App, To-dos oder Notizen?",
-				answer:
-					"Deine Kontakte zeigen Telefonnummern. Deine To-dos und Notizen gehen unter. Tilly gibt Freunden ihren eigenen Raum.",
-			},
-			{
-				question:
-					"Synchronisiert Tilly automatisch mit meinen Kontakten oder sozialen Medien?",
-				answer:
-					"Nein. Tilly enthält nur, was du selbst hinzufügst. Keine automatischen Übernahmen – so bleibt in Tilly nur, was dir wichtig genug ist, es selbst einzutragen.",
-			},
-			{
-				question: "Was ist, wenn ich vergesse, es zu nutzen?",
-				answer:
-					"Öffne Tilly, wenn du daran denkst. Füge hinzu, was dir in den Sinn kommt. Die Gewohnheit entsteht ganz von allein.",
-			},
-			{
-				question: "Sind meine Daten privat?",
-				answer:
-					"Tilly verschlüsselt deine Daten im Browser, bevor sie mit Jazz synchronisiert werden. Die Schlüssel liegen beim Auth-Provider, damit der Tilly-Server Push-Benachrichtigungen senden und den Tilly Agent betreiben kann. Wenn du Tilly Chat nutzt, werden die von dir geteilten Inhalte an den KI-Anbieter weitergegeben. Tilly ist Open Source (AGPL) und du kannst deine Daten jederzeit exportieren.",
-			},
-			{
-				question: "Fühlt sich das nicht künstlich an?",
-				answer:
-					"Nicht künstlicher als im Chatverlauf hochzuscrollen. Tilly funktioniert aber auch bei Telefonaten und persönlichen Treffen.",
-			},
-			{
-				question: "Warum für KI bezahlen, wenn es kostenlose KI-Apps gibt?",
-				answer:
-					"Kostenlose KI‑Apps merken sich nichts und erinnern dich nicht daran, dich zu melden. Tilly ist der Platz für deine Freunde. Und der Agent ist unglaublich praktisch. Tilly Agent kennt deine Beziehungshistorie. Außerdem kostet KI Geld – ich möchte Tilly nachhaltig betreiben, um weiter daran zu arbeiten.",
-			},
-		]}
-	/>
+    <FAQ
+    	client:load
+    	title="Häufig gestellte Fragen"
+    	faqs={[
+    		{
+    			question:
+    				"Wie unterscheidet sich das von meiner Kontakte-App, To-dos oder Notizen?",
+    			answer:
+    				"Deine Kontakte zeigen Telefonnummern. Deine To-dos und Notizen gehen unter. Tilly gibt Freunden ihren eigenen Raum.",
+    		},
+    		{
+    			question:
+    				"Synchronisiert Tilly automatisch mit meinen Kontakten oder sozialen Medien?",
+    			answer:
+    				"Nein. Tilly enthält nur, was du selbst hinzufügst. Keine automatischen Übernahmen – so bleibt in Tilly nur, was dir wichtig genug ist, es selbst einzutragen.",
+    		},
+    		{
+    			question: "Was ist, wenn ich vergesse, es zu nutzen?",
+    			answer:
+    				"Öffne Tilly, wenn du daran denkst. Füge hinzu, was dir in den Sinn kommt. Die Gewohnheit entsteht ganz von allein.",
+    		},
+    		{
+    			question: "Sind meine Daten privat?",
+    			answer:
+    				"Tilly verschlüsselt deine Daten im Browser, bevor sie mit Jazz synchronisiert werden. Die Schlüssel liegen beim Auth-Provider, damit der Tilly-Server Push-Benachrichtigungen senden und den Tilly Agent betreiben kann. Wenn du Tilly Chat nutzt, werden die von dir geteilten Inhalte an den KI-Anbieter weitergegeben. Tilly ist Open Source (AGPL) und du kannst deine Daten jederzeit exportieren.",
+    		},
+    		{
+    			question: "Fühlt sich das nicht künstlich an?",
+    			answer:
+    				"Nicht künstlicher als im Chatverlauf hochzuscrollen. Tilly funktioniert aber auch bei Telefonaten und persönlichen Treffen.",
+    		},
+    		{
+    			question: "Warum für KI bezahlen, wenn es kostenlose KI-Apps gibt?",
+    			answer:
+    				"Kostenlose KI‑Apps merken sich nichts und erinnern dich nicht daran, dich zu melden. Tilly ist der Platz für deine Freunde. Und der Agent ist unglaublich praktisch. Tilly Agent kennt deine Beziehungshistorie. Außerdem kostet KI Geld – ich möchte Tilly nachhaltig betreiben, um weiter daran zu arbeiten.",
+    		},
+    	]}
+    />
     </div>
 
     <CTA
-	title="Bereit, dich an Wichtiges zu erinnern?"
-	primaryCta={{
-		text: "Kostenlos ausprobieren",
-		href: "/app",
-	}}
+    title="Bereit, dich an Wichtiges zu erinnern?"
+    primaryCta={{
+    	text: "Kostenlos ausprobieren",
+    	href: "/app",
+    }}
     />
 
     <Footer
-	navigation={{
-		main: [
-			{ name: "Funktionen", href: "#features" },
-			{ name: "Tarife", href: "#experience" },
-			{ name: "FAQ", href: "#faq" },
-			{ name: "Blog", href: "/de/blog" },
-			{ name: "Impressum", href: "/de/imprint" },
-			{ name: "Datenschutz", href: "/de/privacy" },
-		],
-		social: [
-			{
-				name: "Twitter",
-				href: "https://twitter.com/tillydotsocial",
-				icon: "Twitter",
-			},
-			{
-				name: "Instagram",
-				href: "https://instagram.com/tilly.social",
-				icon: "Instagram",
-			},
-			{
-				name: "GitHub",
-				href: "https://github.com/ccssmnn/tilly",
-				icon: "Github",
-			},
-		],
-		languages: [
-			{ name: "English", href: "/en/" },
-			{ name: "Deutsch", href: "/de/" },
-		],
-	}}
-	company={{
-		name: "Tilly",
-	}}
+    navigation={{
+    	main: [
+    		{ name: "Funktionen", href: "#features" },
+    		{ name: "Tarife", href: "#experience" },
+    		{ name: "FAQ", href: "#faq" },
+    		{ name: "Blog", href: "/de/blog" },
+    		{ name: "Impressum", href: "/de/imprint" },
+    		{ name: "Datenschutz", href: "/de/privacy" },
+    	],
+    	social: [
+    		{
+    			name: "Twitter",
+    			href: "https://twitter.com/tillydotsocial",
+    			icon: "Twitter",
+    		},
+    		{
+    			name: "Instagram",
+    			href: "https://instagram.com/tilly.social",
+    			icon: "Instagram",
+    		},
+    		{
+    			name: "GitHub",
+    			href: "https://github.com/ccssmnn/tilly",
+    			icon: "Github",
+    		},
+    	],
+    	languages: [
+    		{ name: "English", href: "/en/" },
+    		{ name: "Deutsch", href: "/de/" },
+    	],
+    }}
+    company={{
+    	name: "Tilly",
+    }}
     />
 
 </MinimalMarketingLayout>
@@ -24011,7 +24022,7 @@ locale="en"
     <h1>Page Not Found</h1>
     <p>The page you're looking for doesn't exist.</p>
     <p>
-	<a href="/en/">Go back home</a> or <a href="/app">open the app</a>.
+    <a href="/en/">Go back home</a> or <a href="/app">open the app</a>.
     </p>
 
 </LegalPageLayout>
@@ -24032,8 +24043,8 @@ let posts = await getCollection("blog")
 let enPosts = posts.filter(post => post.id.endsWith("/en"))
 
     return enPosts.map(post => ({
-	params: { slug: post.id.replace("/en", "") },
-	props: { post },
+    params: { slug: post.id.replace("/en", "") },
+    props: { post },
     }))
 
 }
@@ -24054,111 +24065,111 @@ ogImage={post.data.ogImage}
 >
 
     <Navbar
-	locale="en"
-	client:load
-	logo={{
-		text: "Tilly",
-		href: "/en/",
-	}}
-	navigation={[
-		{ name: "Features", href: "/en/#features" },
-		{ name: "Experience", href: "/en/#experience" },
-		{ name: "FAQ", href: "/en/#faq" },
-		{ name: "Blog", href: "/en/blog" },
-	]}
-	cta={{
-		text: "Go to App",
-		href: "/app",
-	}}
-	languages={[
-		{ name: "English", href: `/en/blog/${post.id.replace("/en", "")}` },
-		{ name: "Deutsch", href: `/de/blog/${post.id.replace("/en", "")}` },
-	]}
+    locale="en"
+    client:load
+    logo={{
+    	text: "Tilly",
+    	href: "/en/",
+    }}
+    navigation={[
+    	{ name: "Features", href: "/en/#features" },
+    	{ name: "Experience", href: "/en/#experience" },
+    	{ name: "FAQ", href: "/en/#faq" },
+    	{ name: "Blog", href: "/en/blog" },
+    ]}
+    cta={{
+    	text: "Go to App",
+    	href: "/app",
+    }}
+    languages={[
+    	{ name: "English", href: `/en/blog/${post.id.replace("/en", "")}` },
+    	{ name: "Deutsch", href: `/de/blog/${post.id.replace("/en", "")}` },
+    ]}
     />
 
     <main class="container mx-auto px-6 py-12 md:px-8 md:py-24">
-	<article class="prose prose-lg dark:prose-invert mx-auto max-w-3xl">
-		<div class="not-prose mb-8">
-			<a
-				href="/en/blog"
-				class="text-muted-foreground hover:text-foreground mb-4 inline-block text-sm transition-colors"
-			>
-				← Back to blog
-			</a>
-			<h1 class="text-4xl font-bold tracking-tight md:text-5xl">
-				{post.data.title}
-			</h1>
-			<p class="text-muted-foreground mt-4 text-lg">
-				{post.data.description}
-			</p>
-			<div class="mt-4 flex items-center gap-4 text-sm">
-				<time class="text-muted-foreground">
-					{post.data.pubDate}
-				</time>
-				<div class="flex gap-2">
-					{post.data.tags.map(tag => (
-						<span class="bg-muted text-muted-foreground rounded px-2 py-1 text-xs">
-							{tag}
-						</span>
-					))}
-				</div>
-			</div>
-			<div class="mt-6 flex items-center gap-3 border-t pt-6">
-				<img
-					src={post.data.author.avatar}
-					alt={post.data.author.name}
-					class="h-12 w-12 rounded-full object-cover"
-				/>
-				<div>
-					<p class="font-medium">
-						{post.data.author.name}
-					</p>
-					<p class="text-muted-foreground text-sm">
-						{post.data.author.role}
-					</p>
-				</div>
-			</div>
-		</div>
+    <article class="prose prose-lg dark:prose-invert mx-auto max-w-3xl">
+    	<div class="not-prose mb-8">
+    		<a
+    			href="/en/blog"
+    			class="text-muted-foreground hover:text-foreground mb-4 inline-block text-sm transition-colors"
+    		>
+    			← Back to blog
+    		</a>
+    		<h1 class="text-4xl font-bold tracking-tight md:text-5xl">
+    			{post.data.title}
+    		</h1>
+    		<p class="text-muted-foreground mt-4 text-lg">
+    			{post.data.description}
+    		</p>
+    		<div class="mt-4 flex items-center gap-4 text-sm">
+    			<time class="text-muted-foreground">
+    				{post.data.pubDate}
+    			</time>
+    			<div class="flex gap-2">
+    				{post.data.tags.map(tag => (
+    					<span class="bg-muted text-muted-foreground rounded px-2 py-1 text-xs">
+    						{tag}
+    					</span>
+    				))}
+    			</div>
+    		</div>
+    		<div class="mt-6 flex items-center gap-3 border-t pt-6">
+    			<img
+    				src={post.data.author.avatar}
+    				alt={post.data.author.name}
+    				class="h-12 w-12 rounded-full object-cover"
+    			/>
+    			<div>
+    				<p class="font-medium">
+    					{post.data.author.name}
+    				</p>
+    				<p class="text-muted-foreground text-sm">
+    					{post.data.author.role}
+    				</p>
+    			</div>
+    		</div>
+    	</div>
 
-		<Content />
-	</article>
+    	<Content />
+    </article>
     </main>
 
     <Footer
-	navigation={{
-		main: [
-			{ name: "Features", href: "/en/#features" },
-			{ name: "Experience", href: "/en/#experience" },
-			{ name: "FAQ", href: "/en/#faq" },
-			{ name: "Blog", href: "/en/blog" },
-			{ name: "Imprint", href: "/en/imprint" },
-			{ name: "Privacy", href: "/en/privacy" },
-		],
-		social: [
-			{
-				name: "Twitter",
-				href: "https://twitter.com/tillydotsocial",
-				icon: "Twitter",
-			},
-			{
-				name: "Instagram",
-				href: "https://instagram.com/tilly.social",
-				icon: "Instagram",
-			},
-			{
-				name: "GitHub",
-				href: "https://github.com/ccssmnn/tilly",
-				icon: "Github",
-			},
-		],
-		languages: [
-			{ name: "English", href: "/en/blog" },
-			{ name: "Deutsch", href: "/de/blog" },
-		],
-	}}
-	company={{
-		name: "Tilly",
-	}}
+    navigation={{
+    	main: [
+    		{ name: "Features", href: "/en/#features" },
+    		{ name: "Experience", href: "/en/#experience" },
+    		{ name: "FAQ", href: "/en/#faq" },
+    		{ name: "Blog", href: "/en/blog" },
+    		{ name: "Imprint", href: "/en/imprint" },
+    		{ name: "Privacy", href: "/en/privacy" },
+    	],
+    	social: [
+    		{
+    			name: "Twitter",
+    			href: "https://twitter.com/tillydotsocial",
+    			icon: "Twitter",
+    		},
+    		{
+    			name: "Instagram",
+    			href: "https://instagram.com/tilly.social",
+    			icon: "Instagram",
+    		},
+    		{
+    			name: "GitHub",
+    			href: "https://github.com/ccssmnn/tilly",
+    			icon: "Github",
+    		},
+    	],
+    	languages: [
+    		{ name: "English", href: "/en/blog" },
+    		{ name: "Deutsch", href: "/de/blog" },
+    	],
+    }}
+    company={{
+    	name: "Tilly",
+    }}
     />
 
 </MinimalMarketingLayout>
@@ -24190,117 +24201,117 @@ description="Tips and tricks on being a better friend with Tilly"
 >
 
     <Navbar
-	locale="en"
-	client:load
-	logo={{
-		text: "Tilly",
-		href: "/en/",
-	}}
-	navigation={[
-		{ name: "Features", href: "/en/#features" },
-		{ name: "Experience", href: "/en/#experience" },
-		{ name: "FAQ", href: "/en/#faq" },
-		{ name: "Blog", href: "/en/blog" },
-	]}
-	cta={{
-		text: "Go to App",
-		href: "/app",
-	}}
-	languages={[
-		{ name: "English", href: "/en/blog" },
-		{ name: "Deutsch", href: "/de/blog" },
-	]}
+    locale="en"
+    client:load
+    logo={{
+    	text: "Tilly",
+    	href: "/en/",
+    }}
+    navigation={[
+    	{ name: "Features", href: "/en/#features" },
+    	{ name: "Experience", href: "/en/#experience" },
+    	{ name: "FAQ", href: "/en/#faq" },
+    	{ name: "Blog", href: "/en/blog" },
+    ]}
+    cta={{
+    	text: "Go to App",
+    	href: "/app",
+    }}
+    languages={[
+    	{ name: "English", href: "/en/blog" },
+    	{ name: "Deutsch", href: "/de/blog" },
+    ]}
     />
 
     <main class="container mx-auto px-6 py-12 md:px-8 md:py-24">
-	<div class="mx-auto max-w-3xl">
-		<h1 class="text-4xl font-bold tracking-tight md:text-5xl">Blog</h1>
-		<p class="text-muted-foreground mt-4 text-lg">
-			Tips and tricks on being a better friend with Tilly
-		</p>
+    <div class="mx-auto max-w-3xl">
+    	<h1 class="text-4xl font-bold tracking-tight md:text-5xl">Blog</h1>
+    	<p class="text-muted-foreground mt-4 text-lg">
+    		Tips and tricks on being a better friend with Tilly
+    	</p>
 
-		<div class="mt-12 space-y-8">
-			{posts.map(post => {
-				let slug = post.id.replace("/en", "")
-				return (
-					<article class="border-border border-b pb-8">
-						<a href={`/en/blog/${slug}`} class="group">
-							<h2 class="group-hover:text-primary text-2xl font-bold transition-colors">
-								{post.data.title}
-							</h2>
-							<p class="text-muted-foreground mt-2">
-								{post.data.description}
-							</p>
-							<div class="mt-3 flex items-center gap-4 text-sm">
-								<time class="text-muted-foreground">
-									{post.data.pubDate}
-								</time>
-								<div class="flex gap-2">
-									{post.data.tags.map(tag => (
-										<span class="bg-muted text-muted-foreground rounded px-2 py-1 text-xs">
-											{tag}
-										</span>
-									))}
-								</div>
-							</div>
-							<div class="mt-4 flex items-center gap-3">
-								<img
-									src={post.data.author.avatar}
-									alt={post.data.author.name}
-									class="h-10 w-10 rounded-full object-cover"
-								/>
-								<div>
-									<p class="font-medium">
-										{post.data.author.name}
-									</p>
-									<p class="text-muted-foreground text-xs">
-										{post.data.author.role}
-									</p>
-								</div>
-							</div>
-						</a>
-					</article>
-				)
-			})}
-		</div>
-	</div>
+    	<div class="mt-12 space-y-8">
+    		{posts.map(post => {
+    			let slug = post.id.replace("/en", "")
+    			return (
+    				<article class="border-border border-b pb-8">
+    					<a href={`/en/blog/${slug}`} class="group">
+    						<h2 class="group-hover:text-primary text-2xl font-bold transition-colors">
+    							{post.data.title}
+    						</h2>
+    						<p class="text-muted-foreground mt-2">
+    							{post.data.description}
+    						</p>
+    						<div class="mt-3 flex items-center gap-4 text-sm">
+    							<time class="text-muted-foreground">
+    								{post.data.pubDate}
+    							</time>
+    							<div class="flex gap-2">
+    								{post.data.tags.map(tag => (
+    									<span class="bg-muted text-muted-foreground rounded px-2 py-1 text-xs">
+    										{tag}
+    									</span>
+    								))}
+    							</div>
+    						</div>
+    						<div class="mt-4 flex items-center gap-3">
+    							<img
+    								src={post.data.author.avatar}
+    								alt={post.data.author.name}
+    								class="h-10 w-10 rounded-full object-cover"
+    							/>
+    							<div>
+    								<p class="font-medium">
+    									{post.data.author.name}
+    								</p>
+    								<p class="text-muted-foreground text-xs">
+    									{post.data.author.role}
+    								</p>
+    							</div>
+    						</div>
+    					</a>
+    				</article>
+    			)
+    		})}
+    	</div>
+    </div>
     </main>
 
     <Footer
-	navigation={{
-		main: [
-			{ name: "Features", href: "/en/#features" },
-			{ name: "Experience", href: "/en/#experience" },
-			{ name: "FAQ", href: "/en/#faq" },
-			{ name: "Blog", href: "/en/blog" },
-			{ name: "Imprint", href: "/en/imprint" },
-			{ name: "Privacy", href: "/en/privacy" },
-		],
-		social: [
-			{
-				name: "Twitter",
-				href: "https://twitter.com/tillydotsocial",
-				icon: "Twitter",
-			},
-			{
-				name: "Instagram",
-				href: "https://instagram.com/tilly.social",
-				icon: "Instagram",
-			},
-			{
-				name: "GitHub",
-				href: "https://github.com/ccssmnn/tilly",
-				icon: "Github",
-			},
-		],
-		languages: [
-			{ name: "English", href: "/en/blog" },
-			{ name: "Deutsch", href: "/de/blog" },
-		],
-	}}
-	company={{
-		name: "Tilly",
-	}}
+    navigation={{
+    	main: [
+    		{ name: "Features", href: "/en/#features" },
+    		{ name: "Experience", href: "/en/#experience" },
+    		{ name: "FAQ", href: "/en/#faq" },
+    		{ name: "Blog", href: "/en/blog" },
+    		{ name: "Imprint", href: "/en/imprint" },
+    		{ name: "Privacy", href: "/en/privacy" },
+    	],
+    	social: [
+    		{
+    			name: "Twitter",
+    			href: "https://twitter.com/tillydotsocial",
+    			icon: "Twitter",
+    		},
+    		{
+    			name: "Instagram",
+    			href: "https://instagram.com/tilly.social",
+    			icon: "Instagram",
+    		},
+    		{
+    			name: "GitHub",
+    			href: "https://github.com/ccssmnn/tilly",
+    			icon: "Github",
+    		},
+    	],
+    	languages: [
+    		{ name: "English", href: "/en/blog" },
+    		{ name: "Deutsch", href: "/de/blog" },
+    	],
+    }}
+    company={{
+    	name: "Tilly",
+    }}
     />
 
 </MinimalMarketingLayout>
@@ -24405,364 +24416,364 @@ description="Stay connected with the people who matter most."
 >
 
     <Navbar
-	locale="en"
-	client:load
-	logo={{
-		text: "Tilly",
-		href: "/en/",
-	}}
-	navigation={[
-		{ name: "Features", href: "#features" },
-		{ name: "Experience", href: "#experience" },
-		{ name: "FAQ", href: "#faq" },
-		{ name: "Blog", href: "/en/blog" },
-	]}
-	cta={{
-		text: "Go to App",
-		href: "/app",
-	}}
-	languages={[
-		{ name: "English", href: "/en/" },
-		{ name: "Deutsch", href: "/de/" },
-	]}
+    locale="en"
+    client:load
+    logo={{
+    	text: "Tilly",
+    	href: "/en/",
+    }}
+    navigation={[
+    	{ name: "Features", href: "#features" },
+    	{ name: "Experience", href: "#experience" },
+    	{ name: "FAQ", href: "#faq" },
+    	{ name: "Blog", href: "/en/blog" },
+    ]}
+    cta={{
+    	text: "Go to App",
+    	href: "/app",
+    }}
+    languages={[
+    	{ name: "English", href: "/en/" },
+    	{ name: "Deutsch", href: "/de/" },
+    ]}
     />
 
     <div class="pt-3 pb-12 md:pb-24">
-	<Hero
-		client:load
-		badge={{
-			text: "Tilly is Open Source",
-			href: "https://github.com/ccssmnn/tilly",
-			description: "Check out the Repo",
-		}}
-		title="Never forget to follow up again"
-		description="Your friends tell you important things. Tilly helps you remember and follow up when it matters."
-		primaryCta={{
-			text: "Start remembering",
-			href: "/app",
-		}}
-		secondaryCta={{
-			text: "Learn more",
-			href: "#features",
-		}}
-		media={{
-			kind: "image",
-			src: "/images/screenshots/en-people.webp",
-			alt: "Phone showing the Tilly People list",
-			loading: "eager",
-			aspectRatio: "215 / 466",
-			fit: "contain",
-		}}
-	/>
+    <Hero
+    	client:load
+    	badge={{
+    		text: "Tilly is Open Source",
+    		href: "https://github.com/ccssmnn/tilly",
+    		description: "Check out the Repo",
+    	}}
+    	title="Never forget to follow up again"
+    	description="Your friends tell you important things. Tilly helps you remember and follow up when it matters."
+    	primaryCta={{
+    		text: "Start remembering",
+    		href: "/app",
+    	}}
+    	secondaryCta={{
+    		text: "Learn more",
+    		href: "#features",
+    	}}
+    	media={{
+    		kind: "image",
+    		src: "/images/screenshots/en-people.webp",
+    		alt: "Phone showing the Tilly People list",
+    		loading: "eager",
+    		aspectRatio: "215 / 466",
+    		fit: "contain",
+    	}}
+    />
     </div>
     <div id="story" class="py-24">
-	<ContentWithTestimonial
-		title="Here's the problem."
-		testimonial={{
-			quote: "I needed this. So I built it.",
-			author: {
-				name: "Carl Assmann",
-				title: "The guy who wrote Tilly",
-				avatar: "/images/avatars/carl.webp",
-			},
-		}}
-	>
-		<p>
-			Your friend mentions their job interview. You care deeply. But weeks
-			pass, and you realize you never asked how it went.
-		</p>
-		<p>
-			<b>With Tilly, you log it once and get reminded to check in.</b>
-		</p>
-	</ContentWithTestimonial>
+    <ContentWithTestimonial
+    	title="Here's the problem."
+    	testimonial={{
+    		quote: "I needed this. So I built it.",
+    		author: {
+    			name: "Carl Assmann",
+    			title: "The guy who wrote Tilly",
+    			avatar: "/images/avatars/carl.webp",
+    		},
+    	}}
+    >
+    	<p>
+    		Your friend mentions their job interview. You care deeply. But weeks
+    		pass, and you realize you never asked how it went.
+    	</p>
+    	<p>
+    		<b>With Tilly, you log it once and get reminded to check in.</b>
+    	</p>
+    </ContentWithTestimonial>
     </div>
     <div class="py-12 md:py-24">
-	<FeatureGridOffset
-		title="Situations where Tilly helps"
-		subtitle="Real problems Tilly solves"
-		problems={[
-			{
-				name: "Forget to reach out",
-				description: "Life gets busy and important people slip your mind",
-			},
-			{
-				name: "Can't scroll up real conversations",
-				description: "Real conversations are outside your whatsapp chat history",
-			},
-			{
-				name: "Notes and todo apps feel like work",
-				description: "Friendship shouldn't feel like a chore",
-			},
-			{
-				name: "Social media is noisy and distracting",
-				description: "Friends deserve their own space, free of work and distractions",
-			},
-		]}
-	/>
+    <FeatureGridOffset
+    	title="Situations where Tilly helps"
+    	subtitle="Real problems Tilly solves"
+    	problems={[
+    		{
+    			name: "Forget to reach out",
+    			description: "Life gets busy and important people slip your mind",
+    		},
+    		{
+    			name: "Can't scroll up real conversations",
+    			description: "Real conversations are outside your whatsapp chat history",
+    		},
+    		{
+    			name: "Notes and todo apps feel like work",
+    			description: "Friendship shouldn't feel like a chore",
+    		},
+    		{
+    			name: "Social media is noisy and distracting",
+    			description: "Friends deserve their own space, free of work and distractions",
+    		},
+    	]}
+    />
     </div>
 
     <div class="py-12 md:py-24">
-	<FeaturesWithProductScreenshot
-		badge="How it works"
-		title="Simple. Practical. Actually works."
-		features={[
-			{
-				name: "Log what friends tell you",
-				description:
-					"Store notes for each person. See what matters most, not just their phone number.",
-			},
-			{
-				name: "Get reminded to follow up",
-				description:
-					"Set reminders so you never miss important moments.",
-			},
-			{
-				name: "Build stronger friendships",
-				description:
-					"Show up when it matters. Be the friend who remembers.",
-			},
-		]}
-		media={{
-			kind: "image",
-			src: "/images/screenshots/en-person.webp",
-			alt: "Phone showing Tilly person notes",
-			aspectRatio: "215 / 466",
-			fit: "contain",
-		}}
-	/>
+    <FeaturesWithProductScreenshot
+    	badge="How it works"
+    	title="Simple. Practical. Actually works."
+    	features={[
+    		{
+    			name: "Log what friends tell you",
+    			description:
+    				"Store notes for each person. See what matters most, not just their phone number.",
+    		},
+    		{
+    			name: "Get reminded to follow up",
+    			description:
+    				"Set reminders so you never miss important moments.",
+    		},
+    		{
+    			name: "Build stronger friendships",
+    			description:
+    				"Show up when it matters. Be the friend who remembers.",
+    		},
+    	]}
+    	media={{
+    		kind: "image",
+    		src: "/images/screenshots/en-person.webp",
+    		alt: "Phone showing Tilly person notes",
+    		aspectRatio: "215 / 466",
+    		fit: "contain",
+    	}}
+    />
     </div>
     <div class="py-24" id="features">
-	<FeatureGridCentered
-		title="Simple by design"
-		description="Everything you need to be a better friend. Nothing you don't."
-		features={[
-			{
-				name: "People & Notes",
-				description:
-					"Store what matters about each person - birthdays, interests, life updates, and meaningful moments",
-				icon: "PersonHearts",
-			},
-			{
-				name: "Reminders",
-				description:
-					"Gentle nudges to reach out at the right time, so you never miss important moments",
-				icon: "Bell",
-			},
-			{
-				name: "Push Notifications",
-				description:
-					"Never miss a birthday or important reminder with timely notifications on all your devices",
-				icon: "PhoneFill",
-			},
-			{
-				name: "Tilly Agent (Plus Tier)",
-				description:
-					"Agentic AI assistant that autonomously organizes your thoughts and takes action to help you connect",
-				icon: "Chat",
-			},
-			{
-				name: "Complete Data Control",
-				description:
-					"Client-side encrypted sync with securely managed keys for notifications and Tilly Assistant. Export your data anytime. No vendor lock-in ever.",
-				icon: "Download",
-			},
-			{
-				name: "Works Everywhere",
-				description:
-					"Instant sync across all your devices. Full functionality works offline when needed.",
-				icon: "CloudCheck",
-			},
-		]}
-	/>
+    <FeatureGridCentered
+    	title="Simple by design"
+    	description="Everything you need to be a better friend. Nothing you don't."
+    	features={[
+    		{
+    			name: "People & Notes",
+    			description:
+    				"Store what matters about each person - birthdays, interests, life updates, and meaningful moments",
+    			icon: "PersonHearts",
+    		},
+    		{
+    			name: "Reminders",
+    			description:
+    				"Gentle nudges to reach out at the right time, so you never miss important moments",
+    			icon: "Bell",
+    		},
+    		{
+    			name: "Push Notifications",
+    			description:
+    				"Never miss a birthday or important reminder with timely notifications on all your devices",
+    			icon: "PhoneFill",
+    		},
+    		{
+    			name: "Tilly Agent (Plus Tier)",
+    			description:
+    				"Agentic AI assistant that autonomously organizes your thoughts and takes action to help you connect",
+    			icon: "Chat",
+    		},
+    		{
+    			name: "Complete Data Control",
+    			description:
+    				"Client-side encrypted sync with securely managed keys for notifications and Tilly Assistant. Export your data anytime. No vendor lock-in ever.",
+    			icon: "Download",
+    		},
+    		{
+    			name: "Works Everywhere",
+    			description:
+    				"Instant sync across all your devices. Full functionality works offline when needed.",
+    			icon: "CloudCheck",
+    		},
+    	]}
+    />
     </div>
 
     <div class="py-12 md:py-24">
-	<Testimonials
-		client:load
-		title="What Users Say"
-		subtitle="People love Tilly for various reasons"
-		testimonials={[
-			{
-				quote:
-					"Today I learned my design peer's favorite color. Thought about how to remember it ...Tilly! That's when it clicked - the app really comes in handy for collecting small but important details",
-			},
-			{
-				quote:
-					"I didn't know I was missing something like this. Now I know I could have used exactly this for a very long time.",
-			},
-			{
-				quote:
-					"Does exactly what it should and is fast. The chat works surprisingly well.",
-			},
-			{ quote: "This is a cheat code for being a better friend!" },
-		]}
-	/>
+    <Testimonials
+    	client:load
+    	title="What Users Say"
+    	subtitle="People love Tilly for various reasons"
+    	testimonials={[
+    		{
+    			quote:
+    				"Today I learned my design peer's favorite color. Thought about how to remember it ...Tilly! That's when it clicked - the app really comes in handy for collecting small but important details",
+    		},
+    		{
+    			quote:
+    				"I didn't know I was missing something like this. Now I know I could have used exactly this for a very long time.",
+    		},
+    		{
+    			quote:
+    				"Does exactly what it should and is fast. The chat works surprisingly well.",
+    		},
+    		{ quote: "This is a cheat code for being a better friend!" },
+    	]}
+    />
     </div>
     <div class="py-12 md:py-24">
-	<FeaturesWithProductScreenshot
-		client:load
-		badge="Tilly Agent: Your Relationship Assistant"
-		title="Tilly Agent reads and writes your journal."
-		features={[
-			{
-				name: "Just talk:",
-				description:
-					"'Sarah has a new project, Sophie has a new client, she seemed more relaxed.'",
-			},
-			{
-				name: "Tilly organizes:",
-				description:
-					"Finds Sarah and Sophie, adds notes, suggests reminders.",
-			},
-			{
-				name: "Before meeting:",
-				description: "'Catch me up on Sarah' - Then you know what to ask.",
-			},
-			{
-				name: "When reaching out:",
-				description: "'Help me message Sophie' - Get suggestions.",
-			},
-		]}
-		closing="The convenience is real. It's so easy that you actually use it."
-		media={{
-			kind: "image",
-			src: "/images/screenshots/en-chat.webp",
-			alt: "Phone showing the Tilly Agent chat",
-			aspectRatio: "215 / 466",
-			fit: "contain",
-		}}
-	/>
+    <FeaturesWithProductScreenshot
+    	client:load
+    	badge="Tilly Agent: Your Relationship Assistant"
+    	title="Tilly Agent reads and writes your journal."
+    	features={[
+    		{
+    			name: "Just talk:",
+    			description:
+    				"'Sarah has a new project, Sophie has a new client, she seemed more relaxed.'",
+    		},
+    		{
+    			name: "Tilly organizes:",
+    			description:
+    				"Finds Sarah and Sophie, adds notes, suggests reminders.",
+    		},
+    		{
+    			name: "Before meeting:",
+    			description: "'Catch me up on Sarah' - Then you know what to ask.",
+    		},
+    		{
+    			name: "When reaching out:",
+    			description: "'Help me message Sophie' - Get suggestions.",
+    		},
+    	]}
+    	closing="The convenience is real. It's so easy that you actually use it."
+    	media={{
+    		kind: "image",
+    		src: "/images/screenshots/en-chat.webp",
+    		alt: "Phone showing the Tilly Agent chat",
+    		aspectRatio: "215 / 466",
+    		fit: "contain",
+    	}}
+    />
     </div>
     <div id="experience" class="py-24">
-	<Pricing
-		title="Choose Your Experience"
-		subtitle="Free or Plus - simple pricing for everyone."
-		tiers={[
-			{
-				name: "Free",
-				id: "tier-free",
-				href: "/app",
-				priceMonthly: "Free",
-				priceSuffix: null,
-				description:
-					"Free requires a sign in for sync and push notifications",
-				features: [
-					"Unlimited people, notes and reminders",
-					"Push notifications",
-					"Sync to the cloud",
-					"Sync between devices",
-					"Import and export data",
-				],
-				featured: false,
-				ctaText: "Sign Up Free",
-			},
-			{
-				name: "Plus",
-				id: "tier-plus",
-				href: "/app",
-				priceMonthly: "$6",
-				priceSuffix: "/month",
-				description: "AI agent for ultimate convenience",
-				features: [
-					"Everything in Free",
-					"Tilly Agent",
-					"Natural language input",
-					"Message suggestions",
-					"Automated note organization",
-					"Smart follow-up reminders",
-					"Support sustainable development",
-				],
-				featured: true,
-				ctaText: "Upgrade to Plus",
-			},
-		]}
-	/>
+    <Pricing
+    	title="Choose Your Experience"
+    	subtitle="Free or Plus - simple pricing for everyone."
+    	tiers={[
+    		{
+    			name: "Free",
+    			id: "tier-free",
+    			href: "/app",
+    			priceMonthly: "Free",
+    			priceSuffix: null,
+    			description:
+    				"Free requires a sign in for sync and push notifications",
+    			features: [
+    				"Unlimited people, notes and reminders",
+    				"Push notifications",
+    				"Sync to the cloud",
+    				"Sync between devices",
+    				"Import and export data",
+    			],
+    			featured: false,
+    			ctaText: "Sign Up Free",
+    		},
+    		{
+    			name: "Plus",
+    			id: "tier-plus",
+    			href: "/app",
+    			priceMonthly: "$6",
+    			priceSuffix: "/month",
+    			description: "AI agent for ultimate convenience",
+    			features: [
+    				"Everything in Free",
+    				"Tilly Agent",
+    				"Natural language input",
+    				"Message suggestions",
+    				"Automated note organization",
+    				"Smart follow-up reminders",
+    				"Support sustainable development",
+    			],
+    			featured: true,
+    			ctaText: "Upgrade to Plus",
+    		},
+    	]}
+    />
     </div>
 
     <div id="faq" class="py-24">
-	<FAQ
-		client:load
-		title="Frequently Asked Questions"
-		faqs={[
-			{
-				question:
-					"How is this different from my contacts app, todos or notes?",
-				answer:
-					"Your contacts show phone numbers. Your todos and notes get buried. Tilly gives relationships their own space.",
-			},
-			{
-				question:
-					"Will Tilly automatically sync with my contacts or social media?",
-				answer:
-					"No. Tilly only contains what you add yourself. No automatic imports. This way, Tilly only contains what you found important enough to add yourself.",
-			},
-			{
-				question: "What if I forget to use it?",
-				answer:
-					"Pick it up when you remember. Add what's on your mind. The habit builds naturally.",
-			},
-			{
-				question: "Is my data private?",
-				answer:
-					"Tilly encrypts your data in the browser before it syncs with Jazz. Encryption keys live with the auth provider so the Tilly server can send push notifications and power Tilly Assistant. When you use Tilly Chat, the conversation you provide is shared with the AI provider. Tilly is open source (AGPL) and you can export your data anytime.",
-			},
-			{
-				question: "Doesn't this feel artificial?",
-				answer:
-					"No more than scrolling up in WhatsApp. Tilly works for phone calls and dinners too.",
-			},
-			{
-				question: "Why pay for AI when there are free AI apps?",
-				answer:
-					"Free AI apps don't remember and don't remind you to reach out. Tilly Agent has full access to your relationship history. Plus, AI costs money and i want to make Tilly sustainable so I can continue working on it.",
-			},
-		]}
-	/>
+    <FAQ
+    	client:load
+    	title="Frequently Asked Questions"
+    	faqs={[
+    		{
+    			question:
+    				"How is this different from my contacts app, todos or notes?",
+    			answer:
+    				"Your contacts show phone numbers. Your todos and notes get buried. Tilly gives relationships their own space.",
+    		},
+    		{
+    			question:
+    				"Will Tilly automatically sync with my contacts or social media?",
+    			answer:
+    				"No. Tilly only contains what you add yourself. No automatic imports. This way, Tilly only contains what you found important enough to add yourself.",
+    		},
+    		{
+    			question: "What if I forget to use it?",
+    			answer:
+    				"Pick it up when you remember. Add what's on your mind. The habit builds naturally.",
+    		},
+    		{
+    			question: "Is my data private?",
+    			answer:
+    				"Tilly encrypts your data in the browser before it syncs with Jazz. Encryption keys live with the auth provider so the Tilly server can send push notifications and power Tilly Assistant. When you use Tilly Chat, the conversation you provide is shared with the AI provider. Tilly is open source (AGPL) and you can export your data anytime.",
+    		},
+    		{
+    			question: "Doesn't this feel artificial?",
+    			answer:
+    				"No more than scrolling up in WhatsApp. Tilly works for phone calls and dinners too.",
+    		},
+    		{
+    			question: "Why pay for AI when there are free AI apps?",
+    			answer:
+    				"Free AI apps don't remember and don't remind you to reach out. Tilly Agent has full access to your relationship history. Plus, AI costs money and i want to make Tilly sustainable so I can continue working on it.",
+    		},
+    	]}
+    />
     </div>
 
     <CTA
-	title="Ready to remember what matters?"
-	primaryCta={{
-		text: "Try Tilly free",
-		href: "/app",
-	}}
+    title="Ready to remember what matters?"
+    primaryCta={{
+    	text: "Try Tilly free",
+    	href: "/app",
+    }}
     />
 
     <Footer
-	navigation={{
-		main: [
-			{ name: "Features", href: "#features" },
-			{ name: "Experience", href: "#experience" },
-			{ name: "FAQ", href: "#faq" },
-			{ name: "Blog", href: "/en/blog" },
-			{ name: "Imprint", href: "/en/imprint" },
-			{ name: "Privacy", href: "/en/privacy" },
-		],
-		social: [
-			{
-				name: "Twitter",
-				href: "https://twitter.com/tillydotsocial",
-				icon: "Twitter",
-			},
-			{
-				name: "Instagram",
-				href: "https://instagram.com/tilly.social",
-				icon: "Instagram",
-			},
-			{
-				name: "GitHub",
-				href: "https://github.com/ccssmnn/tilly",
-				icon: "Github",
-			},
-		],
-		languages: [
-			{ name: "English", href: "/en/" },
-			{ name: "Deutsch", href: "/de/" },
-		],
-	}}
-	company={{
-		name: "Tilly",
-	}}
+    navigation={{
+    	main: [
+    		{ name: "Features", href: "#features" },
+    		{ name: "Experience", href: "#experience" },
+    		{ name: "FAQ", href: "#faq" },
+    		{ name: "Blog", href: "/en/blog" },
+    		{ name: "Imprint", href: "/en/imprint" },
+    		{ name: "Privacy", href: "/en/privacy" },
+    	],
+    	social: [
+    		{
+    			name: "Twitter",
+    			href: "https://twitter.com/tillydotsocial",
+    			icon: "Twitter",
+    		},
+    		{
+    			name: "Instagram",
+    			href: "https://instagram.com/tilly.social",
+    			icon: "Instagram",
+    		},
+    		{
+    			name: "GitHub",
+    			href: "https://github.com/ccssmnn/tilly",
+    			icon: "Github",
+    		},
+    	],
+    	languages: [
+    		{ name: "English", href: "/en/" },
+    		{ name: "Deutsch", href: "/de/" },
+    	],
+    }}
+    company={{
+    	name: "Tilly",
+    }}
     />
 
 </MinimalMarketingLayout>
@@ -25286,34 +25297,34 @@ success: boolean
 }> = []
 let processingPromises: Promise<void>[] = []
 
-	// TODO: Replace with Jazz-based user enumeration in task 9
-	// for await (let user of getUsersWithJazz()) {
-	// 	await waitForConcurrencyLimit(processingPromises, maxConcurrentUsers)
-	// 	let userPromise = loadNotificationSettings(user)
-	// 		.then(data => shouldReceiveNotification(data))
-	// 		.then(data => hasDueNotifications(data))
-	// 		.then(data => getDevices(data))
-	// 		.then(userWithDevices => processDevicesPipeline(userWithDevices))
-	// 		.then(results => {
-	// 			deliveryResults.push(...results)
-	// 		})
-	// 		.catch(error => {
-	// 			if (typeof error === "string") {
-	// 				console.log(`❌ User ${user.id}: ${error}`)
-	// 			} else {
-	// 				console.log(`❌ User ${user.id}: ${error.message || error}`)
-	// 			}
-	// 		})
-	// 		.finally(() => removeFromList(processingPromises, userPromise))
-	// 	processingPromises.push(userPromise)
-	// }
+    // TODO: Replace with Jazz-based user enumeration in task 9
+    // for await (let user of getUsersWithJazz()) {
+    // 	await waitForConcurrencyLimit(processingPromises, maxConcurrentUsers)
+    // 	let userPromise = loadNotificationSettings(user)
+    // 		.then(data => shouldReceiveNotification(data))
+    // 		.then(data => hasDueNotifications(data))
+    // 		.then(data => getDevices(data))
+    // 		.then(userWithDevices => processDevicesPipeline(userWithDevices))
+    // 		.then(results => {
+    // 			deliveryResults.push(...results)
+    // 		})
+    // 		.catch(error => {
+    // 			if (typeof error === "string") {
+    // 				console.log(`❌ User ${user.id}: ${error}`)
+    // 			} else {
+    // 				console.log(`❌ User ${user.id}: ${error.message || error}`)
+    // 			}
+    // 		})
+    // 		.finally(() => removeFromList(processingPromises, userPromise))
+    // 	processingPromises.push(userPromise)
+    // }
 
-	await Promise.allSettled(processingPromises)
+    await Promise.allSettled(processingPromises)
 
-	return c.json({
-		message: `Processed ${deliveryResults.length} notification deliveries`,
-		results: deliveryResults,
-	})
+    return c.json({
+    	message: `Processed ${deliveryResults.length} notification deliveries`,
+    	results: deliveryResults,
+    })
     },
 
 )
@@ -25327,20 +25338,20 @@ throw `Failed to init worker - ${workerResult.error}`
 }
 
     let workerWithSettings = await workerResult.data.worker.$jazz.ensureLoaded({
-	resolve: settingsQuery,
+    resolve: settingsQuery,
     })
     let notificationSettings = workerWithSettings.root.notificationSettings
     if (!notificationSettings?.$isLoaded) {
-	throw "No notification settings configured"
+    throw "No notification settings configured"
     }
 
     console.log(`✅ User ${user.id}: Loaded notification settings`)
 
     return {
-	user,
-	notificationSettings,
-	worker: workerWithSettings,
-	currentUtc: new Date(),
+    user,
+    notificationSettings,
+    worker: workerWithSettings,
+    currentUtc: new Date(),
     }
 
 }
@@ -25359,22 +25370,22 @@ user: User
     let { notificationSettings, currentUtc, user } = data
 
     if (!isPastNotificationTime(notificationSettings, currentUtc)) {
-	let userTimezone = notificationSettings.timezone || "UTC"
-	let userNotificationTime = notificationSettings.notificationTime || "12:00"
-	let userLocalTime = toZonedTime(currentUtc, userTimezone)
-	let userLocalTimeStr = format(userLocalTime, "HH:mm")
-	throw `Not past notification time (current: ${userLocalTimeStr}, configured: ${userNotificationTime}, timezone: ${userTimezone})`
+    let userTimezone = notificationSettings.timezone || "UTC"
+    let userNotificationTime = notificationSettings.notificationTime || "12:00"
+    let userLocalTime = toZonedTime(currentUtc, userTimezone)
+    let userLocalTimeStr = format(userLocalTime, "HH:mm")
+    throw `Not past notification time (current: ${userLocalTimeStr}, configured: ${userNotificationTime}, timezone: ${userTimezone})`
     }
 
     if (wasDeliveredToday(notificationSettings, currentUtc)) {
-	let userTimezone = notificationSettings.timezone || "UTC"
-	let lastDelivered = notificationSettings.lastDeliveredAt
-		? format(
-				toZonedTime(notificationSettings.lastDeliveredAt, userTimezone),
-				"yyyy-MM-dd HH:mm",
-			)
-		: "never"
-	throw `Already delivered today (last delivered: ${lastDelivered})`
+    let userTimezone = notificationSettings.timezone || "UTC"
+    let lastDelivered = notificationSettings.lastDeliveredAt
+    	? format(
+    			toZonedTime(notificationSettings.lastDeliveredAt, userTimezone),
+    			"yyyy-MM-dd HH:mm",
+    		)
+    	: "never"
+    throw `Already delivered today (last delivered: ${lastDelivered})`
     }
 
     console.log(`✅ User ${user.id}: Passed notification time checks`)
@@ -25390,25 +25401,25 @@ data: NotificationProcessingContext,
 let { user, notificationSettings, worker, currentUtc } = data
 
     let userAccountWithPeople = await worker.$jazz.ensureLoaded({
-	resolve: peopleQuery,
+    resolve: peopleQuery,
     })
 
     let dueReminderCount = getDueReminderCount(
-	userAccountWithPeople,
-	notificationSettings,
-	currentUtc,
+    userAccountWithPeople,
+    notificationSettings,
+    currentUtc,
     )
 
     console.log(
-	`✅ User ${user.id}: Checked due reminders (${dueReminderCount} found)`,
+    `✅ User ${user.id}: Checked due reminders (${dueReminderCount} found)`,
     )
 
     return {
-	user,
-	notificationSettings,
-	worker,
-	currentUtc,
-	dueReminderCount,
+    user,
+    notificationSettings,
+    worker,
+    currentUtc,
+    dueReminderCount,
     }
 
 }
@@ -25420,29 +25431,29 @@ data: DueNotificationContext,
 let { user, notificationSettings } = data
 
     if (data.dueReminderCount === 0) {
-	console.log(`✅ User ${user.id}: No due reminders to notify about`)
-	return {
-		...data,
-		devices: [],
-	}
+    console.log(`✅ User ${user.id}: No due reminders to notify about`)
+    return {
+    	...data,
+    	devices: [],
+    }
     }
 
     let enabledDevices = getEnabledDevices(notificationSettings)
     if (enabledDevices.length === 0) {
-	console.log(`✅ User ${user.id}: No enabled devices`)
-	return {
-		...data,
-		devices: [],
-	}
+    console.log(`✅ User ${user.id}: No enabled devices`)
+    return {
+    	...data,
+    	devices: [],
+    }
     }
 
     console.log(
-	`✅ User ${data.user.id}: Ready to send notification for ${data.dueReminderCount} due reminders to ${enabledDevices.length} devices`,
+    `✅ User ${data.user.id}: Ready to send notification for ${data.dueReminderCount} due reminders to ${enabledDevices.length} devices`,
     )
 
     return {
-	...data,
-	devices: enabledDevices,
+    ...data,
+    devices: enabledDevices,
     }
 
 }
@@ -25461,54 +25472,54 @@ currentUtc,
 } = userWithDevices
 
     if (devices.length === 0) {
-	markNotificationSettingsAsDelivered(notificationSettings, currentUtc)
-	await worker.$jazz.waitForSync()
-	console.log(
-		`✅ User ${user.id}: Marked as delivered (skipped - no action needed)`,
-	)
-	return [
-		{
-			userID: user.id,
-			notificationCount: 0,
-			success: true,
-		},
-	]
+    markNotificationSettingsAsDelivered(notificationSettings, currentUtc)
+    await worker.$jazz.waitForSync()
+    console.log(
+    	`✅ User ${user.id}: Marked as delivered (skipped - no action needed)`,
+    )
+    return [
+    	{
+    		userID: user.id,
+    		notificationCount: 0,
+    		success: true,
+    	},
+    ]
     }
 
     let payload = createLocalizedNotificationPayload(
-	dueReminderCount,
-	user.id,
-	worker,
+    dueReminderCount,
+    user.id,
+    worker,
     )
 
     let devicePromises = devices.map((device: PushDevice) =>
-	sendNotificationToDevice(device, payload),
+    sendNotificationToDevice(device, payload),
     )
 
     let results = await Promise.allSettled(devicePromises)
 
     let deviceResults = results.map((result, i) => {
-	let success = result.status === "fulfilled" && result.value?.ok === true
+    let success = result.status === "fulfilled" && result.value?.ok === true
 
-	if (!success) {
-		let error =
-			result.status === "fulfilled"
-				? !result.value.ok
-					? result.value.error
-					: "Device delivery failed"
-				: result.reason?.message || result.reason || "Unknown error"
+    if (!success) {
+    	let error =
+    		result.status === "fulfilled"
+    			? !result.value.ok
+    				? result.value.error
+    				: "Device delivery failed"
+    			: result.reason?.message || result.reason || "Unknown error"
 
-		console.error(
-			`❌ User ${user.id}: Failed to send to device ${devices[i].endpoint.slice(-10)}:`,
-			error,
-		)
-	} else {
-		console.log(
-			`✅ User ${user.id}: Successfully sent to device ${devices[i].endpoint.slice(-10)}`,
-		)
-	}
+    	console.error(
+    		`❌ User ${user.id}: Failed to send to device ${devices[i].endpoint.slice(-10)}:`,
+    		error,
+    	)
+    } else {
+    	console.log(
+    		`✅ User ${user.id}: Successfully sent to device ${devices[i].endpoint.slice(-10)}`,
+    	)
+    }
 
-	return { success }
+    return { success }
     })
 
     let userSuccess = deviceResults.some(r => r.success)
@@ -25519,11 +25530,11 @@ currentUtc,
     console.log(`✅ User ${user.id}: Completed notification delivery`)
 
     return [
-	{
-		userID: user.id,
-		notificationCount: dueReminderCount,
-		success: userSuccess,
-	},
+    {
+    	userID: user.id,
+    	notificationCount: dueReminderCount,
+    	success: userSuccess,
+    },
     ]
 
 }
@@ -25554,19 +25565,19 @@ if (!notifications.lastDeliveredAt) return false
     let userLocalDate = format(userLocalTime, "yyyy-MM-dd")
 
     let lastDeliveredUserTime = toZonedTime(
-	notifications.lastDeliveredAt,
-	userTimezone,
+    notifications.lastDeliveredAt,
+    userTimezone,
     )
     let lastDeliveredDate = format(lastDeliveredUserTime, "yyyy-MM-dd")
 
     if (lastDeliveredDate !== userLocalDate) return false
 
     let todayNotificationDateTime = new Date(
-	`${userLocalDate}T${userNotificationTime}:00`,
+    `${userLocalDate}T${userNotificationTime}:00`,
     )
     let todayNotificationUtc = fromZonedTime(
-	todayNotificationDateTime,
-	userTimezone,
+    todayNotificationDateTime,
+    userTimezone,
     )
 
     return notifications.lastDeliveredAt >= todayNotificationUtc
@@ -25586,17 +25597,17 @@ let userLocalDateStr = format(userLocalTime, "yyyy-MM-dd")
     if (!people.$isLoaded) return 0
     let dueReminderCount = 0
     for (let person of Array.from(people)) {
-	if (!person?.$isLoaded || !person.reminders?.$isLoaded || isDeleted(person))
-		continue
-	for (let reminder of Array.from(person.reminders)) {
-		if (!reminder?.$isLoaded || reminder.done || isDeleted(reminder)) continue
-		let dueDate = new Date(reminder.dueAtDate)
-		let dueDateInUserTimezone = toZonedTime(dueDate, userTimezone)
-		let dueDateStr = format(dueDateInUserTimezone, "yyyy-MM-dd")
-		if (dueDateStr <= userLocalDateStr) {
-			dueReminderCount++
-		}
-	}
+    if (!person?.$isLoaded || !person.reminders?.$isLoaded || isDeleted(person))
+    	continue
+    for (let reminder of Array.from(person.reminders)) {
+    	if (!reminder?.$isLoaded || reminder.done || isDeleted(reminder)) continue
+    	let dueDate = new Date(reminder.dueAtDate)
+    	let dueDateInUserTimezone = toZonedTime(dueDate, userTimezone)
+    	let dueDateStr = format(dueDateInUserTimezone, "yyyy-MM-dd")
+    	if (dueDateStr <= userLocalDateStr) {
+    		dueReminderCount++
+    	}
+    }
     }
     return dueReminderCount
 
@@ -25849,46 +25860,46 @@ async c => {
 let { endpoint } = c.req.valid("json")
 let user = c.get("user") as User
 
-	let { worker } = await initUserWorker(user)
-	let workerWithSettings = await worker.$jazz.ensureLoaded({
-		resolve: settingsQuery,
-	})
+    let { worker } = await initUserWorker(user)
+    let workerWithSettings = await worker.$jazz.ensureLoaded({
+    	resolve: settingsQuery,
+    })
 
-	let notificationSettings = workerWithSettings.root.notificationSettings
-	if (!notificationSettings?.$isLoaded) {
-		let t = getIntl(workerWithSettings)
-		return c.json(
-			{ message: t("server.error.notificationSettingsNotConfigured") },
-			400,
-		)
-	}
+    let notificationSettings = workerWithSettings.root.notificationSettings
+    if (!notificationSettings?.$isLoaded) {
+    	let t = getIntl(workerWithSettings)
+    	return c.json(
+    		{ message: t("server.error.notificationSettingsNotConfigured") },
+    		400,
+    	)
+    }
 
-	let devices = getEnabledDevices(notificationSettings)
-	let device = devices.find(d => d.endpoint === endpoint)
-	if (!device) {
-		let t = getIntl(workerWithSettings)
-		let message = t("server.error.deviceNotInList")
-		return c.json({ message }, 409)
-	}
+    let devices = getEnabledDevices(notificationSettings)
+    let device = devices.find(d => d.endpoint === endpoint)
+    if (!device) {
+    	let t = getIntl(workerWithSettings)
+    	let message = t("server.error.deviceNotInList")
+    	return c.json({ message }, 409)
+    }
 
-	let t = getIntl(workerWithSettings)
-	let testPayload = {
-		title: t("server.push.test-title"),
-		body: t("server.push.test-body"),
-		icon: "/favicon.ico",
-		badge: "/favicon.ico",
-		url: "/app/settings",
-		userId: user.id,
-	}
+    let t = getIntl(workerWithSettings)
+    let testPayload = {
+    	title: t("server.push.test-title"),
+    	body: t("server.push.test-body"),
+    	icon: "/favicon.ico",
+    	badge: "/favicon.ico",
+    	url: "/app/settings",
+    	userId: user.id,
+    }
 
-	let sendResult = await sendNotificationToDevice(device, testPayload)
-	if (!sendResult.ok) {
-		console.error("Failed to send test notification:", sendResult.error)
-		let message = t("server.error.failedToSendNotification")
-		return c.json({ message }, 500)
-	}
+    let sendResult = await sendNotificationToDevice(device, testPayload)
+    if (!sendResult.ok) {
+    	console.error("Failed to send test notification:", sendResult.error)
+    	let message = t("server.error.failedToSendNotification")
+    	return c.json({ message }, 500)
+    }
 
-	return c.json({ message: "success" })
+    return c.json({ message: "success" })
     },
 
 )
@@ -26380,11 +26391,11 @@ let jazzAccountId = user.unsafeMetadata.jazzAccountID as string
 let jazzAccountSecret = user.unsafeMetadata.jazzAccountSecret as string
 
     let workerResult = await startWorker({
-	AccountSchema: UserAccount,
-	syncServer: PUBLIC_JAZZ_SYNC_SERVER,
-	accountID: jazzAccountId,
-	accountSecret: jazzAccountSecret,
-	skipInboxLoad: true,
+    AccountSchema: UserAccount,
+    syncServer: PUBLIC_JAZZ_SYNC_SERVER,
+    accountID: jazzAccountId,
+    accountSecret: jazzAccountSecret,
+    skipInboxLoad: true,
     })
 
     return { worker: workerResult.worker }
@@ -27101,7 +27112,7 @@ const baseNotesMessages = messages({
     // Individual note messages
     "note.add.title": "Add a Note",
     "note.add.description":
-	"Capture a moment, conversation, or experience you shared together.",
+    "Capture a moment, conversation, or experience you shared together.",
     "note.actions.title": "Note Actions",
     "note.actions.description": "What would you like to do with this note?",
     "note.actions.edit": "Edit",
@@ -27116,15 +27127,15 @@ const baseNotesMessages = messages({
     "note.restore.title": "Restore Note",
     "note.restore.deletionInfo": "This note was deleted {$timeAgo}",
     "note.restore.permanentDeletionWarning":
-	" and is due for permanent deletion.",
+    " and is due for permanent deletion.",
     "note.restore.permanentDeletionCountdown":
-	" and will be permanently deleted in {$days :number} days.",
+    " and will be permanently deleted in {$days :number} days.",
     "note.restore.question": "Would you like to restore it?",
     "note.restore.button": "Restore Note",
     "note.restore.permanentDelete": "Permanently Delete",
     "note.permanentDelete.title": "Permanently Delete Note",
     "note.permanentDelete.confirmation":
-	"Are you sure you want to permanently delete this note? This action cannot be undone.",
+    "Are you sure you want to permanently delete this note? This action cannot be undone.",
     "note.permanentDelete.cancel": "Cancel",
     "note.permanentDelete.confirm": "Permanently Delete",
     "note.toast.updated": "Note updated",
@@ -27156,7 +27167,7 @@ const deNotesMessages = translate(baseNotesMessages, {
     // Individual note messages
     "note.add.title": "Notiz hinzufügen",
     "note.add.description":
-	"Halte einen Moment, ein Gespräch oder eine gemeinsame Erfahrung fest.",
+    "Halte einen Moment, ein Gespräch oder eine gemeinsame Erfahrung fest.",
     "note.actions.title": "Notizaktionen",
     "note.actions.description": "Was möchtest du mit dieser Notiz tun?",
     "note.actions.edit": "Bearbeiten",
@@ -27171,15 +27182,15 @@ const deNotesMessages = translate(baseNotesMessages, {
     "note.restore.deletionInfo": "Diese Notiz wurde {$timeAgo} gelöscht",
     "note.restore.title": "Notiz wiederherstellen",
     "note.restore.permanentDeletionWarning":
-	" und steht zur endgültigen Löschung an.",
+    " und steht zur endgültigen Löschung an.",
     "note.restore.permanentDeletionCountdown":
-	" und wird in {$days :number} Tagen endgültig gelöscht.",
+    " und wird in {$days :number} Tagen endgültig gelöscht.",
     "note.restore.question": "Möchtest du sie wiederherstellen?",
     "note.restore.button": "Notiz wiederherstellen",
     "note.restore.permanentDelete": "Endgültig löschen",
     "note.permanentDelete.title": "Notiz endgültig löschen",
     "note.permanentDelete.confirmation":
-	"Möchtest du diese Notiz wirklich endgültig löschen? Dies kann nicht rückgängig gemacht werden.",
+    "Möchtest du diese Notiz wirklich endgültig löschen? Dies kann nicht rückgängig gemacht werden.",
     "note.permanentDelete.cancel": "Abbrechen",
     "note.permanentDelete.confirm": "Endgültig löschen",
     "note.toast.updated": "Notiz aktualisiert",
@@ -27193,7 +27204,7 @@ const deNotesMessages = translate(baseNotesMessages, {
     "note.toast.removed": "Notiz entfernt",
 
     "note.form.placeholder":
-	"Dokumentiere euer Gespräch und was am wichtigsten ist",
+    "Dokumentiere euer Gespräch und was am wichtigsten ist",
 
 })
 
@@ -27212,7 +27223,7 @@ const ruNotesMessages = translate(baseNotesMessages, {
     // Individual note messages
     "note.add.title": "Добавить заметку",
     "note.add.description":
-	"Запишите момент, разговор или опыт, которым вы поделились вместе.",
+    "Запишите момент, разговор или опыт, которым вы поделились вместе.",
     "note.actions.title": "Действия с заметкой",
     "note.actions.description": "Что вы хотите сделать с этой заметкой?",
     "note.actions.edit": "Редактировать",
@@ -27227,15 +27238,15 @@ const ruNotesMessages = translate(baseNotesMessages, {
     "note.restore.title": "Восстановить заметку",
     "note.restore.deletionInfo": "Эта заметка была удалена {$timeAgo}",
     "note.restore.permanentDeletionWarning":
-	" и готова к окончательному удалению.",
+    " и готова к окончательному удалению.",
     "note.restore.permanentDeletionCountdown":
-	" и будет окончательно удалена через {$days :number} дней.",
+    " и будет окончательно удалена через {$days :number} дней.",
     "note.restore.question": "Хотите восстановить её?",
     "note.restore.button": "Восстановить заметку",
     "note.restore.permanentDelete": "Удалить навсегда",
     "note.permanentDelete.title": "Окончательно удалить заметку",
     "note.permanentDelete.confirmation":
-	"Вы уверены, что хотите окончательно удалить эту заметку? Это действие нельзя отменить.",
+    "Вы уверены, что хотите окончательно удалить эту заметку? Это действие нельзя отменить.",
     "note.permanentDelete.cancel": "Отмена",
     "note.permanentDelete.confirm": "Удалить навсегда",
     "note.toast.updated": "Заметка обновлена",
@@ -27249,7 +27260,7 @@ const ruNotesMessages = translate(baseNotesMessages, {
     "note.toast.removed": "Заметка удалена",
 
     "note.form.placeholder":
-	"Задокументируйте ваш разговор и то, что наиболее важно",
+    "Задокументируйте ваш разговор и то, что наиболее важно",
 
 })
 
@@ -27511,7 +27522,7 @@ const baseRemindersMessages = messages({
     "reminder.form.placeholder": "Set a reminder to follow up when it matters",
     "reminder.actions.title": "Reminder Actions",
     "reminder.actions.description":
-	"What would you like to do with this reminder?",
+    "What would you like to do with this reminder?",
     "reminder.actions.markDone": "Mark as Done",
     "reminder.actions.viewPerson": "View Person",
     "reminder.actions.addNote": "Add Note",
@@ -27523,24 +27534,24 @@ const baseRemindersMessages = messages({
     "reminder.edit.description": "Update the reminder details below.",
     "reminder.addNote.title": "Add Note for {$personName}",
     "reminder.addNote.description":
-	"Record a note about your interaction with {$personName}.",
+    "Record a note about your interaction with {$personName}.",
     "reminder.restore.title": "Restore Reminder",
     "reminder.restore.deletionInfo": "This reminder was deleted {$timeAgo}",
     "reminder.restore.permanentDeletionWarning":
-	" and is due for permanent deletion.",
+    " and is due for permanent deletion.",
     "reminder.restore.permanentDeletionCountdown":
-	" and will be permanently deleted in {$days :number} days.",
+    " and will be permanently deleted in {$days :number} days.",
     "reminder.restore.question": "Would you like to restore it?",
     "reminder.restore.button": "Restore Reminder",
     "reminder.restore.permanentDelete": "Permanently Delete",
     "reminder.permanentDelete.title": "Permanently Delete Reminder",
     "reminder.permanentDelete.confirmation":
-	"Are you sure you want to permanently delete this reminder? This action cannot be undone.",
+    "Are you sure you want to permanently delete this reminder? This action cannot be undone.",
     "reminder.permanentDelete.cancel": "Cancel",
     "reminder.permanentDelete.confirm": "Permanently Delete",
     "reminder.done.actions.title": "Done Reminder Actions",
     "reminder.done.actions.description":
-	"What would you like to do with this completed reminder?",
+    "What would you like to do with this completed reminder?",
     "reminder.done.markUndone": "Mark as Undone",
     "reminder.done.delete": "Delete",
     "reminder.toast.restored": "Reminder restored",
@@ -27554,7 +27565,7 @@ const baseRemindersMessages = messages({
     "reminder.toast.updated": "Reminder updated",
     "reminder.toast.updateUndone": "Reminder update undone",
     "reminder.toast.deleted":
-	"Reminder deleted - will be permanently deleted in 30 days",
+    "Reminder deleted - will be permanently deleted in 30 days",
 
 })
 
@@ -27603,7 +27614,7 @@ const deRemindersMessages = translate(baseRemindersMessages, {
     "reminder.add.title": "Erinnerung hinzufügen",
     "reminder.add.description": "Lege eine Erinnerung für {$person} fest.",
     "reminder.form.placeholder":
-	"Erinnerung setzen, um nachzufassen, wenn es wichtig ist",
+    "Erinnerung setzen, um nachzufassen, wenn es wichtig ist",
     "reminder.actions.title": "Aktionen zur Erinnerung",
     "reminder.actions.description": "Was möchtest du mit dieser Erinnerung tun?",
     "reminder.actions.markDone": "Als erledigt markieren",
@@ -27617,24 +27628,24 @@ const deRemindersMessages = translate(baseRemindersMessages, {
     "reminder.edit.description": "Aktualisiere die Details der Erinnerung.",
     "reminder.addNote.title": "Notiz für {$personName} hinzufügen",
     "reminder.addNote.description":
-	"Halte eine Erinnerung zu deiner Interaktion mit {$personName} fest.",
+    "Halte eine Erinnerung zu deiner Interaktion mit {$personName} fest.",
     "reminder.restore.title": "Erinnerung wiederherstellen",
     "reminder.restore.deletionInfo": "Diese Erinnerung wurde {$timeAgo} gelöscht",
     "reminder.restore.permanentDeletionWarning":
-	" und steht zur endgültigen Löschung an.",
+    " und steht zur endgültigen Löschung an.",
     "reminder.restore.permanentDeletionCountdown":
-	" und wird in {$days :number} Tagen endgültig gelöscht.",
+    " und wird in {$days :number} Tagen endgültig gelöscht.",
     "reminder.restore.question": "Möchtest du sie wiederherstellen?",
     "reminder.restore.button": "Erinnerung wiederherstellen",
     "reminder.restore.permanentDelete": "Endgültig löschen",
     "reminder.permanentDelete.title": "Erinnerung endgültig löschen",
     "reminder.permanentDelete.confirmation":
-	"Bist du sicher, dass du diese Erinnerung endgültig löschen möchtest? Dies kann nicht rückgängig gemacht werden.",
+    "Bist du sicher, dass du diese Erinnerung endgültig löschen möchtest? Dies kann nicht rückgängig gemacht werden.",
     "reminder.permanentDelete.cancel": "Abbrechen",
     "reminder.permanentDelete.confirm": "Endgültig löschen",
     "reminder.done.actions.title": "Aktionen für erledigte Erinnerung",
     "reminder.done.actions.description":
-	"Was möchtest du mit dieser erledigten Erinnerung tun?",
+    "Was möchtest du mit dieser erledigten Erinnerung tun?",
     "reminder.done.markUndone": "Als nicht erledigt markieren",
     "reminder.done.delete": "Löschen",
     "reminder.toast.restored": "Erinnerung wiederhergestellt",
@@ -27644,13 +27655,13 @@ const deRemindersMessages = translate(baseRemindersMessages, {
     "reminder.toast.markedUndone": "Erinnerung als nicht erledigt markiert",
     "reminder.toast.markedDoneAgain": "Erinnerung erneut als erledigt markiert",
     "reminder.toast.restoredToPreviousDate":
-	"Erinnerung auf vorheriges Datum zurückgesetzt",
+    "Erinnerung auf vorheriges Datum zurückgesetzt",
     "reminder.toast.markedNotDone": "Erinnerung als nicht erledigt markiert",
     "reminder.toast.updated": "Erinnerung aktualisiert",
     "reminder.toast.updateUndone":
-	"Aktualisierung der Erinnerung rückgängig gemacht",
+    "Aktualisierung der Erinnerung rückgängig gemacht",
     "reminder.toast.deleted":
-	"Erinnerung gelöscht – wird in 30 Tagen endgültig gelöscht",
+    "Erinnerung gelöscht – wird in 30 Tagen endgültig gelöscht",
 
 })
 
@@ -27698,10 +27709,10 @@ const ruRemindersMessages = translate(baseRemindersMessages, {
     "reminder.add.title": "Добавить напоминание",
     "reminder.add.description": "Установите напоминание для {$person}.",
     "reminder.form.placeholder":
-	"Установите напоминание, чтобы связаться в нужный момент",
+    "Установите напоминание, чтобы связаться в нужный момент",
     "reminder.actions.title": "Действия с напоминанием",
     "reminder.actions.description":
-	"Что вы хотите сделать с этим напоминанием?",
+    "Что вы хотите сделать с этим напоминанием?",
     "reminder.actions.markDone": "Отметить как выполненное",
     "reminder.actions.viewPerson": "Посмотреть контакт",
     "reminder.actions.addNote": "Добавить заметку",
@@ -27713,24 +27724,24 @@ const ruRemindersMessages = translate(baseRemindersMessages, {
     "reminder.edit.description": "Обновите детали напоминания.",
     "reminder.addNote.title": "Добавить заметку для {$personName}",
     "reminder.addNote.description":
-	"Запишите заметку о вашем взаимодействии с {$personName}.",
+    "Запишите заметку о вашем взаимодействии с {$personName}.",
     "reminder.restore.title": "Восстановить напоминание",
     "reminder.restore.deletionInfo": "Это напоминание было удалено {$timeAgo}",
     "reminder.restore.permanentDeletionWarning":
-	" и готово к окончательному удалению.",
+    " и готово к окончательному удалению.",
     "reminder.restore.permanentDeletionCountdown":
-	" и будет окончательно удалено через {$days :number} дней.",
+    " и будет окончательно удалено через {$days :number} дней.",
     "reminder.restore.question": "Хотите восстановить его?",
     "reminder.restore.button": "Восстановить напоминание",
     "reminder.restore.permanentDelete": "Удалить навсегда",
     "reminder.permanentDelete.title": "Окончательно удалить напоминание",
     "reminder.permanentDelete.confirmation":
-	"Вы уверены, что хотите окончательно удалить это напоминание? Это действие нельзя отменить.",
+    "Вы уверены, что хотите окончательно удалить это напоминание? Это действие нельзя отменить.",
     "reminder.permanentDelete.cancel": "Отмена",
     "reminder.permanentDelete.confirm": "Удалить навсегда",
     "reminder.done.actions.title": "Действия с выполненным напоминанием",
     "reminder.done.actions.description":
-	"Что вы хотите сделать с этим выполненным напоминанием?",
+    "Что вы хотите сделать с этим выполненным напоминанием?",
     "reminder.done.markUndone": "Отметить как невыполненное",
     "reminder.done.delete": "Удалить",
     "reminder.toast.restored": "Напоминание восстановлено",
@@ -27740,12 +27751,12 @@ const ruRemindersMessages = translate(baseRemindersMessages, {
     "reminder.toast.markedUndone": "Напоминание отмечено как невыполненное",
     "reminder.toast.markedDoneAgain": "Напоминание снова отмечено как выполненное",
     "reminder.toast.restoredToPreviousDate":
-	"Напоминание восстановлено на предыдущую дату",
+    "Напоминание восстановлено на предыдущую дату",
     "reminder.toast.markedNotDone": "Напоминание отмечено как невыполненное",
     "reminder.toast.updated": "Напоминание обновлено",
     "reminder.toast.updateUndone": "Обновление напоминания отменено",
     "reminder.toast.deleted":
-	"Напоминание удалено - будет окончательно удалено через 30 дней",
+    "Напоминание удалено - будет окончательно удалено через 30 дней",
 
 })
 
@@ -27888,22 +27899,22 @@ const baseSettingsMessages = messages({
     // Data deletion
     "settings.data.delete.title": "Delete All Your Data",
     "settings.data.delete.description":
-	"Permanently delete all your data for this account. This action cannot be undone. We recommend exporting your data first so you can import it later.",
+    "Permanently delete all your data for this account. This action cannot be undone. We recommend exporting your data first so you can import it later.",
     "settings.data.delete.button": "Delete All Data",
     "settings.data.delete.dialog.title": "Delete All Data",
     "settings.data.delete.dialog.description":
-	"This action will permanently delete all your people, notes, and reminders. This cannot be undone. We recommend exporting your data first so you can import it later.",
+    "This action will permanently delete all your people, notes, and reminders. This cannot be undone. We recommend exporting your data first so you can import it later.",
     "settings.data.delete.confirm.label": 'Type "delete all my data" to confirm:',
     "settings.data.delete.confirm.placeholder": "delete all my data",
     "settings.data.delete.confirm.error":
-	'You must type "delete all my data" exactly',
+    'You must type "delete all my data" exactly',
     "settings.data.delete.deleting": "Deleting...",
     "settings.data.delete.success": "All data deleted successfully",
     "settings.data.delete.error.load": "Failed to load account data",
     "settings.data.delete.error.rootMissing": "Account root missing",
     "settings.about.title": "About",
     "settings.about.description":
-	"Learn more about Tilly or redo the welcome tour.",
+    "Learn more about Tilly or redo the welcome tour.",
     "settings.about.visit": "Visit Website",
     "settings.about.learnMore": "Read About Journaling",
     "settings.about.redoTour": "Take the Tour",
@@ -27915,36 +27926,36 @@ const baseSettingsMessages = messages({
     // PWA-related settings
     "settings.pwa.title": "App Installation",
     "settings.pwa.description.mobile":
-	"Get the best experience with push notifications and faster access.",
+    "Get the best experience with push notifications and faster access.",
     "settings.pwa.description.desktop":
-	"Install Tilly as an app for a cleaner interface and quick access.",
+    "Install Tilly as an app for a cleaner interface and quick access.",
     "settings.pwa.status.label": "Status",
     "settings.pwa.status.installed": "✅ Tilly is installed as an app",
     "settings.pwa.status.browser": "📱 Tilly is running in browser",
     "settings.pwa.install.button": "Install App",
     "settings.pwa.install.description.mobile":
-	"Add Tilly to your home screen for faster access. Push notifications require signing in.",
+    "Add Tilly to your home screen for faster access. Push notifications require signing in.",
     "settings.pwa.install.description.desktop":
-	"Install Tilly as an app to remove browser UI and launch it like any other app.",
+    "Install Tilly as an app to remove browser UI and launch it like any other app.",
     "settings.pwa.benefits.title": "Benefits you're enjoying:",
     "settings.pwa.benefits.mobile.notifications":
-	"• Push notifications (when signed in)",
+    "• Push notifications (when signed in)",
     "settings.pwa.benefits.mobile.startup": "• Faster app startup",
     "settings.pwa.benefits.mobile.experience": "• Native app-like experience",
     "settings.pwa.benefits.mobile.icon": "• Dedicated app icon on home screen",
     "settings.pwa.benefits.desktop.interface":
-	"• Clean interface without browser UI",
+    "• Clean interface without browser UI",
     "settings.pwa.benefits.desktop.launch": "• Launch like any other desktop app",
     "settings.pwa.benefits.desktop.startup": "• Faster app startup",
     "settings.pwa.benefits.desktop.window": "• Dedicated app window",
     "settings.pwa.hideInstall.label": "Hide Install Button",
     "settings.pwa.hideInstall.description":
-	"Hide the install button from the navigation menu",
+    "Hide the install button from the navigation menu",
 
     // PWA installation dialogs
     "pwa.install.title": "Install Tilly",
     "pwa.install.addToHomeScreen.chrome":
-	'Select "Add to Home screen" or "Install app"',
+    'Select "Add to Home screen" or "Install app"',
     "pwa.install.addToHomeScreen.confirm": 'Tap "Add" or "Install" to confirm',
     "pwa.install.safari.scrollDown": 'Scroll down and tap "Add to Home Screen"',
     "pwa.install.safari.confirm": 'Tap "Add" to confirm',
@@ -27952,66 +27963,66 @@ const baseSettingsMessages = messages({
     "pwa.install.safari.browser": "Safari (Mac):",
     "pwa.install.firefox.browser": "Firefox:",
     "pwa.install.generic.instruction":
-	'Look for an "Install" or "Add to Home Screen" option in your browser',
+    'Look for an "Install" or "Add to Home Screen" option in your browser',
     "pwa.install.followPrompts":
-	"Follow the prompts to add Tilly to your home screen",
+    "Follow the prompts to add Tilly to your home screen",
     "pwa.install.dialog.title": "Install Tilly",
     "pwa.install.dialog.description.mobile":
-	"Install Tilly as an app for faster access and push notifications.",
+    "Install Tilly as an app for faster access and push notifications.",
     "pwa.install.dialog.description.desktop":
-	"Install Tilly as an app for a cleaner interface and quick access.",
+    "Install Tilly as an app for a cleaner interface and quick access.",
     "pwa.install.dialog.later": "Maybe Later",
     "pwa.install.dialog.browser.title":
-	"Install Tilly directly from your browser for the best experience.",
+    "Install Tilly directly from your browser for the best experience.",
     "pwa.install.dialog.install": "Install Now",
     "pwa.install.android.title":
-	"To install Tilly as a progressive web app on your Android device:",
+    "To install Tilly as a progressive web app on your Android device:",
     "pwa.install.android.step1": 'Select "Add to Home screen" or "Install app"',
     "pwa.install.android.step2": 'Tap "Add" or "Install" to confirm',
     "pwa.install.ios.title":
-	"To install Tilly as a progressive web app on your iPhone or iPad:",
+    "To install Tilly as a progressive web app on your iPhone or iPad:",
     "pwa.install.ios.step1": 'Scroll down and tap "Add to Home Screen"',
     "pwa.install.ios.step2": 'Tap "Add" to confirm',
     "pwa.install.ios.note":
-	"Note: On iOS, installation is only available through the Safari browser.",
+    "Note: On iOS, installation is only available through the Safari browser.",
     "pwa.install.desktop.browser.title":
-	"Install Tilly directly from your browser for a cleaner experience.",
+    "Install Tilly directly from your browser for a cleaner experience.",
     "pwa.install.desktop.title":
-	"To install Tilly as a progressive web app on desktop:",
+    "To install Tilly as a progressive web app on desktop:",
     "pwa.install.desktop.chrome": "Chrome/Edge:",
     "pwa.install.desktop.chrome.instruction":
-	"Look for the install button in the address bar",
+    "Look for the install button in the address bar",
     "pwa.install.desktop.safari": "Safari (Mac):",
     "pwa.install.desktop.safari.instruction": "Click … Share → Add to Dock",
     "pwa.install.desktop.firefox": "Firefox:",
     "pwa.install.desktop.firefox.instruction": "Installation support varies",
     "pwa.install.generic.title": "To install Tilly as a progressive web app:",
     "pwa.install.generic.step1":
-	'Look for an "Install" or "Add to Home Screen" option in your browser menu',
+    'Look for an "Install" or "Add to Home Screen" option in your browser menu',
     "pwa.install.generic.step2":
-	"Follow the prompts to add Tilly to your home screen",
+    "Follow the prompts to add Tilly to your home screen",
     "pwa.install.android.menuStep":
-	"Tap the menu (⋮) or {#shareIcon}share{/shareIcon} button in your browser",
+    "Tap the menu (⋮) or {#shareIcon}share{/shareIcon} button in your browser",
     "pwa.install.ios.shareStep":
-	"Tap the {#shareIcon}Share{/shareIcon} button at the bottom of Safari",
+    "Tap the {#shareIcon}Share{/shareIcon} button at the bottom of Safari",
 
     // Notifications settings
     "notifications.title": "Push Notifications",
     "notifications.description":
-	"Choose when you want to receive reminder notifications and manage your devices.",
+    "Choose when you want to receive reminder notifications and manage your devices.",
     "notifications.signInRequired.title":
-	"Sign in to get access to push notifications",
+    "Sign in to get access to push notifications",
     "notifications.timing.heading": "Timing",
     "notifications.timezone.label": "Timezone",
     "notifications.timezone.change": "Change",
     "notifications.timezone.usingDefault":
-	"Using your device's timezone as default",
+    "Using your device's timezone as default",
     "notifications.timezone.dialog.title": "Change Timezone",
     "notifications.timezone.current.label": "Current timezone",
     "notifications.timezone.new.label": "New timezone",
     "notifications.timezone.new.placeholder": "e.g., Europe/Berlin",
     "notifications.timezone.new.description":
-	'Enter a valid IANA timezone identifier like "Europe/Berlin", "America/New_York", or "Asia/Tokyo"',
+    'Enter a valid IANA timezone identifier like "Europe/Berlin", "America/New_York", or "Asia/Tokyo"',
     "notifications.timezone.detectDevice": "Detect Device Timezone",
     "notifications.timezone.cancel": "Cancel",
     "notifications.timezone.save": "Save",
@@ -28019,27 +28030,27 @@ const baseSettingsMessages = messages({
     "notifications.time.label": "Notification Time",
     "notifications.time.change": "Change",
     "notifications.time.defaultMessage":
-	"Using 12:00 PM as default notification time",
+    "Using 12:00 PM as default notification time",
     "notifications.time.customMessage":
-	"You'll receive notifications at this time each day in your timezone",
+    "You'll receive notifications at this time each day in your timezone",
     "notifications.time.dialog.title": "Change Notification Time",
     "notifications.time.current.label": "Current notification time",
     "notifications.time.new.label": "New notification time",
     "notifications.time.new.placeholder": "Select notification time",
     "notifications.time.description":
-	"Choose when you want to receive daily reminder notifications.",
+    "Choose when you want to receive daily reminder notifications.",
     "notifications.devices.heading": "Devices",
     "notifications.devices.description":
-	"Manage devices registered for push notifications.",
+    "Manage devices registered for push notifications.",
     "notifications.devices.noDevices.description":
-	"Add devices to receive push notifications.",
+    "Add devices to receive push notifications.",
     "notifications.devices.noDevices.title": "No Devices Added",
     "notifications.devices.noDevices.warning":
-	"You will NOT receive any notifications until you add at least one device. Add this device to start receiving reminders.",
+    "You will NOT receive any notifications until you add at least one device. Add this device to start receiving reminders.",
     "notifications.devices.thisDevice": "This device",
     "notifications.devices.actions.title": "Device Actions",
     "notifications.devices.actions.description":
-	'What would you like to do with "{$deviceName}"?',
+    'What would you like to do with "{$deviceName}"?',
     "notifications.devices.table.device": "Device",
     "notifications.devices.table.browser": "Browser",
     "notifications.devices.table.os": "OS",
@@ -28049,10 +28060,10 @@ const baseSettingsMessages = messages({
     "notifications.devices.editName": "Edit name",
     "notifications.devices.editDialog.title": "Edit Device Name",
     "notifications.devices.editDialog.description":
-	"Change the display name for this device.",
+    "Change the display name for this device.",
     "notifications.devices.remove.confirm.title": "Remove Device",
     "notifications.devices.remove.confirm.description":
-	"Are you sure you want to remove this device? You will stop receiving notifications on it.",
+    "Are you sure you want to remove this device? You will stop receiving notifications on it.",
     "notifications.devices.remove.confirm.cancel": "Cancel",
     "notifications.devices.remove.confirm.remove": "Remove",
     "notifications.devices.status.active": "Active",
@@ -28067,36 +28078,36 @@ const baseSettingsMessages = messages({
     "notifications.devices.endpointPrefix": "Endpoint:",
     "notifications.enable.heading": "Enable Notifications",
     "notifications.enable.description":
-	"To receive reminders as push notifications, enable notifications for your account.",
+    "To receive reminders as push notifications, enable notifications for your account.",
     "notifications.enable.step1":
-	"Grant permission when prompted by your browser.",
+    "Grant permission when prompted by your browser.",
     "notifications.enable.step2":
-	"Keep this device registered for notifications.",
+    "Keep this device registered for notifications.",
     "notifications.enable.button": "Enable Push Notifications",
     "notifications.enable.success": "Notifications enabled successfully!",
     "notifications.enable.error": "Failed to enable notifications.",
     "notifications.permission.denied.title": "Permission Denied",
     "notifications.permission.denied.description":
-	"Notifications are blocked in your browser settings. Please enable them to receive reminders.",
+    "Notifications are blocked in your browser settings. Please enable them to receive reminders.",
     "notifications.permission.openSettings": "Open Browser Settings",
     "notifications.register.title": "Register Device",
     "notifications.register.description":
-	"Register this device to receive push notifications.",
+    "Register this device to receive push notifications.",
     "notifications.register.button": "Register",
     "notifications.register.success": "Device registered successfully!",
     "notifications.register.error": "Failed to register device.",
     "notifications.unregister.title": "Unregister Device",
     "notifications.unregister.description":
-	"Stop receiving notifications on this device.",
+    "Stop receiving notifications on this device.",
     "notifications.unregister.button": "Unregister",
     "notifications.unregister.success": "Device unregistered successfully!",
     "notifications.unregister.error": "Failed to unregister device.",
     "notifications.devices.permissionError":
-	"Failed to request notification permission",
+    "Failed to request notification permission",
     "notifications.toast.unsubscribeFailed":
-	"Failed to unsubscribe from notifications",
+    "Failed to unsubscribe from notifications",
     "notifications.toast.subscribeFailed":
-	"Failed to subscribe to push notifications",
+    "Failed to subscribe to push notifications",
     "notifications.toast.testSendFailed": "Failed to send test notification",
     "notifications.toast.testSendSuccess": "Test notification sent",
     "notifications.toast.deviceRemoved": "Device removed successfully",
@@ -28105,35 +28116,35 @@ const baseSettingsMessages = messages({
     "notifications.lastDelivery.label": "Last Notification Check",
     "notifications.lastDelivery.reset": "Reset",
     "notifications.lastDelivery.description":
-	"When reminders were last checked and, if needed, delivered. Reset this to force another check on the next hourly run.",
+    "When reminders were last checked and, if needed, delivered. Reset this to force another check on the next hourly run.",
     "notifications.devices.addButton": "Add This Device",
     "notifications.devices.addDialog.title": "Add This Device",
     "notifications.devices.addDialog.description.enabled":
-	"Enable push notifications for this device to receive reminders.",
+    "Enable push notifications for this device to receive reminders.",
     "notifications.devices.addDialog.description.blocked":
-	"Push notifications are blocked. Please enable them in your browser settings.",
+    "Push notifications are blocked. Please enable them in your browser settings.",
     "notifications.devices.nameLabel": "Device Name",
     "notifications.devices.name.required": "Device name is required",
     "notifications.devices.adding": "Adding...",
     "notifications.iosRequirement.title":
-	"Push notifications require app installation",
+    "Push notifications require app installation",
     "notifications.iosRequirement.description":
-	"On iOS, push notifications are only available after installing Tilly to your home screen. Install the app from the App Installation section below to enable push notifications.",
+    "On iOS, push notifications are only available after installing Tilly to your home screen. Install the app from the App Installation section below to enable push notifications.",
     "notifications.browserNotSupported.title": "Push notifications not available",
     "notifications.browserNotSupported.recommendation.ios":
-	"On iOS, please use Safari and install the app for the full Tilly experience.",
+    "On iOS, please use Safari and install the app for the full Tilly experience.",
     "notifications.browserNotSupported.recommendation.iosInApp":
-	"On iOS, please open this link in Safari and install the app for the full Tilly experience.",
+    "On iOS, please open this link in Safari and install the app for the full Tilly experience.",
     "notifications.browserNotSupported.recommendation.android":
-	"On Android, please use Chrome and install the app for the full Tilly experience.",
+    "On Android, please use Chrome and install the app for the full Tilly experience.",
     "notifications.browserNotSupported.recommendation.androidInApp":
-	"On Android, please open this link in Chrome and install the app for the full Tilly experience.",
+    "On Android, please open this link in Chrome and install the app for the full Tilly experience.",
     "notifications.browserNotSupported.recommendation.windows":
-	"On Windows, please use Chrome or Edge for the full Tilly experience.",
+    "On Windows, please use Chrome or Edge for the full Tilly experience.",
     "notifications.browserNotSupported.recommendation.macos":
-	"On macOS, please use Chrome or Safari for the full Tilly experience.",
+    "On macOS, please use Chrome or Safari for the full Tilly experience.",
     "notifications.browserNotSupported.recommendation.generic":
-	"Please try using Chrome, Edge, or Safari for the full Tilly experience.",
+    "Please try using Chrome, Edge, or Safari for the full Tilly experience.",
     // Status messages
     "status.offline.title": "You're offline",
     "status.update.title": "Update available",
@@ -28142,20 +28153,20 @@ const baseSettingsMessages = messages({
     "status.offline.description": "Most of Tilly works offline.",
     "status.offline.feature.core": "View and edit people, notes, and reminders",
     "status.offline.feature.requiresInternet":
-	"Sync, push notifications, and Tilly Assistant require internet",
+    "Sync, push notifications, and Tilly Assistant require internet",
     "status.update.tooltip": "Update available",
     "status.update.dialog.title": "Update Available",
     "status.update.description":
-	"A new version of Tilly is available with improvements and bug fixes.",
+    "A new version of Tilly is available with improvements and bug fixes.",
     "status.update.updating": "Updating...",
     "status.update.updateNow": "Update Now",
     "status.update.later": "Later",
     "status.notSignedIn.tooltip": "Not signed in",
     "status.notSignedIn.dialog.title": "Not Signed In",
     "status.notSignedIn.browserOnly":
-	"Without sign in, the data is only stored in the browser",
+    "Without sign in, the data is only stored in the browser",
     "status.notSignedIn.benefits":
-	"Sign in to back up and sync your data, and receive push notifications",
+    "Sign in to back up and sync your data, and receive push notifications",
     "status.notSignedIn.signIn": "Sign In",
 
 })
@@ -28234,23 +28245,23 @@ const deSettingsMessages = translate(baseSettingsMessages, {
     // Data deletion
     "settings.data.delete.title": "Alle deine Daten löschen",
     "settings.data.delete.description":
-	"Lösche dauerhaft alle deine Daten für dieses Konto. Diese Aktion kann nicht rückgängig gemacht werden. Wir empfehlen, deine Daten zuerst zu exportieren, damit du sie später wieder importieren kannst.",
+    "Lösche dauerhaft alle deine Daten für dieses Konto. Diese Aktion kann nicht rückgängig gemacht werden. Wir empfehlen, deine Daten zuerst zu exportieren, damit du sie später wieder importieren kannst.",
     "settings.data.delete.button": "Alle Daten löschen",
     "settings.data.delete.dialog.title": "Alle Daten löschen",
     "settings.data.delete.dialog.description":
-	"Diese Aktion löscht dauerhaft alle deine Daten: Personen, Notizen und Erinnerungen. Dies kann nicht rückgängig gemacht werden. Wir empfehlen, deine Daten zuerst zu exportieren, damit du sie später wieder importieren kannst.",
+    "Diese Aktion löscht dauerhaft alle deine Daten: Personen, Notizen und Erinnerungen. Dies kann nicht rückgängig gemacht werden. Wir empfehlen, deine Daten zuerst zu exportieren, damit du sie später wieder importieren kannst.",
     "settings.data.delete.confirm.label":
-	'Schreibe "delete all my data" zur Bestätigung:',
+    'Schreibe "delete all my data" zur Bestätigung:',
     "settings.data.delete.confirm.placeholder": "delete all my data",
     "settings.data.delete.confirm.error":
-	'Du musst genau "delete all my data" eingeben',
+    'Du musst genau "delete all my data" eingeben',
     "settings.data.delete.deleting": "Lösche...",
     "settings.data.delete.success": "Alle Daten wurden erfolgreich gelöscht",
     "settings.data.delete.error.load": "Kontodaten konnten nicht geladen werden",
     "settings.data.delete.error.rootMissing": "Konto-Stammdaten fehlen",
     "settings.about.title": "Über",
     "settings.about.description":
-	"Erfahre mehr über Tilly oder wiederhole die Willkommens-Tour.",
+    "Erfahre mehr über Tilly oder wiederhole die Willkommens-Tour.",
     "settings.about.visit": "Webseite besuchen",
     "settings.about.learnMore": "Über Journaling lesen",
     "settings.about.redoTour": "Tour starten",
@@ -28262,96 +28273,96 @@ const deSettingsMessages = translate(baseSettingsMessages, {
     // PWA-related settings
     "settings.pwa.title": "App-Installation",
     "settings.pwa.description.mobile":
-	"Erhalte die beste Erfahrung mit Push-Benachrichtigungen und schnellerem Zugriff.",
+    "Erhalte die beste Erfahrung mit Push-Benachrichtigungen und schnellerem Zugriff.",
     "settings.pwa.description.desktop":
-	"Installiere Tilly als App für eine sauberere Oberfläche und schnellen Zugriff.",
+    "Installiere Tilly als App für eine sauberere Oberfläche und schnellen Zugriff.",
     "settings.pwa.status.label": "Status",
     "settings.pwa.status.installed": "✅ Tilly ist als App installiert",
     "settings.pwa.status.browser": "📱 Tilly läuft im Browser",
     "settings.pwa.install.button": "App installieren",
     "settings.pwa.install.description.mobile":
-	"Füge Tilly deinem Startbildschirm hinzu. Push-Benachrichtigungen erfordern eine Anmeldung.",
+    "Füge Tilly deinem Startbildschirm hinzu. Push-Benachrichtigungen erfordern eine Anmeldung.",
     "settings.pwa.install.description.desktop":
-	"Installiere Tilly als App, um die Browser-UI zu entfernen und sie wie jede andere App zu starten.",
+    "Installiere Tilly als App, um die Browser-UI zu entfernen und sie wie jede andere App zu starten.",
     "settings.pwa.benefits.title": "Vorteile:",
     "settings.pwa.benefits.mobile.notifications":
-	"• Push-Benachrichtigungen (bei Anmeldung)",
+    "• Push-Benachrichtigungen (bei Anmeldung)",
     "settings.pwa.benefits.mobile.startup": "• Schnellere App-Starts",
     "settings.pwa.benefits.mobile.experience": "• App-ähnliche Erfahrung",
     "settings.pwa.benefits.mobile.icon":
-	"• Eigenes App-Icon auf dem Startbildschirm",
+    "• Eigenes App-Icon auf dem Startbildschirm",
     "settings.pwa.benefits.desktop.interface":
-	"• Aufgeräumte Oberfläche ohne Browser-UI",
+    "• Aufgeräumte Oberfläche ohne Browser-UI",
     "settings.pwa.benefits.desktop.launch": "• Start wie jede andere Desktop-App",
     "settings.pwa.benefits.desktop.startup": "• Schnellere App-Starts",
     "settings.pwa.benefits.desktop.window": "• Eigenes App-Fenster",
     "settings.pwa.hideInstall.label": "Installationsknopf ausblenden",
     "settings.pwa.hideInstall.description":
-	"Blendet den Installationsknopf aus dem Navigationsmenü aus",
+    "Blendet den Installationsknopf aus dem Navigationsmenü aus",
 
     // PWA installation dialogs
     "pwa.install.title": "Tilly installieren",
     "pwa.install.addToHomeScreen.chrome":
-	'"Zum Startbildschirm hinzufügen" oder "App installieren" wählen',
+    '"Zum Startbildschirm hinzufügen" oder "App installieren" wählen',
     "pwa.install.addToHomeScreen.confirm":
-	'Mit "Hinzufügen" oder "Installieren" bestätigen',
+    'Mit "Hinzufügen" oder "Installieren" bestätigen',
     "pwa.install.safari.scrollDown":
-	'Nach unten scrollen und "Zum Home-Bildschirm" tippen',
+    'Nach unten scrollen und "Zum Home-Bildschirm" tippen',
     "pwa.install.safari.confirm": 'Mit "Hinzufügen" bestätigen',
     "pwa.install.chrome.browser": "Chrome/Edge:",
     "pwa.install.safari.browser": "Safari (Mac):",
     "pwa.install.firefox.browser": "Firefox:",
     "pwa.install.generic.instruction":
-	'Im Browser nach "Installieren" oder "Zum Home-Bildschirm" suchen',
+    'Im Browser nach "Installieren" oder "Zum Home-Bildschirm" suchen',
     "pwa.install.followPrompts": "Den Anweisungen folgen, um Tilly hinzuzufügen",
     "pwa.install.dialog.title": "Tilly installieren",
     "pwa.install.dialog.description.mobile":
-	"Tilly als App installieren für schnellen Zugriff und Push-Benachrichtigungen.",
+    "Tilly als App installieren für schnellen Zugriff und Push-Benachrichtigungen.",
     "pwa.install.dialog.description.desktop":
-	"Tilly als App installieren für eine aufgeräumte Oberfläche und schnellen Zugriff.",
+    "Tilly als App installieren für eine aufgeräumte Oberfläche und schnellen Zugriff.",
     "pwa.install.dialog.later": "Vielleicht später",
     "pwa.install.dialog.browser.title":
-	"Installiere Tilly direkt aus deinem Browser für die beste Erfahrung.",
+    "Installiere Tilly direkt aus deinem Browser für die beste Erfahrung.",
     "pwa.install.dialog.install": "Jetzt installieren",
     "pwa.install.android.title": "So installierst du Tilly als PWA auf Android:",
     "pwa.install.android.step1":
-	'"Zum Startbildschirm hinzufügen" oder "App installieren" wählen',
+    '"Zum Startbildschirm hinzufügen" oder "App installieren" wählen',
     "pwa.install.android.step2":
-	'Mit "Hinzufügen" oder "Installieren" bestätigen',
+    'Mit "Hinzufügen" oder "Installieren" bestätigen',
     "pwa.install.ios.title":
-	"So installierst du Tilly als PWA auf iPhone oder iPad:",
+    "So installierst du Tilly als PWA auf iPhone oder iPad:",
     "pwa.install.ios.step1":
-	'Nach unten scrollen und "Zum Home-Bildschirm" tippen',
+    'Nach unten scrollen und "Zum Home-Bildschirm" tippen',
     "pwa.install.ios.step2": 'Mit "Hinzufügen" bestätigen',
     "pwa.install.ios.note":
-	"Hinweis: Unter iOS ist die Installation nur über Safari möglich.",
+    "Hinweis: Unter iOS ist die Installation nur über Safari möglich.",
     "pwa.install.desktop.browser.title":
-	"Installiere Tilly direkt aus deinem Browser für ein sauberes Erlebnis.",
+    "Installiere Tilly direkt aus deinem Browser für ein sauberes Erlebnis.",
     "pwa.install.desktop.title":
-	"So installierst du Tilly als PWA auf dem Desktop:",
+    "So installierst du Tilly als PWA auf dem Desktop:",
     "pwa.install.desktop.chrome": "Chrome/Edge:",
     "pwa.install.desktop.chrome.instruction":
-	"Nach der Installationsschaltfläche in der Adressleiste suchen",
+    "Nach der Installationsschaltfläche in der Adressleiste suchen",
     "pwa.install.desktop.safari": "Safari (Mac):",
     "pwa.install.desktop.safari.instruction": "… Teilen → Zum Dock hinzufügen",
     "pwa.install.desktop.firefox": "Firefox:",
     "pwa.install.desktop.firefox.instruction":
-	"Installationsunterstützung variiert",
+    "Installationsunterstützung variiert",
     "pwa.install.generic.title": "So installierst du Tilly als PWA:",
     "pwa.install.generic.step1":
-	'Im Browsermenü nach "Installieren" oder "Zum Home-Bildschirm" suchen',
+    'Im Browsermenü nach "Installieren" oder "Zum Home-Bildschirm" suchen',
     "pwa.install.generic.step2": "Den Anweisungen folgen, um Tilly hinzuzufügen",
     "pwa.install.android.menuStep":
-	"Menü (⋮) oder {#shareIcon}Teilen{/shareIcon} im Browser tippen",
+    "Menü (⋮) oder {#shareIcon}Teilen{/shareIcon} im Browser tippen",
     "pwa.install.ios.shareStep":
-	"{#shareIcon}Teilen{/shareIcon}-Taste unten in Safari tippen",
+    "{#shareIcon}Teilen{/shareIcon}-Taste unten in Safari tippen",
 
     // Notifications settings
     "notifications.title": "Push-Benachrichtigungen",
     "notifications.description":
-	"Wähle, wann du Erinnerungsbenachrichtigungen erhalten willst, und verwalte deine Geräte.",
+    "Wähle, wann du Erinnerungsbenachrichtigungen erhalten willst, und verwalte deine Geräte.",
     "notifications.signInRequired.title":
-	"Melde dich an, um Zugriff auf Push-Benachrichtigungen zu erhalten",
+    "Melde dich an, um Zugriff auf Push-Benachrichtigungen zu erhalten",
     "notifications.timing.heading": "Zeitplanung",
     "notifications.timezone.label": "Zeitzone",
     "notifications.timezone.change": "Ändern",
@@ -28361,7 +28372,7 @@ const deSettingsMessages = translate(baseSettingsMessages, {
     "notifications.timezone.new.label": "Neue Zeitzone",
     "notifications.timezone.new.placeholder": "z. B. Europe/Berlin",
     "notifications.timezone.new.description":
-	'Gültige IANA-Zeitzone eingeben, z. B. "Europe/Berlin", "America/New_York" oder "Asia/Tokyo"',
+    'Gültige IANA-Zeitzone eingeben, z. B. "Europe/Berlin", "America/New_York" oder "Asia/Tokyo"',
     "notifications.timezone.detectDevice": "Gerätezeitzone erkennen",
     "notifications.timezone.cancel": "Abbrechen",
     "notifications.timezone.save": "Speichern",
@@ -28369,27 +28380,27 @@ const deSettingsMessages = translate(baseSettingsMessages, {
     "notifications.time.label": "Benachrichtigungszeit",
     "notifications.time.change": "Ändern",
     "notifications.time.defaultMessage":
-	"12:00 Uhr als Standard-Benachrichtigungszeit verwenden",
+    "12:00 Uhr als Standard-Benachrichtigungszeit verwenden",
     "notifications.time.customMessage":
-	"Du erhältst Benachrichtigungen täglich zu dieser Zeit in deiner Zeitzone",
+    "Du erhältst Benachrichtigungen täglich zu dieser Zeit in deiner Zeitzone",
     "notifications.time.dialog.title": "Benachrichtigungszeit ändern",
     "notifications.time.current.label": "Aktuelle Benachrichtigungszeit",
     "notifications.time.new.label": "Neue Benachrichtigungszeit",
     "notifications.time.new.placeholder": "Benachrichtigungszeit auswählen",
     "notifications.time.description":
-	"Wähle, wann du tägliche Erinnerungsbenachrichtigungen erhalten möchtest.",
+    "Wähle, wann du tägliche Erinnerungsbenachrichtigungen erhalten möchtest.",
     "notifications.devices.heading": "Geräte",
     "notifications.devices.description":
-	"Geräte verwalten, die Push-Benachrichtigungen empfangen.",
+    "Geräte verwalten, die Push-Benachrichtigungen empfangen.",
     "notifications.devices.noDevices.description":
-	"Füge Geräte hinzu, die Push-Benachrichtigungen erhalten.",
+    "Füge Geräte hinzu, die Push-Benachrichtigungen erhalten.",
     "notifications.devices.noDevices.title": "Keine Geräte hinzugefügt",
     "notifications.devices.noDevices.warning":
-	"Du wirst KEINE Benachrichtigungen erhalten, bis du mindestens ein Gerät hinzufügst. Füge dieses Gerät hinzu, um Erinnerungen zu erhalten.",
+    "Du wirst KEINE Benachrichtigungen erhalten, bis du mindestens ein Gerät hinzufügst. Füge dieses Gerät hinzu, um Erinnerungen zu erhalten.",
     "notifications.devices.thisDevice": "Dieses Gerät",
     "notifications.devices.actions.title": "Geräteaktionen",
     "notifications.devices.actions.description":
-	'Was möchtest du mit „{$deviceName}" tun?',
+    'Was möchtest du mit „{$deviceName}" tun?',
     "notifications.devices.table.device": "Gerät",
     "notifications.devices.table.browser": "Browser",
     "notifications.devices.table.os": "OS",
@@ -28399,16 +28410,16 @@ const deSettingsMessages = translate(baseSettingsMessages, {
     "notifications.devices.editName": "Namen bearbeiten",
     "notifications.devices.editDialog.title": "Gerätenamen bearbeiten",
     "notifications.devices.editDialog.description":
-	"Ändere den Anzeigenamen für dieses Gerät.",
+    "Ändere den Anzeigenamen für dieses Gerät.",
     "notifications.devices.remove.confirm.title": "Gerät entfernen",
     "notifications.devices.remove.confirm.description":
-	"Möchtest du dieses Gerät entfernen? Du erhältst darauf keine Benachrichtigungen mehr.",
+    "Möchtest du dieses Gerät entfernen? Du erhältst darauf keine Benachrichtigungen mehr.",
     "notifications.devices.remove.confirm.cancel": "Abbrechen",
     "notifications.devices.remove.confirm.remove": "Entfernen",
     "notifications.devices.status.active": "Aktiv",
     "notifications.devices.status.inactive": "Inaktiv",
     "notifications.devices.empty":
-	"Noch keine Geräte für Benachrichtigungen registriert.",
+    "Noch keine Geräte für Benachrichtigungen registriert.",
     "notifications.devices.enabled": "Aktiviert",
     "notifications.devices.disabled": "Deaktiviert",
     "notifications.devices.sendTest": "Testbenachrichtigung senden",
@@ -28418,39 +28429,39 @@ const deSettingsMessages = translate(baseSettingsMessages, {
     "notifications.devices.endpointPrefix": "Endpunkt:",
     "notifications.enable.heading": "Benachrichtigungen aktivieren",
     "notifications.enable.description":
-	"Aktiviere Benachrichtigungen für dein Konto, um Erinnerungen zu erhalten.",
+    "Aktiviere Benachrichtigungen für dein Konto, um Erinnerungen zu erhalten.",
     "notifications.enable.step1":
-	"Berechtigung erteilen, wenn der Browser danach fragt.",
+    "Berechtigung erteilen, wenn der Browser danach fragt.",
     "notifications.enable.step2":
-	"Dieses Gerät für Benachrichtigungen registriert lassen.",
+    "Dieses Gerät für Benachrichtigungen registriert lassen.",
     "notifications.enable.button": "Push-Benachrichtigungen aktivieren",
     "notifications.enable.success": "Benachrichtigungen erfolgreich aktiviert!",
     "notifications.enable.error":
-	"Aktivieren der Benachrichtigungen fehlgeschlagen.",
+    "Aktivieren der Benachrichtigungen fehlgeschlagen.",
     "notifications.permission.denied.title": "Berechtigung verweigert",
     "notifications.permission.denied.description":
-	"Benachrichtigungen sind in deinen Browser-Einstellungen blockiert. Bitte aktiviere sie, um Erinnerungen zu erhalten.",
+    "Benachrichtigungen sind in deinen Browser-Einstellungen blockiert. Bitte aktiviere sie, um Erinnerungen zu erhalten.",
     "notifications.permission.openSettings": "Browsereinstellungen öffnen",
     "notifications.register.title": "Gerät registrieren",
     "notifications.register.description":
-	"Dieses Gerät registrieren, um Push-Benachrichtigungen zu erhalten.",
+    "Dieses Gerät registrieren, um Push-Benachrichtigungen zu erhalten.",
     "notifications.register.button": "Registrieren",
     "notifications.register.success": "Gerät erfolgreich registriert!",
     "notifications.register.error": "Gerät konnte nicht registriert werden.",
     "notifications.unregister.title": "Gerät abmelden",
     "notifications.unregister.description":
-	"Keine Benachrichtigungen mehr auf diesem Gerät erhalten.",
+    "Keine Benachrichtigungen mehr auf diesem Gerät erhalten.",
     "notifications.unregister.button": "Abmelden",
     "notifications.unregister.success": "Gerät erfolgreich abgemeldet!",
     "notifications.unregister.error": "Abmeldung fehlgeschlagen.",
     "notifications.devices.permissionError":
-	"Anfrage für Benachrichtigungsberechtigung fehlgeschlagen",
+    "Anfrage für Benachrichtigungsberechtigung fehlgeschlagen",
     "notifications.toast.unsubscribeFailed":
-	"Abmeldung von Benachrichtigungen fehlgeschlagen",
+    "Abmeldung von Benachrichtigungen fehlgeschlagen",
     "notifications.toast.subscribeFailed":
-	"Anmeldung für Push-Benachrichtigungen fehlgeschlagen",
+    "Anmeldung für Push-Benachrichtigungen fehlgeschlagen",
     "notifications.toast.testSendFailed":
-	"Senden der Testbenachrichtigung fehlgeschlagen",
+    "Senden der Testbenachrichtigung fehlgeschlagen",
     "notifications.toast.testSendSuccess": "Testbenachrichtigung gesendet",
     "notifications.toast.deviceRemoved": "Gerät erfolgreich entfernt",
     "notifications.toast.deviceAdded": "Gerät erfolgreich hinzugefügt!",
@@ -28458,36 +28469,36 @@ const deSettingsMessages = translate(baseSettingsMessages, {
     "notifications.lastDelivery.label": "Letzter Check",
     "notifications.lastDelivery.reset": "Zurücksetzen",
     "notifications.lastDelivery.description":
-	"Wann Erinnerungen zuletzt geprüft und bei Bedarf zugestellt wurden. Setze dies zurück, um beim nächsten stündlichen Durchlauf eine erneute Prüfung zu erzwingen.",
+    "Wann Erinnerungen zuletzt geprüft und bei Bedarf zugestellt wurden. Setze dies zurück, um beim nächsten stündlichen Durchlauf eine erneute Prüfung zu erzwingen.",
     "notifications.devices.addButton": "Dieses Gerät hinzufügen",
     "notifications.devices.addDialog.title": "Dieses Gerät hinzufügen",
     "notifications.devices.addDialog.description.enabled":
-	"Aktiviere Push-Benachrichtigungen für dieses Gerät, um Erinnerungen zu erhalten.",
+    "Aktiviere Push-Benachrichtigungen für dieses Gerät, um Erinnerungen zu erhalten.",
     "notifications.devices.addDialog.description.blocked":
-	"Push-Benachrichtigungen sind blockiert. Bitte aktiviere sie in deinen Browser-Einstellungen.",
+    "Push-Benachrichtigungen sind blockiert. Bitte aktiviere sie in deinen Browser-Einstellungen.",
     "notifications.devices.nameLabel": "Gerätename",
     "notifications.devices.name.required": "Gerätename ist erforderlich",
     "notifications.devices.adding": "Hinzufügen...",
     "notifications.iosRequirement.title":
-	"Push-Benachrichtigungen erfordern App-Installation",
+    "Push-Benachrichtigungen erfordern App-Installation",
     "notifications.iosRequirement.description":
-	"Unter iOS sind Push-Benachrichtigungen nur nach Installation von Tilly auf dem Home-Bildschirm verfügbar. Installiere die App unten im Abschnitt App-Installation.",
+    "Unter iOS sind Push-Benachrichtigungen nur nach Installation von Tilly auf dem Home-Bildschirm verfügbar. Installiere die App unten im Abschnitt App-Installation.",
     "notifications.browserNotSupported.title":
-	"Push-Benachrichtigungen nicht verfügbar",
+    "Push-Benachrichtigungen nicht verfügbar",
     "notifications.browserNotSupported.recommendation.ios":
-	"In iOS verwende bitte Safari und installiere die App für die vollständige Tilly-Erfahrung.",
+    "In iOS verwende bitte Safari und installiere die App für die vollständige Tilly-Erfahrung.",
     "notifications.browserNotSupported.recommendation.iosInApp":
-	"In iOS öffne bitte diesen Link in Safari und installiere die App für die vollständige Tilly-Erfahrung.",
+    "In iOS öffne bitte diesen Link in Safari und installiere die App für die vollständige Tilly-Erfahrung.",
     "notifications.browserNotSupported.recommendation.android":
-	"In Android verwende bitte Chrome und installiere die App für die vollständige Tilly-Erfahrung.",
+    "In Android verwende bitte Chrome und installiere die App für die vollständige Tilly-Erfahrung.",
     "notifications.browserNotSupported.recommendation.androidInApp":
-	"In Android öffne bitte diesen Link in Chrome und installiere die App für die vollständige Tilly-Erfahrung.",
+    "In Android öffne bitte diesen Link in Chrome und installiere die App für die vollständige Tilly-Erfahrung.",
     "notifications.browserNotSupported.recommendation.windows":
-	"In Windows verwende bitte Chrome oder Edge für die vollständige Tilly-Erfahrung.",
+    "In Windows verwende bitte Chrome oder Edge für die vollständige Tilly-Erfahrung.",
     "notifications.browserNotSupported.recommendation.macos":
-	"In macOS verwende bitte Chrome oder Safari für die vollständige Tilly-Erfahrung.",
+    "In macOS verwende bitte Chrome oder Safari für die vollständige Tilly-Erfahrung.",
     "notifications.browserNotSupported.recommendation.generic":
-	"Bitte verwende Chrome, Edge oder Safari für die vollständige Tilly-Erfahrung.",
+    "Bitte verwende Chrome, Edge oder Safari für die vollständige Tilly-Erfahrung.",
 
     // Status messages
     "status.offline.title": "Du bist offline",
@@ -28495,24 +28506,24 @@ const deSettingsMessages = translate(baseSettingsMessages, {
     "status.offline.tooltip": "Offline",
     "status.offline.dialog.title": "Offline-Modus",
     "status.offline.description":
-	"Du bist gerade offline, aber die meisten Funktionen funktionieren trotzdem:",
+    "Du bist gerade offline, aber die meisten Funktionen funktionieren trotzdem:",
     "status.offline.feature.core":
-	"Personen, Notizen und Erinnerungen ansehen und bearbeiten",
+    "Personen, Notizen und Erinnerungen ansehen und bearbeiten",
     "status.offline.feature.requiresInternet":
-	"Sync, Push-Benachrichtigungen und Tilly-Assistent benötigen Internet",
+    "Sync, Push-Benachrichtigungen und Tilly-Assistent benötigen Internet",
     "status.update.tooltip": "Update verfügbar",
     "status.update.dialog.title": "Update verfügbar",
     "status.update.description":
-	"Eine neue Version von Tilly ist verfügbar – mit Verbesserungen und Fehlerbehebungen.",
+    "Eine neue Version von Tilly ist verfügbar – mit Verbesserungen und Fehlerbehebungen.",
     "status.update.updating": "Wird aktualisiert...",
     "status.update.updateNow": "Jetzt aktualisieren",
     "status.update.later": "Später",
     "status.notSignedIn.tooltip": "Nicht angemeldet",
     "status.notSignedIn.dialog.title": "Nicht angemeldet",
     "status.notSignedIn.browserOnly":
-	"Ohne Anmeldung werden die Daten nur im Browser gespeichert",
+    "Ohne Anmeldung werden die Daten nur im Browser gespeichert",
     "status.notSignedIn.benefits":
-	"Melde dich an, um deine Daten zu sichern, zu synchronisieren und Push-Benachrichtigungen zu erhalten",
+    "Melde dich an, um deine Daten zu sichern, zu synchronisieren und Push-Benachrichtigungen zu erhalten",
     "status.notSignedIn.signIn": "Anmelden",
 
 })
@@ -29140,7 +29151,7 @@ const baseUiMessages = messages({
     // Authentication messages
     "auth.signIn.title": "Sync Across Devices",
     "auth.signIn.description":
-	"Sign in to save your data and access from any device. Already have an account? Your data will sync automatically.",
+    "Sign in to save your data and access from any device. Already have an account? Your data will sync automatically.",
     "auth.signIn.requiresInternet": "Requires internet connection",
     "auth.signIn.button": "Sign In",
     "auth.signUp.button": "Sign Up",
@@ -29166,7 +29177,7 @@ const baseUiMessages = messages({
     "note.form.content.required": "Content is required",
     "note.form.pin.label": "Pin this note",
     "note.form.pin.description":
-	"Pinned notes always appear at the top of the list",
+    "Pinned notes always appear at the top of the list",
     "form.cancel": "Cancel",
     "form.save": "Save",
     "form.saving": "Saving...",
@@ -29187,7 +29198,7 @@ const baseUiMessages = messages({
     // Error messages
     "error.title": "Something went wrong",
     "error.description":
-	"If you can reproduce this, I would love to hear from you.",
+    "If you can reproduce this, I would love to hear from you.",
     "error.feedback": "Send feedback",
     "error.showDetails": "Show error details",
     "error.copy": "Copy",
@@ -29209,7 +29220,7 @@ const baseUiMessages = messages({
     "toast.personRestored": "Person restored",
     "toast.personUpdateUndone": "Person update undone",
     "toast.personDeletedScheduled":
-	"Person deleted - will be permanently deleted in 30 days",
+    "Person deleted - will be permanently deleted in 30 days",
     "toast.noteUpdated": "Note updated",
     "toast.noteUpdateUndone": "Note update undone",
     "toast.notePinned": "Note pinned",
@@ -29224,7 +29235,7 @@ const baseUiMessages = messages({
     "data.export.button": "Export Data",
     "data.export.dialog.title": "Export Data",
     "data.export.dialog.description":
-	"Download all your relationship notes and details as JSON for backup or transfer to another device.",
+    "Download all your relationship notes and details as JSON for backup or transfer to another device.",
     "data.export.dialog.cancel": "Cancel",
     "data.export.dialog.exporting": "Exporting...",
     "data.export.dialog.download": "Download Data",
@@ -29241,10 +29252,10 @@ const baseUiMessages = messages({
     "data.import.dialog.modeLabel": "Import Mode",
     "data.import.mode.merge": "Merge",
     "data.import.mode.merge.description":
-	"Add new people and update existing ones",
+    "Add new people and update existing ones",
     "data.import.mode.replace": "Replace",
     "data.import.mode.replace.description":
-	"Delete all current data and import new data",
+    "Delete all current data and import new data",
     "data.import.dialog.cancel": "Cancel",
     "data.import.dialog.importing": "Importing...",
     "data.import.dialog.import": "Import Data",
@@ -29278,7 +29289,7 @@ const deUiMessages = translate(baseUiMessages, {
     // Authentication messages
     "auth.signIn.title": "Über Geräte hinweg synchronisieren",
     "auth.signIn.description":
-	"Melde dich an, um deine Daten zu speichern und von jedem Gerät aus darauf zuzugreifen. Hast du bereits ein Konto? Deine Daten werden automatisch synchronisiert.",
+    "Melde dich an, um deine Daten zu speichern und von jedem Gerät aus darauf zuzugreifen. Hast du bereits ein Konto? Deine Daten werden automatisch synchronisiert.",
     "auth.signIn.requiresInternet": "Benötigt Internetverbindung",
     "auth.signIn.button": "Anmelden",
     "auth.signUp.button": "Registrieren",
@@ -29304,7 +29315,7 @@ const deUiMessages = translate(baseUiMessages, {
     "note.form.content.required": "Inhalt ist erforderlich",
     "note.form.pin.label": "Diese Notiz anheften",
     "note.form.pin.description":
-	"Angeheftete Notizen erscheinen immer oben in der Liste",
+    "Angeheftete Notizen erscheinen immer oben in der Liste",
     "form.cancel": "Abbrechen",
     "form.save": "Speichern",
     "form.saving": "Speichern...",
@@ -29325,7 +29336,7 @@ const deUiMessages = translate(baseUiMessages, {
     // Error messages
     "error.title": "Etwas ist schief gelaufen",
     "error.description":
-	"Wenn du das reproduzieren kannst, freue ich mich über eine Nachricht.",
+    "Wenn du das reproduzieren kannst, freue ich mich über eine Nachricht.",
     "error.feedback": "Feedback senden",
     "error.showDetails": "Fehlerdetails anzeigen",
     "error.copy": "Kopieren",
@@ -29347,7 +29358,7 @@ const deUiMessages = translate(baseUiMessages, {
     "toast.personRestored": "Person wiederhergestellt",
     "toast.personUpdateUndone": "Personen-Update rückgängig gemacht",
     "toast.personDeletedScheduled":
-	"Person gelöscht – wird in 30 Tagen endgültig gelöscht",
+    "Person gelöscht – wird in 30 Tagen endgültig gelöscht",
     "toast.noteUpdated": "Notiz aktualisiert",
     "toast.noteUpdateUndone": "Notiz-Update rückgängig gemacht",
     "toast.notePinned": "Notiz angeheftet",
@@ -29362,13 +29373,13 @@ const deUiMessages = translate(baseUiMessages, {
     "data.export.button": "Daten exportieren",
     "data.export.dialog.title": "Daten exportieren",
     "data.export.dialog.description":
-	"Lade alle Notizen und Details als JSON zur Sicherung oder zum Übertragen auf ein anderes Gerät herunter.",
+    "Lade alle Notizen und Details als JSON zur Sicherung oder zum Übertragen auf ein anderes Gerät herunter.",
     "data.export.dialog.cancel": "Abbrechen",
     "data.export.dialog.exporting": "Exportiere...",
     "data.export.dialog.download": "Daten herunterladen",
     "data.import.noFile": "Bitte wähle eine Datei aus",
     "data.import.invalidFormat":
-	"Hochgeladene Datei entspricht nicht dem erwarteten Format.",
+    "Hochgeladene Datei entspricht nicht dem erwarteten Format.",
     "data.import.personError": "Fehler beim Verarbeiten von Person {$name}",
     "data.import.success.merge": "Daten erfolgreich zusammengeführt!",
     "data.import.success.replace": "Daten erfolgreich ersetzt!",
@@ -29380,10 +29391,10 @@ const deUiMessages = translate(baseUiMessages, {
     "data.import.dialog.modeLabel": "Importmodus",
     "data.import.mode.merge": "Zusammenführen",
     "data.import.mode.merge.description":
-	"Neue Personen hinzufügen und bestehende aktualisieren",
+    "Neue Personen hinzufügen und bestehende aktualisieren",
     "data.import.mode.replace": "Ersetzen",
     "data.import.mode.replace.description":
-	"Alle aktuellen Daten löschen und neue Daten importieren",
+    "Alle aktuellen Daten löschen und neue Daten importieren",
     "data.import.dialog.cancel": "Abbrechen",
     "data.import.dialog.importing": "Importiere...",
     "data.import.dialog.import": "Daten importieren",
@@ -29417,7 +29428,7 @@ const ruUiMessages = translate(baseUiMessages, {
     // Authentication messages
     "auth.signIn.title": "Синхронизация между устройствами",
     "auth.signIn.description":
-	"Войдите, чтобы сохранить данные и получить доступ с любого устройства. Уже есть аккаунт? Ваши данные будут синхронизированы автоматически.",
+    "Войдите, чтобы сохранить данные и получить доступ с любого устройства. Уже есть аккаунт? Ваши данные будут синхронизированы автоматически.",
     "auth.signIn.requiresInternet": "Требуется подключение к интернету",
     "auth.signIn.button": "Войти",
     "auth.signUp.button": "Зарегистрироваться",
@@ -29443,7 +29454,7 @@ const ruUiMessages = translate(baseUiMessages, {
     "note.form.content.required": "Содержимое обязательно",
     "note.form.pin.label": "Закрепить эту заметку",
     "note.form.pin.description":
-	"Закрепленные заметки всегда отображаются вверху списка",
+    "Закрепленные заметки всегда отображаются вверху списка",
     "form.cancel": "Отмена",
     "form.save": "Сохранить",
     "form.saving": "Сохранение...",
@@ -29464,7 +29475,7 @@ const ruUiMessages = translate(baseUiMessages, {
     // Error messages
     "error.title": "Что-то пошло не так",
     "error.description":
-	"Если вы можете воспроизвести это, я буду рад услышать от вас.",
+    "Если вы можете воспроизвести это, я буду рад услышать от вас.",
     "error.feedback": "Отправить отзыв",
     "error.showDetails": "Показать детали ошибки",
     "error.copy": "Копировать",
@@ -29486,7 +29497,7 @@ const ruUiMessages = translate(baseUiMessages, {
     "toast.personRestored": "Контакт восстановлен",
     "toast.personUpdateUndone": "Обновление контакта отменено",
     "toast.personDeletedScheduled":
-	"Контакт удален - будет окончательно удален через 30 дней",
+    "Контакт удален - будет окончательно удален через 30 дней",
     "toast.noteUpdated": "Заметка обновлена",
     "toast.noteUpdateUndone": "Обновление заметки отменено",
     "toast.notePinned": "Заметка закреплена",
@@ -29501,13 +29512,13 @@ const ruUiMessages = translate(baseUiMessages, {
     "data.export.button": "Экспортировать данные",
     "data.export.dialog.title": "Экспорт данных",
     "data.export.dialog.description":
-	"Скачайте все ваши заметки и детали как JSON для резервного копирования или переноса на другое устройство.",
+    "Скачайте все ваши заметки и детали как JSON для резервного копирования или переноса на другое устройство.",
     "data.export.dialog.cancel": "Отмена",
     "data.export.dialog.exporting": "Экспорт...",
     "data.export.dialog.download": "Скачать данные",
     "data.import.noFile": "Пожалуйста, выберите файл",
     "data.import.invalidFormat":
-	"Загруженный файл не соответствует ожидаемому формату.",
+    "Загруженный файл не соответствует ожидаемому формату.",
     "data.import.personError": "Ошибка обработки контакта {$name}",
     "data.import.success.merge": "Данные успешно объединены!",
     "data.import.success.replace": "Данные успешно заменены!",
@@ -29519,10 +29530,10 @@ const ruUiMessages = translate(baseUiMessages, {
     "data.import.dialog.modeLabel": "Режим импорта",
     "data.import.mode.merge": "Объединить",
     "data.import.mode.merge.description":
-	"Добавить новых людей и обновить существующих",
+    "Добавить новых людей и обновить существующих",
     "data.import.mode.replace": "Заменить",
     "data.import.mode.replace.description":
-	"Удалить все текущие данные и импортировать новые",
+    "Удалить все текущие данные и импортировать новые",
     "data.import.dialog.cancel": "Отмена",
     "data.import.dialog.importing": "Импорт...",
     "data.import.dialog.import": "Импортировать данные",
@@ -29931,40 +29942,40 @@ let { root } = await account.$jazz.ensureLoaded({
 
     if (!root.people.$isLoaded) return
     for (let person of Array.from(root.people)) {
-	if (!person?.$isLoaded) continue
-	if (
-		person.deletedAt &&
-		!person.permanentlyDeletedAt &&
-		person.deletedAt < thirtyDaysAgo
-	) {
-		person.$jazz.set("permanentlyDeletedAt", person.deletedAt)
-	}
+    if (!person?.$isLoaded) continue
+    if (
+    	person.deletedAt &&
+    	!person.permanentlyDeletedAt &&
+    	person.deletedAt < thirtyDaysAgo
+    ) {
+    	person.$jazz.set("permanentlyDeletedAt", person.deletedAt)
+    }
 
-	if (person.reminders.$isLoaded) {
-		for (let reminder of Array.from(person.reminders)) {
-			if (
-				reminder?.$isLoaded &&
-				reminder.deletedAt &&
-				!reminder.permanentlyDeletedAt &&
-				reminder.deletedAt < thirtyDaysAgo
-			) {
-				reminder.$jazz.set("permanentlyDeletedAt", reminder.deletedAt)
-			}
-		}
-	}
+    if (person.reminders.$isLoaded) {
+    	for (let reminder of Array.from(person.reminders)) {
+    		if (
+    			reminder?.$isLoaded &&
+    			reminder.deletedAt &&
+    			!reminder.permanentlyDeletedAt &&
+    			reminder.deletedAt < thirtyDaysAgo
+    		) {
+    			reminder.$jazz.set("permanentlyDeletedAt", reminder.deletedAt)
+    		}
+    	}
+    }
 
-	if (person.notes.$isLoaded) {
-		for (let note of Array.from(person.notes)) {
-			if (
-				note?.$isLoaded &&
-				note.deletedAt &&
-				!note.permanentlyDeletedAt &&
-				note.deletedAt < thirtyDaysAgo
-			) {
-				note.$jazz.set("permanentlyDeletedAt", note.deletedAt)
-			}
-		}
-	}
+    if (person.notes.$isLoaded) {
+    	for (let note of Array.from(person.notes)) {
+    		if (
+    			note?.$isLoaded &&
+    			note.deletedAt &&
+    			!note.permanentlyDeletedAt &&
+    			note.deletedAt < thirtyDaysAgo
+    		) {
+    			note.$jazz.set("permanentlyDeletedAt", note.deletedAt)
+    		}
+    	}
+    }
     }
 
 }
@@ -30014,17 +30025,17 @@ createdAt: number
 > (arr: Array<T>): Array<T> {
 
     return arr.sort((a, b) => {
-	let aTime = (
-		a.updatedAt ||
-		a.createdAt ||
-		new Date(a.$jazz.lastUpdatedAt || a.$jazz.createdAt)
-	).getTime()
-	let bTime = (
-		b.updatedAt ||
-		b.createdAt ||
-		new Date(b.$jazz.lastUpdatedAt || b.$jazz.createdAt)
-	).getTime()
-	return bTime - aTime
+    let aTime = (
+    	a.updatedAt ||
+    	a.createdAt ||
+    	new Date(a.$jazz.lastUpdatedAt || a.$jazz.createdAt)
+    ).getTime()
+    let bTime = (
+    	b.updatedAt ||
+    	b.createdAt ||
+    	new Date(b.$jazz.lastUpdatedAt || b.$jazz.createdAt)
+    ).getTime()
+    return bTime - aTime
     })
 
 }
@@ -30043,21 +30054,21 @@ createdAt: number
 > (arr: Array<T>): Array<T> {
 
     return arr.sort((a, b) => {
-	let aTime =
-		a.deletedAt?.getTime() ??
-		(
-			a.updatedAt ||
-			a.createdAt ||
-			new Date(a.$jazz.lastUpdatedAt || a.$jazz.createdAt)
-		).getTime()
-	let bTime =
-		b.deletedAt?.getTime() ??
-		(
-			b.updatedAt ||
-			b.createdAt ||
-			new Date(b.$jazz.lastUpdatedAt || b.$jazz.createdAt)
-		).getTime()
-	return bTime - aTime
+    let aTime =
+    	a.deletedAt?.getTime() ??
+    	(
+    		a.updatedAt ||
+    		a.createdAt ||
+    		new Date(a.$jazz.lastUpdatedAt || a.$jazz.createdAt)
+    	).getTime()
+    let bTime =
+    	b.deletedAt?.getTime() ??
+    	(
+    		b.updatedAt ||
+    		b.createdAt ||
+    		new Date(b.$jazz.lastUpdatedAt || b.$jazz.createdAt)
+    	).getTime()
+    return bTime - aTime
     })
 
 }
@@ -30272,23 +30283,23 @@ resolve: { notes: { $each: true } },
 
     let now = new Date()
     let note = Note.create({
-	version: 1,
-	title: data.title,
-	content: data.content,
-	pinned: data.pinned || false,
-	createdAt: now,
-	updatedAt: now,
+    version: 1,
+    title: data.title,
+    content: data.content,
+    pinned: data.pinned || false,
+    createdAt: now,
+    updatedAt: now,
     })
 
     person.notes.$jazz.push(note)
     person.$jazz.set("updatedAt", new Date())
 
     return {
-	operation: "create",
-	noteID: note.$jazz.id,
-	personID: personId,
-	current: { ...note },
-	_ref: note,
+    operation: "create",
+    noteID: note.$jazz.id,
+    personID: personId,
+    current: { ...note },
+    _ref: note,
     }
 
 }
@@ -30721,40 +30732,40 @@ if (!person.$isLoaded) throw errors.PERSON_NOT_FOUND
     let previous = { ...note }
 
     if (updates.title !== undefined) {
-	note.$jazz.set("title", updates.title)
+    note.$jazz.set("title", updates.title)
     }
     if (updates.content !== undefined) {
-	note.$jazz.set("content", updates.content)
+    note.$jazz.set("content", updates.content)
     }
     if (updates.pinned !== undefined) {
-	note.$jazz.set("pinned", updates.pinned)
+    note.$jazz.set("pinned", updates.pinned)
     }
 
     if ("deletedAt" in updates && updates.deletedAt === undefined) {
-	note.$jazz.delete("deletedAt")
+    note.$jazz.delete("deletedAt")
     }
 
     if (updates.deletedAt !== undefined) {
-	note.$jazz.set("deletedAt", new Date(updates.deletedAt))
+    note.$jazz.set("deletedAt", new Date(updates.deletedAt))
     }
 
     if (updates.permanentlyDeletedAt !== undefined) {
-	note.$jazz.set(
-		"permanentlyDeletedAt",
-		new Date(updates.permanentlyDeletedAt),
-	)
+    note.$jazz.set(
+    	"permanentlyDeletedAt",
+    	new Date(updates.permanentlyDeletedAt),
+    )
     }
 
     note.$jazz.set("updatedAt", new Date())
     person.$jazz.set("updatedAt", new Date())
 
     return {
-	operation: "update",
-	noteID: noteId,
-	personID: personId,
-	current: { ...note },
-	previous,
-	_ref: note,
+    operation: "update",
+    noteID: noteId,
+    personID: personId,
+    current: { ...note },
+    previous,
+    _ref: note,
     }
 
 }
@@ -30828,22 +30839,22 @@ let { personId, noteId, ...updates } = input
     if (!res.ok) return { error: `${res.error}` }
     let result = res.data
     return {
-	personId: result.personID,
-	noteId: result.noteID,
-	title: result.current.title,
-	content: result.current.content,
-	pinned: result.current.pinned,
-	deletedAt: result.current.deletedAt?.toISOString(),
-	createdAt: result.current.createdAt.toISOString(),
-	updatedAt: result.current.updatedAt.toISOString(),
-	previous: {
-		title: result.previous.title,
-		content: result.previous.content,
-		pinned: result.previous.pinned,
-		deletedAt: result.current.deletedAt?.toISOString(),
-		createdAt: result.previous.createdAt.toISOString(),
-		updatedAt: result.previous.updatedAt.toISOString(),
-	},
+    personId: result.personID,
+    noteId: result.noteID,
+    title: result.current.title,
+    content: result.current.content,
+    pinned: result.current.pinned,
+    deletedAt: result.current.deletedAt?.toISOString(),
+    createdAt: result.current.createdAt.toISOString(),
+    updatedAt: result.current.updatedAt.toISOString(),
+    previous: {
+    	title: result.previous.title,
+    	content: result.previous.content,
+    	pinned: result.previous.pinned,
+    	deletedAt: result.current.deletedAt?.toISOString(),
+    	createdAt: result.previous.createdAt.toISOString(),
+    	updatedAt: result.previous.updatedAt.toISOString(),
+    },
     }
 
 }
@@ -30880,19 +30891,19 @@ input: \_DeleteNoteTool["input"],
 let { personId, noteId } = input
 
     let res = await tryCatch(
-	updateNote(personId, noteId, { deletedAt: new Date() }),
+    updateNote(personId, noteId, { deletedAt: new Date() }),
     )
     if (!res.ok) return { error: `${res.error}` }
     let result = res.data
     return {
-	personId: result.personID,
-	noteId: result.noteID,
-	title: result.current.title,
-	content: result.current.content,
-	pinned: result.current.pinned,
-	deletedAt: result.current.deletedAt?.toISOString(),
-	createdAt: result.current.createdAt.toISOString(),
-	updatedAt: result.current.updatedAt.toISOString(),
+    personId: result.personID,
+    noteId: result.noteID,
+    title: result.current.title,
+    content: result.current.content,
+    pinned: result.current.pinned,
+    deletedAt: result.current.deletedAt?.toISOString(),
+    createdAt: result.current.createdAt.toISOString(),
+    updatedAt: result.current.updatedAt.toISOString(),
     }
 
 }
@@ -31225,43 +31236,43 @@ resolve: { root: { people: { $each: true } } },
 
     let now = new Date()
     let person = Person.create({
-	version: 1,
-	name: data.name,
-	summary: data.summary,
-	notes: co.list(Note).create([]),
-	reminders: co.list(Reminder).create([]),
-	createdAt: now,
-	updatedAt: now,
+    version: 1,
+    name: data.name,
+    summary: data.summary,
+    notes: co.list(Note).create([]),
+    reminders: co.list(Reminder).create([]),
+    createdAt: now,
+    updatedAt: now,
     })
 
     if (data.avatarFile) {
-	try {
-		let avatar = await createImage(data.avatarFile, {
-			owner: account,
-			maxSize: 2048,
-			placeholder: "blur",
-			progressive: true,
-		})
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		person.$jazz.set("avatar", avatar as any) // TODO: is this an error on the jazz side of things?
-	} catch (error) {
-		console.warn("Failed to create avatar:", error)
-	}
+    try {
+    	let avatar = await createImage(data.avatarFile, {
+    		owner: account,
+    		maxSize: 2048,
+    		placeholder: "blur",
+    		progressive: true,
+    	})
+    	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+    	person.$jazz.set("avatar", avatar as any) // TODO: is this an error on the jazz side of things?
+    } catch (error) {
+    	console.warn("Failed to create avatar:", error)
+    }
     } else if (data.avatarFile === null) {
-	person.$jazz.delete("avatar")
+    person.$jazz.delete("avatar")
     }
 
     account.root.people.$jazz.push(person)
 
     return {
-	operation: "create",
-	personID: person.$jazz.id,
-	current: {
-		name: person.name,
-		summary: person.summary,
-		version: 1,
-	},
-	_ref: person,
+    operation: "create",
+    personID: person.$jazz.id,
+    current: {
+    	name: person.name,
+    	summary: person.summary,
+    	version: 1,
+    },
+    _ref: person,
     }
 
 }
@@ -31565,13 +31576,13 @@ let validPeople = people.filter(person => person?.name)
 let searchLower = searchName.toLowerCase().trim()
 
     return validPeople
-	.filter(person => {
-		let nameMatch = person.name.toLowerCase().includes(searchLower)
-		let summaryMatch =
-			person.summary?.toLowerCase().includes(searchLower) || false
-		return nameMatch || summaryMatch
-	})
-	.slice(0, 3)
+    .filter(person => {
+    	let nameMatch = person.name.toLowerCase().includes(searchLower)
+    	let summaryMatch =
+    		person.summary?.toLowerCase().includes(searchLower) || false
+    	return nameMatch || summaryMatch
+    })
+    .slice(0, 3)
 
 }
 
@@ -31624,31 +31635,31 @@ return { error: "No people data available" }
 }
 
     let allPeople = me.root.people
-	.filter((person): person is co.loaded<typeof Person> => person != null)
-	.filter((person) => !isPermanentlyDeleted(person))
-	.filter((person) => input.includeDeleted || !isDeleted(person))
+    .filter((person): person is co.loaded<typeof Person> => person != null)
+    .filter((person) => !isPermanentlyDeleted(person))
+    .filter((person) => input.includeDeleted || !isDeleted(person))
 
     let people
     if (input.search) {
-	people = searchPeople(allPeople, input.search).map(person => ({
-		id: person.$jazz.id,
-		name: person.name,
-		summary: person.summary || null,
-		deletedAt: person.deletedAt,
-	}))
+    people = searchPeople(allPeople, input.search).map(person => ({
+    	id: person.$jazz.id,
+    	name: person.name,
+    	summary: person.summary || null,
+    	deletedAt: person.deletedAt,
+    }))
     } else {
-	people = allPeople.map(person => ({
-		id: person.$jazz.id,
-		name: person.name,
-		summary: person.summary || null,
-		deletedAt: person.deletedAt,
-	}))
+    people = allPeople.map(person => ({
+    	id: person.$jazz.id,
+    	name: person.name,
+    	summary: person.summary || null,
+    	deletedAt: person.deletedAt,
+    }))
     }
 
     return {
-	people,
-	count: people.length,
-	...(input.search && { searchQuery: input.search }),
+    people,
+    count: people.length,
+    ...(input.search && { searchQuery: input.search }),
     }
 
 }
@@ -31725,58 +31736,58 @@ notes: { $each: true },
 })
 
     if (!fullPerson.$isLoaded) {
-	return { error: `Person with ID "${input.personId}" not found` }
+    return { error: `Person with ID "${input.personId}" not found` }
     }
 
     let filteredNotes =
-	fullPerson.notes?.filter(n => {
-		if (!n.$isLoaded) return false
-		if (isPermanentlyDeleted(n)) return false
-		if (!input.includeDeletedNotes && isDeleted(n)) return false
-		return true
-	}) || []
+    fullPerson.notes?.filter(n => {
+    	if (!n.$isLoaded) return false
+    	if (isPermanentlyDeleted(n)) return false
+    	if (!input.includeDeletedNotes && isDeleted(n)) return false
+    	return true
+    }) || []
 
     let filteredReminders =
-	fullPerson.reminders?.filter(r => {
-		if (!r.$isLoaded) return false
-		if (isPermanentlyDeleted(r)) return false
-		if (!input.includeDeletedReminders && isDeleted(r)) return false
-		if (!input.includeDeletedReminders && r.done) return false
-		return true
-	}) || []
+    fullPerson.reminders?.filter(r => {
+    	if (!r.$isLoaded) return false
+    	if (isPermanentlyDeleted(r)) return false
+    	if (!input.includeDeletedReminders && isDeleted(r)) return false
+    	if (!input.includeDeletedReminders && r.done) return false
+    	return true
+    }) || []
 
     if (input.search) {
-	let searchLower = input.search.toLowerCase()
-	filteredNotes = filteredNotes.filter(note =>
-		note.content.toLowerCase().includes(searchLower),
-	)
-	filteredReminders = filteredReminders.filter(reminder =>
-		reminder.text.toLowerCase().includes(searchLower),
-	)
+    let searchLower = input.search.toLowerCase()
+    filteredNotes = filteredNotes.filter(note =>
+    	note.content.toLowerCase().includes(searchLower),
+    )
+    filteredReminders = filteredReminders.filter(reminder =>
+    	reminder.text.toLowerCase().includes(searchLower),
+    )
     }
 
     return {
-	personId: fullPerson.$jazz.id,
-	name: fullPerson.name,
-	summary: fullPerson.summary,
-	deletedAt: fullPerson.deletedAt?.toISOString(),
-	notes: filteredNotes.map(n => ({
-		id: n.$jazz.id,
-		title: n.title || "",
-		content: n.content,
-		pinned: n.pinned || false,
-		deletedAt: n.deletedAt?.toISOString(),
-		createdAt: n.createdAt.toISOString(),
-		updatedAt: n.updatedAt.toISOString(),
-	})),
-	reminders: filteredReminders.map(r => ({
-		id: r.$jazz.id,
-		text: r.text,
-		dueAtDate: r.dueAtDate,
-		deletedAt: r.deletedAt?.toISOString(),
-		createdAt: r.createdAt.toISOString(),
-		updatedAt: r.updatedAt.toISOString(),
-	})),
+    personId: fullPerson.$jazz.id,
+    name: fullPerson.name,
+    summary: fullPerson.summary,
+    deletedAt: fullPerson.deletedAt?.toISOString(),
+    notes: filteredNotes.map(n => ({
+    	id: n.$jazz.id,
+    	title: n.title || "",
+    	content: n.content,
+    	pinned: n.pinned || false,
+    	deletedAt: n.deletedAt?.toISOString(),
+    	createdAt: n.createdAt.toISOString(),
+    	updatedAt: n.updatedAt.toISOString(),
+    })),
+    reminders: filteredReminders.map(r => ({
+    	id: r.$jazz.id,
+    	text: r.text,
+    	dueAtDate: r.dueAtDate,
+    	deletedAt: r.deletedAt?.toISOString(),
+    	createdAt: r.createdAt.toISOString(),
+    	updatedAt: r.updatedAt.toISOString(),
+    })),
     }
 
 }
@@ -32155,56 +32166,56 @@ let person = await Person.load(personId)
 if (!person.$isLoaded) throw errors.PERSON_NOT_FOUND
 
     let previous = {
-	name: person.name,
-	summary: person.summary,
-	version: person.version,
+    name: person.name,
+    summary: person.summary,
+    version: person.version,
     }
 
     if (updates.name !== undefined) {
-	person.$jazz.set("name", updates.name)
+    person.$jazz.set("name", updates.name)
     }
     if (updates.summary !== undefined) {
-	person.$jazz.set("summary", updates.summary)
+    person.$jazz.set("summary", updates.summary)
     }
 
     if ("deletedAt" in updates && updates.deletedAt === undefined) {
-	person.$jazz.delete("deletedAt")
+    person.$jazz.delete("deletedAt")
     }
 
     if (updates.deletedAt !== undefined) {
-	person.$jazz.set("deletedAt", updates.deletedAt)
+    person.$jazz.set("deletedAt", updates.deletedAt)
     }
 
     if (updates.permanentlyDeletedAt !== undefined) {
-	person.$jazz.set("permanentlyDeletedAt", updates.permanentlyDeletedAt)
+    person.$jazz.set("permanentlyDeletedAt", updates.permanentlyDeletedAt)
     }
 
     if (updates.avatarFile !== undefined) {
-	if (updates.avatarFile === null) {
-		person.$jazz.delete("avatar")
-	} else {
-		let avatar = await createImage(updates.avatarFile, {
-			owner: person.$jazz.owner,
-			maxSize: 2048,
-			placeholder: "blur",
-			progressive: true,
-		})
-		person.$jazz.set("avatar", avatar)
-	}
+    if (updates.avatarFile === null) {
+    	person.$jazz.delete("avatar")
+    } else {
+    	let avatar = await createImage(updates.avatarFile, {
+    		owner: person.$jazz.owner,
+    		maxSize: 2048,
+    		placeholder: "blur",
+    		progressive: true,
+    	})
+    	person.$jazz.set("avatar", avatar)
+    }
     }
 
     person.$jazz.set("updatedAt", new Date())
 
     return {
-	operation: "update",
-	personID: personId,
-	current: {
-		name: person.name,
-		summary: person.summary,
-		version: person.version,
-	},
-	previous,
-	_ref: person,
+    operation: "update",
+    personID: personId,
+    current: {
+    	name: person.name,
+    	summary: person.summary,
+    	version: person.version,
+    },
+    previous,
+    _ref: person,
     }
 
 }
@@ -32630,24 +32641,24 @@ resolve: { reminders: { $each: true } },
     let now = new Date()
 
     let reminder = Reminder.create({
-	version: 1,
-	text: data.text,
-	dueAtDate: data.dueAtDate,
-	repeat: data.repeat,
-	done: false,
-	createdAt: now,
-	updatedAt: now,
+    version: 1,
+    text: data.text,
+    dueAtDate: data.dueAtDate,
+    repeat: data.repeat,
+    done: false,
+    createdAt: now,
+    updatedAt: now,
     })
 
     person.reminders.$jazz.push(reminder)
     person.$jazz.set("updatedAt", new Date())
 
     return {
-	operation: "create",
-	reminderID: reminder.$jazz.id,
-	personID: options.personId,
-	current: { ...reminder },
-	_ref: reminder,
+    operation: "create",
+    reminderID: reminder.$jazz.id,
+    personID: options.personId,
+    current: { ...reminder },
+    _ref: reminder,
     }
 
 }
@@ -32718,14 +32729,14 @@ let { personId, ...data } = input
     if (!res.ok) return { error: `${res.error}` }
     let result = res.data
     return {
-	personId: result.personID,
-	reminderId: result.reminderID,
-	text: result.current.text,
-	dueAtDate: result.current.dueAtDate,
-	repeat: result.current.repeat,
-	done: result.current.done,
-	createdAt: result.current.createdAt.toISOString(),
-	updatedAt: result.current.updatedAt.toISOString(),
+    personId: result.personID,
+    reminderId: result.reminderID,
+    text: result.current.text,
+    dueAtDate: result.current.dueAtDate,
+    repeat: result.current.repeat,
+    done: result.current.done,
+    createdAt: result.current.createdAt.toISOString(),
+    updatedAt: result.current.updatedAt.toISOString(),
     }
 
 }
@@ -32927,69 +32938,69 @@ if (!userResult.ok) throw errors.USER_NOT_FOUND
     if (!people.$isLoaded) throw errors.USER_NOT_FOUND
 
     let allReminders: Array<{
-	reminder: co.loaded<typeof Reminder>
-	person: co.loaded<typeof Person>
+    reminder: co.loaded<typeof Reminder>
+    person: co.loaded<typeof Person>
     }> = []
 
     for (let person of Array.from(people)) {
-	if (!person?.$isLoaded) continue
-	if (isPermanentlyDeleted(person) || isDeleted(person)) continue
-	if (!person.reminders?.$isLoaded) continue
+    if (!person?.$isLoaded) continue
+    if (isPermanentlyDeleted(person) || isDeleted(person)) continue
+    if (!person.reminders?.$isLoaded) continue
 
-	for (let reminder of person.reminders) {
-		if (!reminder?.$isLoaded) continue
-		if (isPermanentlyDeleted(reminder)) continue
-		if (!options.includeDone && reminder.done) continue
-		if (!options.includeDeleted && isDeleted(reminder)) continue
+    for (let reminder of person.reminders) {
+    	if (!reminder?.$isLoaded) continue
+    	if (isPermanentlyDeleted(reminder)) continue
+    	if (!options.includeDone && reminder.done) continue
+    	if (!options.includeDeleted && isDeleted(reminder)) continue
 
-		allReminders.push({ reminder, person })
-	}
+    	allReminders.push({ reminder, person })
+    }
     }
 
     allReminders.sort(
-	(a, b) =>
-		new Date(a.reminder.dueAtDate).getTime() -
-		new Date(b.reminder.dueAtDate).getTime(),
+    (a, b) =>
+    	new Date(a.reminder.dueAtDate).getTime() -
+    	new Date(b.reminder.dueAtDate).getTime(),
     )
 
     // Filter by due date if dueOnly is true
     let filteredReminders = allReminders
     if (options.dueOnly) {
-	let now = new Date()
-	filteredReminders = allReminders.filter(({ reminder }) => {
-		let dueDate = new Date(reminder.dueAtDate)
-		return dueDate <= now
-	})
+    let now = new Date()
+    filteredReminders = allReminders.filter(({ reminder }) => {
+    	let dueDate = new Date(reminder.dueAtDate)
+    	return dueDate <= now
+    })
     }
     if (options.searchQuery) {
-	let searchLower = options.searchQuery.toLowerCase()
-	filteredReminders = filteredReminders.filter(
-		({ reminder, person }) =>
-			reminder.text.toLowerCase().includes(searchLower) ||
-			person.name.toLowerCase().includes(searchLower),
-	)
+    let searchLower = options.searchQuery.toLowerCase()
+    filteredReminders = filteredReminders.filter(
+    	({ reminder, person }) =>
+    		reminder.text.toLowerCase().includes(searchLower) ||
+    		person.name.toLowerCase().includes(searchLower),
+    )
     }
 
     return {
-	operation: "list",
-	reminders: filteredReminders.map(({ reminder, person }) => ({
-		id: reminder.$jazz.id,
-		text: reminder.text,
-		dueAtDate: reminder.dueAtDate,
-		repeat: reminder.repeat,
-		done: reminder.done,
-		deletedAt: reminder.deletedAt,
-		createdAt: reminder.createdAt.toISOString(),
-		updatedAt: reminder.updatedAt.toISOString(),
-		person: {
-			id: person.$jazz.id,
-			name: person.name,
-		},
-	})),
-	totalCount: allReminders.length,
-	filteredCount: filteredReminders.length,
-	searchQuery: options.searchQuery,
-	dueOnly: options.dueOnly,
+    operation: "list",
+    reminders: filteredReminders.map(({ reminder, person }) => ({
+    	id: reminder.$jazz.id,
+    	text: reminder.text,
+    	dueAtDate: reminder.dueAtDate,
+    	repeat: reminder.repeat,
+    	done: reminder.done,
+    	deletedAt: reminder.deletedAt,
+    	createdAt: reminder.createdAt.toISOString(),
+    	updatedAt: reminder.updatedAt.toISOString(),
+    	person: {
+    		id: person.$jazz.id,
+    		name: person.name,
+    	},
+    })),
+    totalCount: allReminders.length,
+    filteredCount: filteredReminders.length,
+    searchQuery: options.searchQuery,
+    dueOnly: options.dueOnly,
     }
 
 }
@@ -33512,51 +33523,51 @@ if (!person.$isLoaded) throw errors.PERSON_NOT_FOUND
     let previous = { ...reminder }
 
     if (updates.text !== undefined) {
-	reminder.$jazz.set("text", updates.text)
+    reminder.$jazz.set("text", updates.text)
     }
     if (updates.dueAtDate !== undefined) {
-	reminder.$jazz.set("dueAtDate", updates.dueAtDate)
+    reminder.$jazz.set("dueAtDate", updates.dueAtDate)
     }
     if (updates.repeat !== undefined) {
-	reminder.$jazz.set("repeat", updates.repeat)
+    reminder.$jazz.set("repeat", updates.repeat)
     }
     if ("repeat" in updates && updates.repeat === undefined) {
-	reminder.$jazz.delete("repeat")
+    reminder.$jazz.delete("repeat")
     }
     if (updates.done === true && !reminder.done && !reminder.repeat) {
-	reminder.$jazz.set("done", updates.done)
+    reminder.$jazz.set("done", updates.done)
     }
     if (updates.done === true && !reminder.done && reminder.repeat) {
-	let { nextDueAtDate } = calculateNextDueDate(reminder)
-	reminder.$jazz.set("dueAtDate", nextDueAtDate)
-	reminder.$jazz.set("done", false)
+    let { nextDueAtDate } = calculateNextDueDate(reminder)
+    reminder.$jazz.set("dueAtDate", nextDueAtDate)
+    reminder.$jazz.set("done", false)
     }
     if (updates.done === false && reminder.done) {
-	reminder.$jazz.set("done", updates.done)
+    reminder.$jazz.set("done", updates.done)
     }
 
     if ("deletedAt" in updates && updates.deletedAt === undefined) {
-	reminder.$jazz.delete("deletedAt")
+    reminder.$jazz.delete("deletedAt")
     }
 
     if (updates.deletedAt !== undefined) {
-	reminder.$jazz.set("deletedAt", updates.deletedAt)
+    reminder.$jazz.set("deletedAt", updates.deletedAt)
     }
 
     if (updates.permanentlyDeletedAt !== undefined) {
-	reminder.$jazz.set("permanentlyDeletedAt", updates.permanentlyDeletedAt)
+    reminder.$jazz.set("permanentlyDeletedAt", updates.permanentlyDeletedAt)
     }
 
     reminder.$jazz.set("updatedAt", new Date())
     person.$jazz.set("updatedAt", new Date())
 
     return {
-	operation: "update",
-	reminderID: options.reminderId,
-	personID: options.personId,
-	current: { ...reminder },
-	previous,
-	_ref: reminder,
+    operation: "update",
+    reminderID: options.reminderId,
+    personID: options.personId,
+    current: { ...reminder },
+    previous,
+    _ref: reminder,
     }
 
 }
@@ -33574,20 +33585,20 @@ nextDueAtDate: reminder.dueAtDate || "",
 
     let nextDueDate: Date
     switch (unit) {
-	case "day":
-		nextDueDate = addDays(currentDueDate, interval)
-		break
-	case "week":
-		nextDueDate = addWeeks(currentDueDate, interval)
-		break
-	case "month":
-		nextDueDate = addMonths(currentDueDate, interval)
-		break
-	case "year":
-		nextDueDate = addYears(currentDueDate, interval)
-		break
-	default:
-		nextDueDate = addDays(currentDueDate, 1)
+    case "day":
+    	nextDueDate = addDays(currentDueDate, interval)
+    	break
+    case "week":
+    	nextDueDate = addWeeks(currentDueDate, interval)
+    	break
+    case "month":
+    	nextDueDate = addMonths(currentDueDate, interval)
+    	break
+    case "year":
+    	nextDueDate = addYears(currentDueDate, interval)
+    	break
+    default:
+    	nextDueDate = addDays(currentDueDate, 1)
     }
 
     let nextDueAtDate = format(nextDueDate, "yyyy-MM-dd")
@@ -33740,20 +33751,20 @@ input: \_RemoveReminderTool["input"],
 let { personId, reminderId } = input
 
     let res = await tryCatch(
-	updateReminder({ deletedAt: new Date() }, { userId, personId, reminderId }),
+    updateReminder({ deletedAt: new Date() }, { userId, personId, reminderId }),
     )
     if (!res.ok) return { error: `${res.error}` }
     let result = res.data
     return {
-	personId: result.personID,
-	reminderId: result.reminderID,
-	text: result.current.text,
-	dueAtDate: result.current.dueAtDate,
-	repeat: result.current.repeat,
-	done: result.current.done,
-	deletedAt: result.current.deletedAt?.toISOString(),
-	createdAt: result.current.createdAt.toISOString(),
-	updatedAt: result.current.updatedAt.toISOString(),
+    personId: result.personID,
+    reminderId: result.reminderID,
+    text: result.current.text,
+    dueAtDate: result.current.dueAtDate,
+    repeat: result.current.repeat,
+    done: result.current.done,
+    deletedAt: result.current.deletedAt?.toISOString(),
+    createdAt: result.current.createdAt.toISOString(),
+    updatedAt: result.current.updatedAt.toISOString(),
     }
 
 }
@@ -34390,6 +34401,7 @@ className,
 ...props
 }: React.ComponentProps<"div">) {
 return (
+
 <div
 data-slot="alert-dialog-header"
 className={cn("flex flex-col gap-2 text-left", className)}
@@ -34403,6 +34415,7 @@ className,
 ...props
 }: React.ComponentProps<"div">) {
 return (
+
 <div
 data-slot="alert-dialog-footer"
 className={cn(
@@ -34720,12 +34733,12 @@ asChild?: boolean
 const Comp = asChild ? Slot : "button"
 
     return (
-	<Comp
-		data-slot="button"
-		type="button"
-		className={cn(buttonVariants({ variant, size, className }))}
-		{...props}
-	/>
+    <Comp
+    	data-slot="button"
+    	type="button"
+    	className={cn(buttonVariants({ variant, size, className }))}
+    	{...props}
+    />
     )
 
 }
@@ -34880,70 +34893,70 @@ const [open, setOpen] = React.useState(false)
 let isMobile = useIsMobile()
 
     let triggerButton = (
-	<Button
-		variant="outline"
-		role="combobox"
-		aria-expanded={open}
-		className={cn("w-full justify-between", className)}
-	>
-		{value ? items.find(item => item.value === value)?.label : placeholder}
-		<ChevronBarExpand className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-	</Button>
+    <Button
+    	variant="outline"
+    	role="combobox"
+    	aria-expanded={open}
+    	className={cn("w-full justify-between", className)}
+    >
+    	{value ? items.find(item => item.value === value)?.label : placeholder}
+    	<ChevronBarExpand className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+    </Button>
     )
 
     let commandContent = (
-	<Command>
-		<CommandInput placeholder={searchPlaceholder} />
-		<CommandList>
-			<CommandEmpty>{emptyText}</CommandEmpty>
-			<CommandGroup>
-				{items.map(item => (
-					<CommandItem
-						key={item.value}
-						value={item.label}
-						onSelect={() => {
-							onValueChange?.(item.value === value ? "" : item.value)
-							setOpen(false)
-						}}
-					>
-						<Check
-							className={cn(
-								"mr-2 h-4 w-4",
-								value === item.value ? "opacity-100" : "opacity-0",
-							)}
-						/>
-						{item.label}
-					</CommandItem>
-				))}
-			</CommandGroup>
-		</CommandList>
-	</Command>
+    <Command>
+    	<CommandInput placeholder={searchPlaceholder} />
+    	<CommandList>
+    		<CommandEmpty>{emptyText}</CommandEmpty>
+    		<CommandGroup>
+    			{items.map(item => (
+    				<CommandItem
+    					key={item.value}
+    					value={item.label}
+    					onSelect={() => {
+    						onValueChange?.(item.value === value ? "" : item.value)
+    						setOpen(false)
+    					}}
+    				>
+    					<Check
+    						className={cn(
+    							"mr-2 h-4 w-4",
+    							value === item.value ? "opacity-100" : "opacity-0",
+    						)}
+    					/>
+    					{item.label}
+    				</CommandItem>
+    			))}
+    		</CommandGroup>
+    	</CommandList>
+    </Command>
     )
 
     if (isMobile) {
-	return (
-		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger asChild>{triggerButton}</DialogTrigger>
-			<DialogContent
-				titleSlot={
-					<DialogHeader>
-						<DialogTitle>{searchPlaceholder}</DialogTitle>
-					</DialogHeader>
-				}
-			>
-				{commandContent}
-			</DialogContent>
-		</Dialog>
-	)
+    return (
+    	<Dialog open={open} onOpenChange={setOpen}>
+    		<DialogTrigger asChild>{triggerButton}</DialogTrigger>
+    		<DialogContent
+    			titleSlot={
+    				<DialogHeader>
+    					<DialogTitle>{searchPlaceholder}</DialogTitle>
+    				</DialogHeader>
+    			}
+    		>
+    			{commandContent}
+    		</DialogContent>
+    	</Dialog>
+    )
     }
 
     return (
-	<Popover open={open} onOpenChange={setOpen}>
-		<PopoverTrigger asChild>{triggerButton}</PopoverTrigger>
-		<PopoverContent className="w-full p-0" align="start">
-			{commandContent}
-		</PopoverContent>
-	</Popover>
+    <Popover open={open} onOpenChange={setOpen}>
+    	<PopoverTrigger asChild>{triggerButton}</PopoverTrigger>
+    	<PopoverContent className="w-full p-0" align="start">
+    		{commandContent}
+    	</PopoverContent>
+    </Popover>
     )
 
 }
@@ -35216,6 +35229,7 @@ paddingRight:
 }
 onOpenAutoFocus={e => (isMobile ? e.preventDefault() : null)}
 {...props} >
+
 <div className="flex items-start justify-between gap-3">
 {titleSlot}
 <Button asChild variant="secondary">
@@ -35232,6 +35246,7 @@ onOpenAutoFocus={e => (isMobile ? e.preventDefault() : null)}
 
 function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
 return (
+
 <div
 data-slot="dialog-header"
 className={cn("flex flex-col gap-2 text-left", className)}
@@ -35242,6 +35257,7 @@ className={cn("flex flex-col gap-2 text-left", className)}
 
 function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
 return (
+
 <div
 data-slot="dialog-footer"
 className={cn(
@@ -35614,18 +35630,18 @@ const formState = useFormState({ name: fieldContext.name })
 const fieldState = getFieldState(fieldContext.name, formState)
 
     if (!fieldContext) {
-	throw new Error("useFormField should be used within <FormField>")
+    throw new Error("useFormField should be used within <FormField>")
     }
 
     const { id } = itemContext
 
     return {
-	id,
-	name: fieldContext.name,
-	formItemId: `${id}-form-item`,
-	formDescriptionId: `${id}-form-item-description`,
-	formMessageId: `${id}-form-item-message`,
-	...fieldState,
+    id,
+    name: fieldContext.name,
+    formItemId: `${id}-form-item`,
+    formDescriptionId: `${id}-form-item-description`,
+    formMessageId: `${id}-form-item-message`,
+    ...fieldState,
     }
 
 }
@@ -35642,13 +35658,13 @@ function FormItem({ className, ...props }: React.ComponentProps<"div">) {
 const id = React.useId()
 
     return (
-	<FormItemContext.Provider value={{ id }}>
-		<div
-			data-slot="form-item"
-			className={cn("grid gap-2", className)}
-			{...props}
-		/>
-	</FormItemContext.Provider>
+    <FormItemContext.Provider value={{ id }}>
+    	<div
+    		data-slot="form-item"
+    		className={cn("grid gap-2", className)}
+    		{...props}
+    	/>
+    </FormItemContext.Provider>
     )
 
 }
@@ -35660,13 +35676,13 @@ className,
 const { error, formItemId } = useFormField()
 
     return (
-	<Label
-		data-slot="form-label"
-		data-error={!!error}
-		className={cn("data-[error=true]:text-destructive", className)}
-		htmlFor={formItemId}
-		{...props}
-	/>
+    <Label
+    	data-slot="form-label"
+    	data-error={!!error}
+    	className={cn("data-[error=true]:text-destructive", className)}
+    	htmlFor={formItemId}
+    	{...props}
+    />
     )
 
 }
@@ -35675,17 +35691,17 @@ function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
 const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
 
     return (
-	<Slot
-		data-slot="form-control"
-		id={formItemId}
-		aria-describedby={
-			!error
-				? `${formDescriptionId}`
-				: `${formDescriptionId} ${formMessageId}`
-		}
-		aria-invalid={!!error}
-		{...props}
-	/>
+    <Slot
+    	data-slot="form-control"
+    	id={formItemId}
+    	aria-describedby={
+    		!error
+    			? `${formDescriptionId}`
+    			: `${formDescriptionId} ${formMessageId}`
+    	}
+    	aria-invalid={!!error}
+    	{...props}
+    />
     )
 
 }
@@ -35694,12 +35710,12 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
 const { formDescriptionId } = useFormField()
 
     return (
-	<p
-		data-slot="form-description"
-		id={formDescriptionId}
-		className={cn("text-muted-foreground text-sm", className)}
-		{...props}
-	/>
+    <p
+    	data-slot="form-description"
+    	id={formDescriptionId}
+    	className={cn("text-muted-foreground text-sm", className)}
+    	{...props}
+    />
     )
 
 }
@@ -35709,18 +35725,18 @@ const { error, formMessageId } = useFormField()
 const body = error ? String(error?.message ?? "") : props.children
 
     if (!body) {
-	return null
+    return null
     }
 
     return (
-	<p
-		data-slot="form-message"
-		id={formMessageId}
-		className={cn("text-destructive text-sm", className)}
-		{...props}
-	>
-		{body}
-	</p>
+    <p
+    	data-slot="form-message"
+    	id={formMessageId}
+    	className={cn("text-destructive text-sm", className)}
+    	{...props}
+    >
+    	{body}
+    </p>
     )
 
 }
@@ -35871,147 +35887,147 @@ let isMac = useIsMac()
     useResizeTextarea(textareaRef, value, { maxHeight: 400 })
 
     function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
-	onChange(e.target.value)
+    onChange(e.target.value)
     }
 
     function handleKeyDown(e: React.KeyboardEvent) {
-	onKeyDown?.(e)
+    onKeyDown?.(e)
 
-	if (e.defaultPrevented) return
+    if (e.defaultPrevented) return
 
-	if (showPreview) return
+    if (showPreview) return
 
-	let isModifierPressed = e.metaKey || e.ctrlKey
-	if (!isModifierPressed) return
+    let isModifierPressed = e.metaKey || e.ctrlKey
+    if (!isModifierPressed) return
 
-	let markdownShortcutKeys = ["b", "i", "k", "l", "h"]
-	if (!markdownShortcutKeys.includes(e.key)) return
+    let markdownShortcutKeys = ["b", "i", "k", "l", "h"]
+    if (!markdownShortcutKeys.includes(e.key)) return
 
-	e.preventDefault()
-	switch (e.key) {
-		case "b":
-			applyMarkdownFormat(textareaRef, value, onChange, "bold")
-			break
-		case "i":
-			applyMarkdownFormat(textareaRef, value, onChange, "italic")
-			break
-		case "k":
-			applyMarkdownFormat(textareaRef, value, onChange, "link")
-			break
-		case "l":
-			applyMarkdownFormat(textareaRef, value, onChange, "list")
-			break
-		case "h":
-			applyMarkdownFormat(textareaRef, value, onChange, "heading")
-			break
-	}
+    e.preventDefault()
+    switch (e.key) {
+    	case "b":
+    		applyMarkdownFormat(textareaRef, value, onChange, "bold")
+    		break
+    	case "i":
+    		applyMarkdownFormat(textareaRef, value, onChange, "italic")
+    		break
+    	case "k":
+    		applyMarkdownFormat(textareaRef, value, onChange, "link")
+    		break
+    	case "l":
+    		applyMarkdownFormat(textareaRef, value, onChange, "list")
+    		break
+    	case "h":
+    		applyMarkdownFormat(textareaRef, value, onChange, "heading")
+    		break
+    }
     }
 
     let toolButtons = [
-	{ format: "bold", icon: TypeBold, label: "markdown.bold", key: "B" },
-	{ format: "italic", icon: TypeItalic, label: "markdown.italic", key: "I" },
-	{ format: "link", icon: Link45deg, label: "markdown.link", key: "K" },
-	{ format: "list", icon: ListUl, label: "markdown.list", key: "L" },
-	{ format: "heading", icon: TypeH3, label: "markdown.heading", key: "H" },
+    { format: "bold", icon: TypeBold, label: "markdown.bold", key: "B" },
+    { format: "italic", icon: TypeItalic, label: "markdown.italic", key: "I" },
+    { format: "link", icon: Link45deg, label: "markdown.link", key: "K" },
+    { format: "list", icon: ListUl, label: "markdown.list", key: "L" },
+    { format: "heading", icon: TypeH3, label: "markdown.heading", key: "H" },
     ] as const
 
     return (
-	<div
-		className="flex flex-col-reverse md:flex-col"
-		onKeyDown={handleKeyDown}
-	>
-		<div className="border-border bg-muted/30 flex items-center justify-between gap-2 rounded-b-md border border-t-0 px-2 py-1 md:rounded-t-md md:rounded-b-none md:border-t md:border-b-0">
-			<TooltipProvider>
-				<div className="flex gap-1">
-					{toolButtons.map(tool => (
-						<Tooltip key={tool.format}>
-							<TooltipTrigger asChild>
-								<Button
-									type="button"
-									variant="ghost"
-									size="sm"
-									onMouseDown={e => e.preventDefault()}
-									onClick={() =>
-										applyMarkdownFormat(
-											textareaRef,
-											value,
-											onChange,
-											tool.format,
-										)
-									}
-									className="h-10 w-10 p-0 md:h-7 md:w-7"
-									disabled={showPreview}
-								>
-									<tool.icon className="h-5 w-5 md:h-4 md:w-4" />
-								</Button>
-							</TooltipTrigger>
-							<TooltipContent>
-								<T k={tool.label} />{" "}
-								<KbdGroup>
-									<Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
-									<Kbd>{tool.key}</Kbd>
-								</KbdGroup>
-							</TooltipContent>
-						</Tooltip>
-					))}
-				</div>
-			</TooltipProvider>
-			<Button
-				type="button"
-				variant="ghost"
-				size="sm"
-				onMouseDown={e => e.preventDefault()}
-				onClick={() => setShowPreview(!showPreview)}
-				disabled={!value.trim()}
-				className="text-muted-foreground hover:text-foreground h-7 gap-1 px-2 text-xs"
-			>
-				{showPreview ? (
-					<>
-						<PencilSquare className="h-3 w-3" />
-						<span>
-							<T k="markdown.edit" />
-						</span>
-					</>
-				) : (
-					<>
-						<Eye className="h-3 w-3" />
-						<span>
-							<T k="markdown.preview" />
-						</span>
-					</>
-				)}
-			</Button>
-		</div>
-		{showPreview ? (
-			<div
-				className={cn(
-					"border-border bg-background min-h-[100px] rounded-t-md border border-b-0 px-3 py-2 md:rounded-t-none md:rounded-b-md md:border-t-0 md:border-b",
-					className,
-				)}
-			>
-				{value ? (
-					<Markdown>{value}</Markdown>
-				) : (
-					<p className="text-muted-foreground text-sm italic">
-						<T k="markdown.noPreview" />
-					</p>
-				)}
-			</div>
-		) : (
-			<Textarea
-				ref={textareaRef}
-				value={value}
-				onChange={handleChange}
-				placeholder={placeholder}
-				rows={rows}
-				autoResize={false}
-				className={cn(
-					"max-h-[400px] resize-none overflow-y-auto rounded-t-md rounded-b-none md:rounded-t-none md:rounded-b-md [&::-webkit-resizer]:hidden",
-					className,
-				)}
-			/>
-		)}
-	</div>
+    <div
+    	className="flex flex-col-reverse md:flex-col"
+    	onKeyDown={handleKeyDown}
+    >
+    	<div className="border-border bg-muted/30 flex items-center justify-between gap-2 rounded-b-md border border-t-0 px-2 py-1 md:rounded-t-md md:rounded-b-none md:border-t md:border-b-0">
+    		<TooltipProvider>
+    			<div className="flex gap-1">
+    				{toolButtons.map(tool => (
+    					<Tooltip key={tool.format}>
+    						<TooltipTrigger asChild>
+    							<Button
+    								type="button"
+    								variant="ghost"
+    								size="sm"
+    								onMouseDown={e => e.preventDefault()}
+    								onClick={() =>
+    									applyMarkdownFormat(
+    										textareaRef,
+    										value,
+    										onChange,
+    										tool.format,
+    									)
+    								}
+    								className="h-10 w-10 p-0 md:h-7 md:w-7"
+    								disabled={showPreview}
+    							>
+    								<tool.icon className="h-5 w-5 md:h-4 md:w-4" />
+    							</Button>
+    						</TooltipTrigger>
+    						<TooltipContent>
+    							<T k={tool.label} />{" "}
+    							<KbdGroup>
+    								<Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
+    								<Kbd>{tool.key}</Kbd>
+    							</KbdGroup>
+    						</TooltipContent>
+    					</Tooltip>
+    				))}
+    			</div>
+    		</TooltipProvider>
+    		<Button
+    			type="button"
+    			variant="ghost"
+    			size="sm"
+    			onMouseDown={e => e.preventDefault()}
+    			onClick={() => setShowPreview(!showPreview)}
+    			disabled={!value.trim()}
+    			className="text-muted-foreground hover:text-foreground h-7 gap-1 px-2 text-xs"
+    		>
+    			{showPreview ? (
+    				<>
+    					<PencilSquare className="h-3 w-3" />
+    					<span>
+    						<T k="markdown.edit" />
+    					</span>
+    				</>
+    			) : (
+    				<>
+    					<Eye className="h-3 w-3" />
+    					<span>
+    						<T k="markdown.preview" />
+    					</span>
+    				</>
+    			)}
+    		</Button>
+    	</div>
+    	{showPreview ? (
+    		<div
+    			className={cn(
+    				"border-border bg-background min-h-[100px] rounded-t-md border border-b-0 px-3 py-2 md:rounded-t-none md:rounded-b-md md:border-t-0 md:border-b",
+    				className,
+    			)}
+    		>
+    			{value ? (
+    				<Markdown>{value}</Markdown>
+    			) : (
+    				<p className="text-muted-foreground text-sm italic">
+    					<T k="markdown.noPreview" />
+    				</p>
+    			)}
+    		</div>
+    	) : (
+    		<Textarea
+    			ref={textareaRef}
+    			value={value}
+    			onChange={handleChange}
+    			placeholder={placeholder}
+    			rows={rows}
+    			autoResize={false}
+    			className={cn(
+    				"max-h-[400px] resize-none overflow-y-auto rounded-t-md rounded-b-none md:rounded-t-none md:rounded-b-md [&::-webkit-resizer]:hidden",
+    				className,
+    			)}
+    		/>
+    	)}
+    </div>
     )
 
 }
@@ -36029,9 +36045,9 @@ if (!textarea) return
     let end = textarea.selectionEnd
 
     if (format === "heading" || format === "list") {
-	applyLineFormat(textarea, value, onChange, format, start, end)
+    applyLineFormat(textarea, value, onChange, format, start, end)
     } else {
-	applyInlineFormat(textarea, value, onChange, format, start, end)
+    applyInlineFormat(textarea, value, onChange, format, start, end)
     }
 
 }
@@ -36047,26 +36063,26 @@ end: number,
 let selectedText = value.substring(start, end)
 
     if (start === end) {
-	let bounds = getWordBounds(value, start)
-	selectedText = value.substring(bounds.start, bounds.end)
-	start = bounds.start
-	end = bounds.end
+    let bounds = getWordBounds(value, start)
+    selectedText = value.substring(bounds.start, bounds.end)
+    start = bounds.start
+    end = bounds.end
     }
 
     let formatConfig: InlineFormatConfig = getInlineFormatConfig(
-	format,
-	value,
-	start,
-	end,
-	selectedText,
+    format,
+    value,
+    start,
+    end,
+    selectedText,
     )
     let result = formatConfig.toggle()
 
     onChange(result.newValue)
 
     setTimeout(() => {
-	textarea.focus()
-	textarea.setSelectionRange(result.newStart, result.newEnd)
+    textarea.focus()
+    textarea.setSelectionRange(result.newStart, result.newEnd)
     }, 0)
 
 }
@@ -36084,11 +36100,11 @@ let currentLineIndex = 0
 let charCount = 0
 
     for (let i = 0; i < lines.length; i++) {
-	if (charCount + lines[i].length >= start) {
-		currentLineIndex = i
-		break
-	}
-	charCount += lines[i].length + 1
+    if (charCount + lines[i].length >= start) {
+    	currentLineIndex = i
+    	break
+    }
+    charCount += lines[i].length + 1
     }
 
     let currentLine = lines[currentLineIndex]
@@ -36105,10 +36121,10 @@ let charCount = 0
     onChange(newValue)
 
     setTimeout(() => {
-	textarea.focus()
-	let newStart = lineStartPos + result.newStartOffset
-	let newEnd = lineStartPos + result.newEndOffset
-	textarea.setSelectionRange(newStart, newEnd)
+    textarea.focus()
+    let newStart = lineStartPos + result.newStartOffset
+    let newEnd = lineStartPos + result.newEndOffset
+    textarea.setSelectionRange(newStart, newEnd)
     }, 0)
 
 }
@@ -36118,11 +36134,11 @@ let start = pos
 let end = pos
 
     while (start > 0 && /\S/.test(text[start - 1])) {
-	start--
+    start--
     }
 
     while (end < text.length && /\S/.test(text[end])) {
-	end++
+    end++
     }
 
     return { start, end }
@@ -36155,37 +36171,37 @@ let before = value.substring(Math.max(0, start - 2), start)
 let after = value.substring(end, Math.min(value.length, end + 2))
 
     return {
-	toggle: () => {
-		if (before === "**" && after === "**") {
-			return {
-				newValue:
-					value.substring(0, start - 2) +
-					selectedText +
-					value.substring(end + 2),
-				newStart: start - 2,
-				newEnd: start - 2 + selectedText.length,
-			}
-		} else if (
-			selectedText.startsWith("**") &&
-			selectedText.endsWith("**") &&
-			selectedText.length > 4
-		) {
-			let unwrapped = selectedText.slice(2, -2)
-			return {
-				newValue:
-					value.substring(0, start) + unwrapped + value.substring(end),
-				newStart: start,
-				newEnd: start + unwrapped.length,
-			}
-		} else {
-			let wrapped = "**" + selectedText + "**"
-			return {
-				newValue: value.substring(0, start) + wrapped + value.substring(end),
-				newStart: start + 2,
-				newEnd: start + 2 + selectedText.length,
-			}
-		}
-	},
+    toggle: () => {
+    	if (before === "**" && after === "**") {
+    		return {
+    			newValue:
+    				value.substring(0, start - 2) +
+    				selectedText +
+    				value.substring(end + 2),
+    			newStart: start - 2,
+    			newEnd: start - 2 + selectedText.length,
+    		}
+    	} else if (
+    		selectedText.startsWith("**") &&
+    		selectedText.endsWith("**") &&
+    		selectedText.length > 4
+    	) {
+    		let unwrapped = selectedText.slice(2, -2)
+    		return {
+    			newValue:
+    				value.substring(0, start) + unwrapped + value.substring(end),
+    			newStart: start,
+    			newEnd: start + unwrapped.length,
+    		}
+    	} else {
+    		let wrapped = "**" + selectedText + "**"
+    		return {
+    			newValue: value.substring(0, start) + wrapped + value.substring(end),
+    			newStart: start + 2,
+    			newEnd: start + 2 + selectedText.length,
+    		}
+    	}
+    },
     }
 
 }
@@ -36202,42 +36218,42 @@ let beforeBold = value.substring(Math.max(0, start - 2), start)
 let afterBold = value.substring(end, Math.min(value.length, end + 2))
 
     return {
-	toggle: () => {
-		if (
-			before === "*" &&
-			after === "*" &&
-			!(beforeBold === "**" && afterBold === "**")
-		) {
-			return {
-				newValue:
-					value.substring(0, start - 1) +
-					selectedText +
-					value.substring(end + 1),
-				newStart: start - 1,
-				newEnd: start - 1 + selectedText.length,
-			}
-		} else if (
-			selectedText.startsWith("*") &&
-			selectedText.endsWith("*") &&
-			!selectedText.startsWith("**") &&
-			selectedText.length > 2
-		) {
-			let unwrapped = selectedText.slice(1, -1)
-			return {
-				newValue:
-					value.substring(0, start) + unwrapped + value.substring(end),
-				newStart: start,
-				newEnd: start + unwrapped.length,
-			}
-		} else {
-			let wrapped = "*" + selectedText + "*"
-			return {
-				newValue: value.substring(0, start) + wrapped + value.substring(end),
-				newStart: start + 1,
-				newEnd: start + 1 + selectedText.length,
-			}
-		}
-	},
+    toggle: () => {
+    	if (
+    		before === "*" &&
+    		after === "*" &&
+    		!(beforeBold === "**" && afterBold === "**")
+    	) {
+    		return {
+    			newValue:
+    				value.substring(0, start - 1) +
+    				selectedText +
+    				value.substring(end + 1),
+    			newStart: start - 1,
+    			newEnd: start - 1 + selectedText.length,
+    		}
+    	} else if (
+    		selectedText.startsWith("*") &&
+    		selectedText.endsWith("*") &&
+    		!selectedText.startsWith("**") &&
+    		selectedText.length > 2
+    	) {
+    		let unwrapped = selectedText.slice(1, -1)
+    		return {
+    			newValue:
+    				value.substring(0, start) + unwrapped + value.substring(end),
+    			newStart: start,
+    			newEnd: start + unwrapped.length,
+    		}
+    	} else {
+    		let wrapped = "*" + selectedText + "*"
+    		return {
+    			newValue: value.substring(0, start) + wrapped + value.substring(end),
+    			newStart: start + 1,
+    			newEnd: start + 1 + selectedText.length,
+    		}
+    	}
+    },
     }
 
 }
@@ -36252,40 +36268,40 @@ let before = value.substring(Math.max(0, start - 1), start)
 let afterMatch = value.substring(end).match(/^\]\([^)]\*\)/)
 
     return {
-	toggle: () => {
-		if (before === "[" && afterMatch) {
-			let afterLength = afterMatch[0].length
-			return {
-				newValue:
-					value.substring(0, start - 1) +
-					selectedText +
-					value.substring(end + afterLength),
-				newStart: start - 1,
-				newEnd: start - 1 + selectedText.length,
-			}
-		} else {
-			let linkPattern = /^\[(.+)\]\((.+)\)$/
-			let match = selectedText.match(linkPattern)
+    toggle: () => {
+    	if (before === "[" && afterMatch) {
+    		let afterLength = afterMatch[0].length
+    		return {
+    			newValue:
+    				value.substring(0, start - 1) +
+    				selectedText +
+    				value.substring(end + afterLength),
+    			newStart: start - 1,
+    			newEnd: start - 1 + selectedText.length,
+    		}
+    	} else {
+    		let linkPattern = /^\[(.+)\]\((.+)\)$/
+    		let match = selectedText.match(linkPattern)
 
-			if (match) {
-				let linkText = match[1]
-				return {
-					newValue:
-						value.substring(0, start) + linkText + value.substring(end),
-					newStart: start,
-					newEnd: start + linkText.length,
-				}
-			} else {
-				let wrapped = "[" + selectedText + "](url)"
-				return {
-					newValue:
-						value.substring(0, start) + wrapped + value.substring(end),
-					newStart: start + 1,
-					newEnd: start + 1 + selectedText.length,
-				}
-			}
-		}
-	},
+    		if (match) {
+    			let linkText = match[1]
+    			return {
+    				newValue:
+    					value.substring(0, start) + linkText + value.substring(end),
+    				newStart: start,
+    				newEnd: start + linkText.length,
+    			}
+    		} else {
+    			let wrapped = "[" + selectedText + "](url)"
+    			return {
+    				newValue:
+    					value.substring(0, start) + wrapped + value.substring(end),
+    				newStart: start + 1,
+    				newEnd: start + 1 + selectedText.length,
+    			}
+    		}
+    	}
+    },
     }
 
 }
@@ -36905,25 +36921,25 @@ export function Toaster({ ...props }: ToasterProps) {
 let isMobile = useIsMobile()
 
     return (
-	<Sonner
-		position={isMobile ? "top-center" : "bottom-right"}
-		mobileOffset={{
-			top: "max(calc(var(--spacing) * 3), env(safe-area-inset-top))",
-			bottom: "max(calc(var(--spacing) * 3), env(safe-area-inset-bottom))",
-			left: "max(calc(var(--spacing) * 3), env(safe-area-inset-left))",
-			right: "max(calc(var(--spacing) * 3), env(safe-area-inset-right))",
-		}}
-		theme="system"
-		className="toaster group"
-		style={
-			{
-				"--normal-bg": "var(--popover)",
-				"--normal-text": "var(--popover-foreground)",
-				"--normal-border": "var(--border)",
-			} as React.CSSProperties
-		}
-		{...props}
-	/>
+    <Sonner
+    	position={isMobile ? "top-center" : "bottom-right"}
+    	mobileOffset={{
+    		top: "max(calc(var(--spacing) * 3), env(safe-area-inset-top))",
+    		bottom: "max(calc(var(--spacing) * 3), env(safe-area-inset-bottom))",
+    		left: "max(calc(var(--spacing) * 3), env(safe-area-inset-left))",
+    		right: "max(calc(var(--spacing) * 3), env(safe-area-inset-right))",
+    	}}
+    	theme="system"
+    	className="toaster group"
+    	style={
+    		{
+    			"--normal-bg": "var(--popover)",
+    			"--normal-text": "var(--popover-foreground)",
+    			"--normal-border": "var(--border)",
+    		} as React.CSSProperties
+    	}
+    	{...props}
+    />
     )
 
 }
@@ -37091,39 +37107,39 @@ maxHeight?: number
 > (
 
     (
-	{
-		className,
-		autoResize: enableAutoResize = true,
-		maxHeight,
-		onInput,
-		...props
-	},
-	ref,
+    {
+    	className,
+    	autoResize: enableAutoResize = true,
+    	maxHeight,
+    	onInput,
+    	...props
+    },
+    ref,
     ) => {
-	let internalRef = useRef<HTMLTextAreaElement>(null)
+    let internalRef = useRef<HTMLTextAreaElement>(null)
 
-	// Use the resize hook with disabled flag
-	useResizeTextarea(internalRef, String(props.value || ""), {
-		maxHeight,
-		disabled: !enableAutoResize,
-	})
+    // Use the resize hook with disabled flag
+    useResizeTextarea(internalRef, String(props.value || ""), {
+    	maxHeight,
+    	disabled: !enableAutoResize,
+    })
 
-	// Combine external ref with internal ref
-	useImperativeHandle(ref, () => internalRef.current!, [])
+    // Combine external ref with internal ref
+    useImperativeHandle(ref, () => internalRef.current!, [])
 
-	return (
-		<textarea
-			ref={internalRef}
-			data-slot="textarea"
-			className={cn(
-				"border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-input flex field-sizing-content min-h-16 w-full rounded-md border px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-				enableAutoResize ? "resize-none" : "resize-y rounded-br-none",
-				className,
-			)}
-			onInput={onInput}
-			{...props}
-		/>
-	)
+    return (
+    	<textarea
+    		ref={internalRef}
+    		data-slot="textarea"
+    		className={cn(
+    			"border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-input flex field-sizing-content min-h-16 w-full rounded-md border px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+    			enableAutoResize ? "resize-none" : "resize-y rounded-br-none",
+    			className,
+    		)}
+    		onInput={onInput}
+    		{...props}
+    	/>
+    )
     },
 
 )
@@ -37138,18 +37154,18 @@ options?: { maxHeight?: number; disabled?: boolean },
 let { maxHeight, disabled = false } = options || {}
 
     useEffect(() => {
-	let textarea = ref.current
-	if (!textarea || disabled) return
+    let textarea = ref.current
+    if (!textarea || disabled) return
 
-	textarea.style.height = "auto"
-	let scrollHeight = textarea.scrollHeight
-	if (maxHeight) {
-		textarea.style.height = `${Math.min(scrollHeight, maxHeight)}px`
-	} else {
-		textarea.style.height = `${scrollHeight}px`
-	}
+    textarea.style.height = "auto"
+    let scrollHeight = textarea.scrollHeight
+    if (maxHeight) {
+    	textarea.style.height = `${Math.min(scrollHeight, maxHeight)}px`
+    } else {
+    	textarea.style.height = `${scrollHeight}px`
+    }
 
-	textarea.scrollTop = textarea.scrollHeight
+    textarea.scrollTop = textarea.scrollHeight
     }, [value, maxHeight, disabled, ref])
 
 }
@@ -37484,6 +37500,7 @@ href: string
 
 function CTA({ title, primaryCta, secondaryCta }: Props) {
 return (
+
 <div className="bg-background">
 <div className="container mx-auto px-6 py-24 md:flex md:items-center md:justify-around">
 <TypographyH2>{title}</TypographyH2>
@@ -37601,6 +37618,7 @@ CloudCheck: CloudCheckFill,
 
 function FeatureGridCentered({ badge, title, description, features }: Props) {
 return (
+
 <div className="container mx-auto px-6 md:px-8">
 <div className="mx-auto max-w-2xl text-center">
 {badge && (
@@ -37614,27 +37632,27 @@ return (
 )}
 </div>
 
-		<div className="mx-auto mt-16 max-w-2xl md:mt-20 md:max-w-5xl">
-			<dl className="grid max-w-xl grid-cols-1 gap-x-12 gap-y-12 md:max-w-none md:grid-cols-3 md:gap-y-16">
-				{features.map(feature => {
-					let IconComponent = iconMap[feature.icon as keyof typeof iconMap]
-					return (
-						<div key={feature.name}>
-							<dt className="text-foreground text-base font-semibold">
-								<div className="bg-primary mb-4 flex size-12 items-center justify-center rounded-xl">
-									<IconComponent className="text-primary-foreground size-7" />
-								</div>
-								{feature.name}
-							</dt>
-							<dd className="text-muted-foreground mt-3 text-sm leading-relaxed">
-								{feature.description}
-							</dd>
-						</div>
-					)
-				})}
-			</dl>
-		</div>
-	</div>
+    	<div className="mx-auto mt-16 max-w-2xl md:mt-20 md:max-w-5xl">
+    		<dl className="grid max-w-xl grid-cols-1 gap-x-12 gap-y-12 md:max-w-none md:grid-cols-3 md:gap-y-16">
+    			{features.map(feature => {
+    				let IconComponent = iconMap[feature.icon as keyof typeof iconMap]
+    				return (
+    					<div key={feature.name}>
+    						<dt className="text-foreground text-base font-semibold">
+    							<div className="bg-primary mb-4 flex size-12 items-center justify-center rounded-xl">
+    								<IconComponent className="text-primary-foreground size-7" />
+    							</div>
+    							{feature.name}
+    						</dt>
+    						<dd className="text-muted-foreground mt-3 text-sm leading-relaxed">
+    							{feature.description}
+    						</dd>
+    					</div>
+    				)
+    			})}
+    		</dl>
+    	</div>
+    </div>
     )
 
 }
@@ -37772,31 +37790,31 @@ src: string
 				)}
 			</div>
 
-		{video && (
-			<script>
-				const video = document.getElementById('demo-video') as HTMLVideoElement
-				const fallback = document.getElementById('screenshot-fallback') as HTMLImageElement
+    	{video && (
+    		<script>
+    			const video = document.getElementById('demo-video') as HTMLVideoElement
+    			const fallback = document.getElementById('screenshot-fallback') as HTMLImageElement
 
-				if (video && fallback) {
-					const observer = new IntersectionObserver((entries) => {
-						entries.forEach(entry => {
-							if (entry.isIntersecting) {
-								video.addEventListener('canplaythrough', () => {
-									video.style.opacity = '1'
-									fallback.style.opacity = '0'
-									video.play()
-								})
-								video.load()
-								observer.unobserve(entry.target)
-							}
-						})
-					}, { threshold: 0.5 })
+    			if (video && fallback) {
+    				const observer = new IntersectionObserver((entries) => {
+    					entries.forEach(entry => {
+    						if (entry.isIntersecting) {
+    							video.addEventListener('canplaythrough', () => {
+    								video.style.opacity = '1'
+    								fallback.style.opacity = '0'
+    								video.play()
+    							})
+    							video.load()
+    							observer.unobserve(entry.target)
+    						}
+    					})
+    				}, { threshold: 0.5 })
 
-					observer.observe(video)
-				}
-			</script>
-		)}
-	</div>
+    				observer.observe(video)
+    			}
+    		</script>
+    	)}
+    </div>
     </div>
 
 </div>
@@ -37901,6 +37919,7 @@ Instagram,
 
 function Footer({ navigation, company }: Props) {
 return (
+
 <footer className="bg-background border-border border-t">
 <div className="container mx-auto px-6 py-12 md:px-8">
 <nav
@@ -38072,88 +38091,88 @@ let currentLanguageEmoji =
 locale === "de" ? "🇩🇪" : locale === "ru" ? "🇷🇺" : "🇺🇸"
 
     return (
-	<IntlProvider
-		messages={locale === "de" ? messagesDe : locale === "ru" ? messagesRu : messagesEn}
-		locale={locale}
-	>
-		<header className="bg-background border-border sticky inset-x-0 top-0 z-50 border-b">
-			<nav className="container mx-auto flex items-center justify-between px-3 py-4">
-				<a href={logo.href} className="flex items-center gap-3">
-					<img alt="" src="/favicon.ico" className="size-8 rounded" />
-					<span className="ml-2 hidden text-xl font-bold md:block">
-						{logo.text}
-					</span>
-				</a>
-				<div className="hidden md:flex md:items-center md:gap-x-6">
-					{navigation.map(item => (
-						<Button key={item.name} asChild variant="ghost" size="sm">
-							<a href={item.href} target="_self">
-								{item.name}
-							</a>
-						</Button>
-					))}
-					{languages && (
-						<DropdownMenu modal={false}>
-							<DropdownMenuTrigger asChild>
-								<Button variant="ghost" size="icon">
-									{currentLanguageEmoji}
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent align="end">
-								{languages.map(item => (
-									<DropdownMenuItem key={item.name} asChild>
-										<a href={item.href}>{item.name}</a>
-									</DropdownMenuItem>
-								))}
-							</DropdownMenuContent>
-						</DropdownMenu>
-					)}
-				</div>
-				<div className="flex gap-3">
-					{languages && (
-						<DropdownMenu modal={false}>
-							<DropdownMenuTrigger asChild>
-								<Button variant="ghost" className="md:hidden" size="icon">
-									{currentLanguageEmoji}
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent align="end">
-								{languages.map(item => (
-									<DropdownMenuItem key={item.name} asChild>
-										<a href={item.href}>{item.name}</a>
-									</DropdownMenuItem>
-								))}
-							</DropdownMenuContent>
-						</DropdownMenu>
-					)}
-					<Button asChild>
-						<a href={cta.href}>{cta.text}</a>
-					</Button>
-					<Button
-						variant="ghost"
-						size="icon"
-						onClick={() => setMobileMenuOpen(true)}
-						className="md:hidden"
-					>
-						<List className="size-6" />
-					</Button>
-				</div>
-			</nav>
-			<Dialog open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-				<DialogContent titleSlot={<DialogTitle>Menu</DialogTitle>}>
-					<div className="flex flex-col gap-3">
-						{navigation.map(item => (
-							<Button key={item.name} asChild variant="outline">
-								<a href={item.href} target="_self">
-									{item.name}
-								</a>
-							</Button>
-						))}
-					</div>
-				</DialogContent>
-			</Dialog>
-		</header>
-	</IntlProvider>
+    <IntlProvider
+    	messages={locale === "de" ? messagesDe : locale === "ru" ? messagesRu : messagesEn}
+    	locale={locale}
+    >
+    	<header className="bg-background border-border sticky inset-x-0 top-0 z-50 border-b">
+    		<nav className="container mx-auto flex items-center justify-between px-3 py-4">
+    			<a href={logo.href} className="flex items-center gap-3">
+    				<img alt="" src="/favicon.ico" className="size-8 rounded" />
+    				<span className="ml-2 hidden text-xl font-bold md:block">
+    					{logo.text}
+    				</span>
+    			</a>
+    			<div className="hidden md:flex md:items-center md:gap-x-6">
+    				{navigation.map(item => (
+    					<Button key={item.name} asChild variant="ghost" size="sm">
+    						<a href={item.href} target="_self">
+    							{item.name}
+    						</a>
+    					</Button>
+    				))}
+    				{languages && (
+    					<DropdownMenu modal={false}>
+    						<DropdownMenuTrigger asChild>
+    							<Button variant="ghost" size="icon">
+    								{currentLanguageEmoji}
+    							</Button>
+    						</DropdownMenuTrigger>
+    						<DropdownMenuContent align="end">
+    							{languages.map(item => (
+    								<DropdownMenuItem key={item.name} asChild>
+    									<a href={item.href}>{item.name}</a>
+    								</DropdownMenuItem>
+    							))}
+    						</DropdownMenuContent>
+    					</DropdownMenu>
+    				)}
+    			</div>
+    			<div className="flex gap-3">
+    				{languages && (
+    					<DropdownMenu modal={false}>
+    						<DropdownMenuTrigger asChild>
+    							<Button variant="ghost" className="md:hidden" size="icon">
+    								{currentLanguageEmoji}
+    							</Button>
+    						</DropdownMenuTrigger>
+    						<DropdownMenuContent align="end">
+    							{languages.map(item => (
+    								<DropdownMenuItem key={item.name} asChild>
+    									<a href={item.href}>{item.name}</a>
+    								</DropdownMenuItem>
+    							))}
+    						</DropdownMenuContent>
+    					</DropdownMenu>
+    				)}
+    				<Button asChild>
+    					<a href={cta.href}>{cta.text}</a>
+    				</Button>
+    				<Button
+    					variant="ghost"
+    					size="icon"
+    					onClick={() => setMobileMenuOpen(true)}
+    					className="md:hidden"
+    				>
+    					<List className="size-6" />
+    				</Button>
+    			</div>
+    		</nav>
+    		<Dialog open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+    			<DialogContent titleSlot={<DialogTitle>Menu</DialogTitle>}>
+    				<div className="flex flex-col gap-3">
+    					{navigation.map(item => (
+    						<Button key={item.name} asChild variant="outline">
+    							<a href={item.href} target="_self">
+    								{item.name}
+    							</a>
+    						</Button>
+    					))}
+    				</div>
+    			</DialogContent>
+    		</Dialog>
+    	</header>
+    </IntlProvider>
     )
 
 }
@@ -38323,6 +38342,7 @@ tiers: PricingTier[]
 
 function Pricing({ title, subtitle, ctaText, tiers }: Props) {
 return (
+
 <div className="container mx-auto px-6 md:px-8">
 <div className="mx-auto max-w-4xl text-center">
 <TypographyH2>{title}</TypographyH2>
@@ -38574,35 +38594,35 @@ goToApp: "Go to App",
 			]}
 		/>
 
-	<main class="mx-auto max-w-4xl px-6 py-24">
-		<div class="prose prose-gray max-w-none dark:prose-invert">
-			<slot />
-		</div>
-	</main>
-	<Footer
-	navigation={{
-		main: [
-			{ name: localizedNav.labels.features, href: localizedNav.features },
-			{ name: localizedNav.labels.pricing, href: localizedNav.pricing },
-			{ name: localizedNav.labels.faq, href: localizedNav.faq },
-			{ name: localizedNav.labels.blog, href: localizedNav.blog },
-			{ name: localizedNav.labels.imprint, href: localizedNav.imprint },
-			{ name: localizedNav.labels.privacy, href: localizedNav.privacy },
-		],
-			social: [
-				{ name: "Twitter", href: "#", icon: "Twitter" },
-				{ name: "GitHub", href: "#", icon: "Github" },
-			],
-			languages: [
-				{ name: "English", href: "/en/" },
-				{ name: "Deutsch", href: "/de/" },
-				{ name: "Русский", href: "/ru/" },
-			],
-		}}
-		company={{
-			name: "Tilly",
-		}}
-	/>
+    <main class="mx-auto max-w-4xl px-6 py-24">
+    	<div class="prose prose-gray max-w-none dark:prose-invert">
+    		<slot />
+    	</div>
+    </main>
+    <Footer
+    navigation={{
+    	main: [
+    		{ name: localizedNav.labels.features, href: localizedNav.features },
+    		{ name: localizedNav.labels.pricing, href: localizedNav.pricing },
+    		{ name: localizedNav.labels.faq, href: localizedNav.faq },
+    		{ name: localizedNav.labels.blog, href: localizedNav.blog },
+    		{ name: localizedNav.labels.imprint, href: localizedNav.imprint },
+    		{ name: localizedNav.labels.privacy, href: localizedNav.privacy },
+    	],
+    		social: [
+    			{ name: "Twitter", href: "#", icon: "Twitter" },
+    			{ name: "GitHub", href: "#", icon: "Github" },
+    		],
+    		languages: [
+    			{ name: "English", href: "/en/" },
+    			{ name: "Deutsch", href: "/de/" },
+    			{ name: "Русский", href: "/ru/" },
+    		],
+    	}}
+    	company={{
+    		name: "Tilly",
+    	}}
+    />
     </body>
 
 </html>

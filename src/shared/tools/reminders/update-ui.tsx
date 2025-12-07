@@ -20,8 +20,8 @@ import {
 	removeReminderTool,
 	removeReminderExecute,
 	updateReminder,
-} from "#shared/tools/reminder-update"
-import { ReminderDetails } from "./reminder-create-ui"
+} from "#shared/tools/reminders/update"
+import { ReminderDetails } from "./create-ui"
 import { cn } from "#app/lib/utils"
 
 export {
