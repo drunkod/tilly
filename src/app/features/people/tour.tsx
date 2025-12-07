@@ -1,5 +1,5 @@
 import { Button } from "#shared/ui/button"
-import { NewPerson } from "#app/features/new-person"
+import { NewPerson } from "#app/features/people/new"
 import { TypographyH2, TypographyLead } from "#shared/ui/typography"
 import { PeopleFill } from "react-bootstrap-icons"
 import { T } from "#shared/intl"

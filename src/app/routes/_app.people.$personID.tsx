@@ -3,17 +3,17 @@ import { z } from "zod"
 import { useCoState } from "jazz-tools/react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "#shared/ui/tabs"
 import { Person, Note, Reminder, isDueToday } from "#shared/schema/user"
-import { usePersonNotes } from "#app/features/note-hooks"
-import { usePersonReminders } from "#app/features/reminder-hooks"
+import { usePersonNotes } from "#app/features/notes/hooks"
+import { usePersonReminders } from "#app/features/reminders/hooks"
 import { co, type ResolveQuery } from "jazz-tools"
 import { useState, useDeferredValue } from "react"
 import { Journal, Plus, Bell, X, Search } from "react-bootstrap-icons"
 import { useAutoFocusInput } from "#app/hooks/use-auto-focus-input"
-import { PersonDetails } from "#app/features/person-details"
-import { NoteListItem } from "#app/features/note-list-item"
-import { NoteForm } from "#app/features/note-form"
-import { ReminderListItem } from "#app/features/reminder-list-item"
-import { ReminderForm } from "#app/features/reminder-form"
+import { PersonDetails } from "#app/features/people/details"
+import { NoteListItem } from "#app/features/notes/list-item"
+import { NoteForm } from "#app/features/notes/form"
+import { ReminderListItem } from "#app/features/reminders/list-item"
+import { ReminderForm } from "#app/features/reminders/form"
 import { Button } from "#shared/ui/button"
 import { Input } from "#shared/ui/input"
 import {
@@ -37,8 +37,8 @@ import {
 } from "#shared/ui/accordion"
 
 import { T, useIntl } from "#shared/intl/setup"
-import { NoteTour } from "#app/features/note-tour"
-import { ReminderTour } from "#app/features/reminder-tour"
+import { NoteTour } from "#app/features/notes/tour"
+import { ReminderTour } from "#app/features/reminders/tour"
 
 export const Route = createFileRoute("/_app/people/$personID")({
 	validateSearch: z.object({
@@ -227,7 +227,7 @@ function NotesList({
 
 	if (notes.active.length === 0 && notes.deleted.length === 0) {
 		if (!searchQuery) {
-			return <NoteTour onSuccess={() => {}} personId={person.$jazz.id} />
+			return <NoteTour onSuccess={() => { }} personId={person.$jazz.id} />
 		}
 
 		return (
@@ -330,7 +330,7 @@ function RemindersList({
 		reminders.deleted.length === 0
 	) {
 		if (!searchQuery) {
-			return <ReminderTour onSuccess={() => {}} personId={person.$jazz.id} />
+			return <ReminderTour onSuccess={() => { }} personId={person.$jazz.id} />
 		}
 
 		return (

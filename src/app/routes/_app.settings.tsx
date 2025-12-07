@@ -26,10 +26,10 @@ import {
 	SelectValue,
 } from "#shared/ui/select"
 import { useState } from "react"
-import { ExportButton as DownloadButton } from "#app/features/data-download-button"
-import { UploadButton } from "#app/features/data-upload-button"
+import { ExportButton as DownloadButton } from "#app/features/shared/data-download-button"
+import { UploadButton } from "#app/features/shared/data-upload-button"
 import { TypographyH1, TypographyMuted } from "#shared/ui/typography"
-import { NotificationSettings } from "#app/features/notification-settings"
+import { NotificationSettings } from "#app/features/shared/notification-settings"
 import { ServerSettingsSection } from "#app/features/server-settings"
 import { SettingsSection } from "#app/components/settings-section"
 import { useIsPWAInstalled, useIsMobileDevice } from "#app/hooks/use-pwa"

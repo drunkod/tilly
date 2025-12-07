@@ -1,9 +1,9 @@
 import { createFileRoute, notFound } from "@tanstack/react-router"
 import { UserAccount, isDeleted } from "#shared/schema/user"
-import { useReminders } from "#app/features/reminder-hooks"
+import { useReminders } from "#app/features/reminders/hooks"
 import { useAccount } from "jazz-tools/react"
 import { type ResolveQuery } from "jazz-tools"
-import { ReminderListItem } from "#app/features/reminder-list-item"
+import { ReminderListItem } from "#app/features/reminders/list-item"
 
 import { TypographyH1 } from "#shared/ui/typography"
 import { Button } from "#shared/ui/button"
@@ -18,8 +18,8 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "#shared/ui/accordion"
-import { NewReminder } from "#app/features/new-reminder"
-import { ReminderTour } from "#app/features/reminder-tour"
+import { NewReminder } from "#app/features/reminders/new"
+import { ReminderTour } from "#app/features/reminders/tour"
 import { useAppStore } from "#app/lib/store"
 import { T, useIntl } from "#shared/intl/setup"
 import { calculateEagerLoadCount } from "#shared/lib/viewport-utils"

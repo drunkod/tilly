@@ -19,9 +19,9 @@ import {
 	Stars,
 	Phone,
 } from "react-bootstrap-icons"
-import { PersonTour } from "#app/features/person-tour"
-import { NoteTour } from "#app/features/note-tour"
-import { ReminderTour } from "#app/features/reminder-tour"
+import { PersonTour } from "#app/features/people/tour"
+import { NoteTour } from "#app/features/notes/tour"
+import { ReminderTour } from "#app/features/reminders/tour"
 import { InstallationInstructions } from "#app/components/pwa-install-dialog"
 
 export const Route = createFileRoute("/tour")({

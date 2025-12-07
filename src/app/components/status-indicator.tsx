@@ -6,8 +6,6 @@ import {
 	Check,
 	ExclamationTriangleFill,
 } from "react-bootstrap-icons"
-// TODO: Replace with Jazz auth in task 2
-// import { useAuth } from "#shared/clerk/client"
 
 import { Button } from "#shared/ui/button"
 import {
@@ -31,10 +29,10 @@ export { StatusIndicator }
 function StatusIndicator() {
 	let { updateAvailable } = useServiceWorkerUpdate()
 	let isOnline = useOnlineStatus()
-	// TODO: Replace with Jazz auth in task 2
-	// let { isLoaded, isSignedIn } = useAuth()
+	// With passkey authentication, users are always considered signed in once they access the app.
+	// The isLoaded/isSignedIn pattern is kept for potential future auth state checks.
 	let isLoaded = true
-	let isSignedIn = true // Temporary - will be replaced with passkey auth
+	let isSignedIn = true
 
 	if (!isOnline) {
 		return <OfflineIndicator />
@@ -65,9 +63,9 @@ function OfflineIndicator() {
 					style={
 						isMobile
 							? {
-									top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
-									right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
-								}
+								top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
+								right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
+							}
 							: undefined
 					}
 				>
@@ -126,9 +124,9 @@ function UpdateIndicator() {
 					style={
 						isMobile
 							? {
-									top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
-									right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
-								}
+								top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
+								right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
+							}
 							: undefined
 					}
 				>
@@ -189,9 +187,9 @@ function NotSignedInIndicator() {
 					style={
 						isMobile
 							? {
-									top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
-									right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
-								}
+								top: `max(calc(var(--spacing) * 3), env(safe-area-inset-top))`,
+								right: `max(calc(var(--spacing) * 3), env(safe-area-inset-right))`,
+							}
 							: undefined
 					}
 				>

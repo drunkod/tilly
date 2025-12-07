@@ -21,7 +21,7 @@ import {
 import { Person, UserAccount } from "#shared/schema/user"
 import { co } from "jazz-tools"
 import { PencilSquare, Trash } from "react-bootstrap-icons"
-import { PersonForm } from "./person-form"
+import { PersonForm } from "./form"
 import { useState } from "react"
 import { useNavigate } from "@tanstack/react-router"
 import { toast } from "sonner"
@@ -188,9 +188,9 @@ export function PersonDetails({
 							(
 								person.updatedAt || new Date(person.$jazz.lastUpdatedAt)
 							).getTime() !==
-								(
-									person.createdAt || new Date(person.$jazz.createdAt)
-								).getTime() &&
+							(
+								person.createdAt || new Date(person.$jazz.createdAt)
+							).getTime() &&
 							t("person.updated.suffix", {
 								ago: formatDistanceToNow(
 									person.updatedAt || new Date(person.$jazz.lastUpdatedAt),

@@ -102,6 +102,7 @@ export default [
 			"*.config.{js,mjs,ts}",
 			".vercel/",
 			".astro/",
+			".preview/",
 		],
 	},
 ]
