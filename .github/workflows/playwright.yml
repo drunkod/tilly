@@ -16,6 +16,12 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_JAZZ_SYNC_SERVER: ${{ vars.PUBLIC_JAZZ_SYNC_SERVER }}
+      PUBLIC_SERVER_URL: ${{ vars.PUBLIC_SERVER_URL }}
+      GITHUB_PAGES_BASE: "drunkod.github.io/tilly"
+      ASTRO_OUTPUT: "static"
+
     steps:
       - uses: actions/checkout@v4
 
@@ -33,8 +39,8 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm exec playwright install chromium --with-deps
 
-      - name: Build project with Node adapter
-        run: pnpm build:node
+      - name: Build static site
+        run: pnpm build:static:github
 
       - name: Run Playwright tests
         run: pnpm test:e2e
