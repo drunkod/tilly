@@ -12,7 +12,9 @@ export default defineConfig({
 	reporter: [["html", { open: "always" }]],
 
 	use: {
-		baseURL: "http://localhost:4321",
+		baseURL: process.env.GITHUB_PAGES_BASE
+			? `http://localhost:4321/${process.env.GITHUB_PAGES_BASE.split("/").slice(1).join("/")}/`
+			: "http://localhost:4321",
 		trace: "on-first-retry",
 	},
 
@@ -40,8 +42,10 @@ export default defineConfig({
 	],
 
 	webServer: {
-		command: "pnpm preview",
-		url: "http://localhost:4321",
+		command: "pnpm build:static && pnpm preview",
+		url: process.env.GITHUB_PAGES_BASE
+			? `http://localhost:4321/${process.env.GITHUB_PAGES_BASE.split("/").slice(1).join("/")}/`
+			: "http://localhost:4321",
 		reuseExistingServer: !process.env.CI,
 		timeout: 120000,
 	},

@@ -24,3 +24,6 @@ scripts/mock-data.de.json
 *-worktree
 .env*.local
 .preview
+test-results
+playwright-report
+.clj-kondo
