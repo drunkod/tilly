@@ -25,7 +25,9 @@ export default defineConfig({
 	reporter: [["html", { open: "always" }]],
 
 	use: {
-		baseURL,
+		baseURL: process.env.GITHUB_PAGES_BASE
+			? `http://localhost:4321/${process.env.GITHUB_PAGES_BASE.split("/").slice(1).join("/")}/`
+			: "http://localhost:4321",
 		trace: "on-first-retry",
 	},
 
@@ -53,10 +55,10 @@ export default defineConfig({
 	],
 
 	webServer: {
-		command: process.env.GITHUB_PAGES_BASE
-			? `ASTRO_OUTPUT=static GITHUB_PAGES_BASE=${process.env.GITHUB_PAGES_BASE} npm run preview:static`
-			: "npm run preview",
-		url: baseURL,
+		command: "pnpm build:static && pnpm preview",
+		url: process.env.GITHUB_PAGES_BASE
+			? `http://localhost:4321/${process.env.GITHUB_PAGES_BASE.split("/").slice(1).join("/")}/`
+			: "http://localhost:4321",
 		reuseExistingServer: !process.env.CI,
 		timeout: 120000,
 	},
