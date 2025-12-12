@@ -3,11 +3,17 @@ import { defineConfig, devices } from "@playwright/test"
 // Compute base path from GITHUB_PAGES_BASE if present
 let basePath = ""
 if (process.env.GITHUB_PAGES_BASE) {
-	let pathParts = process.env.GITHUB_PAGES_BASE.split("/")
-		.slice(1)
-		.filter(Boolean)
-	if (pathParts.length > 0) {
-		basePath = `/${pathParts.join("/")}`
+	const rawPath = process.env.GITHUB_PAGES_BASE;
+	if (rawPath.includes('/')) {
+		let pathParts = rawPath.split("/")
+			.slice(1)
+			.filter(Boolean);
+		if (pathParts.length > 0) {
+			basePath = `/${pathParts.join("/")}`;
+		}
+	} else if (!rawPath.includes('.')) {
+		// Assumes a single segment without a dot is a repo name.
+		basePath = `/${rawPath}`;
 	}
 }
 
