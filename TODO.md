@@ -1,1 +1,2 @@
 - add local first ai from open souce from my bookmark
+- playwright test too long time in github actions (how fix? maybe optional?)

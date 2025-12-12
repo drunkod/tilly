@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test"
 
 test.describe("Home Page", () => {
 	test("should load the home page", async ({ page }) => {
-		await page.goto("")
+		await page.goto("app/")
 
 		// Wait for the page to be fully loaded
 		await page.waitForLoadState("networkidle")
@@ -12,7 +12,7 @@ test.describe("Home Page", () => {
 	})
 
 	test("should navigate to settings page", async ({ page }) => {
-		await page.goto("")
+		await page.goto("app/")
 
 		// Wait for navigation to be visible
 		await page.waitForSelector("nav")

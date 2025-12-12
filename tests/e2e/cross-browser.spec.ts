@@ -12,7 +12,7 @@ async function checkWebAuthnSupport(page: Page): Promise<boolean> {
 
 test.describe("Cross-Browser Passkey Support", () => {
 	test("should detect WebAuthn API availability", async ({ page }) => {
-		await page.goto("settings")
+		await page.goto("app/settings")
 		await page.waitForLoadState("networkidle")
 
 		let isSupported = await checkWebAuthnSupport(page)
@@ -34,7 +34,7 @@ test.describe("Cross-Browser Passkey Support", () => {
 	test("should display authentication buttons regardless of WebAuthn support", async ({
 		page,
 	}) => {
-		await page.goto("settings")
+		await page.goto("app/settings")
 		await page.waitForLoadState("networkidle")
 
 		// Authentication section should always be visible
@@ -48,7 +48,7 @@ test.describe("Cross-Browser Passkey Support", () => {
 	test("should open authentication dialog in all browsers", async ({
 		page,
 	}) => {
-		await page.goto("settings")
+		await page.goto("app/settings")
 		await page.waitForLoadState("networkidle")
 
 		// Click sign up button
@@ -72,7 +72,7 @@ test.describe("Cross-Browser Passkey Support", () => {
 	test("should handle username input correctly across browsers", async ({
 		page,
 	}) => {
-		await page.goto("settings")
+		await page.goto("app/settings")
 		await page.waitForLoadState("networkidle")
 
 		// Open signup dialog
@@ -95,7 +95,7 @@ test.describe("Cross-Browser Passkey Support", () => {
 	})
 
 	test("should handle dialog interactions consistently", async ({ page }) => {
-		await page.goto("settings")
+		await page.goto("app/settings")
 		await page.waitForLoadState("networkidle")
 
 		// Open dialog

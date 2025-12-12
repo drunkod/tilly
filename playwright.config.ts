@@ -37,31 +37,44 @@ export default defineConfig({
 		trace: "on-first-retry",
 	},
 
-	projects: [
-		{
-			name: "chromium",
-			use: { ...devices["Desktop Chrome"] },
-		},
-		{
-			name: "firefox",
-			use: { ...devices["Desktop Firefox"] },
-		},
-		{
-			name: "webkit",
-			use: { ...devices["Desktop Safari"] },
-		},
-		{
-			name: "mobile-chrome",
-			use: { ...devices["Pixel 5"] },
-		},
-		{
-			name: "mobile-safari",
-			use: { ...devices["iPhone 13"] },
-		},
-	],
+	// In CI, only run Chromium (since that's all that's installed)
+	// Locally, run all browsers for comprehensive testing
+	projects: process.env.CI
+		? [
+			{
+				name: "chromium",
+				use: { ...devices["Desktop Chrome"] },
+			},
+		]
+		: [
+			{
+				name: "chromium",
+				use: { ...devices["Desktop Chrome"] },
+			},
+			{
+				name: "firefox",
+				use: { ...devices["Desktop Firefox"] },
+			},
+			{
+				name: "webkit",
+				use: { ...devices["Desktop Safari"] },
+			},
+			{
+				name: "mobile-chrome",
+				use: { ...devices["Pixel 5"] },
+			},
+			{
+				name: "mobile-safari",
+				use: { ...devices["iPhone 13"] },
+			},
+		],
 
 	webServer: {
-		command: "pnpm build:static && pnpm preview",
+		// In CI, the build is already done by the workflow (build:static:github)
+		// Locally, we need to build before preview
+		command: process.env.CI
+			? "ASTRO_OUTPUT=static pnpm preview"
+			: "ASTRO_OUTPUT=static pnpm build:static && ASTRO_OUTPUT=static pnpm preview",
 		url: process.env.GITHUB_PAGES_BASE
 			? `http://localhost:4321/${process.env.GITHUB_PAGES_BASE.split("/").slice(1).join("/")}/`
 			: "http://localhost:4321",

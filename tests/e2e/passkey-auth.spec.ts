@@ -24,7 +24,7 @@ test.describe("Passkey Authentication - UI Tests", () => {
 		await setupVirtualAuthenticator(page)
 
 		// Navigate directly to settings page
-		await page.goto("settings")
+		await page.goto("app/settings")
 
 		// Wait for page to load
 		await page.waitForLoadState("networkidle")
@@ -196,7 +196,7 @@ test.describe("Passkey Authentication - Integration Tests", () => {
 	// implementation when Playwright's WebAuthn support improves.
 
 	test("complete signup flow shows authentication UI", async ({ page }) => {
-		await page.goto("settings")
+		await page.goto("app/settings")
 		await page.waitForLoadState("networkidle")
 
 		// Verify unauthenticated state
@@ -220,7 +220,7 @@ test.describe("Passkey Authentication - Integration Tests", () => {
 	})
 
 	test("login flow shows correct UI elements", async ({ page }) => {
-		await page.goto("settings")
+		await page.goto("app/settings")
 		await page.waitForLoadState("networkidle")
 
 		// Click log in button
@@ -241,7 +241,7 @@ test.describe("Passkey Authentication - Integration Tests", () => {
 	test("authentication status displays correctly when unauthenticated", async ({
 		page,
 	}) => {
-		await page.goto("settings")
+		await page.goto("app/settings")
 		await page.waitForLoadState("networkidle")
 
 		// Verify authentication section exists
@@ -253,7 +253,7 @@ test.describe("Passkey Authentication - Integration Tests", () => {
 	})
 
 	test("failed login attempt shows error", async ({ page }) => {
-		await page.goto("settings")
+		await page.goto("app/settings")
 		await page.waitForLoadState("networkidle")
 
 		// Open login dialog
