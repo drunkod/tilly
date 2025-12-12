@@ -134,12 +134,12 @@
   - Move `user-question-ui.tsx` to `system/user-question-ui.tsx`
   - _Requirements: 8.3_
 
-- [ ] 3.6 Update tools.ts central exports
+- [x] 3.6 Update tools.ts central exports
   - Update all imports to reference new domain paths (`./people/read`, `./notes/create`, etc.)
   - Verify all tool exports remain unchanged
   - _Requirements: 9.2, 10.2, 11.2, 12.1, 12.3_
 
-- [ ] 3.7 Update ui.tsx central exports
+- [x] 3.7 Update ui.tsx central exports
   - Update all imports to reference new domain paths (`./people/create-ui`, `./notes/update-ui`, etc.)
   - Verify all UI component exports remain unchanged
   - _Requirements: 9.2, 10.2, 11.2, 12.2, 12.3_
