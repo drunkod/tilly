@@ -38,6 +38,7 @@ test.describe("Cross-Browser Passkey Support", () => {
 		await page.waitForLoadState("networkidle")
 
 		// Authentication section should always be visible
+		await expect(page.getByRole("heading", { name: /settings/i })).toBeVisible()
 		await expect(page.getByText(/authentication/i).first()).toBeVisible()
 
 		// Buttons should be visible

@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: github-pages
     env:
-      PUBLIC_JAZZ_SYNC_SERVER: ${{ vars.PUBLIC_JAZZ_SYNC_SERVER }}
+      PUBLIC_JAZZ_SYNC_SERVER: ${{ vars.PUBLIC_JAZZ_SYNC_SERVER || 'wss://cloud.jazz.tools/?key=tilly-ci' }}
       PUBLIC_SERVER_URL: ${{ vars.PUBLIC_SERVER_URL }}
       GITHUB_PAGES_BASE: "drunkod.github.io/tilly"
       ASTRO_OUTPUT: "static"

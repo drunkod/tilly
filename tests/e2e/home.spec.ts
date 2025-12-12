@@ -14,6 +14,12 @@ test.describe("Home Page", () => {
 	test("should navigate to settings page", async ({ page }) => {
 		await page.goto("app/")
 
+		// Handle tour if present (fresh user)
+		let skipButton = page.getByRole("link", { name: /skip/i })
+		if (await skipButton.isVisible()) {
+			await skipButton.click()
+		}
+
 		// Wait for navigation to be visible
 		await page.waitForSelector("nav")
 

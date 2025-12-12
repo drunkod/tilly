@@ -28,6 +28,9 @@ test.describe("Passkey Authentication - UI Tests", () => {
 
 		// Wait for page to load
 		await page.waitForLoadState("networkidle")
+
+		// Verify we are on the settings page
+		await expect(page.getByRole("heading", { name: /settings/i })).toBeVisible()
 	})
 
 	test("should display authentication dialog when clicking sign up", async ({
